@@ -1,0 +1,203 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{geometry}
+\usepackage{tikz}
+    \usetikzlibrary{patterns,decorations.pathreplacing,snakes,arrows.meta}
+    \tikzset{box/.style={draw, thick, minimum width=1cm, minimum height=1cm}}
+\usepackage{bigints}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{enumitem}
+%\usepackage{wrapfig}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{textcomp}
+\setlength{\multicolsep}{5.0pt plus 2.0pt minus 1.5pt}% 50% of original values
+\geometry{a4paper, portrait, top=2.5cm, left=2.5cm, right=2.5cm, bottom=2.5cm}
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+
+
+\renewcommand{\baselinestretch}{1.2}
+\newcounter{choice}
+\renewcommand\thechoice{\alph{choice}}
+\newcommand\choicelabel{\thechoice.}
+
+\newenvironment{choices}%
+{\list{\choicelabel}%
+	{\usecounter{choice}\def\makelabel##1{\hspace{0.3cm}\llap{##1}}%
+		\settowidth{\leftmargin}{\hskip\labelsep\hskip 0em}%
+		\def\choice{%
+			\item
+		} % choice
+		\labelwidth\leftmargin\advance\labelwidth-\labelsep
+		\topsep=0pt
+		\partopsep=0pt
+	}%
+}%
+{\endlist}
+
+\newenvironment{oneparchoices}%
+{%
+	\setcounter{choice}{0}%
+	\def\choice{%
+		\refstepcounter{choice}%
+		\ifnum\value{choice}>1\relax
+		\penalty -50\hskip 2cm plus 1em
+		\fi
+		\choicelabel
+		\nobreak\enskip
+	}% choice
+	% If we're continuing the paragraph containing the question,
+	% then leave a bit of space before the first choice:
+	\ifvmode\else\enskip\fi
+	\ignorespaces
+}%
+{}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\fancyfoot[L]{\textit{5002221132}}
+\fancyfoot[R]{\textit{Tetew}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{2pt}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+\begin{document}
+\begin{center}
+    \large{TES BAGIAN PERTAMA}\\
+    Bentuk Soal: Isian Singkat\\
+    Waktu: 60 menit\\
+    ~
+\end{center}
+\textbf{SOAL}
+\begin{enumerate}
+  \item Diketahui suatu barisan \( (a_n)_{n \geq 1} \) memenuhi \(\lim a_{n+1} - a_n = 2024 \). Nilai dari
+        \[
+        \lim_{n \to \infty} \frac{a_n}{n+1}
+        \]
+        adalah....
+  
+  \item Diberikan suatu matriks berukuran \( 2025 \times 2025 \), \( A = \| a_{ij} \|^{n}_{i=1} \) dimana \( a_{ii} = 0 \), \( a_{ij} = i \mod (j+1) \) untuk \( i < j \) dan \( a_{ij} = -(j \mod (i+1)) \) untuk \( i, j \) yang lainnya. Nilai dari \( \det(2025A) \) adalah...
+  
+  \item Diberikan \( G \) adalah suatu grup komutatif dengan orde 2025 dan \( N \) adalah subgrup normal dari \( G \) dengan orde \( n \). Jumlah semua \( n \) yang mungkin adalah ...
+  
+  \item Diberikan fungsi
+        \[
+        F(z) = \frac{z+i}{z-i}
+        \]
+        untuk semua bilangan kompleks \( z \neq i \), dan \( z_n = F(z_{n-1}) \) untuk semua bilangan bulat positif \( n \). Diketahui bahwa \( z_0 = -1 + i \) dan \( z_{2025} = a + bi \), dimana \( a \) dan \( b \) adalah bilangan real. Nilai \( a + b \) adalah ....
+  
+  \item Banyak himpunan bagian dari \( \{1,2,3,4,5,6,7,8\} \) yang bukan merupakan himpunan bagian dari \( \{1,2,3,4,5\} \) maupun \( \{4,5,6,7,8\} \) adalah ...
+\end{enumerate}
+\textbf{\underline{SOLUSI}}
+\begin{enumerate}
+  \item Definisikan barisan $b_n=n$ untuk $n\in\N$, sehingga jelas bahwa $b_n$ monoton naik dan divergen ke $\infty$. Selanjutnya perhatikan bahwa 
+  \begin{align*}
+    \lim_{n\to\infty}\frac{a_{n+1}-a_n}{b_{n+1}-b_n} &= \lim_{n\to\infty}\frac{a_{n+1}-a_n}{(n+1)-n} = \lim_{n\to\infty}(a_{n+1}-a_n) = 2024.
+  \end{align*}
+  Berdasarkan teorema Stolz-Cesàro, diperoleh bahwa
+  \begin{align*}
+    \lim_{n\to\infty}\frac{a_n}{n} &= \lim_{n\to\infty}a_{n+1}-a_n= 2024.
+  \end{align*}
+  yang berarti nilai dari $\lim_{n\to\infty}\frac{a_n}{n+1}$ adalah
+  \begin{align*}
+    \lim_{n\to\infty}\frac{a_n}{n+1} &= \lim_{n\to\infty}\frac{a_n}{n}\cdot\frac{n}{n+1} = 2024\cdot 1 = \boxed{2024}.
+  \end{align*}
+  \item Perhatikan bahwa setiap elemen dapat dituliskan lebih sederhana sebagai berikut
+  \begin{align*}
+    a_{ij} = \begin{cases}
+      0 & \text{jika } i=j,\\
+      i & \text{jika } i<j,\\
+      -j & \text{jika } i>j.
+    \end{cases}
+  \end{align*}
+  Untuk lebih jelasnya kita dapat menuliskan matriks $A$ sebagai berikut
+  \begin{align*}
+    A = \begin{bmatrix}
+      a_{11} & a_{12} & a_{13} & \dots & a_{1,2025}\\
+      a_{21} & a_{22} & a_{23} & \dots & a_{2,2025}\\
+      \vdots & \vdots & \vdots & \ddots & \vdots\\
+      a_{2025,1} & a_{2025,2} & a_{2025,3} & \dots & a_{2025,2025}
+    \end{bmatrix}= \begin{bmatrix}
+      0 & 1 & 2 & \dots & 2024\\
+      -1 & 0 & 1 & \dots & 2023\\
+      -2 & -1 & 0 & \dots & 2022\\
+      \vdots & \vdots & \vdots & \ddots & \vdots\\
+      -2024 & -2023 & -2022 & \dots & 0
+    \end{bmatrix}.
+  \end{align*}
+  Dengan mudah dapat diidentifikasi bahwa matriks $A$ adalah matriks anti-simetri (\textit{skew-symmetric}) yang memenuhi $A^T=-A$, sehingga 
+  \[\det(A)=\det(A^T)=\det(-A)=(-1)^{2025}\det(A)=-\det(A)\implies\det(A)=0\]
+  Jadi $\det(2025A)=2025^{2025}\det(A)=2025^{2025}\cdot 0 = \boxed{0}$.
+  \item Semua subgrup dari grup komutatif adalah subgrup normal, sehingga jumlah semua orde $n$ yang mungkin sama saja dengan jumlah semua faktor dari 2025. Jika difaktorkan, maka $2025=3^4\cdot 5^2$, yang artinya banyaknya faktor dari 2025 adalah $(4+1)(2+1)=15$ yaitu 
+  \[\{1, 3, 5, 9, 15, 25, 27, 45, 75, 81, 135, 225, 405, 675, 2025\}\]
+  yang jika dijumlahkan hasilnya adalah $\boxed{3751}$.
+\end{enumerate}
+\newpage
+\begin{center}
+    \large{TES BAGIAN KEDUA}\\
+    Bentuk Soal: Uraian\\
+    Waktu: 120 menit
+\end{center}
+\textbf{SOAL}
+\begin{enumerate}
+  \item Diberikan \( \mathbb{F} \) adalah lapangan dengan karakteristik \( p \). Tunjukkan bahwa matriks 
+          \[
+          A = \begin{bmatrix} 1 & \alpha \\ 0 & 1 \end{bmatrix}
+          \]
+          dengan \( \alpha \in \mathbb{F} \) memenuhi \( A^p = I \) dan \( A \) tidak dapat didiagonalkan atas \( \mathbb{F} \) jika \( \alpha \neq 0 \).
+
+    \item Buktikan bahwa untuk setiap \( x \in \left[ 0, \dfrac{\pi}{2} \right] \) memenuhi
+          \[
+          -x \cos x + \sin x \leq \frac{\pi}{2} x.
+          \]
+
+    \item Suatu matriks \( A \) berordo \( n \) memiliki sifat bahwa untuk setiap matriks \( X \) yang berordo \( n \) dengan \( \text{tr} X = 0 \), memenuhi \( \text{tr}(AX) = 0 \). Buktikan bahwa \( A = \lambda I \).
+
+    \item Tentukan peta himpunan
+          \[
+          A = \left\{ z \in \mathbb{C} : 1 < |z| < 3, 0 < \arg(z) < \frac{\pi}{6} \right\}
+          \]
+          oleh pemetaan \( f(z) = -iz^3 \).
+
+    \item Tentukan banyaknya bilangan bulat dari 1 sampai 99999 sehingga jumlah digit-digitnya pada bilangan tersebut adalah 22.
+\end{enumerate}
+\textbf{\underline{SOLUSI}}
+\begin{enumerate}
+  \item Karena $\F$ berkarakteristik $p$, akibatnya untuk $\alpha\in\F$ berlaku $p\alpha=0$. Sehingga diperoleh
+  \begin{flalign*}
+    A^p &= \begin{bmatrix} 1 & \alpha \\ 0 & 1 \end{bmatrix}^p =\underbrace{\begin{bmatrix} 1 & \alpha \\ 0 & 1 \end{bmatrix}\cdot\begin{bmatrix} 1 & \alpha \\ 0 & 1 \end{bmatrix}\cdot\dots\cdot\begin{bmatrix} 1 & \alpha \\ 0 & 1 \end{bmatrix}}_p =\begin{bmatrix} 1 & p\alpha \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = I.
+  \end{flalign*}
+  Selanjutnya perhatikan bahwa nilai eigen dari $A$ adalah $\lambda=1$ dengan multiplisitas aljabar 2 (dapat dicari menggunakan polinomial karakteristik $\det(A-\lambda I)=0$). 
+
+  Untuk mencari vektor eigennya dapat dicari dengan mencari solusi dari persamaan $(A-\lambda I)\mathbf{v}=0$.
+  \begin{align*}
+    \begin{bmatrix} 0 & \alpha \\ 0 & 0 \end{bmatrix}\mathbf{v}= \begin{bmatrix} 0 \\ 0 \end{bmatrix}\implies \alpha v_2 = 0\quad\text{dan}\quad v_1\in\F.
+  \end{align*}
+  Jika $\alpha\neq 0$, maka haruslah $v_2=0$. Sehingga vektor eigennya hanyalah $\begin{bmatrix} 1 \\ 0 \end{bmatrix}$ atau bisa dibilang multiplisitas geometrinya adalah 1. 
+
+  Multiplisitas geometri kurang dari multiplisitas aljabar mengimplikasikan bahwa matriks $A$ tidak dapat didiagonalisasi atas $\F$.
+  \item  
+\end{enumerate}
+\end{document}

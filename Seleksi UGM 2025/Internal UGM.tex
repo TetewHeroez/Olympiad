@@ -1,0 +1,159 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{geometry}
+\usepackage{tikz}
+    \usetikzlibrary{patterns,decorations.pathreplacing,snakes,arrows.meta}
+    \tikzset{box/.style={draw, thick, minimum width=1cm, minimum height=1cm}}
+\usepackage{bigints}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{footmisc} 
+\usepackage[colorlinks=true, linkcolor=red]{hyperref}
+\usepackage{multicol}
+\usepackage{enumitem}
+%\usepackage{wrapfig}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\definecolor{darkcyan}{HTML}{0091A4}  
+\definecolor{brightcyan}{HTML}{dcf0f2}
+\newmdenv[  
+topline=false,  
+rightline=false,  
+bottomline=false,  
+leftline=true,  
+linecolor=darkcyan,  
+linewidth=3pt,  
+backgroundcolor=brightcyan,  
+frametitle={\textit{Solusi}:}
+]{solution}  
+\setlength{\multicolsep}{5.0pt plus 2.0pt minus 1.5pt}% 50% of original values
+\geometry{a4paper, portrait, top=2.5cm, left=2.5cm, right=2.5cm, bottom=2.5cm}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+
+\renewcommand{\baselinestretch}{1.2}
+
+\fancyfoot[L]{\textit{5002221132}}
+\fancyfoot[R]{\textit{Tetew}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{2pt}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+\begin{document}
+\section*{Isian singkat}
+\begin{enumerate}
+  \item Diberikan matriks \( A \) berukuran \( 2025 \times 2025 \) dengan
+        \[
+          \det(A - \lambda I_{2025 \times 2025}) = (\lambda - 2)^k (\lambda - 1)^{2025-k}
+        \]
+        untuk suatu bilangan asli\footnote{Agak rancu disini karena didefinisikan bilangan asli namun nilai $k=0$ disebutkan di kalimat setelahnya.} \( k \) dengan \( 0 \leq k \leq 2025 \). Jika \( A^2 = A \), maka banyaknya nilai \( k \) yang mungkin adalah \ldots
+
+        \begin{solution}
+          Bentuk determinan yang diberikan menunjukkan bahwa nilai eigen 2 muncul sebanyak \( k \) kali, dan nilai eigen 1 muncul sebanyak \( 2025 - k \) kali. Sedangkan diketahui bahwa \( A \) adalah matriks idempotent, sehingga nilai eigen dari \( A \) hanya bisa $\lambda=0$ atau $\lambda=1$.
+
+          Dengan demikian, \( k \) harus sama dengan 0, karena jika \( k > 0 \), maka akan ada nilai eigen 2 yang tidak sesuai dengan sifat idempotent. Oleh karena itu, satu-satunya nilai yang mungkin untuk \( k \) adalah $\boxed{1}$ saja yaitu \( k=0 \).
+        \end{solution}
+
+  \item Diberikan ruang vektor \( V \) atas lapangan \( F \), dengan \( \dim(V) = 7 \), serta transformasi linear \( T_1 : V \to V \) dan \( T_2 : V \to V \), dengan \( \dim(\mathrm{Im}(T_1)) = 3 \) dan \( \dim(\mathrm{Im}(T_2)) = 4 \). Jika \( M \) dan \( m \) berturut-turut menyatakan nilai terbesar dan terkecil yang mungkin dari \( \dim(\mathrm{Im}(T_2 \circ T_1)) \), maka nilai \( M + m = \ldots \)
+
+        \begin{solution}
+          Dengan menggunakan Teorema Rank-Nullity, kita tau bahwa
+          \[\dim(\mathrm{Im}(T_2\circ T_1)) \leq \min\{\dim(\mathrm{Im}(T_1)), \dim(\mathrm{Im}(T_2))\}\]
+          Sehingga dengan jelas kita peroleh
+          \[\dim(\mathrm{Im}(T_2\circ T_1)) \leq \min\{3,4\} = 3 = M\]
+        \end{solution}
+
+  \item Jika setiap \( z \in \mathbb{C} \) yang memenuhi
+        \[
+          \left| \frac{z+1}{z+4} \right| = 2
+        \]
+        terletak pada suatu lingkaran, maka radius dan titik pusat lingkaran tersebut berturut-turut adalah \ldots
+
+  \item Bentuk sederhana dari
+        \[
+          \sum_{n=1}^{\infty} 3^{n-1} \sin^3\left( \frac{x}{3^n} \right)
+        \]
+        adalah \ldots
+
+  \item Nilai
+        \[
+          \sup \left\{ \inf \left\{ 5(-1)^n - \left( \frac{m+1}{n} \right)^2 : n \geq m \right\} : m \in \mathbb{N} \right\}
+        \]
+        adalah \ldots
+
+  \item Diberikan fungsi kontinu \( f : [0,1] \to \mathbb{R} \) dengan \( |f(x)| \leq x \) untuk setiap \( x \in [0,1] \). \\
+        Nilai terbesar yang mungkin dari
+        \[
+          \int_0^1 \left( (f(x))^2 - x^4 f(x) \right) \, dx
+        \]
+        adalah \ldots
+
+  \item Banyaknya bilangan asli \( x \in \{1,2,3,\ldots,2025\} \) yang bukan kelipatan 2 dan bukan kelipatan 5 adalah \ldots
+
+  \item Tiga siswa $a_{1}$, $a_{2}$, $a_{3}$ dari Sekolah A dan 4 siswa $b_{1}$, $b_{2}$, $b_{3}$, $b_{4}$ dari Sekolah B berkumpul dalam sebuah pertemuan. % 
+        Banyaknya cara menyusun ketujuh siswa tersebut dalam satu baris dengan syarat tidak terdapat satu blok yang berisikan semua siswa dari sekolah yang sama adalah \ldots % 
+        (Contoh: $b_{3}b_{2}a_{1}a_{3}b_{1}b_{4}a_{2}$ diperbolehkan, tetapi $b_{1}b_{4}a_{1}a_{2}a_{3}b_{3}b_{2}$ dan $a_{1}b_{4}b_{3}b_{1}b_{2}a_{3}a_{2}$ tidak diperbolehkan) % 
+
+  \item Jika $S_{5}$ menyatakan grup semua fungsi bijektif pada $\{1,2,..., 5\}$ terhadap operasi komposisi fungsi, maka banyaknya elemen berorder 2 pada $S_{5}$ adalah \ldots % 
+
+  \item Jika $z$, $p$, dan $m$ berturut-turut menyatakan banyaknya ideal di $\mathbb{Z}_{2025}$, banyaknya ideal prima di $\mathbb{Z}_{2025}$, dan banyaknya ideal maksimal di $\mathbb{Z}_{2025}$, maka nilai $z+p+m$ adalah \ldots % 
+\end{enumerate}
+\section*{Uraian}
+\begin{enumerate}
+  \item
+        Diberikan ruang vektor $V$ atas lapangan $F$ dengan $\dim(V)=n$. Misalkan $U$ dan $W$ merupakan dua ruang bagian dari $V$ dengan $\dim(U)+\dim(W)=n$. % 
+        Buktikan bahwa terdapat transformasi linear $T:V\longrightarrow V$ yang memenuhi $\ker(T)=U$ dan $\mathrm{Im}(T)=W.$ % 
+
+  \item
+        Diketahui $A_{1},A_{2},...,A_{n}$ merupakan titik-titik sudut sebuah poligon $n$ sisi beraturan yang termuat pada sebuah lingkaran dengan radius $r$ dan titik pusat $O(0,0)$. Jika $P$ merupakan titik di luar lingkaran yang terletak pada garis perpanjangan $OA_{1}$, buktikan bahwa % 
+        \[
+          \prod_{k=1}^{n}|PA_{k}|=|OP|^{n}-r^{n},
+        \] % 
+        dengan $|AB|$ menyatakan panjang ruang garis yang menghubungkan titik A dan B. % 
+
+  \item
+        Diberikan fungsi kontinu $f:[a,b]\rightarrow\mathbb{R}$ yang terdiferensial pada $(a, b)$ dengan $f(a)=f(b)$. % 
+        Tunjukkan bahwa untuk setiap bilangan asli $n$, terdapat $n$ bilangan real berbeda, % 
+        $c_{1},c_{2},...,c_{n}\in(a,b)$, yang memenuhi % 
+        \[
+          f^{\prime}(c_{1})+f^{\prime}(c_{2})+\cdot\cdot\cdot+f^{\prime}(c_{n})=0.
+        \] % 
+
+  \item
+        Untuk suatu bilangan bulat tak negatif $n$ dan $m$, misalkan $D(m,n)$ menyatakan banyaknya solusi persamaan % 
+        \[
+          x_{1}+x_{2}+\cdot\cdot\cdot+x_{m}=n
+        \] % 
+        dengan $x_{i}\in\mathbb{N}$, untuk setiap $i\in\{1,2,...,m\}$ dan $x_{1}<x_{2}<\ldots<x_{m}$. Tunjukkan bahwa % 
+        \[
+          D(m,n)=D(m,n-m)+D(m-1,n-m).
+        \] % 
+
+  \item
+        \begin{enumerate}
+          \item Diketahui $A$, $B$, $C$ merupakan subgrup dari sebuah grup $G$. Jika $A\subseteq B$, $A\cap C=B\cap C$, dan $AC=BC$, buktikan bahwa $A=B$. % 
+          \item Carilah contoh grup $G$ dan subgrup $A$, $B$, $C$ dari $G$ yang memenuhi $A\cap C=B\cap C$, dan $AC=BC$ tetapi $A\ne B$. % 
+        \end{enumerate}
+        Catatan: Jika $P$ dan $Q$ adalah subgrup dari $(G, *)$, maka $PQ$ didefinisikan sebagai % 
+        \[
+          PQ=\{p*q:p\in P,q\in Q\}.
+        \] % 
+  \item
+\end{enumerate}
+\end{document}
