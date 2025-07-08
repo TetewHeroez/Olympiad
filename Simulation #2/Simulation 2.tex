@@ -171,7 +171,7 @@
     untuk setiap $n\geq 1$. Buktikan bahwa $(a_n)_{n\geq 1}$ merupakan barisan konvergen.
     \item Diberikan homomorfisma ring $f:\mathbb{Z}[x]\to \mathbb{Z}_2[x]$ dengan 
     \begin{align*}
-        f(a_0+a_1x+\cdots +a_nx^n) := \overline{a_0}+\overline{a_1}X+\cdots + \overline{a_n}x^n,
+        f(a_0+a_1x+\cdots +a_nx^n) := \overline{a_0}+\overline{a_1}x+\cdots + \overline{a_n}x^n,
     \end{align*}
     dan $\overline{a_i}=a_i\mod 2$ untuk setiap $i=0,1,2,\dots,n$. 
     \begin{enumerate}
@@ -197,10 +197,20 @@
 \end{enumerate}
 \textbf{\underline{SOLUSI}}
 \begin{enumerate}
-    \item Diketahui bahwa $a_n>0$ untuk setiap $n\geq 1$. dan secara rekrusif diperoleh
+    \item Definisikan barisan $\displaystyle b_n=a_n+\sum_{k=n+1}^{\infty}\dfrac{1}{k^2}$. Sehingga 
+    \[b_{n+1}-b_n=\left(a_{n+1}+\sum_{k=n+2}^{\infty}\dfrac{1}{k^2}\right)-\left(a_n+\sum_{k=n+1}^{\infty}\dfrac{1}{k^2}\right)=a_{n+1}-a_{n}-\frac{1}{(n+1)^2}\leq 0\]
+    yang berarti $b_{n+1}\leq b_n$ untuk setiap $n\geq 1$. Dengan demikian barisan $b_n$ adalah barisan monoton tidak naik (turun atau konstan).
+
+    Selanjutnya perhatikan bahwa $b_n> 0$ untuk setiap $n\geq 1$ karena $a_n$ adalah bilangan positif. Disisi lain juga
+    \[b_n\leq a_0+\sum_{k=1}^{\infty}\dfrac{1}{k^2}=\dfrac{\pi^2}{6}+a_0\]
+    Dengan demikian barisan $b_n$ adalah barisan terbatas. Sehingga dapat disimpulkan bahwa barisan $b_n$ konvergen (misalkan $b_n\to L\in\R$).
+
+    Menggunakan sifat limit, maka
     \begin{align*}
-        a_{n+1}&\leq a_n+\dfrac{1}{(n+1)^2}\leq a_{n-1}+\dfrac{1}{n^2}+\dfrac{1}{(n+1)^2}\leq \cdots \leq a_1+\sum_{k=2}^{n+1}\dfrac{1}{k^2}
+        \lim_{n\to\infty}a_n&=\lim_{n\to\infty}\left(b_n-\sum_{k=n+1}^{\infty}\dfrac{1}{k^2}\right)\\
+        &=L-\lim_{n\to\infty}\sum_{k=n+1}^{\infty}\dfrac{1}{k^2}=L-0=L
     \end{align*}
+    Jadi barisan $(a_n)_{n\geq 1}$ juga barisan konvergen.
     \item \begin{enumerate}
         \item Secara definisi dapat ditulis sebagai
         \begin{align*}
@@ -215,7 +225,18 @@
         \end{align*}
         Artinya anggota dari $\ker f$ adalah polinomial dengan koefisien genap semua. Atau dapat juga ditulis 
         \[\ker f=\left\{p(x)\in\Z[x]\mid p(x)=2q(x),\,q(x)\in\Z[x]\right\}\] 
-        \item  Misalkan $r(x)s(x)\in\ker f$ untuk suatu $r(x),s(x)\in\Z[x]$. 
+        \item  Misalkan $r(x)=a_0+a_1+\dots+a_n\in\ker f$ dan $s(x)=b_0+b_1+\dots+b_n\in\ker f$, maka $f(r(x))=0$ dan $f(s(x))=0$. Sehingga kita punya
+        \begin{itemize}
+            \item $f(r(x)-s(x))=f(r(x))-f(s(x))=0+0=0$ yang berarti $r(x)-s(x)\in\ker f$.
+            \item Misalkan $u(x)=r(x)s(x)=c_0+c_1+\dots+c_n$ dengan $c_k=\sum_{i=0}^{k}a_kb_{k-i}$ untuk $k=0,1,\dots,n$. Karena $a_i$ dan $b_i$ adalah bilangan genap, maka penjumlahan dan perkaliannya yaitu $c_k$ juga bilangan genap untuk setiap $k=0,1,\dots,n$. Sehingga
+            \[f(u(x))=f(r(x)s(x))=\overline{c_0}+\overline{c_1}x+\cdots+\overline{c_n}x^n=0\]
+            Jadi $r(x)s(x)\in\ker f$.
+        \end{itemize}
+        Dengan demikian $\ker f$ merupakan subring dari $\Z[x]$.
+
+        Selanjutnya kita misalkan ulang $r(x)s(x)\in\ker f$ namun $r(x)\notin\ker f$ dan $s(x)\notin\ker f$, artinya terdapat koefisien $a_i$ dan $b_j$ yang ganjil. Hal ini berakibat bahwa $c_k \not\equiv 0 \mod 2$ untuk suatu $k\in\{0,1,\dots,n\}$. Hal ini berarti $f(u(x))=f(r(x)s(x))\ne 0$, yang bertentangan dengan asumsi bahwa $r(x)s(x)\in\ker f$. Dengan demikian haruslah $r(x)\in\ker f$ atau $s(x)\in\ker f$.
+
+        $\therefore$ Terbukti bahwa $\ker f$ adalah ideal prima di $\Z[x]$.
     \end{enumerate}
     \item \begin{enumerate}
         \item 

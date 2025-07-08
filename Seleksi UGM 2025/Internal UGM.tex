@@ -17,6 +17,7 @@
 \usepackage[colorlinks=true, linkcolor=red]{hyperref}
 \usepackage{multicol}
 \usepackage{enumitem}
+\usepackage{cancel}
 %\usepackage{wrapfig}
 \usepackage{longtable}
 \usepackage{array}
@@ -73,10 +74,19 @@ frametitle={\textit{Solusi}:}
   \item Diberikan ruang vektor \( V \) atas lapangan \( F \), dengan \( \dim(V) = 7 \), serta transformasi linear \( T_1 : V \to V \) dan \( T_2 : V \to V \), dengan \( \dim(\mathrm{Im}(T_1)) = 3 \) dan \( \dim(\mathrm{Im}(T_2)) = 4 \). Jika \( M \) dan \( m \) berturut-turut menyatakan nilai terbesar dan terkecil yang mungkin dari \( \dim(\mathrm{Im}(T_2 \circ T_1)) \), maka nilai \( M + m = \ldots \)
 
         \begin{solution}
-          Dengan menggunakan Teorema Rank-Nullity, kita tau bahwa
-          \[\dim(\mathrm{Im}(T_2\circ T_1)) \leq \min\{\dim(\mathrm{Im}(T_1)), \dim(\mathrm{Im}(T_2))\}\]
+          Misalkan $S=T_2\circ T_1$ dan dengan menggunakan Teorema Rank-Nullity, kita tau bahwa
+          \[\dim(\mathrm{Im}(S)) \leq \min\{\dim(\mathrm{Im}(T_1)), \dim(\mathrm{Im}(T_2))\}\]
           Sehingga dengan jelas kita peroleh
-          \[\dim(\mathrm{Im}(T_2\circ T_1)) \leq \min\{3,4\} = 3 = M\]
+          \[\dim(\mathrm{Im}(S)) \leq \min\{3,4\} = 3 = M\]
+          Secara intuitif dapat kita bayangkan bahwa beberapa elemen dari \( \mathrm{Im}(T_1) \) mungkin saja terpenuhi untuk menjadi elemen dari \( \ker(T_2) \), sehingga didapatkan sebuah rumus sebagai berikut
+          \[\dim(\ker(S))=\dim(\ker(T_1)) + \dim(\ker(T_2)\cap\mathrm{Im}(T_1))\]
+          $\dim(\mathrm{Im}(S))$ diberikan oleh rumus
+          \[\dim(\mathrm{Im}(S)) = \dim(V) - \dim(\ker(S))= 7 - \dim(\ker(S))\]
+          yang artinya $\dim(\mathrm{Im}(S))$ minimum ketika $\dim(\ker(S))$ maksimum atau lebih lanjutnya $\dim(\ker(T_2)\cap\mathrm{Im}(T_1))$ harus maksimum.
+
+          Disisi lain kita tahu bahwa $\dim(\ker(T_2))=\dim(V)-\dim(\mathrm{Im}(T_2))=7-4=3$. Dengan memilih $\ker(T_2)=\mathrm{Im}(T_1)$ maka dapat kita peroleh
+          \[\dim(\mathrm{Im}(S)) = 0 = m\]
+          Maka, nilai \( M + m = 3 + 0 = \boxed{3} \).
         \end{solution}
 
   \item Jika setiap \( z \in \mathbb{C} \) yang memenuhi
@@ -84,18 +94,95 @@ frametitle={\textit{Solusi}:}
           \left| \frac{z+1}{z+4} \right| = 2
         \]
         terletak pada suatu lingkaran, maka radius dan titik pusat lingkaran tersebut berturut-turut adalah \ldots
+        \begin{solution}
+          Misalkan \( z = x + iy \) dengan \( x, y \in \mathbb{R} \), maka
+          \begin{align*}
+            \left| \frac{z+1}{z+4} \right| &= 2 \\
+            \left| z + 1 \right| &= 2 \left| z + 4 \right| \\
+            \left| z + 1 \right|^2 &= 4 \left| z + 4 \right|^2 \\
+            (x+1)^2 + y^2 &= 4((x+4)^2 + y^2) \\
+            x^2 + 2x + 1 + y^2 &= 4x^2 + 32x + 64 + 4y^2 \\
+            3x^2 + 3y^2 + 30x + 63 &= 0 \\
+            x^2 + y^2 + 10x + 21 &= 0 \\
+            (x + 5)^2 + y^2 &= 4.
+          \end{align*}
+          Dengan demikian, radius lingkaran tersebut adalah \( 2 \) dan titik pusatnya adalah \( (-5, 0) \) atau $z=-5$.
+        \end{solution}
 
   \item Bentuk sederhana dari
         \[
           \sum_{n=1}^{\infty} 3^{n-1} \sin^3\left( \frac{x}{3^n} \right)
         \]
         adalah \ldots
-
+        \begin{solution}
+          Perhatikan bahwa $\sin\left(\theta\right)=\dfrac{e^{i\theta}-e^{-i\theta}}{2i}$, sehingga
+          \[
+          \sin^3\left( \theta \right) = \left( \frac{e^{i\theta}-e^{-i\theta}}{2i} \right)^3 = \frac{1}{-8i} \left( e^{3i\theta} - 3e^{i\theta} + 3e^{-i\theta} - e^{-3i\theta} \right).
+          \]
+          Jika dikembalikan ke dalam bentuk sinus, kita dapat tuliskan
+          \[
+          \sin^3\left( \theta \right) = \frac{1}{4}\left[3 \sin(\theta) - \sin(3\theta)\right].
+          \]
+          Sehingga setiap suku pada deret tersebut dapat dituliskan sebagai
+          \[
+          3^{n-1} \sin^3\left( \frac{x}{3^n} \right) = \frac{1}{4}\left[3^n \sin\left( \frac{x}{3^{n}} \right) - 3^{n-1} \sin\left( \frac{x}{3^{n-1}} \right)\right].
+          \]
+          Perhatikan bahwa deret diatas dapat dijadikan teleskopik seperti berikut
+          \begin{align*}
+            n=1 &\implies \frac{1}{4}\left[\cancel{3\sin\left( \frac{x}{3} \right)} - \sin(x)\right] \\
+            n=2 &\implies \frac{1}{4}\left[\cancel{9\sin\left( \frac{x}{9} \right)} - \cancel{3\sin\left( \frac{x}{3} \right)}\right] \\
+            n=3 &\implies \frac{1}{4}\left[\cancel{27\sin\left( \frac{x}{27} \right)} - \cancel{9\sin\left( \frac{x}{9} \right)}\right] \\
+            &\vdots \\
+            n=k &\implies \frac{1}{4}\left[3^k\sin\left( \frac{x}{3^k} \right) - \cancel{3^{k-1}\sin\left( \frac{x}{3^{k-1}} \right)}\right]\\
+            \cline{1-2}
+            \sum_{n=1}^{k}& 3^{n-1} \sin^3\left( \frac{x}{3^n} \right) = \frac{1}{4}\left[3^k\sin\left( \frac{x}{3^k} \right) - \sin(x)\right].
+          \end{align*}
+          Sehingga untuk $k\to\infty$, kita peroleh
+          \[
+          \lim_{k \to \infty} 3^k \sin\left( \frac{x}{3^k} \right) = \lim_{k \to \infty} x\cdot \frac{\sin\left( \frac{x}{3^k}\right)}{\frac{x}{3^k}} = x.
+          \]
+          Jadi bentuk sederhananya adalah
+          \[
+          \sum_{n=1}^{\infty} 3^{n-1} \sin^3\left( \frac{x}{3^n} \right) = \boxed{\frac{1}{4}\left[x - \sin(x)\right]}.
+          \]
+        \end{solution}
   \item Nilai
         \[
           \sup \left\{ \inf \left\{ 5(-1)^n - \left( \frac{m+1}{n} \right)^2 : n \geq m \right\} : m \in \mathbb{N} \right\}
         \]
         adalah \ldots
+        \begin{solution}
+          Misalkan \( S = \left\{ \inf \left\{ 5(-1)^n - \left( \frac{m+1}{n} \right)^2 : n \geq m \right\} : m \in \mathbb{N} \right\} \).
+
+          Untuk setiap \( m \in \mathbb{N} \), kita akan mencari nilai infimum dari barisan himpunan \[ T_m = \left\{ 5(-1)^n - \left( \frac{m+1}{n} \right)^2 : n \geq m \right\}. \]
+
+          Perhatikan bahwa untuk membuat ekspresi \( 5(-1)^n - \left( \frac{m+1}{n} \right)^2 \) menjadi kecil, kita perlu 
+          \begin{itemize}
+            \item $5(-1)^n$ harus negatif, berarti \( n \) haruslah ganjil.
+            \item \(\left( \frac{m+1}{n} \right)^2\) harus besar, berarti \( n \) haruslah sekecil mungkin.
+          \end{itemize}
+          Selanjutnya dengan sedikit melihat pola anggota himpunan \( T_m \) untuk setiap \( m\in \mathbb{N} \)
+          \begin{align*}
+            T_1 &= \left\{ 5(-1)^n - \left( \frac{2}{n} \right)^2 : n \geq 1 \right\} = \left\{ -9, 4, -\frac{49}{9},\ldots \right\} \implies \inf(T_1) = -9 \\
+            T_2 &= \left\{ 5(-1)^n - \left( \frac{3}{n} \right)^2 : n \geq 2 \right\} = \left\{ \frac{11}{4}, -6, \frac{71}{16}, \ldots \right\} \implies \inf(T_2) = -6 \\
+            T_3 &= \left\{ 5(-1)^n - \left( \frac{4}{n} \right)^2 : n \geq 3 \right\} = \left\{ -\frac{61}{9}, 1, -\frac{121}{25}, \ldots \right\} \implies \inf(T_3) = -\frac{61}{9} \\
+            T_4 &= \left\{ 5(-1)^n - \left( \frac{5}{n} \right)^2 : n \geq 4 \right\} = \left\{ \frac{55}{16}, -6, \frac{121}{25}, \ldots \right\} \implies \inf(T_4) = -6 \\
+            \vdots&\quad\vdots \quad\vdots \quad\vdots 
+          \end{align*}
+          Dari sedikit perhitungan diatas, kita mendapatkan sebuah pola dugaan yaitu 
+          \[\inf(T_m) = \begin{cases}
+            -5-\left(1+\frac{1}{m}\right)^2,\quad & \text{untuk } m \text{ ganjil} \\
+            -6,\quad & \text{untuk } m \text{ genap}
+          \end{cases}\]
+          Dengan demikian, kita dapat menyatakan \( S \) sebagai
+          \[S = \left\{ -5-\left(1+\frac{1}{m}\right)^2 : m \text{ ganjil} \right\} \cup \left\{ -6 : m \text{ genap} \right\}.\]
+          Untuk mencari supremum dari \( S \), kita perlu mencari nilai maksimum dari kedua himpunan tersebut. Karena untuk \( m \) genap hasilnya tetap -6, maka kita fokus pada himpunan pertama.
+          Dengan menggunakan limit, kita dapatkan
+          \[
+          \lim_{m \to \infty} -5-\left(1+\frac{1}{m}\right)^2 = -6.
+          \]
+          Sehingga supremum dari \( S \) adalah $\boxed{-6}$. 
+        \end{solution}
 
   \item Diberikan fungsi kontinu \( f : [0,1] \to \mathbb{R} \) dengan \( |f(x)| \leq x \) untuk setiap \( x \in [0,1] \). \\
         Nilai terbesar yang mungkin dari
@@ -103,12 +190,50 @@ frametitle={\textit{Solusi}:}
           \int_0^1 \left( (f(x))^2 - x^4 f(x) \right) \, dx
         \]
         adalah \ldots
+        \begin{solution}
+          Diketahui sifat fungsi \( f\) dan \(g \) yang terintegralkan pada interval \( [a,b] \) dan memenuhi \(f(x)\leq g(x)\) untuk setiap \(x\in[a,b]\), maka
+          \[\int_a^b f(x) \, dx \leq \int_a^b g(x) \, dx.\]
+          Dengan demikian, kita dapat mencari nilai maksimum dari integral di soal
+          \begin{align*}
+            \int_0^1 \left( (f(x))^2 - x^4 f(x) \right) \, dx &\leq \left|\int_{0}^{1}\left( (f(x))^2 - x^4 f(x) \right)\right|\\
+            &\leq \int_{0}^{1}\left|(f(x))^2- x^4 f(x)\right| \, dx
+          \end{align*}
+          Ketaksamaan segitiga mengatakan $\left|f^2(x)-x^4f(x)\right|\leq |f^2(x)|+|x^4f(x)|$ untuk setiap $x\in[0,1]$. Demikian juga dengan integralnya
+          \begin{align*}
+            \int_{0}^{1}\left|(f(x))^2- x^4 f(x)\right| \, dx &\leq \int_{0}^{1}\left|(f(x))^2\right| + \int_{0}^{1}\left|x^4 f(x)\right| \, dx \\
+            &\leq \int_{0}^{1}x^2 \, dx + \int_{0}^{1}x^5 \, dx \\
+            &= \left[ \frac{x^3}{3} + \frac{x^6}{6} \right]_{0}^{1} \\
+            &= \frac{1}{3} + \frac{1}{6} = \frac{1}{2}.
+          \end{align*}
+          Jadi, nilai terbesar yang mungkin dari integral tersebut adalah $\boxed{\frac{1}{2}}$.
+        \end{solution}
 
   \item Banyaknya bilangan asli \( x \in \{1,2,3,\ldots,2025\} \) yang bukan kelipatan 2 dan bukan kelipatan 5 adalah \ldots
+        \begin{solution}
+          Misalkan \( S \) adalah himpunan bilangan asli dari 1 sampai 2025 dan. Selanjutnya definisikan $A_1$ dan $A_2$ sebagai himpunan bilangan asli dari 1 sampai 2025 yang masing-masing merupakan kelipatan 2 dan kelipatan 5. Dengan mudah kita peroleh bahwa
+          \begin{flalign*}
+            |S| &= 2025, &\\
+            |A_1| &= \left\lfloor \frac{2025}{2} \right\rfloor = 1012, &\\
+            |A_2| &= \left\lfloor \frac{2025}{5} \right\rfloor = 405, &\\
+            |A_1 \cap A_2| &= \left\lfloor \frac{2025}{10} \right\rfloor = 202.
+          \end{flalign*} 
+          Menggunakan prinsip inklusi-eksklusi, maka banyaknya bilangan asli dari 1 sampai 2025 yang bukan kelipatan 2 dan bukan kelipatan 5 adalah
+          \[|A_1^c \cap A_2^c| = |S| - |A_1| - |A_2| + |A_1 \cap A_2| = 2025 - 1012 - 405 + 202 = \boxed{810}.\]
+        \end{solution}
 
-  \item Tiga siswa $a_{1}$, $a_{2}$, $a_{3}$ dari Sekolah A dan 4 siswa $b_{1}$, $b_{2}$, $b_{3}$, $b_{4}$ dari Sekolah B berkumpul dalam sebuah pertemuan. % 
-        Banyaknya cara menyusun ketujuh siswa tersebut dalam satu baris dengan syarat tidak terdapat satu blok yang berisikan semua siswa dari sekolah yang sama adalah \ldots % 
-        (Contoh: $b_{3}b_{2}a_{1}a_{3}b_{1}b_{4}a_{2}$ diperbolehkan, tetapi $b_{1}b_{4}a_{1}a_{2}a_{3}b_{3}b_{2}$ dan $a_{1}b_{4}b_{3}b_{1}b_{2}a_{3}a_{2}$ tidak diperbolehkan) % 
+  \item Tiga siswa $a_{1}$, $a_{2}$, $a_{3}$ dari Sekolah A dan 4 siswa $b_{1}$, $b_{2}$, $b_{3}$, $b_{4}$ dari Sekolah B berkumpul dalam sebuah pertemuan. 
+        Banyaknya cara menyusun ketujuh siswa tersebut dalam satu baris dengan syarat tidak terdapat satu blok yang berisikan semua siswa dari sekolah yang sama adalah \ldots 
+        (Contoh: $b_{3}b_{2}a_{1}a_{3}b_{1}b_{4}a_{2}$ diperbolehkan, tetapi $b_{1}b_{4}a_{1}a_{2}a_{3}b_{3}b_{2}$ dan $a_{1}b_{4}b_{3}b_{1}b_{2}a_{3}a_{2}$ tidak diperbolehkan) 
+        \begin{solution}
+          Misalkan $S$ adalah himpunan semua susunan ketujuh siswa tersebut, sehingga jelas bahwa $|S|=7!=5040$. Misalkan $A$ dan $B$ adalah himpunan susunan masing-masing siswa sekolah A yang satu blok berurutan dan siswa sekolah B yang satu blok berurutan (Contoh: $b_1b_2a_{1}a_{2}a_{3}b_3b_4\in A$ dan $a_{3}b_1b_2b_3b_4a_{1}a_{2}\in B$). Banyaknya anggota $A,B$ dan $A\cap B$ dapat dihitung sebagai berikut:
+          \begin{flalign*}
+            |A| &= 5! \cdot 3! = 120 \cdot 6 = 720, &\\
+            |B| &= 4! \cdot 4! = 24 \cdot 24 = 576, &\\
+            |A \cap B| &= 2 \cdot 4! \cdot 3! = 2 \cdot 24 \cdot 6 = 288.
+          \end{flalign*}
+          Lagi-lagi dengan prinsip inklusi-eksklusi, maka banyaknya susunan ketujuh siswa tersebut yang tidak memiliki satu blok berisikan semua siswa dari sekolah yang sama adalah
+          \[|A^c \cap B^c| = |S| - |A| - |B| + |A \cap B| = 5040 - 720 - 576 + 288 = 4.032\]
+        \end{solution}
 
   \item Jika $S_{5}$ menyatakan grup semua fungsi bijektif pada $\{1,2,..., 5\}$ terhadap operasi komposisi fungsi, maka banyaknya elemen berorder 2 pada $S_{5}$ adalah \ldots % 
 
@@ -125,7 +250,7 @@ frametitle={\textit{Solusi}:}
         \[
           \prod_{k=1}^{n}|PA_{k}|=|OP|^{n}-r^{n},
         \] % 
-        dengan $|AB|$ menyatakan panjang ruang garis yang menghubungkan titik A dan B. % 
+        dengan $|AB|$ menyatakan panjang ruang garis yang menghubungkan titik $A$ dan $B$. % 
 
   \item
         Diberikan fungsi kontinu $f:[a,b]\rightarrow\mathbb{R}$ yang terdiferensial pada $(a, b)$ dengan $f(a)=f(b)$. % 
@@ -154,6 +279,5 @@ frametitle={\textit{Solusi}:}
         \[
           PQ=\{p*q:p\in P,q\in Q\}.
         \] % 
-  \item
 \end{enumerate}
 \end{document}

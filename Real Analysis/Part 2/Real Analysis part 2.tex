@@ -1,0 +1,136 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsfonts,amsthm}
+\usepackage{ragged2e,multicol,setspace, fancyhdr,enumerate,enumitem,cancel}
+\usepackage[a4paper, width=216mm, height=297mm, margin=2.5cm]{geometry}
+\usepackage{etoolbox}
+\newcommand{\zerodisplayskips}{%
+  \setlength{\abovedisplayskip}{0pt}%
+  \setlength{\belowdisplayskip}{0pt}%
+  \setlength{\abovedisplayshortskip}{0pt}%
+  \setlength{\belowdisplayshortskip}{0pt}}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+\setlength{\columnsep}{0.8cm}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\definecolor{darkcyan}{HTML}{0091A4}  
+\definecolor{brightcyan}{HTML}{dcf0f2}
+\newmdenv[  
+topline=false,  
+rightline=false,  
+bottomline=false,  
+leftline=true,  
+linecolor=darkcyan,  
+linewidth=3pt,  
+backgroundcolor=brightcyan,  
+frametitle={\textit{Solusi}:}
+]{solution}  
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{definisi}{Definisi}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\fpb}{\text{fpb}}
+\newcommand{\kpk}{\text{kpk}}
+\newcommand{\solusi}{{\textbf{\underline{SOLUSI}}}:\\}
+
+\begin{document}
+\setstretch{1.1}
+\pagenumbering{gobble}
+\begin{enumerate}
+    \item Diberikan suatu fungsi kontinu $f:[a,b] \to \mathbb{R}$ dan didefinisikan bahwa $A=\{x \in [a,b] | f(x) \le 0\}$. Jika $A$ tidak kosong, buktikan bahwa $\sup A \in A$ dan $\inf A \in A$.
+    \begin{solution}
+        Karena $A$ adalah himpunan bagian tak kosong dari $[a,b]$ yang dimana jelas himpunan tersebut terbatas, maka pasti terdapat $\sup A$ dan $\inf A$. Misalkan $c=\sup A$ dan kita tahu menggunakan definisi supremum bahwa 
+        \begin{itemize}
+            \item Untuk setiap $x \in A$, $x \leq c$.
+            \item $\forall \epsilon > 0, \exists x \in A$ sehingga $c - \epsilon < x$.
+        \end{itemize}
+        Artinya untuk setiap $\epsilon > 0$, bilangan $c - \epsilon\in A$. 
+        \begin{teorema}
+            Misalkan \( f : A \to \mathbb{R} \) dan \( c \) adalah titik akumulasi dari \( A \). Maka pernyataan-pernyataan berikut adalah ekivalen:
+\begin{enumerate}
+    \item[(i)] \( \displaystyle \lim_{x \to c} f(x) = L \).
+    \item[(ii)] \textit{Untuk setiap barisan \( (x_n) \) dalam \( A \) yang konvergen ke \( c \), dengan \( x_n \neq c \) untuk setiap \( n \in \mathbb{N} \), barisan \( (f(x_n)) \) konvergen ke \( L \).}
+\end{enumerate}
+        \end{teorema}
+        Didefinisikan barisan \( (x_n)\in A \) dengan \( x_n = c - \frac{1}{n} \) untuk setiap \( n \in \mathbb{N} \). Dengan fakta bahwa $x_n\to c$ ketika $n \to \infty$ dan $f$ kontinu pada $[a,b]$ (dengan $c$ adalah titik akumulasi dari $A$), maka menggunakan teorema di atas diperoleh
+        \begin{align*}
+            f(x_n) &\leq 0,\quad \forall n \in \mathbb{N} \\
+            \lim_{n \to \infty} f(x_n) &\leq 0\\
+            f(c) &\leq 0
+        \end{align*}
+        Dengan kata lain, $c=\sup A \in A$.
+
+        Analog untuk $\inf A$, misalkan $d=\inf A$ dapat dibuat barisan \( (y_n)\in A \) dengan \( y_n = d + \frac{1}{n} \) sehingga
+        \begin{align*}
+            f(y_n) &\leq 0,\quad \forall n \in \mathbb{N} \\
+            \lim_{n \to \infty} f(y_n) &\leq 0\\
+            f(d) &\leq 0
+        \end{align*}
+        Dengan kata lain, $d=\inf A \in A$.
+    \end{solution}
+
+    \item Dari hasil nomer 1, buktikan bahwa jika $f(a)<0$ dan $f(b)>0$ maka $f(\sup A)=0$. Konsep ini selanjutnya kita kenal dengan teorema letak akar. Lebih umumnya, disebut teorema nilai antara, yakni untuk setiap $k$ dengan $f(a)<k<f(b)$ terdapat $c \in (a,b)$ sedemikian hingga $f(c)=k$. 
+    \begin{solution}
+        Dari hasil sebelumnya diperoleh bahwa $f(\sup A)\leq 0$. Sekarang andaikan $f(\sup A)< 0$, misalkan juga $c=\sup A$ maka karena $f$ kontinu di $c$ menggunakan definisi diperoleh $\forall\, \varepsilon > 0, \exists\, \delta > 0$ sehingga $|x-c|<\delta \implies |f(x)-f(c)|<\epsilon$. 
+
+        Dengan memilih $\varepsilon = -f(c)$ (jelas boleh karena $f(c)<0$), maka diperoleh
+        \begin{align*}
+            |f(x)-f(c)| < -f(c)\\
+            -f(c) < f(x) < f(c)\\
+            2f(c) < f(x) < 0
+        \end{align*}
+        Artinya untuk semua $x \in (c-\delta,c+\delta)$ berlaku $f(x)<0$. Sekarang kita perlu membuktikan bahwa interval $(c,c+\delta)$ tidak kosong, kita akan menggunakan fakta bahwa $f(b)>0$. Artinya $b\notin A$ dan pastinya dengan mudah berlaku $c\ne b$ dan $c< b$. Dengan menggunakan sifat kerapatan bilangan real diperoleh bahwa terdapat $x_0 \in (c,c+\delta)\subseteq(c,b)$ sehingga $f(x_0)<0$. 
+        
+        Hal ini bertentangan dengan definisi $c=\sup A$, karena $x_0 \in A$ sehingga $x_0 \leq c$. Dengan demikian, kita memperoleh bahwa $f(\sup A)=0$.
+    \end{solution}
+
+    \item Buktikan bahwa jika $f:[a,b] \to [a,b]$ kontinu, maka terdapat $c \in [a,b]$ sedemikian hingga $f(c)=c$. Untuk soal-soal berikutnya, $c$ disebut titik tetap (\textit{fixed point}) jika $f(c)=c$.
+    \begin{solution}
+        Misalkan $f:[a,b] \to [a,b]$ kontinu. Kita definisikan fungsi $g(x)=f(x)-x$. Maka, $g$ adalah fungsi kontinu pada $[a,b]$ dan jelas bahwa $f(a)\geq a$ dan $f(b)\leq b$. Maka, kita punya $g(a)=f(a)-a\geq 0$ dan $g(b)=f(b)-b\leq 0$. 
+
+        Dengan menggunakan teorema nilai antara, kita dapat menyimpulkan bahwa terdapat $c \in [a,b]$ sedemikian hingga $g(c)=0$, atau dengan kata lain $f(c)=c$.
+    \end{solution}
+    \item Buktikan bahwa fungsi $f(x)=\cos(\sin(x^2))$ mempunyai titik tetap. 
+    \begin{solution}
+        Perhatikan bahwa untuk fungsi $g(x)=f(x)-x=\cos(\sin(x^2))-x$ 
+        \begin{itemize}
+            \item $g$ adalah fungsi kontinu pada $\mathbb{R}$.
+            \item $g(0)=\cos(\sin(0^2))-0=\cos(0)=1>0$.
+            \item $g(1)=\cos(\sin(1^2))-1<0$ (karena $\cos(\sin(1))<1$).
+        \end{itemize}
+        Dengan menggunakan teorema nilai antara, kita dapat menyimpulkan bahwa terdapat $c \in [0,1]$ sedemikian hingga $g(c)=0$, atau dengan kata lain $f(c)=c$.
+    \end{solution}
+
+    \item Misalkan $f:\mathbb{R} \to \mathbb{R}$ adalah fungsi kontinu dan menurun. Buktikan bahwa: 
+    \begin{enumerate}
+        \item $f$ memiliki satu titik tetap yang tunggal
+        \item Berlaku alternatif berikut: himpunan $\{x \in \mathbb{R}\, | \,(f \circ f)(x)=x\}$ adalah tak hingga atau memiliki jumlah elemen ganjil. 
+    \end{enumerate}
+
+    \item Buktikan bahwa setiap fungsi kontinu $f:[a,b] \to \mathbb{R}$ terbatas (Gunakan konsep kontradiksi untuk membuktikan hal tersebut). 
+
+    \item Buktikan bahwa setiap fungsi kontinu $f:[a,b] \to \mathbb{R}$ mempunyai nilai maksimum dan minimum. 
+
+    \item Buktikan bahwa tidak ada fungsi kontinu dan pada (surjective) yang memenuhi $f:[0,1] \to (0,1)$. 
+
+    \item Carilah semua fungsi kontinu $f:\mathbb{R} \to \mathbb{R}$ sedemikian sehingga $x_1-x_2 \in \mathbb{Q} \iff f(x_1)-f(x_2) \in \mathbb{Q}$. \\
+    Jawaban. $f(x)=ax+b$ dengan $a \in \mathbb{Q}, a \neq 0$ dan $b \in \mathbb{R}$. 
+
+    \item Misalkan $C>0$ adalah konstanta sembarang. Carilah semua fungsi kontinu $f:\mathbb{R} \to \mathbb{R}$ yang memenuhi: $f(x)=f(x^2+C)$, untuk semua $x \in \mathbb{R}$. 
+\end{enumerate}
+\end{document}
