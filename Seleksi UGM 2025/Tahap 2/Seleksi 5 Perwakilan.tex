@@ -1,0 +1,121 @@
+\documentclass[a4paper, 11pt]{article}
+
+\usepackage{geometry}
+\usepackage{tikz}
+    \usetikzlibrary{patterns,decorations.pathreplacing,snakes,arrows.meta}
+    \tikzset{box/.style={draw, thick, minimum width=1cm, minimum height=1cm}}
+\usepackage{bigints}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{footmisc} 
+\usepackage[colorlinks=true, linkcolor=red]{hyperref}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{cancel}
+%\usepackage{wrapfig}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\definecolor{darkcyan}{HTML}{0091A4}  
+\definecolor{brightcyan}{HTML}{dcf0f2}
+\newmdenv[  
+topline=false,  
+rightline=false,  
+bottomline=false,  
+leftline=true,  
+linecolor=darkcyan,  
+linewidth=3pt,  
+backgroundcolor=brightcyan,  
+frametitle={\textit{Solusi}:}
+]{solution}  
+\setlength{\multicolsep}{5.0pt plus 2.0pt minus 1.5pt}% 50% of original values
+\geometry{a4paper, portrait, top=2.5cm, left=2.5cm, right=2.5cm, bottom=2.5cm}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+
+\renewcommand{\baselinestretch}{1.2}
+
+\fancyfoot[L]{\textit{5002221132}}
+\fancyfoot[R]{\textit{Tetew}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{2pt}
+
+\pagenumbering{gobble}
+\begin{document}
+\begin{center}
+    \textbf{SELEKSI SESI PERTAMA BIDANG MATEMATIKA} \\[6pt]
+
+    \begin{tabular}{ l l }
+        Hari, Tanggal           & : Sabtu, 16 Agustus 2025 \\
+        Durasi pengerjaan       & : 90 menit               \\
+        Waktu pengerjaan        & : Pukul 08.00--09.30 WIB \\
+        Batas waktu pengumpulan & : Pukul 09.40 WIB        \\
+        Total poin              & : 30                     \\
+    \end{tabular}
+\end{center}
+\noindent
+\textbf{Naskah soal ini terdiri atas dua halaman.}
+
+\begin{enumerate}
+    \item Diberikan ruang vektor $V$ atas lapangan $\mathbb{R}$ dengan $\dim(V)=6$. Diketahui $U_1$ dan $U_2$ merupakan subruang dari $V$ dengan $U_1 \subseteq U_2$ dan $\dim(U_1)=2$ serta $\dim(U_2)=4$. Jika
+          \[
+              E = \{ T : V \to V \mid T \text{ transformasi linear},\; T(U_1) \subseteq U_1, \; T(U_2) \subseteq U_2 \},
+          \]
+          maka $\dim(E) = \dots$.
+
+    \item Bilangan tiga digit $abc$ dikatakan ``jaya'' jika sistem persamaan linear
+          \[
+              \begin{cases}
+                  ax + by + cz = a, \\
+                  cx + ay + bz = b, \\
+                  bx + cy + az = c
+              \end{cases}
+          \]
+          mempunyai lebih dari dua solusi. Banyaknya bilangan jaya adalah \dots
+
+    \item Jika bilangan kompleks $z$ memenuhi $z = (1+i)^i$, maka nilai yang mungkin dari $\arg(z)$ adalah \dots
+
+    \item Jika $a$ dan $b$ adalah bilangan kompleks dengan sifat $|a| \leq |b|$, maka nilai terkecil dari $|z|, z \in \mathbb{C}$, yang memenuhi persamaan
+          \[
+              |z-a| + |z+a| = 2|b|
+          \]
+          adalah \dots
+
+    \item Nilai dari
+          \[
+              \lim_{n \to \infty} \frac{1}{n^{26}} \sum_{k=1}^{n} (k+25)^{25}
+          \]
+          adalah \dots
+
+    \item Diberikan fungsi terdiferensial $f : \mathbb{R} \to \mathbb{R}$ yang memenuhi $f'(0) = 1$ dan
+          \[
+              f(x+y) = \frac{f(x)}{e^y} + \frac{f(y)}{e^x}, \quad \forall x,y \in \mathbb{R}.
+          \]
+          Nilai terbesar yang mungkin dari $f(1)$ adalah \dots
+    \item Sebuah permainan terdiri dari dua jenis langkah: maju dan mundur. Permainan akan selesai apabila salah satu jenis langkah dilakukan sebanyak 5 kali, tanpa memperhatikan urutannya. Banyaknya kemungkinan kombinasi langkah pada suatu permainan yang selesai tepat setelah langkah terakhir adalah ....
+
+    \item Suatu bilangan bulat positif dikatakan bebas kuadrat (\textit{squarefree}) jika bilangan bulat itu tidak habis dibagi oleh bilangan kuadrat yang lebih besar dari 1. Contoh bilangan bebas kuadrat adalah 1 dan 21. Banyaknya bilangan bebas kuadrat yang kurang dari 250 adalah ....
+
+    \item Banyaknya anggota dari grup faktor $\mathbb{Q}/\mathbb{Z}$ yang berorde bilangan prima yang kurang dari 50 adalah ....
+
+    \item Banyaknya pembagi nol berderajat satu di gelanggang suku banyak $ \mathbb{Z}_{10}[x] $ adalah ....
+\end{enumerate}
+\newpage
+\pagestyle{fancy}
+Hai
+\end{document}
