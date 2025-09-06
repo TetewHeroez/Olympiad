@@ -1,0 +1,98 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{geometry}
+\usepackage{tikz}
+    \usetikzlibrary{patterns,decorations.pathreplacing,snakes,arrows.meta}
+    \tikzset{box/.style={draw, thick, minimum width=1cm, minimum height=1cm}}
+\usepackage{bigints}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{footmisc} 
+\usepackage[colorlinks=true, linkcolor=red]{hyperref}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{cancel}
+%\usepackage{wrapfig}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\definecolor{darkcyan}{HTML}{0091A4}  
+\definecolor{brightcyan}{HTML}{dcf0f2}
+\newmdenv[  
+topline=false,  
+rightline=false,  
+bottomline=false,  
+leftline=true,  
+linecolor=darkcyan,  
+linewidth=3pt,  
+backgroundcolor=brightcyan,  
+frametitle={\textit{Solusi}:}
+]{solution}  
+\setlength{\multicolsep}{5.0pt plus 2.0pt minus 1.5pt}% 50% of original values
+\geometry{a4paper, portrait, top=2.5cm, left=2.5cm, right=2.5cm, bottom=2.5cm}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+
+\renewcommand{\baselinestretch}{1.2}
+
+\fancyfoot[L]{\textit{5002221132}}
+\fancyfoot[R]{\textit{Tetew}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{2pt}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+\begin{document}
+
+\begin{enumerate}
+  \item \textbf{Definisi T-grid:} Sebuah T-grid adalah matriks berukuran $3 \times 3$ yang memenuhi dua syarat berikut:
+        \begin{enumerate}
+          \item Tepat lima dari entri-entri dalam matriks bernilai $1$, dan empat entri lainnya bernilai $0$.
+          \item Di antara delapan baris, kolom, dan diagonal panjang (dua diagonal panjang adalah $\{a_{13}, a_{22}, a_{31}\}$ dan $\{a_{11}, a_{22}, a_{33}\}$), tidak boleh lebih dari satu yang memiliki ketiga entri bernilai sama.
+        \end{enumerate}
+        Tentukan banyaknya T-grid yang berbeda yang memenuhi syarat di atas.
+
+  \item Berikan argumen kombinatorik untuk membuktikan
+        \[
+          \sum_{k=0}^{n} k \binom{n}{k}^2 = n \binom{2n - 1}{n - 1}
+        \]
+
+  \item Banyak solusi non-negatif dari persamaan
+        \[
+          2x_1 + x_2 + 3x_3 + 5x_4 = 35
+        \]
+        \begin{solution}
+          Kita dapat menggunakan mfungsi pembangkit untuk menyelesaikan masalah ini. Pertama, kita akan mencari fungsi pembangkit dari setiap variabel:
+          \begin{align*}
+            x_1 & : g_1(x) = \frac{1}{1 - x^2}, \\
+            x_2 & : g_2(x) = \frac{1}{1 - x},   \\
+            x_3 & : g_3(x) = \frac{1}{1 - x^3}, \\
+            x_4 & : g_4(x) = \frac{1}{1 - x^5}.
+          \end{align*}
+          Maka, fungsi pembangkit total adalah
+          \[
+            G(x) = \frac{1}{(1 - x^2)(1 - x)(1 - x^3)(1 - x^5)}.
+          \]
+          Kita perlu mencari koefisien dari $x^{35}$ dalam ekspansi dari $G(x)$.
+        \end{solution}
+
+  \item Tunjukkan bahwa untuk setiap bilangan irasional $x$ dan bilangan bulat positif $n$, terdapat bilangan rasional $\frac{p}{q}$ dengan $1 \leq q \leq n$ sehingga
+        \[
+          \left| x - \frac{p}{q} \right| < \frac{1}{nq}
+        \]
+\end{enumerate}
+\end{document}

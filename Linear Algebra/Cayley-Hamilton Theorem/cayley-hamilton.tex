@@ -1,0 +1,156 @@
+\documentclass[12pt, a4paper]{article}
+
+%=============== PREAMBLE ===============
+\usepackage[indonesian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb} % Paket matematika dasar
+\usepackage[a4paper, margin=2.5cm]{geometry} % Mengatur margin halaman
+\usepackage[svgnames]{xcolor} % Untuk definisi warna
+\usepackage{hyperref} % Untuk hyperlink (opsional)
+
+%--- TCOLORBOX SETUP ---
+% Memuat paket tcolorbox dengan library yang diperlukan
+% skins: untuk styling tingkat lanjut (warna, gradien, dll.)
+% theorems: untuk membuat environment teorema otomatis
+% breakable: agar box bisa terpotong antar halaman
+\usepackage[many]{tcolorbox}
+\tcbuselibrary{skins, theorems, breakable}
+
+%--- Palet Warna ---
+\definecolor{imc_blue}{HTML}{003F5C}
+\definecolor{imc_lightblue}{HTML}{E8F1F2}
+\definecolor{imc_orange}{HTML}{FFA600}
+\definecolor{imc_grey}{HTML}{F0F0F0}
+\definecolor{imc_red}{HTML}{D44D5C}
+
+%--- Definisi Box Teorema (Lebih Kokoh) ---
+% Menggunakan format title langsung untuk menghindari konflik karakter ':'
+\newtcbtheorem{mytheorem}{Teorema}%
+{
+    enhanced,
+    colback=imc_lightblue,
+    colframe=imc_blue,
+    fonttitle=\bfseries,
+    title={#1~\thetcbcounter}, % Format judul yang lebih aman
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={sharp corners, colback=imc_blue},
+    sharp corners,
+    breakable
+}{th}
+
+\newtcbtheorem{mydef}{Definisi}%
+{
+    enhanced,
+    colback=imc_grey,
+    colframe=gray!75!black,
+    fonttitle=\bfseries,
+    title={#1~\thetcbcounter},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={sharp corners, colback=gray!75!black},
+    sharp corners,
+    breakable
+}{def}
+
+\newtcbtheorem{myexample}{Contoh Soal}%
+{
+    enhanced,
+    colback=LightGoldenrodYellow!20,
+    colframe=imc_orange,
+    fonttitle=\bfseries,
+    title={#1~\thetcbcounter},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={sharp corners, colback=imc_orange},
+    sharp corners,
+    breakable
+}{ex}
+
+%--- Definisi Box Bukti (Disederhanakan) ---
+% Menggunakan 'title' standar, lebih aman daripada 'overlay'
+\newtcolorbox{myproof}{
+    enhanced,
+    colframe=cyan!60!black,
+    colback=cyan!10,
+    boxrule=0.5pt,
+    sharp corners,
+    breakable,
+    fonttitle=\bfseries\itshape,
+    title=Bukti:
+}
+
+\newtcolorbox{mywarning}[1][Penting]{
+    enhanced,
+    colback=red!5!white,
+    colframe=imc_red,
+    boxrule=0.8pt,
+    fonttitle=\bfseries,
+    title=#1
+}
+
+
+%=============== DOCUMENT ===============
+\begin{document}
+
+\begin{mydef}{Polinomial Karakteristik}
+  Diberikan sebuah matriks persegi $A$ berukuran $n \times n$ atas lapangan $\mathbb{F}$. Polinomial karakteristik dari $A$, dinotasikan $p_A(\lambda)$, didefinisikan sebagai:
+  \[ p_A(\lambda) = \det(A - \lambda I) \]
+  di mana $I$ adalah matriks identitas $n \times n$.
+\end{mydef}
+
+Dengan definisi ini, kita dapat menyatakan Teorema Cayley-Hamilton.
+
+\begin{mytheorem}{Cayley-Hamilton}
+  Setiap matriks persegi $A$ berukuran $n \times n$ memenuhi persamaan karakteristiknya sendiri. Artinya, jika $p_A(\lambda)$ adalah polinomial karakteristik dari $A$, maka:
+  \[ p_A(A) = \mathbf{0} \]
+  di mana $\mathbf{0}$ adalah matriks nol berukuran $n \times n$.
+\end{mytheorem}
+
+\begin{myproof}
+  Misalkan $A$ adalah matriks $n \times n$ dan $p_A(\lambda) = \det(A-\lambda I)$ adalah polinomial karakteristiknya.
+  Misalkan $B(\lambda) = \text{adj}(A - \lambda I)$ adalah matriks adjugat dari $(A-\lambda I)$.
+
+  Setiap entri dari $B(\lambda)$ adalah kofaktor dari $(A-\lambda I)$, yang merupakan polinomial dalam $\lambda$ dengan derajat paling tinggi $n-1$. Oleh karena itu, kita dapat menulis $B(\lambda)$ sebagai sebuah polinomial dengan koefisien berupa matriks:
+  \[ B(\lambda) = B_{n-1}\lambda^{n-1} + B_{n-2}\lambda^{n-2} + \dots + B_1\lambda + B_0 \]
+  di mana $B_i$ adalah matriks-matriks $n \times n$.
+
+  Dari sifat dasar matriks adjugat, kita tahu bahwa:
+  \[ (A-\lambda I) \cdot \text{adj}(A - \lambda I) = \det(A - \lambda I) \cdot I \]
+  Substitusikan ekspresi untuk $B(\lambda)$ dan $p_A(\lambda) = c_n\lambda^n + \dots + c_0$:
+  \[ (A-\lambda I) (B_{n-1}\lambda^{n-1} + \dots + B_0) = (c_n\lambda^n + \dots + c_0) I \]
+  Dengan menjabarkan dan menyamakan koefisien untuk setiap pangkat $\lambda$, kita peroleh sistem persamaan matriks berikut:
+  \begin{align*}
+    -B_{n-1}           & = c_n I     \\
+    AB_{n-1} - B_{n-2} & = c_{n-1} I \\
+                       & \vdots      \\
+    AB_1 - B_0         & = c_1 I     \\
+    AB_0               & = c_0 I
+  \end{align*}
+  Kalikan setiap persamaan di atas dari kiri dengan perpangkatan $A$ yang sesuai ($A^n, A^{n-1}, \dots, I$) lalu jumlahkan semuanya. Sisi kiri akan menjadi deret teleskopik yang hasilnya adalah matriks nol, sementara sisi kanan menjadi $p_A(A)$. Maka, kita sampai pada kesimpulan:
+  \[ p_A(A) = c_n A^n + c_{n-1} A^{n-1} + \dots + c_1 A + c_0 I = \mathbf{0} \]
+\end{myproof}
+
+\begin{myexample}
+Verifikasi Teorema Cayley-Hamilton untuk matriks $A = \begin{pmatrix} 3 & 1 \\ 2 & 4 \end{pmatrix}$.
+
+\textbf{Solusi:}\\
+\textbf{Langkah 1: Cari Polinomial Karakteristik}
+\begin{align*}
+  p_A(\lambda) & = \det(A - \lambda I) = \det \begin{pmatrix} 3-\lambda & 1 \\ 2 & 4-\lambda \end{pmatrix} \\
+               & = (3-\lambda)(4-\lambda) - (1)(2) = \lambda^2 - 7\lambda + 10
+\end{align*}
+\textbf{Langkah 2: Substitusi $A$ ke dalam Polinomial} \\
+Teorema Cayley-Hamilton memprediksi bahwa $A^2 - 7A + 10I = \mathbf{0}$. Mari kita buktikan.
+\[ A^2 = \begin{pmatrix} 3 & 1 \\ 2 & 4 \end{pmatrix} \begin{pmatrix} 3 & 1 \\ 2 & 4 \end{pmatrix} = \begin{pmatrix} 11 & 7 \\ 14 & 18 \end{pmatrix} \]
+Maka,
+\begin{align*}
+  A^2 - 7A + 10I & = \begin{pmatrix} 11 & 7 \\ 14 & 18 \end{pmatrix} - 7\begin{pmatrix} 3 & 1 \\ 2 & 4 \end{pmatrix} + 10\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \\
+                 & = \begin{pmatrix} 11 - 21 + 10 & 7 - 7 + 0 \\ 14 - 14 + 0 & 18 - 28 + 10 \end{pmatrix} = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} = \mathbf{0}
+\end{align*}
+Verifikasi berhasil.
+\end{myexample}
+
+\begin{enumerate}
+  \item Misalkan $A$ adalah matriks $n \times n$ sedemikian sehingga $A^k = \mathbf{0}$ untuk suatu bilangan asli $k$ (matriks nilpoten). Buktikan bahwa semua nilai eigen dari $A$ adalah 0, dan simpulkan bahwa $A^n = \mathbf{0}$.
+\end{enumerate}
+
+
+\end{document}

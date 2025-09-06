@@ -1,0 +1,112 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{geometry}
+\usepackage{tikz}
+    \usetikzlibrary{patterns,decorations.pathreplacing,snakes,arrows.meta}
+    \tikzset{box/.style={draw, thick, minimum width=1cm, minimum height=1cm}}
+\usepackage{bigints}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{footmisc} 
+\usepackage[colorlinks=true, linkcolor=red]{hyperref}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{cancel}
+%\usepackage{wrapfig}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\definecolor{darkcyan}{HTML}{0091A4}  
+\definecolor{brightcyan}{HTML}{dcf0f2}
+\newmdenv[  
+topline=false,  
+rightline=false,  
+bottomline=false,  
+leftline=true,  
+linecolor=darkcyan,  
+linewidth=3pt,  
+backgroundcolor=brightcyan,  
+frametitle={\textit{Solusi}:}
+]{solution}  
+\setlength{\multicolsep}{5.0pt plus 2.0pt minus 1.5pt}% 50% of original values
+\geometry{a4paper, portrait, top=2.5cm, left=2.5cm, right=2.5cm, bottom=2.5cm}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+
+\renewcommand{\baselinestretch}{1.2}
+
+\fancyfoot[L]{\textit{5002221132}}
+\fancyfoot[R]{\textit{Tetew}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{2pt}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+\begin{document}
+\begin{enumerate}
+  \item Misalkan $f \in C^2[0, N]$ dan $|f'(x)| < 1$, $f''(x) > 0$ untuk setiap $x \in [0, N]$. Misalkan $0 \le m_0 < m_1 < \cdots < m_k \le N$ adalah bilangan bulat sedemikian sehingga $n_i = f(m_i)$ juga merupakan bilangan bulat untuk $i = 0, 1, \ldots, k$. Misalkan $b_i = n_i - n_{i-1}$ dan $a_i = m_i - m_{i-1}$ untuk $i = 1, 2, \ldots, k$. Buktikan bahwa
+        \[
+          -1 < \frac{b_1}{a_1} < \frac{b_2}{a_2} < \cdots < \frac{b_k}{a_k} < 1.
+        \]
+        \begin{solution}
+          Diketahui bahwa $f$ kontinu dan $f''(x) > 0$, sehingga $f$ adalah fungsi yang cekung ke atas. Dengan menggunakan teorema nilai rata-rata, kita dapat menyatakan bahwa terdapat $c_i \in (m_{i-1}, m_i)$ sehingga
+          \[
+            f'(c_i)= \frac{f(m_i) - f(m_{i-1})}{m_i - m_{i-1}} = \frac{b_i}{a_i}.
+          \]
+          untuk setiap $i = 1, 2, \ldots, k$. Dengan kata lain kita punya informasi bahwa $-1 < f'(c_i) < 1$ untuk setiap $i$.
+
+          Jelas bahwa $c_i<c_{i+1}$ untuk setiap $i=1, 2, \ldots, k$. Sekarang gunakan fakta bahwa $f'(x)$ adalah fungsi kontinu yang monoton naik, sebab $f\in C^2[0, N]$ dan $f''(x) > 0$ untuk setiap $x \in [0, N]$. Oleh karena itu berlaku
+          \[
+            -1 < f'(c_1) < f'(c_2) < \cdots < f'(c_k) < 1.
+          \]
+          Dengan demikian, kita memperoleh
+          \[
+            -1 < \frac{b_1}{a_1} < \frac{b_2}{a_2} < \cdots < \frac{b_k}{a_k} < 1.
+          \]
+        \end{solution}
+
+  \item Misalkan $F : (1, \infty) \rightarrow \mathbb{R}$ adalah fungsi yang didefinisikan oleh
+        \[
+          F(x) := \int_{x}^{x^2} \frac{dt}{\ln t}.
+        \]
+        Tunjukkan bahwa $F$ adalah fungsi satu-ke-satu (injektif) dan tentukan daerah hasil (range) dari $F$.
+
+  \item Misalkan $x_1 = 0.8$ dan $y_1 = 0.6$. Didefinisikan
+        \[
+          x_{n+1} = x_n \cos y_n - y_n \sin y_n, \quad y_{n+1} = x_n \sin y_n + y_n \cos y_n, \quad \text{untuk semua } n \ge 1.
+        \]
+        Tentukan konvergensi dari barisan-barisan tersebut, dan jika konvergen, tentukan nilai limitnya.
+
+  \item Buktikan bahwa jika $f : [0, 1] \rightarrow [0, 1]$ adalah fungsi kontinu, maka barisan iterasi
+        \[
+          x_{n+1} = f(x_n)
+        \]
+        konvergen jika dan hanya jika
+        \[
+          \lim_{n \to \infty} (x_{n+1} - x_n) = 0.
+        \]
+
+  \item Diketahui fungsi kontinu $f : [0, 1] \rightarrow \mathbb{R}$ memenuhi
+        \[
+          x f(y) + y f(x) \le 1, \quad \text{untuk semua } x, y \in [0, 1].
+        \]
+        Tunjukkan bahwa:
+        \[
+          \int_0^1 f(x) \, dx \le \frac{\pi}{4}.
+        \]
+\end{enumerate}
+\end{document}
