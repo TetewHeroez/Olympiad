@@ -97,14 +97,14 @@ frametitle={\textit{Solusi}:}
         \begin{solution}
           Misalkan \( z = x + iy \) dengan \( x, y \in \mathbb{R} \), maka
           \begin{align*}
-            \left| \frac{z+1}{z+4} \right| &= 2 \\
-            \left| z + 1 \right| &= 2 \left| z + 4 \right| \\
-            \left| z + 1 \right|^2 &= 4 \left| z + 4 \right|^2 \\
-            (x+1)^2 + y^2 &= 4((x+4)^2 + y^2) \\
-            x^2 + 2x + 1 + y^2 &= 4x^2 + 32x + 64 + 4y^2 \\
-            3x^2 + 3y^2 + 30x + 63 &= 0 \\
-            x^2 + y^2 + 10x + 21 &= 0 \\
-            (x + 5)^2 + y^2 &= 4.
+            \left| \frac{z+1}{z+4} \right| & = 2                        \\
+            \left| z + 1 \right|           & = 2 \left| z + 4 \right|   \\
+            \left| z + 1 \right|^2         & = 4 \left| z + 4 \right|^2 \\
+            (x+1)^2 + y^2                  & = 4((x+4)^2 + y^2)         \\
+            x^2 + 2x + 1 + y^2             & = 4x^2 + 32x + 64 + 4y^2   \\
+            3x^2 + 3y^2 + 30x + 63         & = 0                        \\
+            x^2 + y^2 + 10x + 21           & = 0                        \\
+            (x + 5)^2 + y^2                & = 4.
           \end{align*}
           Dengan demikian, radius lingkaran tersebut adalah \( 2 \) dan titik pusatnya adalah \( (-5, 0) \) atau $z=-5$.
         \end{solution}
@@ -117,33 +117,33 @@ frametitle={\textit{Solusi}:}
         \begin{solution}
           Perhatikan bahwa $\sin\left(\theta\right)=\dfrac{e^{i\theta}-e^{-i\theta}}{2i}$, sehingga
           \[
-          \sin^3\left( \theta \right) = \left( \frac{e^{i\theta}-e^{-i\theta}}{2i} \right)^3 = \frac{1}{-8i} \left( e^{3i\theta} - 3e^{i\theta} + 3e^{-i\theta} - e^{-3i\theta} \right).
+            \sin^3\left( \theta \right) = \left( \frac{e^{i\theta}-e^{-i\theta}}{2i} \right)^3 = \frac{1}{-8i} \left( e^{3i\theta} - 3e^{i\theta} + 3e^{-i\theta} - e^{-3i\theta} \right).
           \]
           Jika dikembalikan ke dalam bentuk sinus, kita dapat tuliskan
           \[
-          \sin^3\left( \theta \right) = \frac{1}{4}\left[3 \sin(\theta) - \sin(3\theta)\right].
+            \sin^3\left( \theta \right) = \frac{1}{4}\left[3 \sin(\theta) - \sin(3\theta)\right].
           \]
           Sehingga setiap suku pada deret tersebut dapat dituliskan sebagai
           \[
-          3^{n-1} \sin^3\left( \frac{x}{3^n} \right) = \frac{1}{4}\left[3^n \sin\left( \frac{x}{3^{n}} \right) - 3^{n-1} \sin\left( \frac{x}{3^{n-1}} \right)\right].
+            3^{n-1} \sin^3\left( \frac{x}{3^n} \right) = \frac{1}{4}\left[3^n \sin\left( \frac{x}{3^{n}} \right) - 3^{n-1} \sin\left( \frac{x}{3^{n-1}} \right)\right].
           \]
           Perhatikan bahwa deret diatas dapat dijadikan teleskopik seperti berikut
           \begin{align*}
-            n=1 &\implies \frac{1}{4}\left[\cancel{3\sin\left( \frac{x}{3} \right)} - \sin(x)\right] \\
-            n=2 &\implies \frac{1}{4}\left[\cancel{9\sin\left( \frac{x}{9} \right)} - \cancel{3\sin\left( \frac{x}{3} \right)}\right] \\
-            n=3 &\implies \frac{1}{4}\left[\cancel{27\sin\left( \frac{x}{27} \right)} - \cancel{9\sin\left( \frac{x}{9} \right)}\right] \\
-            &\vdots \\
-            n=k &\implies \frac{1}{4}\left[3^k\sin\left( \frac{x}{3^k} \right) - \cancel{3^{k-1}\sin\left( \frac{x}{3^{k-1}} \right)}\right]\\
+            n=1            & \implies \frac{1}{4}\left[\cancel{3\sin\left( \frac{x}{3} \right)} - \sin(x)\right]                                         \\
+            n=2            & \implies \frac{1}{4}\left[\cancel{9\sin\left( \frac{x}{9} \right)} - \cancel{3\sin\left( \frac{x}{3} \right)}\right]        \\
+            n=3            & \implies \frac{1}{4}\left[\cancel{27\sin\left( \frac{x}{27} \right)} - \cancel{9\sin\left( \frac{x}{9} \right)}\right]      \\
+                           & \vdots                                                                                                                      \\
+            n=k            & \implies \frac{1}{4}\left[3^k\sin\left( \frac{x}{3^k} \right) - \cancel{3^{k-1}\sin\left( \frac{x}{3^{k-1}} \right)}\right] \\
             \cline{1-2}
-            \sum_{n=1}^{k}& 3^{n-1} \sin^3\left( \frac{x}{3^n} \right) = \frac{1}{4}\left[3^k\sin\left( \frac{x}{3^k} \right) - \sin(x)\right].
+            \sum_{n=1}^{k} & 3^{n-1} \sin^3\left( \frac{x}{3^n} \right) = \frac{1}{4}\left[3^k\sin\left( \frac{x}{3^k} \right) - \sin(x)\right].
           \end{align*}
           Sehingga untuk $k\to\infty$, kita peroleh
           \[
-          \lim_{k \to \infty} 3^k \sin\left( \frac{x}{3^k} \right) = \lim_{k \to \infty} x\cdot \frac{\sin\left( \frac{x}{3^k}\right)}{\frac{x}{3^k}} = x.
+            \lim_{k \to \infty} 3^k \sin\left( \frac{x}{3^k} \right) = \lim_{k \to \infty} x\cdot \frac{\sin\left( \frac{x}{3^k}\right)}{\frac{x}{3^k}} = x.
           \]
           Jadi bentuk sederhananya adalah
           \[
-          \sum_{n=1}^{\infty} 3^{n-1} \sin^3\left( \frac{x}{3^n} \right) = \boxed{\frac{1}{4}\left[x - \sin(x)\right]}.
+            \sum_{n=1}^{\infty} 3^{n-1} \sin^3\left( \frac{x}{3^n} \right) = \boxed{\frac{1}{4}\left[x - \sin(x)\right]}.
           \]
         \end{solution}
   \item Nilai
@@ -156,32 +156,32 @@ frametitle={\textit{Solusi}:}
 
           Untuk setiap \( m \in \mathbb{N} \), kita akan mencari nilai infimum dari barisan himpunan \[ T_m = \left\{ 5(-1)^n - \left( \frac{m+1}{n} \right)^2 : n \geq m \right\}. \]
 
-          Perhatikan bahwa untuk membuat ekspresi \( 5(-1)^n - \left( \frac{m+1}{n} \right)^2 \) menjadi kecil, kita perlu 
+          Perhatikan bahwa untuk membuat ekspresi \( 5(-1)^n - \left( \frac{m+1}{n} \right)^2 \) menjadi kecil, kita perlu
           \begin{itemize}
             \item $5(-1)^n$ harus negatif, berarti \( n \) haruslah ganjil.
             \item \(\left( \frac{m+1}{n} \right)^2\) harus besar, berarti \( n \) haruslah sekecil mungkin.
           \end{itemize}
           Selanjutnya dengan sedikit melihat pola anggota himpunan \( T_m \) untuk setiap \( m\in \mathbb{N} \)
           \begin{align*}
-            T_1 &= \left\{ 5(-1)^n - \left( \frac{2}{n} \right)^2 : n \geq 1 \right\} = \left\{ -9, 4, -\frac{49}{9},\ldots \right\} \implies \inf(T_1) = -9 \\
-            T_2 &= \left\{ 5(-1)^n - \left( \frac{3}{n} \right)^2 : n \geq 2 \right\} = \left\{ \frac{11}{4}, -6, \frac{71}{16}, \ldots \right\} \implies \inf(T_2) = -6 \\
-            T_3 &= \left\{ 5(-1)^n - \left( \frac{4}{n} \right)^2 : n \geq 3 \right\} = \left\{ -\frac{61}{9}, 1, -\frac{121}{25}, \ldots \right\} \implies \inf(T_3) = -\frac{61}{9} \\
-            T_4 &= \left\{ 5(-1)^n - \left( \frac{5}{n} \right)^2 : n \geq 4 \right\} = \left\{ \frac{55}{16}, -6, \frac{121}{25}, \ldots \right\} \implies \inf(T_4) = -6 \\
-            \vdots&\quad\vdots \quad\vdots \quad\vdots 
+            T_1    & = \left\{ 5(-1)^n - \left( \frac{2}{n} \right)^2 : n \geq 1 \right\} = \left\{ -9, 4, -\frac{49}{9},\ldots \right\} \implies \inf(T_1) = -9                          \\
+            T_2    & = \left\{ 5(-1)^n - \left( \frac{3}{n} \right)^2 : n \geq 2 \right\} = \left\{ \frac{11}{4}, -6, \frac{71}{16}, \ldots \right\} \implies \inf(T_2) = -6              \\
+            T_3    & = \left\{ 5(-1)^n - \left( \frac{4}{n} \right)^2 : n \geq 3 \right\} = \left\{ -\frac{61}{9}, 1, -\frac{121}{25}, \ldots \right\} \implies \inf(T_3) = -\frac{61}{9} \\
+            T_4    & = \left\{ 5(-1)^n - \left( \frac{5}{n} \right)^2 : n \geq 4 \right\} = \left\{ \frac{55}{16}, -6, \frac{121}{25}, \ldots \right\} \implies \inf(T_4) = -6            \\
+            \vdots & \quad\vdots \quad\vdots \quad\vdots
           \end{align*}
-          Dari sedikit perhitungan diatas, kita mendapatkan sebuah pola dugaan yaitu 
+          Dari sedikit perhitungan diatas, kita mendapatkan sebuah pola dugaan yaitu
           \[\inf(T_m) = \begin{cases}
-            -5-\left(1+\frac{1}{m}\right)^2,\quad & \text{untuk } m \text{ ganjil} \\
-            -6,\quad & \text{untuk } m \text{ genap}
-          \end{cases}\]
+              -5-\left(1+\frac{1}{m}\right)^2,\quad & \text{untuk } m \text{ ganjil} \\
+              -6,\quad                              & \text{untuk } m \text{ genap}
+            \end{cases}\]
           Dengan demikian, kita dapat menyatakan \( S \) sebagai
           \[S = \left\{ -5-\left(1+\frac{1}{m}\right)^2 : m \text{ ganjil} \right\} \cup \left\{ -6 : m \text{ genap} \right\}.\]
           Untuk mencari supremum dari \( S \), kita perlu mencari nilai maksimum dari kedua himpunan tersebut. Karena untuk \( m \) genap hasilnya tetap -6, maka kita fokus pada himpunan pertama.
           Dengan menggunakan limit, kita dapatkan
           \[
-          \lim_{m \to \infty} -5-\left(1+\frac{1}{m}\right)^2 = -6.
+            \lim_{m \to \infty} -5-\left(1+\frac{1}{m}\right)^2 = -6.
           \]
-          Sehingga supremum dari \( S \) adalah $\boxed{-6}$. 
+          Sehingga supremum dari \( S \) adalah $\boxed{-6}$.
         \end{solution}
 
   \item Diberikan fungsi kontinu \( f : [0,1] \to \mathbb{R} \) dengan \( |f(x)| \leq x \) untuk setiap \( x \in [0,1] \). \\
@@ -195,15 +195,15 @@ frametitle={\textit{Solusi}:}
           \[\int_a^b f(x) \, dx \leq \int_a^b g(x) \, dx.\]
           Dengan demikian, kita dapat mencari nilai maksimum dari integral di soal
           \begin{align*}
-            \int_0^1 \left( (f(x))^2 - x^4 f(x) \right) \, dx &\leq \left|\int_{0}^{1}\left( (f(x))^2 - x^4 f(x) \right)\right|\\
-            &\leq \int_{0}^{1}\left|(f(x))^2- x^4 f(x)\right| \, dx
+            \int_0^1 \left( (f(x))^2 - x^4 f(x) \right) \, dx & \leq \left|\int_{0}^{1}\left( (f(x))^2 - x^4 f(x) \right)\right| \\
+                                                              & \leq \int_{0}^{1}\left|(f(x))^2- x^4 f(x)\right| \, dx
           \end{align*}
           Ketaksamaan segitiga mengatakan $\left|f^2(x)-x^4f(x)\right|\leq |f^2(x)|+|x^4f(x)|$ untuk setiap $x\in[0,1]$. Demikian juga dengan integralnya
           \begin{align*}
-            \int_{0}^{1}\left|(f(x))^2- x^4 f(x)\right| \, dx &\leq \int_{0}^{1}\left|(f(x))^2\right| + \int_{0}^{1}\left|x^4 f(x)\right| \, dx \\
-            &\leq \int_{0}^{1}x^2 \, dx + \int_{0}^{1}x^5 \, dx \\
-            &= \left[ \frac{x^3}{3} + \frac{x^6}{6} \right]_{0}^{1} \\
-            &= \frac{1}{3} + \frac{1}{6} = \frac{1}{2}.
+            \int_{0}^{1}\left|(f(x))^2- x^4 f(x)\right| \, dx & \leq \int_{0}^{1}\left|(f(x))^2\right| + \int_{0}^{1}\left|x^4 f(x)\right| \, dx \\
+                                                              & \leq \int_{0}^{1}x^2 \, dx + \int_{0}^{1}x^5 \, dx                               \\
+                                                              & = \left[ \frac{x^3}{3} + \frac{x^6}{6} \right]_{0}^{1}                           \\
+                                                              & = \frac{1}{3} + \frac{1}{6} = \frac{1}{2}.
           \end{align*}
           Jadi, nilai terbesar yang mungkin dari integral tersebut adalah $\boxed{\frac{1}{2}}$.
         \end{solution}
@@ -212,38 +212,140 @@ frametitle={\textit{Solusi}:}
         \begin{solution}
           Misalkan \( S \) adalah himpunan bilangan asli dari 1 sampai 2025 dan. Selanjutnya definisikan $A_1$ dan $A_2$ sebagai himpunan bilangan asli dari 1 sampai 2025 yang masing-masing merupakan kelipatan 2 dan kelipatan 5. Dengan mudah kita peroleh bahwa
           \begin{flalign*}
-            |S| &= 2025, &\\
-            |A_1| &= \left\lfloor \frac{2025}{2} \right\rfloor = 1012, &\\
-            |A_2| &= \left\lfloor \frac{2025}{5} \right\rfloor = 405, &\\
-            |A_1 \cap A_2| &= \left\lfloor \frac{2025}{10} \right\rfloor = 202.
-          \end{flalign*} 
+            |S|            & = 2025,                                             & \\
+            |A_1|          & = \left\lfloor \frac{2025}{2} \right\rfloor = 1012, & \\
+            |A_2|          & = \left\lfloor \frac{2025}{5} \right\rfloor = 405,  & \\
+            |A_1 \cap A_2| & = \left\lfloor \frac{2025}{10} \right\rfloor = 202.
+          \end{flalign*}
           Menggunakan prinsip inklusi-eksklusi, maka banyaknya bilangan asli dari 1 sampai 2025 yang bukan kelipatan 2 dan bukan kelipatan 5 adalah
           \[|A_1^c \cap A_2^c| = |S| - |A_1| - |A_2| + |A_1 \cap A_2| = 2025 - 1012 - 405 + 202 = \boxed{810}.\]
         \end{solution}
 
-  \item Tiga siswa $a_{1}$, $a_{2}$, $a_{3}$ dari Sekolah A dan 4 siswa $b_{1}$, $b_{2}$, $b_{3}$, $b_{4}$ dari Sekolah B berkumpul dalam sebuah pertemuan. 
-        Banyaknya cara menyusun ketujuh siswa tersebut dalam satu baris dengan syarat tidak terdapat satu blok yang berisikan semua siswa dari sekolah yang sama adalah \ldots 
-        (Contoh: $b_{3}b_{2}a_{1}a_{3}b_{1}b_{4}a_{2}$ diperbolehkan, tetapi $b_{1}b_{4}a_{1}a_{2}a_{3}b_{3}b_{2}$ dan $a_{1}b_{4}b_{3}b_{1}b_{2}a_{3}a_{2}$ tidak diperbolehkan) 
+  \item Tiga siswa $a_{1}$, $a_{2}$, $a_{3}$ dari Sekolah A dan 4 siswa $b_{1}$, $b_{2}$, $b_{3}$, $b_{4}$ dari Sekolah B berkumpul dalam sebuah pertemuan.
+        Banyaknya cara menyusun ketujuh siswa tersebut dalam satu baris dengan syarat tidak terdapat satu blok yang berisikan semua siswa dari sekolah yang sama adalah \ldots
+        (Contoh: $b_{3}b_{2}a_{1}a_{3}b_{1}b_{4}a_{2}$ diperbolehkan, tetapi $b_{1}b_{4}a_{1}a_{2}a_{3}b_{3}b_{2}$ dan $a_{1}b_{4}b_{3}b_{1}b_{2}a_{3}a_{2}$ tidak diperbolehkan)
         \begin{solution}
           Misalkan $S$ adalah himpunan semua susunan ketujuh siswa tersebut, sehingga jelas bahwa $|S|=7!=5040$. Misalkan $A$ dan $B$ adalah himpunan susunan masing-masing siswa sekolah A yang satu blok berurutan dan siswa sekolah B yang satu blok berurutan (Contoh: $b_1b_2a_{1}a_{2}a_{3}b_3b_4\in A$ dan $a_{3}b_1b_2b_3b_4a_{1}a_{2}\in B$). Banyaknya anggota $A,B$ dan $A\cap B$ dapat dihitung sebagai berikut:
           \begin{flalign*}
-            |A| &= 5! \cdot 3! = 120 \cdot 6 = 720, &\\
-            |B| &= 4! \cdot 4! = 24 \cdot 24 = 576, &\\
-            |A \cap B| &= 2 \cdot 4! \cdot 3! = 2 \cdot 24 \cdot 6 = 288.
+            |A|        & = 5! \cdot 3! = 120 \cdot 6 = 720,                & \\
+            |B|        & = 4! \cdot 4! = 24 \cdot 24 = 576,                & \\
+            |A \cap B| & = 2 \cdot 4! \cdot 3! = 2 \cdot 24 \cdot 6 = 288.
           \end{flalign*}
           Lagi-lagi dengan prinsip inklusi-eksklusi, maka banyaknya susunan ketujuh siswa tersebut yang tidak memiliki satu blok berisikan semua siswa dari sekolah yang sama adalah
           \[|A^c \cap B^c| = |S| - |A| - |B| + |A \cap B| = 5040 - 720 - 576 + 288 = 4.032\]
         \end{solution}
 
   \item Jika $S_{5}$ menyatakan grup semua fungsi bijektif pada $\{1,2,..., 5\}$ terhadap operasi komposisi fungsi, maka banyaknya elemen berorder 2 pada $S_{5}$ adalah \ldots % 
-
+        \begin{solution}
+          Misalkan $g\in S_5$ adalah elemen berorder 2, maka $g^2 = e$ dimana $e$ adalah elemen identitas pada $S_5$. Perhatikan bahwa untuk setiap elemen $g\in S_5$  haruslah berbentuk maksimal dua sikel yang saling asing dengan maksimal 2 elemen persikelnya yaitu
+          \[
+            g = \begin{pmatrix}
+              a_1 & a_2
+            \end{pmatrix}
+            \text{ atau }g = \begin{pmatrix}
+              a_1 & a_2
+            \end{pmatrix}
+            \begin{pmatrix}
+              a_3 & a_4
+            \end{pmatrix}
+          \]
+          sehingga banyaknya elemen berorder 2 pada $S_5$ adalah
+          \[
+            \binom{5}{2} + \frac{1}{2!}\binom{5}{2}\binom{3}{2}= 10 + 15 = \boxed{25}.
+          \]
+        \end{solution}
   \item Jika $z$, $p$, dan $m$ berturut-turut menyatakan banyaknya ideal di $\mathbb{Z}_{2025}$, banyaknya ideal prima di $\mathbb{Z}_{2025}$, dan banyaknya ideal maksimal di $\mathbb{Z}_{2025}$, maka nilai $z+p+m$ adalah \ldots % 
+        \begin{solution}
+          Perhatikan bahwa $2025 = 3^4 \cdot 5^2$. Dengan demikian, banyaknya ideal di $\mathbb{Z}_{2025}$ adalah
+          \[
+            z = (4+1)(2+1) = 15.
+          \]
+          Banyaknya ideal prima di $\mathbb{Z}_{2025}$ adalah
+          \[
+            p = 2,
+          \]
+          karena hanya ada dua bilangan prima yang membagi $2025$ yaitu $3$ dan $5$. Sedangkan banyaknya ideal maksimal di $\mathbb{Z}_{2025}$ adalah
+          \[
+            m = 2,
+          \]
+          karena ideal maksimal berkorespondensi satu-satu dengan bilangan prima yang membagi $2025$. Dengan demikian, kita peroleh
+          \[
+            z + p + m = 15 + 2 + 2 = \boxed{19}.
+          \]
+        \end{solution}
 \end{enumerate}
 \section*{Uraian}
 \begin{enumerate}
   \item
         Diberikan ruang vektor $V$ atas lapangan $F$ dengan $\dim(V)=n$. Misalkan $U$ dan $W$ merupakan dua ruang bagian dari $V$ dengan $\dim(U)+\dim(W)=n$. % 
         Buktikan bahwa terdapat transformasi linear $T:V\longrightarrow V$ yang memenuhi $\ker(T)=U$ dan $\mathrm{Im}(T)=W.$ % 
+        \begin{solution}
+          Misalkan $\dim(U)=k$ dan $\dim(W)=n-k$. Karena $U$ dan $W$ adalah subruang dari $V$, maka terdapat basis $B_U=\{u_1,u_2,\ldots,u_k\}$ dari $U$ dan basis $B_W=\{w_1,w_2,\ldots,w_{n-k}\}$ dari $W$. Disisi lain dengan perluasan basis, kita dapatkan basis $B_V=\{u_1,u_2,\ldots,u_k,v_1,v_2,\ldots,v_{n-k}\}$ dari $V$.
+
+          Selanjutnya perlu kita definisikan transformasi linear $T:V\longrightarrow V$ sebagai berikut
+          \[
+            T(u_i) = 0, \quad \text{untuk setiap } i\in\{1,2,\ldots,k\}
+          \]
+          dan
+          \[
+            T(v_j) = w_j, \quad \text{untuk setiap } j\in\{1,2,\ldots,n-k\}.
+          \]
+          Selanjutnya dengan definisi diatas akan dibuktikan dua hal berikut:
+          \begin{itemize}
+            \item $\ker(T)=U$ \\
+                  Misalkan $x\in \ker(T)$, maka $T(x)=0$. Karena $B_V$ adalah basis dari $V$, maka $x$ dapat dituliskan sebagai
+                  \[
+                    x = a_1u_1 + a_2u_2 + \ldots + a_ku_k + b_1v_1 + b_2v_2 + \ldots + b_{n-k}v_{n-k}
+                  \]
+                  untuk beberapa skalar $a_i,b_j\in F$. Dengan menggunakan sifat linearitas dari $T$, kita peroleh
+                  \begin{align*}
+                    T(x) & = T(a_1u_1 + a_2u_2 + \ldots + a_ku_k + b_1v_1 + b_2v_2 + \ldots + b_{n-k}v_{n-k})    \\
+                         & = a_1T(u_1) + a_2T(u_2) + \ldots + a_kT(u_k) + b_1T(v_1) + \ldots + b_{n-k}T(v_{n-k}) \\
+                         & = 0 + 0 + \ldots + 0 + b_1w_1 + b_2w_2 + \ldots + b_{n-k}w_{n-k}                      \\
+                         & = b_1w_1 + b_2w_2 + \ldots + b_{n-k}w_{n-k}.
+                  \end{align*}
+                  Karena $T(x)=0$, maka $b_j=0$ untuk setiap $j\in\{1,2,\ldots,n-k\}$ karena $B_W$ adalah basis dari $W$ (bebas linear). Dengan demikian, kita peroleh
+                  \[
+                    x = a_1u_1 + a_2u_2 + \ldots + a_ku_k,
+                  \]
+                  yang berarti bahwa $x\in U$. Jadi, $\ker(T)\subseteq U$.
+
+                  Sebaliknya, misalkan $y\in U$. Maka terdapat skalar $c_i\in F$ sehingga
+                  \[
+                    y = c_1u_1 + c_2u_2 + \ldots + c_ku_k.
+                  \]
+                  sehingga diperoleh
+                  \[
+                    T(y) = c_1T(u_1) + c_2T(u_2) + \ldots + c_kT(u_k) = c_1\cdot 0 + c_2\cdot 0 + \ldots + c_k\cdot 0 = 0.
+                  \]
+                  Dengan demikian, $y\in \ker(T)$, sehingga $U\subseteq \ker(T)$. Jadi dapat disimpulkan $\ker(T)=U$.
+            \item $\mathrm{Im}(T)=W$ \\
+                  Misalkan $z\in \mathrm{Im}(T)$, maka terdapat $x\in V$ sehingga $T(x)=z$. Karena $B_V$ adalah basis dari $V$, maka $x$ dapat dituliskan sebagai
+                  \[
+                    x = a_1u_1 + a_2u_2 + \ldots + a_ku_k + b_1v_1 + b_2v_2 + \ldots + b_{n-k}v_{n-k}
+                  \]
+                  untuk beberapa skalar $a_i,b_j\in F$. Dengan menggunakan sifat linearitas dari $T$, kita peroleh
+                  \begin{align*}
+                    T(x) & = T(a_1u_1 + a_2u_2 + \ldots + a_ku_k + b_1v_1 + b_2v_2 + \ldots + b_{n-k}v_{n-k})    \\
+                         & = a_1T(u_1) + a_2T(u_2) + \ldots + a_kT(u_k) + b_1T(v_1) + \ldots + b_{n-k}T(v_{n-k}) \\
+                         & = 0 + 0 + \ldots + 0 + b_1w_1 + b_2w_2 + \ldots + b_{n-k}w_{n-k}                      \\
+                         & = b_1w_1 + b_2w_2 + \ldots + b_{n-k}w_{n-k}.
+                  \end{align*}
+                  Artinya $z=b_1w_1 + b_2w_2 + \ldots + b_{n-k}w_{n-k}\in W$. Jadi, $\mathrm{Im}(T)\subseteq W$.
+
+                  Sebaliknya, misalkan $w\in W$. Maka terdapat skalar $c_j\in F$ sehingga
+                  \[
+                    w = c_1w_1 + c_2w_2 + \ldots + c_{n-k}w_{n-k}.
+                  \]
+                  Perhatikan bahwa dapat kita definisikan $v=c_1v_1 + c_2v_2 + \ldots + c_{n-k}v_{n-k}\in V$. Sehingga diperoleh informasi
+                  \begin{align*}
+                    T(v) & = T(c_1v_1 + c_2v_2 + \ldots + c_{n-k}v_{n-k})       \\                                                  \\
+                         & = c_1T(v_1) + c_2T(v_2) + \ldots + c_{n-k}T(v_{n-k}) \\
+                         & = c_1w_1 + c_2w_2 + \ldots + c_{n-k}w_{n-k} = w.
+                  \end{align*}
+                  Karena kita dapat menemukan $v\in V$ sehingga $T(v)=w$, maka $w\in \mathrm{Im}(T)$, sehingga $W\subseteq \mathrm{Im}(T)$. Jadi dapat disimpulkan $\mathrm{Im}(T)=W$.
+          \end{itemize}
+        \end{solution}
 
   \item
         Diketahui $A_{1},A_{2},...,A_{n}$ merupakan titik-titik sudut sebuah poligon $n$ sisi beraturan yang termuat pada sebuah lingkaran dengan radius $r$ dan titik pusat $O(0,0)$. Jika $P$ merupakan titik di luar lingkaran yang terletak pada garis perpanjangan $OA_{1}$, buktikan bahwa % 
@@ -251,6 +353,10 @@ frametitle={\textit{Solusi}:}
           \prod_{k=1}^{n}|PA_{k}|=|OP|^{n}-r^{n},
         \] % 
         dengan $|AB|$ menyatakan panjang ruang garis yang menghubungkan titik $A$ dan $B$. % 
+
+        \begin{solution}
+
+        \end{solution}
 
   \item
         Diberikan fungsi kontinu $f:[a,b]\rightarrow\mathbb{R}$ yang terdiferensial pada $(a, b)$ dengan $f(a)=f(b)$. % 

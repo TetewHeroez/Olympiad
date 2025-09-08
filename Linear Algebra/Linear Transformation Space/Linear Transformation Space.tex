@@ -1,0 +1,271 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[bahasa]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+
+% Pengaturan Geometri Halaman
+\geometry{
+    a4paper,
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm
+}
+
+%--- Definisi Warna Kustom ---
+\definecolor{boxbackblue}{RGB}{235, 245, 255}
+\definecolor{boxframeblue}{RGB}{150, 200, 255}
+\definecolor{boxbackgreen}{RGB}{235, 255, 235}
+\definecolor{boxframegreen}{RGB}{150, 255, 150}
+\definecolor{boxbackgray}{RGB}{240, 240, 240}
+\definecolor{boxframegray}{RGB}{180, 180, 180}
+\definecolor{boxbackpurple}{RGB}{245, 235, 255}
+\definecolor{boxframepurple}{RGB}{200, 150, 255}
+
+%--- Pengaturan Lingkungan Teorema (amsthm) ---
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{definition}[theorem]{Definisi}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposisi}
+\newtheorem{corollary}[theorem]{Akibat}
+
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Contoh}
+\newtheorem{remark}[theorem]{Catatan}
+
+%--- Styling Lingkungan dengan tcolorbox ---
+% Gaya umum untuk semua boks
+\tcbset{
+    boxstyle/.style={
+        arc=3mm, 
+        auto outer arc,
+        fonttitle=\bfseries,
+        breakable,
+        pad at break=2mm,
+    }
+}
+
+% Menerapkan gaya ke lingkungan yang sudah ada
+\tcolorboxenvironment{definition}{
+    boxstyle,
+    colback=boxbackgreen,
+    colframe=boxframegreen,
+    title={Definisi }
+}
+
+\tcolorboxenvironment{theorem}{
+    boxstyle,
+    colback=boxbackblue,
+    colframe=boxframeblue,
+    title={Teorema }
+}
+
+\tcolorboxenvironment{example}{
+    boxstyle,
+    colback=boxbackgray,
+    colframe=boxframegray,
+    title={Contoh }
+}
+
+\tcolorboxenvironment{proposition}{
+    boxstyle,
+    colback=boxbackpurple,
+    colframe=boxframepurple,
+    title={Proposisi}
+}
+
+% Mendefinisikan ulang lingkungan 'proof' dengan gaya tcolorbox
+\renewenvironment{proof}[1][\proofname]{\begin{tcolorbox}[
+    boxstyle,
+    colback=white,
+    colframe=black!15!white,
+    title=#1,
+    boxrule=1pt,
+    left=6mm,
+    enhanced,
+    overlay={\draw[black!50!white,line width=2pt] (frame.north west) -- (frame.south west);}
+    ] \pushQED{\qed}}{\popQED \end{tcolorbox}}
+
+
+% Perintah Kustom
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\dimV}{\dim(V)}
+\newcommand{\dimW}{\dim(W)}
+\newcommand{\ket}[1]{\left| #1 \right\rangle}
+
+\begin{document}
+
+
+\section{Definisi Dasar}
+
+Misalkan $V$ dan $W$ adalah dua ruang vektor atas lapangan (field) yang sama, $\F$.
+
+\begin{definition}
+    Himpunan $L(V,W)$ didefinisikan sebagai himpunan yang berisi semua transformasi linear dari $V$ ke $W$.
+    \[
+        L(V,W) = \{ T: V \to W \mid T \text{ adalah transformasi linear} \}
+    \]
+    Jika $V=W$, kita sering menuliskannya secara singkat sebagai $L(V)$. Anggota dari $L(V,W)$ adalah fungsi (transformasi), bukan vektor pada umumnya.
+\end{definition}
+
+\begin{definition}
+    Untuk $T_1, T_2 \in L(V,W)$ dan skalar $c \in \F$, kita mendefinisikan operasi berikut:
+    \begin{enumerate}
+        \item \textbf{Penjumlahan:} $(T_1 + T_2): V \to W$ didefinisikan sebagai:
+              \[ (T_1 + T_2)(v) = T_1(v) + T_2(v) \quad \text{untuk semua } v \in V \]
+        \item \textbf{Perkalian Skalar:} $(cT_1): V \to W$ didefinisikan sebagai:
+              \[ (cT_1)(v) = c \cdot T_1(v) \quad \text{untuk semua } v \in V \]
+    \end{enumerate}
+\end{definition}
+
+\section{Struktur Ruang Vektor}
+
+Dengan operasi yang telah didefinisikan di atas, himpunan $L(V,W)$ ternyata membentuk sebuah ruang vektor.
+
+\begin{theorem}
+    Himpunan $L(V,W)$ dengan operasi penjumlahan dan perkalian skalar yang telah didefinisikan, merupakan sebuah ruang vektor atas lapangan $\F$.
+\end{theorem}
+
+\begin{proof}
+    Kita perlu memverifikasi aksioma-aksioma ruang vektor.
+    \begin{enumerate}
+        \item \textbf{Tertutup:} Harus ditunjukkan bahwa jika $T_1, T_2 \in L(V,W)$, maka $(T_1+T_2)$ juga merupakan transformasi linear. Untuk $u,v \in V$ dan $k \in \F$:
+              \begin{align*}
+                  (T_1+T_2)(u+kv) & = T_1(u+kv) + T_2(u+kv)                   \\
+                                  & = (T_1(u) + kT_1(v)) + (T_2(u) + kT_2(v)) \\
+                                  & = (T_1(u)+T_2(u)) + k(T_1(v)+T_2(v))      \\
+                                  & = (T_1+T_2)(u) + k(T_1+T_2)(v)
+              \end{align*}
+              Jadi, $(T_1+T_2)$ bersifat linear. Pembuktian untuk $(cT_1)$ juga serupa.
+
+        \item \textbf{Elemen Nol:} Terdapat transformasi nol $T_0: V \to W$ yang didefinisikan sebagai $T_0(v) = \mathbf{0}_W$ untuk semua $v \in V$. Jelas bahwa $T_0$ linear dan $T+T_0=T$ untuk setiap $T \in L(V,W)$.
+
+        \item \textbf{Invers Aditif:} Untuk setiap $T \in L(V,W)$, terdapat transformasi $(-T)$ yang didefinisikan oleh $(-T)(v) = -T(v)$. Transformasi ini juga linear dan $T+(-T) = T_0$.
+
+        \item \textbf{Aksioma lainnya} (asosiatif, komutatif, distributif) mengikuti langsung dari properti yang sama pada ruang vektor $W$.
+    \end{enumerate}
+    Karena semua aksioma terpenuhi, $L(V,W)$ adalah sebuah ruang vektor.
+\end{proof}
+
+\section{Teorema Utama: Dimensi $L(V,W)$}
+
+Ini adalah hasil paling penting terkait ruang $L(V,W)$.
+
+\begin{theorem}
+    Misalkan $V$ dan $W$ adalah ruang vektor berdimensi hingga atas lapangan $\F$. Jika $\dim(V)=n$ dan $\dim(W)=m$, maka dimensi dari $L(V,W)$ adalah:
+    \[
+        \dim(L(V,W)) = \dim(V) \cdot \dim(W) = n \cdot m
+    \]
+\end{theorem}
+
+\begin{proof}
+    Bukti ini bersifat konstruktif. Kita akan membangun sebuah basis untuk $L(V,W)$ dan menunjukkan bahwa basis tersebut memiliki $n \cdot m$ elemen.
+
+    Misalkan $\mathcal{B}_V = \{v_1, v_2, \ldots, v_n\}$ adalah basis untuk $V$ dan $\mathcal{B}_W = \{w_1, w_2, \ldots, w_m\}$ adalah basis untuk $W$.
+
+    Sebuah transformasi linear ditentukan secara unik oleh aksinya pada vektor-vektor basis. Untuk setiap pasangan indeks $(i, j)$ di mana $1 \le i \le m$ dan $1 \le j \le n$, kita definisikan sebuah transformasi linear $T_{ij}: V \to W$ sebagai berikut:
+    \[
+        T_{ij}(v_k) = \begin{cases} w_i & \text{jika } k=j \\ \mathbf{0}_W & \text{jika } k \ne j \end{cases}
+    \]
+    Transformasi ini memetakan vektor basis ke-$j$ dari $V$ ke vektor basis ke-$i$ dari $W$, dan memetakan semua vektor basis $V$ lainnya ke vektor nol.
+
+    Kita akan menunjukkan bahwa himpunan $\mathcal{B}_{L} = \{ T_{ij} \mid 1 \le i \le m, 1 \le j \le n \}$ adalah basis untuk $L(V,W)$. Himpunan ini memiliki $n \cdot m$ anggota.
+
+    \textbf{1. $\mathcal{B}_{L}$ merentang (spans) $L(V,W)$:}
+
+    Ambil sebarang $T \in L(V,W)$. Untuk setiap vektor basis $v_j \in \mathcal{B}_V$, citranya $T(v_j)$ adalah sebuah vektor di $W$. Kita dapat menuliskannya sebagai kombinasi linear dari basis $\mathcal{B}_W$:
+    \[ T(v_j) = \sum_{i=1}^{m} a_{ij} w_i \]
+    untuk suatu skalar $a_{ij} \in \F$. Skalar-skalar ini mendefinisikan matriks $[T]_{\mathcal{B}_V}^{\mathcal{B}_W}$.
+
+    Sekarang, pertimbangkan transformasi $S = \sum_{i=1}^{m} \sum_{j=1}^{n} a_{ij} T_{ij}$. Kita cek aksi $S$ pada vektor basis $v_k$:
+    \begin{align*}
+        S(v_k) & = \left( \sum_{i=1}^{m} \sum_{j=1}^{n} a_{ij} T_{ij} \right) (v_k) = \sum_{i=1}^{m} \sum_{j=1}^{n} a_{ij} (T_{ij}(v_k)) \\
+               & = \sum_{i=1}^{m} a_{ik} T_{ik}(v_k) \quad (\text{karena } T_{ij}(v_k) = 0 \text{ jika } j \ne k)                        \\
+               & = \sum_{i=1}^{m} a_{ik} w_i
+    \end{align*}
+    Hasil ini persis sama dengan $T(v_k)$. Karena $S$ dan $T$ memiliki aksi yang sama pada semua vektor basis $V$, maka $S=T$. Jadi, setiap $T \in L(V,W)$ dapat ditulis sebagai kombinasi linear dari elemen-elemen di $\mathcal{B}_L$.
+
+    \textbf{2. $\mathcal{B}_{L}$ bebas linear (linearly independent):}
+
+    Misalkan kita memiliki kombinasi linear yang menghasilkan transformasi nol, $T_0$:
+    \[ \sum_{i=1}^{m} \sum_{j=1}^{n} c_{ij} T_{ij} = T_0 \]
+    Kita harus menunjukkan semua $c_{ij}=0$. Terapkan transformasi ini pada sebuah vektor basis $v_k$:
+    \[ \left( \sum_{i=1}^{m} \sum_{j=1}^{n} c_{ij} T_{ij} \right)(v_k) = T_0(v_k) = \mathbf{0}_W \]
+    Dengan logika yang sama seperti sebelumnya, sisi kiri menjadi:
+    \[ \sum_{i=1}^{m} c_{ik} w_i = \mathbf{0}_W \]
+    Karena $\mathcal{B}_W = \{w_1, \ldots, w_m\}$ adalah himpunan bebas linear, maka semua koefisien harus nol. Jadi, $c_{1k} = c_{2k} = \dots = c_{mk} = 0$.
+    Karena ini berlaku untuk setiap $k$ dari $1$ sampai $n$, maka semua skalar $c_{ij}$ harus sama dengan nol.
+
+    Karena $\mathcal{B}_{L}$ merentang $L(V,W)$ dan bebas linear, maka ia adalah basis. Jumlah elemennya adalah $n \cdot m$.
+\end{proof}
+
+\section{Isomorfisme dengan Ruang Matriks}
+
+Hubungan antara transformasi linear dan matriks lebih dalam dari sekadar representasi. Faktanya, kedua ruang ini secara struktural identik (isomorfik).
+
+\begin{proposition}
+    Misalkan $V$ dan $W$ adalah ruang vektor berdimensi hingga dengan $\dim(V)=n$ dan $\dim(W)=m$. Misalkan $\mathcal{B}_V$ adalah basis untuk $V$ dan $\mathcal{B}_W$ adalah basis untuk $W$. Maka, ruang $L(V,W)$ isomorfik dengan ruang matriks $M_{m \times n}(\F)$, yang juga isomorfik dengan $\F^{nm}$.
+    \[ L(V,W) \cong M_{m \times n}(\F) \cong \F^{nm} \]
+\end{proposition}
+
+\begin{proof}
+    Kita akan mendefinisikan sebuah pemetaan $\Phi: L(V,W) \to M_{m \times n}(\F)$ dan menunjukkan bahwa pemetaan ini adalah sebuah isomorfisme (transformasi linear yang bijektif).
+
+    Definisikan $\Phi(T) = [T]_{\mathcal{B}_V}^{\mathcal{B}_W}$, yaitu matriks representasi dari $T$ terhadap basis $\mathcal{B}_V$ dan $\mathcal{B}_W$.
+
+    \begin{enumerate}
+        \item \textbf{Linearitas:} Sifat dasar dari representasi matriks adalah linear. Untuk $T_1, T_2 \in L(V,W)$ dan $c \in \F$:
+              \begin{align*}
+                  \Phi(T_1 + cT_2) & = [T_1 + cT_2]_{\mathcal{B}_V}^{\mathcal{B}_W}                                   \\
+                                   & = [T_1]_{\mathcal{B}_V}^{\mathcal{B}_W} + c[T_2]_{\mathcal{B}_V}^{\mathcal{B}_W} \\
+                                   & = \Phi(T_1) + c\Phi(T_2)
+              \end{align*}
+              Jadi, $\Phi$ adalah transformasi linear.
+
+        \item \textbf{Injektif (Satu-ke-satu):} Misalkan $\Phi(T)$ adalah matriks nol. Ini berarti bahwa untuk setiap vektor basis $v_j \in \mathcal{B}_V$, kolom ke-$j$ dari matriks, yaitu $[T(v_j)]_{\mathcal{B}_W}$, adalah vektor nol. Ini menyiratkan $T(v_j) = \mathbf{0}_W$ untuk semua $j=1, \ldots, n$. Karena $T$ memetakan semua vektor basis dari $V$ ke vektor nol di $W$, maka $T$ haruslah transformasi nol ($T=T_0$). Jadi, kernel dari $\Phi$ hanya berisi transformasi nol, yang berarti $\Phi$ adalah injektif.
+
+        \item \textbf{Surjektif (Pada):} Ambil sebarang matriks $A \in M_{m \times n}(\F)$. Kita dapat mendefinisikan sebuah transformasi linear $T: V \to W$ dengan menentukan aksinya pada basis $\mathcal{B}_V = \{v_1, \ldots, v_n\}$. Untuk setiap $j=1, \ldots, n$, definisikan citra $T(v_j)$ sebagai vektor di $W$ yang vektor koordinatnya terhadap basis $\mathcal{B}_W$ adalah kolom ke-$j$ dari $A$. Konstruksi ini selalu mungkin. Dengan definisi ini, matriks representasi dari $T$ adalah persis matriks $A$, sehingga $\Phi(T) = A$. Karena setiap matriks $A$ adalah citra dari suatu $T$, maka $\Phi$ adalah surjektif.
+    \end{enumerate}
+    Karena $\Phi$ adalah transformasi linear yang bijektif (injektif dan surjektif), maka ia adalah sebuah isomorfisme. Jadi, $L(V,W) \cong M_{m \times n}(\F)$.
+
+    Selanjutnya, isomorfisme antara $M_{m \times n}(\F)$ dan $\F^{nm}$ adalah trivial, yaitu dengan memetakan sebuah matriks ke sebuah vektor kolom panjang dengan menumpuk kolom-kolom matriks tersebut.
+\end{proof}
+
+\section{Contoh}
+
+\begin{example}[Ruang $L(\R^2, \R^3)$]
+    Misalkan $V = \R^2$ ($n=2$) dan $W = \R^3$ ($m=3$).
+    Menurut teorema, $\dim(L(\R^2, \R^3)) = 2 \cdot 3 = 6$.
+    Setiap transformasi $T: \R^2 \to \R^3$ dapat direpresentasikan oleh sebuah matriks $3 \times 2$. Ruang dari semua matriks $M_{3 \times 2}(\R)$ memiliki dimensi 6, yang konsisten dengan teorema kita.
+    Basis untuk $L(\R^2, \R^3)$ dapat direpresentasikan oleh matriks-matriks basis standar:
+    \[
+        \left\{
+        \begin{pmatrix} 1 & 0 \\ 0 & 0 \\ 0 & 0 \end{pmatrix},
+        \begin{pmatrix} 0 & 1 \\ 0 & 0 \\ 0 & 0 \end{pmatrix},
+        \begin{pmatrix} 0 & 0 \\ 1 & 0 \\ 0 & 0 \end{pmatrix},
+        \begin{pmatrix} 0 & 0 \\ 0 & 1 \\ 0 & 0 \end{pmatrix},
+        \begin{pmatrix} 0 & 0 \\ 0 & 0 \\ 1 & 0 \end{pmatrix},
+        \begin{pmatrix} 0 & 0 \\ 0 & 0 \\ 0 & 1 \end{pmatrix}
+        \right\}
+    \]
+\end{example}
+
+\begin{example}[Ruang Dual]
+    Kasus khusus yang penting adalah ketika $W=\F$ (lapangan itu sendiri, sebagai ruang vektor berdimensi 1).
+    Ruang $V^* = L(V, \F)$ disebut \textbf{ruang dual} dari $V$. Anggotanya adalah fungsional linear.
+    Dimensinya adalah:
+    \[ \dim(V^*) = \dim(L(V,\F)) = \dim(V) \cdot \dim(\F) = n \cdot 1 = n \]
+    Jadi, dimensi ruang dual sama dengan dimensi ruang asalnya.
+\end{example}
+
+\end{document}
+
