@@ -355,7 +355,26 @@ frametitle={\textit{Solusi}:}
         dengan $|AB|$ menyatakan panjang ruang garis yang menghubungkan titik $A$ dan $B$. % 
 
         \begin{solution}
+          Pandang $P$ dan $A_k$ untuk $k=1,2,\ldots,n$ sebagai bilangan kompleks $z$ dan $z_k$ berturut-turut. Representasikan titik-titik yang disebutkan pada soal sebagai akar bilangan kompleks dari fungsi
+          \[
+            f(z) = z^n - r^n.
+          \]
+          Misalkan $z_k = re^{\frac{2(k-1)\pi i}{n}}$ untuk $k=1,2,\ldots,n$ adalah akar-akar dari $f(z)$. Artinya $f(z)$ dapat dituliskan sebagai
+          \[
+            f(z) = (z-z_1)(z-z_2)\ldots(z-z_n).
+          \]
+          Karena $P$ berada diperpanjangan garis $OA_1$ yang berarti $P$ berada pada sumbu real positif, maka $P$ dapat direpresentasikan sebagai bilangan real positif $p$.
 
+          Oleh karena itu, dengan mensubstitusi $z=p$ pada $f(z)$, kita peroleh sebuah persamaan
+          \begin{align*}
+                     & p^n - r^n        = (p-z_1)(p-z_2)\ldots(p-z_n) \\
+            \implies & |p^n - r^n|  = |(p-z_1)(p-z_2)\ldots(p-z_n)|   \\
+            \iff     & |p^n - r^n|  = |p-z_1||p-z_2|\ldots|p-z_n|
+          \end{align*}
+          Karena $P$ diluar lingkaran, maka $p>r\implies p^n - r^n > 0$. Sehingga diperoleh fakta $|p^n - r^n| = p^n - r^n$. Terakhir dapat diperhatikan bahwa $|p-z_k| = |PA_k|$ yang dimana merepresentasikan panjang garis yang menghubungkan titik $P$ dan $A_k$. Dengan demikian, kita peroleh
+          \[
+            \prod_{k=1}^{n}|PA_{k}| = |p-z_1||p-z_2|\ldots|p-z_n| = p^n - r^n = |OP|^n - r^n.
+          \]
         \end{solution}
 
   \item
@@ -363,18 +382,66 @@ frametitle={\textit{Solusi}:}
         Tunjukkan bahwa untuk setiap bilangan asli $n$, terdapat $n$ bilangan real berbeda, % 
         $c_{1},c_{2},...,c_{n}\in(a,b)$, yang memenuhi % 
         \[
-          f^{\prime}(c_{1})+f^{\prime}(c_{2})+\cdot\cdot\cdot+f^{\prime}(c_{n})=0.
+          f^{\prime}(c_{1})+f^{\prime}(c_{2})+\dots+f^{\prime}(c_{n})=0.
         \] % 
+
+        \begin{solution}
+          Pertama-tama akan kita partisi himpunan interval $[a,b]$ menjadi $n$ subinterval yang sama panjangnya, yaitu $[a,x_1],[x_1,x_2],\ldots,[x_{n-1},b]$ dengan $x_k = a + k\left(\frac{b-a}{n}\right)$ untuk $k=1,2,\ldots,n-1$. Selanjutnya, karena $f$ kontinu pada $[a,b]$ dan terdiferensial pada $(a,b)$, maka berdasarkan teorema nilai rata-rata, untuk setiap subinterval $[x_{k-1},x_k]$ terdapat $c_k\in(x_{k-1},x_k)$ sehingga
+          \[
+            f'(c_k) = \frac{f(x_k) - f(x_{k-1})}{x_k - x_{k-1}} = \frac{f(x_k) - f(x_{k-1})}{\frac{b-a}{n}} = \frac{n}{b-a}(f(x_k) - f(x_{k-1})).
+          \]
+          Dengan menjumlahkan persamaan diatas untuk $k=1,2,\ldots,n$, kita peroleh
+          \begin{align*}
+            \sum_{k=1}^{n} f'(c_k) & = \frac{n}{b-a} \sum_{k=1}^{n} (f(x_k) - f(x_{k-1})) \\
+                                   & = \frac{n}{b-a} (f(x_n) - f(x_0))                    \\
+                                   & = \frac{n}{b-a} (f(b) - f(a))
+          \end{align*}
+          Karena $f(a)=f(b)$, maka diperoleh
+          \[
+            \sum_{k=1}^{n} f'(c_k) = \frac{n}{b-a} (f(b) - f(a)) = 0.
+          \]
+          Karena $c_k$ berada pada subinterval yang berbeda, maka $c_1,c_2,\ldots,c_n$ adalah bilangan real yang berbeda. Dengan demikian, kita telah membuktikan bahwa terdapat $n$ bilangan real berbeda $c_1,c_2,\ldots,c_n\in(a,b)$ sehingga
+          \[
+            f'(c_1) + f'(c_2) + \ldots + f'(c_n) = 0.
+          \]
+        \end{solution}
 
   \item
         Untuk suatu bilangan bulat tak negatif $n$ dan $m$, misalkan $D(m,n)$ menyatakan banyaknya solusi persamaan % 
         \[
-          x_{1}+x_{2}+\cdot\cdot\cdot+x_{m}=n
+          x_{1}+x_{2}+\cdots+x_{m}=n
         \] % 
         dengan $x_{i}\in\mathbb{N}$, untuk setiap $i\in\{1,2,...,m\}$ dan $x_{1}<x_{2}<\ldots<x_{m}$. Tunjukkan bahwa % 
         \[
           D(m,n)=D(m,n-m)+D(m-1,n-m).
         \] % 
+
+        \begin{solution}
+          Misalkan $S$ adalah himpunan semua solusi dari persamaan $x_1+x_2+\ldots+x_m=n$ dengan $x_i\in\mathbb{N}$ dan $x_1<x_2<\ldots<x_m$. Kita akan membagi himpunan $S$ menjadi dua bagian berdasarkan nilai dari $x_1$.
+
+          \textbf{Kasus 1:} $x_1=1$. \\
+          Jika $x_1=1$, maka kita dapat menuliskan ulang persamaan tersebut sebagai
+          \[
+            1 + x_2 + x_3 + \ldots + x_m = n \implies x_2 + x_3 + \ldots + x_m = n - 1.
+          \]
+          Karena $x_2 < x_3 < \ldots < x_m$, kita dapat mendefinisikan variabel baru $y_i = x_i - 1$ untuk setiap $i=2,3,\ldots,m$. Dengan demikian, kita memiliki
+          \[
+            y_2 + y_3 + \ldots + y_m = n - 1 - (m - 1) = n - m,
+          \]
+          dengan syarat $y_2 < y_3 < \ldots < y_m$ dan $y_i \in \mathbb{N}$. Banyaknya solusi dari persamaan ini adalah $D(m-1,n-m)$.
+
+          \textbf{Kasus 2:} $x_1 > 1$. \\
+          Jika $x_1 > 1$, kita dapat mendefinisikan variabel baru $z_i = x_i - 1$ untuk setiap $i=1,2,\ldots,m$. Maka persamaan tersebut menjadi
+          \[
+            z_1 + z_2 + z_3 + \ldots + z_m = n - m,
+          \]
+          dengan syarat $z_1 < z_2 < z_3 < \ldots < z_m$ dan $z_i \in \mathbb{N}$. Banyaknya solusi dari persamaan ini adalah $D(m,n-m)$.
+
+          Karena setiap solusi dalam himpunan $S$ masuk ke dalam salah satu dari dua kasus di atas, maka kita dapat menyimpulkan bahwa
+          \[
+            D(m,n) = D(m,n-m) + D(m-1,n-m).
+          \]
+        \end{solution}
 
   \item
         \begin{enumerate}
@@ -385,5 +452,39 @@ frametitle={\textit{Solusi}:}
         \[
           PQ=\{p*q:p\in P,q\in Q\}.
         \] % 
+        \begin{solution}
+          \begin{enumerate}
+            \item Misalkan $x\in B$. Karena $AC=BC$, maka terdapat $b\in B$ dan $c\in C$ sehingga $x=bc$. Karena $A\subseteq B$, maka $b\in A$. Selanjutnya, karena $A\cap C=B\cap C$, maka $c\in A\cap C$. Dengan demikian, terdapat $a_1,a_2\in A$ sehingga $x=a_1a_2$. Karena $A$ adalah subgrup, maka $x=a_1a_2\in A$. Jadi, kita peroleh bahwa $B\subseteq A$. Karena juga diketahui bahwa $A\subseteq B$, maka dapat disimpulkan bahwa $A=B$.
+            \item Misalkan $G=S_3$ adalah grup terhadap operasi komposisi. Misalkan
+                  \[
+                    A=\left\{\begin{pmatrix}
+                      1
+                    \end{pmatrix},
+                    \begin{pmatrix}
+                      1 & 2
+                    \end{pmatrix}
+                    \right\}, \quad B=\left\{\begin{pmatrix}
+                      1
+                    \end{pmatrix},
+                    \begin{pmatrix}
+                      2 & 3
+                    \end{pmatrix}
+                    \right\}, \quad C=\left\{\begin{pmatrix}
+                      1
+                    \end{pmatrix}\right\}.
+                  \]
+                  Dengan mudah kita peroleh bahwa
+                  \[
+                    A\cap C = B\cap C = \left\{\begin{pmatrix}
+                      1
+                    \end{pmatrix}\right\},
+                  \]
+                  dan
+                  \[
+                    AC = BC,
+                  \]
+                  tetapi jelas bahwa $A\ne B$.
+          \end{enumerate}
+        \end{solution}
 \end{enumerate}
 \end{document}
