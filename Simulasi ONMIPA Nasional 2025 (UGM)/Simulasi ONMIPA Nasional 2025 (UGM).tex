@@ -1,0 +1,140 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{geometry}
+\usepackage{tikz}
+    \usetikzlibrary{patterns,decorations.pathreplacing,snakes,arrows.meta}
+    \tikzset{box/.style={draw, thick, minimum width=1cm, minimum height=1cm}}
+\usepackage{bigints}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{footmisc} 
+\usepackage[colorlinks=true, linkcolor=red]{hyperref}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{cancel}
+%\usepackage{wrapfig}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\definecolor{darkcyan}{HTML}{0091A4}  
+\definecolor{brightcyan}{HTML}{dcf0f2}
+\newmdenv[  
+topline=false,  
+rightline=false,  
+bottomline=false,  
+leftline=true,  
+linecolor=darkcyan,  
+linewidth=3pt,  
+backgroundcolor=brightcyan,  
+frametitle={\textit{Solusi}:}
+]{solution}  
+\setlength{\multicolsep}{5.0pt plus 2.0pt minus 1.5pt}% 50% of original values
+\geometry{a4paper, portrait, top=2.5cm, left=3cm, right=3cm, bottom=2.5cm}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+
+\renewcommand{\baselinestretch}{1.2}
+
+\fancyfoot[L]{\textit{5002221132}}
+\fancyfoot[R]{\textit{Tetew}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{2pt}
+\usepackage{titlesec}
+\titleformat{\section}
+  {\centering\bfseries}   % format teks
+  {}                            % nomor section
+  {0pt}                         % jarak antara label dan judul
+  {\MakeUppercase}              % ubah ke huruf besar semua
+
+\titlespacing*{\section}
+  {0pt}{2.5ex plus 2ex minus .5ex}{2ex plus .5ex} % jarak atas & bawah
+
+
+\pagenumbering{gobble}
+\begin{document}
+\begin{center}
+  \textbf{\large SIMULASI ONMIPA NASIONAL BIDANG MATEMATIKA}\\[1ex]
+  Durasi pengerjaan: 240 menit
+\end{center}
+
+\section*{Subbidang Aljabar Linear}
+
+Diberikan ruang hasil kali dalam berdimensi hingga $V$ atas lapangan $\mathbb{R}$.
+Diketahui $\{ e_1, \ldots, e_n \}$ merupakan basis ortonormal untuk $V$ dan
+$B = \{ v_1, \ldots, v_n \} \subseteq V$. Jika
+\[
+  \| e_i - v_i \| < \frac{1}{\sqrt{n}}
+\]
+untuk setiap $i \in \{ 1, \ldots, n \}$,
+buktikan bahwa $B$ merupakan basis untuk $V$.
+\vspace*{1cm}
+\section*{Subbidang Analisis Real}
+
+Diberikan fungsi $f : [0,2] \to (0, \infty)$ yang memenuhi $f''(x) \ge 0$ untuk setiap $x \in [0,2]$ dan
+\[
+  \int_{0}^{1} f(t)\, dt - \int_{1}^{2} \frac{dt}{f(t)} \le 1.
+\]
+Buktikan bahwa
+\[
+  \int_{0}^{2} f(t)\, dt \le 2f(2).
+\]
+\vspace*{1cm}
+\section*{Subbidang Analisis Kompleks}
+
+Diketahui $\displaystyle P(z) = \sum_{j=0}^{n} a_j z^j$ merupakan polinomial dengan derajat $n \ge 1$ dan semua akar $P(z) = 0$ termuat di dalam himpunan $\{ z \in \mathbb{C} : |z| < 1 \}$. Jika didefinisikan
+\[
+  P^*(z) = z^n \overline{P}\!\left( 1/z \right),
+\]
+dengan
+$
+  \displaystyle\overline{P}(z) = \sum_{j=0}^{n} \overline{a_{j}} z^j,
+$
+tunjukkan bahwa semua akar-akar dari persamaan
+\[
+  P(z) + P^*(z) = 0
+\]
+termuat di dalam himpunan $\{ z \in \mathbb{C} : |z| = 1 \}$.
+
+\vspace*{1cm}
+
+
+\section*{Subbidang Kombinatorika}
+
+Tentukan banyaknya $N \subset \{ 1, 2, \ldots, 2025 \}$ dengan
+$N = \{ a_1, a_2, \ldots, a_{45} \}$ dan
+\[
+  \sum_{i=1}^{45} a_i \equiv 0 \pmod{45}.
+\]
+\vspace*{1cm}
+\section*{Subbidang Struktur Aljabar}
+
+Diberikan himpunan tak kosong $G$ dan operasi biner
+$\star : G \times G \to G$ yang memenuhi kondisi:
+
+\begin{enumerate}
+  \item Untuk setiap $a,b,c \in G$ berlaku $(a \star b) \star c = a \star (b \star c)$;
+  \item Untuk setiap $a,b,c \in G$ berlaku jika $a \star c = b \star c$, maka $a = b$; dan
+  \item Terdapat $u \in G$ sedemikian sehingga untuk setiap $a \in G$ berlaku $a \star a \star a = u \star a \star u$.
+\end{enumerate}
+
+Tunjukkan bahwa $(G, \star)$ merupakan grup komutatif.
+\newpage
+\pagestyle{fancy}
+\begin{center}
+  \textbf{\underline{SOLUSI}}
+\end{center}
+\end{document}
