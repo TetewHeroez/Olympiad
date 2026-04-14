@@ -1,0 +1,88 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{geometry}
+\usepackage{tikz}
+    \usetikzlibrary{patterns,decorations.pathreplacing,snakes,arrows.meta}
+    \tikzset{box/.style={draw, thick, minimum width=1cm, minimum height=1cm}}
+\usepackage{bigints}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{footmisc} 
+\usepackage[colorlinks=true, linkcolor=red]{hyperref}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{cancel}
+%\usepackage{wrapfig}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\definecolor{darkcyan}{HTML}{0091A4}  
+\definecolor{brightcyan}{HTML}{dcf0f2}
+\newmdenv[  
+topline=false,  
+rightline=false,  
+bottomline=false,  
+leftline=true,  
+linecolor=darkcyan,  
+linewidth=3pt,  
+backgroundcolor=brightcyan,  
+frametitle={\textit{Solusi}:}
+]{solution}  
+\setlength{\multicolsep}{5.0pt plus 2.0pt minus 1.5pt}% 50% of original values
+\geometry{a4paper, portrait, top=2.5cm, left=2.5cm, right=2.5cm, bottom=2.5cm}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+
+\renewcommand{\baselinestretch}{1.2}
+
+\fancyfoot[L]{\textit{5002221132}}
+\fancyfoot[R]{\textit{Tetew}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{2pt}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+\begin{document}
+\begin{enumerate}
+  \item Diberikan $G$ adalah grup komutatif berorde $n$. Jika $p$ dan $q$ adalah dua bilangan prima yang berbeda dan keduanya membagi $n$, maka tunjukkan bahwa $G$ memuat suatu subgrup siklik berorde $pq$.
+
+  \item Diberikan $R$ adalah ring komutatif dengan elemen identitas $1_R \in R$. Tunjukkan bahwa $R$ adalah lapangan jika dan hanya jika setiap ideal sejati di $R$ adalah ideal prima.
+
+  \item Diberikan suatu grup $G$ sedemikian sehingga anggota dari $G$ yang berorde $7$ ada sebanyak $42$. Jika banyaknya subgrup dari $G$ yang berorde $7$ adalah $n$, maka $|\mathrm{Aut}(\mathbb{Z}_n)| = \cdots$.
+
+  \item Misalkan $G$ adalah suatu subgrup dari $GL_2(\mathbb{R})$ yang dibangun oleh $A$ dan $B$ dengan
+        \[
+          A = \begin{pmatrix} 2 & 0 \\ 0 & 1 \end{pmatrix}, \quad
+          B = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}.
+        \]
+        Misalkan $H \subset G$ berisi matriks-matriks
+        \[
+          \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}
+          \quad \text{dengan } a_{11} = a_{22} = 1.
+        \]
+        Tunjukkan bahwa $H$ adalah subgrup komutatif dari $G$.
+
+  \item Diberikan ring $R$ yang tidak memiliki identitas perkalian $1$ dengan kuadrat dari tiap anggotanya adalah $0$. Buktikan bahwa $abc + abc = 0$ untuk setiap $a, b, c \in R$.
+
+  \item Tunjukkan bahwa persamaan
+        \[
+          x_1^2 + x_2^2 + \cdots + x_k^2 = -1
+        \]
+        tidak memiliki solusi di lapangan $\mathbb{Q}(\sqrt[5]{3}e^{2\pi i/5})$.
+\end{enumerate}
+
+\end{document}

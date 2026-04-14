@@ -1,0 +1,264 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{geometry}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\usepackage{array}
+
+% Setting margin presisi
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=2cm, right=2cm, headheight=15pt}
+
+% Bikin custom fancy header buat halaman soal aja (mulai hal 3)
+\fancypagestyle{halamansoal}{
+    \fancyhf{}
+    \fancyhead[L]{Nama/NRP: \hrulefill}
+    \renewcommand{\headrulewidth}{0pt}
+    \cfoot{\thepage}
+}
+
+\begin{document}
+
+% ==================== HALAMAN 1 (COVER) ====================
+\thispagestyle{empty}
+
+\begin{center}
+  {\Large \textbf{OLIMPIADE SAINS ITS (OSITS) 2026}}\\[0.2cm]
+  {\Large \textbf{BABAK PENYISIHAN}}
+\end{center}
+
+\vfill
+
+\begin{center}
+  {\Large \textbf{BIDANG MATEMATIKA}}\\[0.2cm]
+  {\Large \textbf{Sabtu, 28 Februari 2026}}
+\end{center}
+
+\vfill
+
+\begin{center}
+  {\Large \textbf{Waktu : 180 menit (3 jam)}}
+\end{center}
+
+\vfill
+\vfill
+
+\noindent
+\begin{tabular}{|p{2.2cm}|p{1.4cm}|p{1.4cm}|p{1.4cm}|p{1.4cm}|p{1.4cm}|p{3.5cm}|}
+  \hline
+  \rule[-0.2cm]{0pt}{0.7cm}Nama :   & \multicolumn{6}{l|}{}                                                             \\
+  \hline
+  \rule[-0.2cm]{0pt}{0.7cm}NRP :    & \multicolumn{6}{l|}{}                                                             \\
+  \hline
+  \multirow{4}{*}{\vspace{1cm}SKOR} & \rule{0pt}{0.4cm}1.   & 2. & 3. & 4. & 5.  & \centering\arraybackslash TOTAL SKOR \\ \cline{7-7}
+                                    & \rule{0pt}{0.7cm}     &    &    &    &     & \multirow{3}{*}{}                    \\ \cline{2-6}
+                                    & \rule{0pt}{0.4cm}6.   & 7. & 8. & 9. & 10. &                                      \\
+                                    & \rule{0pt}{0.8cm}     &    &    &    &     &                                      \\
+  \hline
+\end{tabular}
+
+\newpage
+
+% ==================== HALAMAN 2 (PETUNJUK) ====================
+\thispagestyle{empty}
+\begin{center}
+  \textbf{PETUNJUK PENGERJAAN}\\
+  \textbf{OSITS BIDANG MATEMATIKA}
+\end{center}
+
+\begin{enumerate}
+  \item OSITS bidang Matematika terdiri 10 soal uraian dengan maksimal skor untuk setiap soalnya adalah 10 poin. Bidang yang diujikan meliputi:
+        \begin{itemize}
+          \item Analisis Real
+          \item Aljabar Linier
+          \item Struktur Aljabar
+          \item Analisis Kompleks
+          \item Kombinatorika
+        \end{itemize}
+  \item Waktu pengerjaan selama 180 menit dan tidak ada penambahan waktu bagi yang datang terlambat.
+  \item Tuliskan nama dan NRP di sampul bagian depan dan setiap halaman soal (bagian atas).
+  \item Tuliskan jawaban Saudara lengkap dengan argumentasi dan penjelesan.
+  \item Tuliskan jawaban Saudara pada kotak jawaban yang tersedia di setiap soalnya. Jika tidak mencukupi diperbolehkan menggunakan halaman bagian belakang.
+  \item Wajib menggunakan bolpoin untuk menuliskan jawaban.
+  \item Dilarang menggunakan kalkulator atau alat bantu hitung lainnya selama pengerjaan berlangsung.
+  \item Dilarang berbuat curang seperti bekerja sama, mencontek, ataupun jenis pelanggaran lainnya.
+  \item Keputusan juri tidak dapat diganggu gugat.
+\end{enumerate}
+
+\newpage
+
+% MENGAKTIFKAN HEADER NAMA/NRP UNTUK HALAMAN SOAL
+\pagestyle{halamansoal}
+
+% Buka block enumerate utama untuk soal 1-10
+% ==================== HALAMAN 3 (SOAL 1) ====================
+\begin{enumerate}
+  \item \textbf{(Analisis Real)}\\
+        Buktikan bahwa untuk setiap bilangan real $a>0$ berlaku
+        \[ \ln(1+a) \le \frac{a}{\sqrt{1+a}} \]
+
+
+        \textbf{Jawaban:}
+        \par\vspace{0.1cm}\noindent
+        \fbox{%
+          \begin{minipage}[t][\dimexpr\textheight-\pagetotal-2.5cm\relax]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+            \mbox{}
+          \end{minipage}%
+        }
+
+        \newpage
+
+        % ==================== HALAMAN 4 (SOAL 2) ====================
+  \item \textbf{(Aljabar Linier)}\\
+        Diberikan bilangan real $a, b, c, d$ sehingga $c \ne 0$ dan $ad-bc=1$. Buktikan bahwa terdapat bilangan real $k, u,$ dan $v$ sehingga
+        \[
+          \begin{pmatrix} a & b \\ c & d \end{pmatrix} =
+          \begin{pmatrix} k & -u \\ 0 & k \end{pmatrix}
+          \begin{pmatrix} k & 0 \\ c & k \end{pmatrix}
+          \begin{pmatrix} k & -v \\ 0 & k \end{pmatrix}.
+        \]
+
+
+        \textbf{Jawaban:}
+        \par\vspace{0.1cm}\noindent
+        \fbox{%
+          \begin{minipage}[t][\dimexpr\textheight-\pagetotal-2.5cm\relax]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+            \mbox{}
+          \end{minipage}%
+        }
+
+        \newpage
+
+        % ==================== HALAMAN 5 (SOAL 3) ====================
+  \item \textbf{(Struktur Aljabar)}\\
+        Misalkan $G$ grup komutatif dan $g \in G$ dengan $|g|=2$. Jika $H$ subgrup dari $G$, buktikan bahwa $H \cup gH$ juga subgrup dari $G$. Apakah $H \cup gH$ subgrup normal? Jelaskan.\\
+
+
+        \textbf{Jawaban:}
+        \par\vspace{0.1cm}\noindent
+        \fbox{%
+          \begin{minipage}[t][\dimexpr\textheight-\pagetotal-2.5cm\relax]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+            \mbox{}
+          \end{minipage}%
+        }
+
+        \newpage
+
+        % ==================== HALAMAN 6 (SOAL 4) ====================
+  \item \textbf{(Analisis Kompleks)}\\
+        Diberikan bilangan kompleks $z = \cos \theta + i \sin \theta$ dengan $z \ne 1$. Tunjukkan bahwa
+        \[ \text{Re}\left(\frac{1}{1-z}\right) = \frac{1}{2} \]
+
+
+        \textbf{Jawaban:}
+        \par\vspace{0.1cm}\noindent
+        \fbox{%
+          \begin{minipage}[t][\dimexpr\textheight-\pagetotal-2.5cm\relax]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+            \mbox{}
+          \end{minipage}%
+        }
+
+        \newpage
+
+        % ==================== HALAMAN 7 (SOAL 5) ====================
+  \item \textbf{(Kombinatorika)}\\
+        Misalkan $M$ adalah himpunan semua bilangan 8-digit yang digit-digitnya adalah 1, 2 atau 3 dan memuat paling sedikit 1 digit 2. Tentukan Banyaknya bilangan $N$ di $M$ sehingga setiap digit 2 di $N$ diapit oleh digit 1 dan 3.\\
+
+
+        \textbf{Jawaban:}
+        \par\vspace{0.1cm}\noindent
+        \fbox{%
+          \begin{minipage}[t][\dimexpr\textheight-\pagetotal-2.5cm\relax]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+            \mbox{}
+          \end{minipage}%
+        }
+
+        \newpage
+
+        % ==================== HALAMAN 8 (SOAL 6) ====================
+  \item \textbf{(Analisis Real)}\\
+        Misalkan $f:[0,1] \rightarrow \mathbb{R}$ terdiferensialkan dan turunan $f^{\prime}$ bersifat Lipschitz pada $[0,1]$ dengan konstanta 6, yaitu
+        \[ |f^{\prime}(x)-f^{\prime}(y)| \le 6|x-y| \quad \text{untuk semua } x, y \in [0,1] \]
+        Diketahui pula bahwa
+        \[ f(0)=2, \quad f(1)=1 \]
+        Buktikan bahwa untuk setiap $x \in [0,1]$ berlaku
+        \[ |f(x)-(2-x)| \le 3x(1-x). \]
+
+
+        \textbf{Jawaban:}
+        \par\vspace{0.1cm}\noindent
+        \fbox{%
+          \begin{minipage}[t][\dimexpr\textheight-\pagetotal-2.5cm\relax]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+            \mbox{}
+          \end{minipage}%
+        }
+
+        \newpage
+
+        % ==================== HALAMAN 9 (SOAL 7) ====================
+  \item \textbf{(Aljabar Linier)}\\
+        Misalkan $T:\mathbb{R}^{2} \rightarrow \mathbb{R}^{2}$ adalah pemetaan linier dan untuk setiap $v \in \mathbb{R}^{2}$ berlaku
+        \[ ||Tv|| = ||v||. \]
+        Buktikan bahwa $T$ adalah transformasi ortogonal. Dengan kata lain, jika $A$ adalah matriks representasi $T$ pada basis standar ($Tv=Av$), tunjukkan bahwa
+        \[ A^{T}A = I. \]
+
+
+        \textbf{Jawaban:}
+        \par\vspace{0.1cm}\noindent
+        \fbox{%
+          \begin{minipage}[t][\dimexpr\textheight-\pagetotal-2.5cm\relax]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+            \mbox{}
+          \end{minipage}%
+        }
+
+        \newpage
+
+        % ==================== HALAMAN 10 (SOAL 8) ====================
+  \item \textbf{(Struktur Aljabar)}\\
+        Diberikan $b=(1~3~5~4)(2~6~3~5) \in S_{15}$.
+        \begin{enumerate}
+          \item Dapatkan $b^{2026}$
+          \item Tentukan banyaknya $m \in S_{15}$ yang memenuhi $b=m^{5}$.
+        \end{enumerate}
+
+
+        \textbf{Jawaban:}
+        \par\vspace{0.1cm}\noindent
+        \fbox{%
+          \begin{minipage}[t][\dimexpr\textheight-\pagetotal-2.5cm\relax]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+            \mbox{}
+          \end{minipage}%
+        }
+
+        \newpage
+
+        % ==================== HALAMAN 11 (SOAL 9) ====================
+  \item \textbf{(Analisis Kompleks)}\\
+        Diberikan polinomial $f(x)=x^{4}+ax^{3}+bx^{2}+cx+d$ dimana setiap koefisiennya merupakan bilangan real dan akarnya real. Buktikan bahwa jika $|f(i)|=1$ maka $a=b=c=d=0$.\\
+
+
+        \textbf{Jawaban:}
+        \par\vspace{0.1cm}\noindent
+        \fbox{%
+          \begin{minipage}[t][\dimexpr\textheight-\pagetotal-2.5cm\relax]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+            \mbox{}
+          \end{minipage}%
+        }
+
+        \newpage
+
+        % ==================== HALAMAN 12 (SOAL 10) ====================
+  \item \textbf{(Kombinatorika)}\\
+        Tentukan bentuk sederhana dari
+        \[ \sum_{j=0}^{k} 2^{k-j} \binom{k+j}{j} \]
+
+
+        \textbf{Jawaban:}
+        \par\vspace{0.1cm}\noindent
+        \fbox{%
+          \begin{minipage}[t][\dimexpr\textheight-\pagetotal-2.5cm\relax]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+            \mbox{}
+          \end{minipage}%
+        }
+
+\end{enumerate} % Tutup block enumerate utama
+\end{document}

@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{hyperref,ragged2e,amsmath,multicol,gensymb,setspace,
+fancyhdr,amsfonts,tikz,pgfplots,nccmath,enumerate,verbatim}
+\usepackage[a4paper, width=216mm, height=297mm, margin=2.5cm]{geometry}
+\usepgfplotslibrary{polar,fillbetween}
+\usepgflibrary{shapes.geometric}
+\usepgfplotslibrary{external}
+\usetikzlibrary{calc,patterns,arrows}
+\newcommand\mylog[1]{\mathop{{}^{#1}\mathrm{log}}}
+\pgfplotsset{compat=1.15}
+\pgfplotsset{my style/.append style={axis x line=middle, axis y line=
+middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
+\usepackage{etoolbox}
+\newcommand{\zerodisplayskips}{%
+  \setlength{\abovedisplayskip}{0pt}%
+  \setlength{\belowdisplayskip}{0pt}%
+  \setlength{\abovedisplayshortskip}{0pt}%
+  \setlength{\belowdisplayshortskip}{0pt}}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+}
+\setlength{\columnsep}{0.8cm}
+
+\pagestyle{fancy}
+
+\begin{document}
+\begin{enumerate}
+    \item Diketahui $R$ merupakan suatu ring dengan identitas perkalian $1_R$ dan $(x+y)^2=x^2+y^2$ untuk setiap $x,y\in R$. Apakah $R$ merupakan ring komutatif?\\
+    Untuk setiap $x,y\in R$, kita punya $$(x+y)^2=x^2+xy+yx+y^2=x^2+y^2$$ dan didapat $xy+yx=0$ atau $xy=-yx$. Kemudian karena $1_R\in R$ didapat pula untuk setiap $a\in R$
+    \begin{align*}
+        (a+1)^2=a^2+1.a+a.1+1^2&=a^2+1^2\\
+        a^2+2a+1&=a^2+1\\
+        2a&=0\\
+        a&=-a
+    \end{align*}
+    Karena $a=-a$ untuk setiap $a\in R$, didapat $xy=yx$
+    $$$$
+    \item Jika $a,b,c,d$ merupakan bilangan bulat sehingga $f(x)=x^4+ax^3+bx^2+cx+d$ mempunyai akar $\sqrt{3}-\sqrt{5}$, maka nilai $a+b+c+d$ adalah \dots
+    \item Diketahui $\mathcal{R}=\mathbb{Z}_{1013}\times \mathbb{Z}_{1013}$ merupakan ring terhadap operasi penjumlahan dan perkalian berikut:
+    \begin{align*}
+        (a,b)+(c,d)=((a+c)\mod 1013, (b+d)\mod 1013),\\
+        (a,b)\cdot (c,d) = (ac\mod 1013, (ad+bc+bd) \mod 1013),
+    \end{align*}
+    untuk setiap $(a,b),(c,d)\in \mathcal{R}$. Buktikan terdapat tepat sebanyak 2024 elemen taknol di $\mathcal{R}$ yang merupakan pembagi nol. 
+    \item Diberikan $G$ suatu grup siklis dengan order 2024. Banyak elemen $G$ yang berorde ganjil adalah \dots
+    \item Diketahui $\mathbb{R}[x]$ adalah ring polinom atas $\mathbb{R}$. Untuk setiap $p(x)\in\mathbb{R}[x]$, ideal di $\mathbb{R}[x]$ yang dibangun oleh $p(x)$ dinotasikan sebagai $\langle p(x)\rangle$.
+    \begin{enumerate}
+        \item Buktikan $\langle x-2024\rangle$ merupakan ideal maksimal di $\mathbb{R}[x]$.
+        \item Tentukan bilangan asli $a$ terbesar sehingga $\langle x^2+ax+2024\rangle$ merupakan ideal maksimal di $\mathbb{R}[x]$.
+    \end{enumerate}
+\end{enumerate}
+\end{document}

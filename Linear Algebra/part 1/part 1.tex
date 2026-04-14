@@ -1,0 +1,210 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{geometry}
+\usepackage{tikz}
+    \usetikzlibrary{patterns,decorations.pathreplacing,snakes,arrows.meta}
+    \tikzset{box/.style={draw, thick, minimum width=1cm, minimum height=1cm}}
+\usepackage{bigints}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{footmisc} 
+\usepackage[colorlinks=true, linkcolor=red]{hyperref}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{cancel}
+%\usepackage{wrapfig}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\definecolor{darkcyan}{HTML}{0091A4}  
+\definecolor{brightcyan}{HTML}{dcf0f2}
+\newmdenv[  
+topline=false,  
+rightline=false,  
+bottomline=false,  
+leftline=true,  
+linecolor=darkcyan,  
+linewidth=3pt,  
+backgroundcolor=brightcyan,  
+frametitle={\textit{Solusi}:}
+]{solution}  
+\setlength{\multicolsep}{5.0pt plus 2.0pt minus 1.5pt}% 50% of original values
+\geometry{a4paper, portrait, top=2.5cm, left=2.5cm, right=2.5cm, bottom=2.5cm}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+
+\renewcommand{\baselinestretch}{1.2}
+
+\fancyfoot[L]{\textit{5002221132}}
+\fancyfoot[R]{\textit{Tetew}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{2pt}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+\begin{document}
+\begin{enumerate}
+  \item Diberikan suatu matriks $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$ dengan semua entrinya bernilai bilangan real. Tentukan semua matriks $A$ yang memenuhi
+        \[
+          A^2 - (2a^2 + 2d^2)A - 3(\det A)I = 0.
+        \]
+        \begin{solution}
+          Menggunakan Teorema Cayley-Hamilton, kita dapat menyatakan bahwa
+          \[
+            A^2 - (a+d)A + (ad - bc)I = 0.
+          \]
+          Dengan mengeliminasi $A^2$ dari kedua persamaan, kita memperoleh
+          \[
+            (2a^2 + 2d^2-a-d)A = -4(ad - bc)I.
+          \]
+          Dari informasi ini perlu kita bagi kasus menjadi dua.
+          \begin{itemize}
+            \item Jika $b=0$ dan $c=0$, maka kita memperoleh
+                  \[
+                    (2a^2 + 2d^2-a-d)A = -4adI.
+                  \]
+                  Dengan menyamakan entri diagonal utama, kita memperoleh
+                  \begin{align*}
+                    (2a^2 + 2d^2 - a - d)a & = -4ad  \\
+                    (2a^2 + 2d^2 - a - d)d & = -4ad.
+                  \end{align*}
+                  \begin{itemize}
+                    \item Jika $a=0$, maka kita memperoleh
+                          \[
+                            2d^2 - d = 0 \implies d(2d-1) = 0 \implies d = 0 \text{ atau } d = \frac{1}{2}.
+                          \]
+                          Jadi matriks yang memenuhi adalah $A = \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}$ atau $A = \begin{bmatrix} 0 & 0 \\ 0 & \frac{1}{2} \end{bmatrix}$. (Analog dengan $d=0$.)
+                    \item Jika $a\ne 0$ dan $d\ne 0$, maka kita memperoleh dua persamaan dengan hukum kanselasi
+                          \begin{align*}
+                            2a^2 + 2d^2 - a - d & = -4d, \\
+                            2a^2 + 2d^2 - a - d & = -4a.
+                          \end{align*}
+                          Dengan menyamakan kedua persamaan tersebut, kita memperoleh $a=d$. Subtitusikan kembali ke salah satu persamaan hingga didapatkan
+                          \begin{align*}
+                            2a^2 + 2d^2 - a - d & = -4d \\
+                            2a^2 + 2a^2 - a - a & = -4a \\
+                            4a^2 + 2a           & = 0   \\
+                            2a(2a + 1)          & = 0.
+                          \end{align*}
+                          Karena $a\ne 0$, maka haruslah $a=d=-\frac{1}{2}$.
+                  \end{itemize}
+            \item Jika $b\ne 0$ atau $c\ne 0$, maka kita memperoleh
+
+          \end{itemize}
+        \end{solution}
+
+  \item Misalkan $M$ adalah matriks invertibel berdimensi $2n \times 2n$, yang dinyatakan dalam bentuk blok sebagai
+        \[
+          M = \begin{bmatrix} A & B \\ C & D \end{bmatrix}, \quad
+          M^{-1} = \begin{bmatrix} E & F \\ G & H \end{bmatrix}.
+        \]
+        Tunjukkan bahwa $\det M \cdot \det H = \det A$.
+        \begin{solution}
+          Kita dapat menggunakan sifat perkalian dari matriks blok yaitu
+          \[
+            I=MM^{-1} = \begin{bmatrix} A & B \\ C & D \end{bmatrix} \begin{bmatrix} E & F \\ G & H \end{bmatrix} = \begin{bmatrix} AE + BG & AF + BH \\ CE + DG & CF + DH \end{bmatrix}.
+          \]
+          Dengan menyamakan entri-entri dari kedua matriks tersebut, kita memperoleh
+          \begin{align*}
+            AE + BG & = I, \\
+            AF + BH & = 0, \\
+            CE + DG & = 0, \\
+            CF + DH & = I.
+          \end{align*}
+        \end{solution}
+
+  \item Misalkan pemetaan $f : \mathbb{M}_n \rightarrow \mathbb{R}$ dari ruang $\mathbb{M}_n = \mathbb{R}^{n^2}$ (matriks $n \times n$ berentrikan bilangan real) ke $\mathbb{R}$ adalah linier, yaitu:
+        \[
+          f(A + B) = f(A) + f(B), \quad f(cA) = cf(A)
+        \]
+        untuk setiap $A, B \in \mathbb{M}_n$ dan $c \in \mathbb{R}$. Buktikan bahwa terdapat matriks $C \in \mathbb{M}_n$ yang unik sehingga
+        \[
+          f(A) = \text{tr}(AC)
+        \]
+        untuk setiap $A \in \mathbb{M}_n$. (Jika $A = \{a_{ij}\}_{i,j=1}^n$, maka $\text{tr}(A) = \sum_{i=1}^n a_{ii}$.)
+        \begin{solution}
+          Pertama-tama definisikan basis baku $E_{ij} \in \mathbb{M}_n$ dimana $E_{ij}$ adalah matriks yang memiliki entri $1$ pada baris $i$ dan kolom $j$, dan $0$ di tempat lainnya ($1 \leq i,j \leq n$)
+        \end{solution}
+  \item
+        \begin{enumerate}
+          \item Tunjukkan bahwa untuk setiap $m \in \mathbb{N}$ terdapat suatu matriks real $m \times m$, misalkan $A$, sedemikian sehingga
+                \[
+                  A^3 = A + I,
+                \]
+                di mana $I$ adalah matriks identitas $m \times m$.
+
+          \item Tunjukkan bahwa $\det A > 0$ untuk setiap matriks real $m \times m$ yang memenuhi $A^3 = A + I$.
+        \end{enumerate}
+        \begin{solution}
+          \begin{enumerate}
+            \item Tinjau untuk $m=1$, maka kita peroleh persamaan
+                  \[
+                    a^3 = a + 1 \implies a^3 - a - 1 = 0.
+                  \]
+                  Perhatikan bahwa fungsi $f(x) = x^3 - x - 1$ adalah fungsi kontinu yang monoton naik (tidak turun). Selanjutnya kita dapat tinjau bahwa
+                  \begin{align*}
+                    f(1) & = 1^3 - 1 - 1 = -1, \\
+                    f(2) & = 2^3 - 2 - 1 = 5.
+                  \end{align*}
+                  Menggunakan teorema nilai antara, kita memperoleh bahwa terdapat suatu $\lambda \in (1, 2)$ sehingga $f(\lambda)=\lambda^3 - \lambda - 1 = 0$. Dengan demikian, kita memperoleh suatu matriks $A = [\lambda]$ yang memenuhi $A^3 = A + I$.
+
+                  Selanjutnya secara umum untuk $m\geq 2$, kita dapat kontruksi matriks $A$ sebagai sebagai matriks diagonal dengan entri $\lambda$. Karena perpangkatan dari matriks diagonal adalah dengan cara memangkatkan setiap entri diagonalnya, maka kita memperoleh
+                  \begin{align*}
+                    A^3 - A - I & = \begin{bmatrix} \lambda^3 & 0 & \cdots & 0 \\ 0 & \lambda^3 & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & \lambda^3 \end{bmatrix} - \begin{bmatrix} \lambda & 0 & \cdots & 0 \\ 0 & \lambda & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & \lambda \end{bmatrix} - \begin{bmatrix} 1 & 0 & \cdots & 0 \\ 0 & 1 & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & 1 \end{bmatrix} \\
+                                & = \begin{bmatrix} \lambda^3 - \lambda - 1 & 0 & \cdots & 0 \\ 0 & \lambda^3 - \lambda - 1 & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & \lambda^3 - \lambda - 1 \end{bmatrix} = \mathbf{0}.
+                  \end{align*}
+                  Jadi terbukti matriks $A=\text{diag}(\lambda, \lambda, \ldots, \lambda)$ memenuhi $A^3 = A + I$.
+            \item $\det A$ dapat dinyatakan sebagai perkalian semua nilai eigen dari $A$. Misalkan $\alpha$ adalah sembarang nilai eigen dari $A$, maka kita peroleh
+                  \[
+                    Av = \alpha v
+                  \]
+                  untuk suatu vektor tak nol $v$.
+
+                  Disisi lain karena $A$ memenuhi $A^3 - A - I = 0$, maka juga harus berlaku
+                  \begin{align*}
+                    (A^3 - A - I)v            & = 0  \\
+                    A^3v - Av - Iv            & = 0  \\
+                    \alpha^3 v - \alpha v - v & = 0  \\
+                    (\alpha^3 - \alpha - 1)v  & = 0.
+                  \end{align*}
+                  Karena $v \neq 0$, maka harus berlaku $\alpha^3 - \alpha - 1 = 0$. Dengan demikian, setiap nilai eigen dari $A$ adalah akar dari polinomial $x^3 - x - 1$.
+
+                  Karena $f(x) = x^3 - x - 1$ adalah fungsi kontinu yang monoton naik, maka $f(x)$ tepat memiliki 1 akar real, yaitu $\lambda$ dan sisa nya adalah akar kompleks yang saling konjugat misalkan saja $\mu$ dan $\overline{\mu}$. Sekarang perhatikan bahwa
+                  \[
+                    \det A = \lambda^p \cdot \mu^q \cdot \overline{\mu}^q,
+                  \]
+                  dengan $p$ dan $q$ mempresentasikan multiplisitas aljabar dari masing-masing nilai eigen ($n=p+2p$). Gunakan fakta bahwa
+                  \begin{itemize}
+                    \item $\lambda > 0$, sebab $\lambda\in (1, 2)$,
+                    \item $\mu\overline{\mu} = |\mu|^2 > 0$
+                  \end{itemize}
+                  maka kita memperoleh $\det A = \lambda^p |\mu|^{2q} > 0$.
+          \end{enumerate}
+        \end{solution}
+  \item Misalkan $A$ dan $B$ adalah matriks kompleks bujur sangkar dengan ukuran yang sama, dan
+        \[
+          \text{rank}(AB - BA) = 1.
+        \]
+        Tunjukkan bahwa
+        \[
+          (AB - BA)^2 = 0.
+        \]
+        \begin{solution}
+
+        \end{solution}
+\end{enumerate}
+\end{document}

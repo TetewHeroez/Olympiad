@@ -1,0 +1,128 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{geometry}
+\usepackage{tikz}
+    \usetikzlibrary{patterns,decorations.pathreplacing,snakes,arrows.meta}
+    \tikzset{box/.style={draw, thick, minimum width=1cm, minimum height=1cm}}
+\usepackage{bigints}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{footmisc} 
+\usepackage[colorlinks=true, linkcolor=red]{hyperref}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{cancel}
+%\usepackage{wrapfig}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\definecolor{darkcyan}{HTML}{0091A4}  
+\definecolor{brightcyan}{HTML}{dcf0f2}
+\newmdenv[  
+topline=false,  
+rightline=false,  
+bottomline=false,  
+leftline=true,  
+linecolor=darkcyan,  
+linewidth=3pt,  
+backgroundcolor=brightcyan,  
+frametitle={\textit{Solusi}:}
+]{solution}  
+\setlength{\multicolsep}{5.0pt plus 2.0pt minus 1.5pt}% 50% of original values
+\geometry{a4paper, portrait, top=2.5cm, left=2.5cm, right=2.5cm, bottom=2.5cm}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+
+\renewcommand{\baselinestretch}{1.2}
+
+\fancyfoot[L]{\textit{5002221132}}
+\fancyfoot[R]{\textit{Tetew}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{2pt}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+\begin{document}
+
+\begin{enumerate}
+  \item Diberikan bilangan kompleks
+        \[
+          z = \cos\left(\frac{2\pi}{3}\right) + i \sin\left(\frac{2\pi}{3}\right)
+        \]
+        Tentukan nilai
+        \[
+          (1 + z)(1 + z^2)(1 + z^3) \cdots (1 + z^{2026})
+        \]
+        \begin{solution}
+          Kita perhatikan bahwa $z^3 = 1$, sehingga diperoleh fakta bahwa $z-1=0$ atau $z^2+z+1=0$. Namun karna $z \neq 1$, maka jelas yang berlaku hanyalah $z^2 + z + 1 = 0$. Selanjutnya dapat ditinjau bahwa
+          \[
+            (1 + z)(1 + z^2) = 1 + z + z^2 + z^3 = 1 + z + z^2 + 1 = 2 + z + z^2 = 2 - 1 = 1.
+          \]
+          dan
+          \[
+            1+ z^3 = 1 + 1 = 2.
+          \]
+          Dengan demikian, kita memperoleh
+          \[
+            (1 + z)(1 + z^2)(1 + z^3) = 1 \cdot 2 = 2.
+          \]
+
+          Perlu kita ingat bahwa $z^3 = 1$ yang menunjukkan bahwa $z^{3k} = 1$ untuk setiap $k \in \mathbb{Z}$. Oleh karena itu, dengan meninjau bahwa $2026 = 3 \cdot 675 + 1$, kita memperoleh
+          \begin{align*}
+            (1 + z)(1 + z^2)(1 + z^3) \cdots (1 + z^{2026}) & = [(1 + z)(1 + z^2)(1 + z^3)]^{675}(1 + z)            \\
+                                                            & = 2^{675}\left(\frac{1}{2}+\frac{\sqrt{3}}{2}i\right) \\
+                                                            & = 2^{674}\left(1 + \sqrt{3}i\right).
+          \end{align*}
+
+        \end{solution}
+
+  \item Misalkan $z_1, z_2, z_3 \in \mathbb{C}$ yang memenuhi $|z_1| = |z_2| = |z_3| = 2025$. Nilai dari
+        \[
+          \left| \frac{z_1z_2 + z_2z_3 + z_1z_3}{z_1 + z_2 + z_3} \right| = \cdots
+        \]
+        \begin{solution}
+          Rumuskan persamaan yang diketahui sebagai berikut
+          \[
+            z_1\overline{z_1} = z_2\overline{z_2} = z_3\overline{z_3} = 2025^2.
+          \]
+          Selanjutnya dapat kita peroleh dua hubungan yaitu
+          \[
+            z_1=\frac{z_2\overline{z_2}}{\overline{z_1}} \quad \text{dan} \quad z_3=\frac{z_2\overline{z_2}}{\overline{z_3}}.
+          \]
+          Kemudian kita substitusi ke dalam ekspresi yang ingin kita cari, namun disini kita subtitusi untuk pembilangnya saja
+          \begin{align*}
+            \left| \frac{z_1z_2 + z_2z_3 + z_1z_3}{z_1 + z_2 + z_3} \right| & = \left| \frac{z_2\overline{z_2}z_2\left[ \frac{1}{\overline{z_1}} + \frac{1}{\overline{z_3}}+ \frac{\overline{z_2}}{\overline{z_3}\overline{z_1}} \right]}{z_1 + z_2 + z_3} \right| \\
+                                                                            & = 2025^3 \left| \frac{\frac{\overline{z_3}+\overline{z_1}+\overline{z_2}}{\overline{z_1}\overline{z_3}}}{z_1 + z_2 + z_3} \right|                                                    \\
+                                                                            & = 2025^3\frac{1}{|\overline{z_1}\overline{z_3}|} \left| \frac{\overline{z_3}+\overline{z_1}+\overline{z_2}}{z_1 + z_2 + z_3} \right|                                                 \\
+                                                                            & = 2025^3\frac{1}{2025^2} \left| \frac{\overline{z_3+z_1+z_2}}{z_1 + z_2 + z_3} \right|                                                                                               \\
+                                                                            & = 2025\cdot\frac{|z_3+z_1+z_2|}{|z_1 + z_2 + z_3|}                                                                                                                                   \\
+                                                                            & = 2025\cdot 1 = 2025.
+          \end{align*}
+        \end{solution}
+
+  \item Untuk $m,n \in \mathbb{C}$, tunjukkan bahwa
+        \[
+          |1 + m| + |1 + n| + |1 + mn| \geq 2
+        \]
+
+  \item Tunjukkan bahwa
+        \[
+          |z| \leq \frac{1}{3} \quad \text{jika dan hanya jika} \quad \left| \frac{6z - i}{2 + 3zi} \right| \leq 1
+        \]
+\end{enumerate}
+
+\end{document}

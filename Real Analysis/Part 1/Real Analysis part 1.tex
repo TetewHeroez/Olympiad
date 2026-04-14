@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsfonts}
+\usepackage{ragged2e,multicol,setspace, fancyhdr,enumerate,enumitem,cancel}
+\usepackage[a4paper, width=216mm, height=297mm, margin=2.5cm]{geometry}
+\usepackage{etoolbox}
+\newcommand{\zerodisplayskips}{%
+  \setlength{\abovedisplayskip}{0pt}%
+  \setlength{\belowdisplayskip}{0pt}%
+  \setlength{\abovedisplayshortskip}{0pt}%
+  \setlength{\belowdisplayshortskip}{0pt}}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+\setlength{\columnsep}{0.8cm}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\fpb}{\text{fpb}}
+\newcommand{\kpk}{\text{kpk}}
+\newcommand{\solusi}{{\textbf{\underline{SOLUSI}}}:\\}
+
+\begin{document}
+\setstretch{1.1}
+\pagenumbering{gobble}
+\begin{enumerate}
+    \item Compute
+    \[
+    \lim_{n \to \infty} \sum_{k=0}^n \operatorname{arccot}(k^2 + k + 1).
+    \]
+    \solusi
+    
+    \item Prove that
+    \[
+    \lim_{n \to \infty} \left( 1 + \frac{1}{n} \right) \left( 1 + \frac{2}{n} \right)^{1/2} \cdots \left( 1 + \frac{n}{n} \right)^{1/n} = e^{\pi^2 / 12}.
+    \]
+
+    \item Let \( (a_n)_{n \geq 1} \) be an arithmetic progression of positive numbers. Compute
+    \[
+    \lim_{n \to \infty} \frac{n \left( a_1 \cdots a_n \right)^{1/n}}{a_1 + \cdots + a_n}.
+    \]
+\end{enumerate}
+
+% \newpage
+% \fancyhead[c]{\textbf{SOLUSI}}
+% \fancyfoot[L]{\textit{5002221132}}
+% \fancyfoot[R]{\textit{Tetew}}
+% \renewcommand{\headrulewidth}{0pt}
+% \renewcommand{\footrulewidth}{2pt}
+% \pagestyle{fancy}
+% \begin{enumerate}
+%     \item 
+% \end{enumerate}
+\end{document}
