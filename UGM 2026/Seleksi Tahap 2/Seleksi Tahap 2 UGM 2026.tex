@@ -70,4 +70,93 @@ Diberikan ring $R$ dengan elemen satuan 1 dan untuk setiap $x, y \in R$ berlaku
   \item[(b)] Apakah pernyataan (a) tetap berlaku bila $R$ tidak memiliki elemen satuan?
 \end{enumerate}
 
+\newpage
+\begin{center}
+  \textbf{SOLUSI SELEKSI TAHAP II}
+\end{center}
+
+\vspace{0.5cm}
+
+\textbf{Solusi Aljabar Linear} \\
+Tinjau aksi matriks $A$ pada vektor $v$.
+\[
+  Av = (I - 2vv^T)v = v - 2v(v^Tv) = v - 2v(1) = -v
+\]
+Hal ini berarti $\lambda_1 = -1$ adalah salah satu nilai eigen dari $A$ dengan vektor eigen $v$.
+Selanjutnya, pilih sebarang vektor tak nol $w \in \mathbb{R}^3$ yang ortogonal terhadap $v$, yakni $v^Tw = 0$.
+Tinjau aksi $A$ pada $w$:
+\[
+  Aw = (I - 2vv^T)w = w - 2v(v^Tw) = w - 0 = w
+\]
+Maka $\lambda_2 = 1$ adalah nilai eigen dari $A$.
+Karena $v \in \mathbb{R}^3$, ruang ortogonal dari vektor basis $v$ adalah bidang dua dimensi, sehingga multiplisitas geometri untuk nilai eigen $\lambda_2 = 1$ adalah $3-1=2$. Dari sini, semua nilai eigen dan multiplisitas geometrinya telah didapat, yakni $\lambda = -1$ dengan multiplisitas geometri 1 dan $\lambda=1$ dengan multiplisitas geometri 2.
+
+\vspace{0.5cm}
+
+\textbf{Solusi Analisis Kompleks} \\
+Bentuk $f(x+iy) = R(x,y)e^{iA(x,y)}$ dalam bentuk riil dan imajinernya adalah $f = u + iv$ dengan $u = R\cos A$ dan $v = R\sin A$. Karena $f$ holomorfik, berdasarkan persamaan Cauchy-Riemann, fungsi harus memenuhi:
+\[ u_x = v_y \quad \text{dan} \quad u_y = -v_x \]
+Dapatkan turunan parsialnya:
+\begin{align*}
+  u_x & = \frac{\partial R}{\partial x}\cos A - R\sin A \frac{\partial A}{\partial x} \\
+  u_y & = \frac{\partial R}{\partial y}\cos A - R\sin A \frac{\partial A}{\partial y} \\
+  v_x & = \frac{\partial R}{\partial x}\sin A + R\cos A \frac{\partial A}{\partial x} \\
+  v_y & = \frac{\partial R}{\partial y}\sin A + R\cos A \frac{\partial A}{\partial y}
+\end{align*}
+Masukkan ke dalam $u_x = v_y$:
+\[ \frac{\partial R}{\partial x}\cos A - R\sin A \frac{\partial A}{\partial x} = \frac{\partial R}{\partial y}\sin A + R\cos A \frac{\partial A}{\partial y} \tag{1} \]
+Masukkan ke dalam $u_y = -v_x$:
+\[ \frac{\partial R}{\partial y}\cos A - R\sin A \frac{\partial A}{\partial y} = -\frac{\partial R}{\partial x}\sin A - R\cos A \frac{\partial A}{\partial x} \tag{2} \]
+Kalikan persamaan (1) dengan $\cos A$ dan persamaan (2) dengan $-\sin A$:
+\begin{align*}
+  \frac{\partial R}{\partial x}\cos^2 A - R\sin A\cos A \frac{\partial A}{\partial x}  & = \frac{\partial R}{\partial y}\sin A\cos A + R\cos^2 A \frac{\partial A}{\partial y} \\
+  -\frac{\partial R}{\partial y}\sin A\cos A + R\sin^2 A \frac{\partial A}{\partial y} & = \frac{\partial R}{\partial x}\sin^2 A + R\sin A\cos A \frac{\partial A}{\partial x}
+\end{align*}
+Jumlahkan kedua persamaan tersebut, sehingga diperoleh:
+\[ \frac{\partial R}{\partial x}(\cos^2A + \sin^2A) = R\frac{\partial A}{\partial y}(\cos^2A + \sin^2A) \]
+Mengingat identitas $\cos^2A + \sin^2A = 1$, maka terbukti bahwa $\frac{\partial R}{\partial x} = R\frac{\partial A}{\partial y}$.
+
+\vspace{0.5cm}
+
+\textbf{Solusi Analisis Real} \\
+Substitusi $y = 1$ memberikan $f(x) = xf(1) + f(x) \implies f(1)=0$. \\
+Substitusi $y = 0$ memberikan $f(0) = xf(0) + 0 \implies f(0)=0$. \\
+Untuk $x,y \neq 0$, bagi persamaan dengan $xy$:
+\[ \frac{f(xy)}{xy} = \frac{f(x)}{x} + \frac{f(y)}{y} \]
+Sebut $g(x) = f(x)/x$ untuk setiap $x \neq 0$. Karena fungsi awal kontinu di $x \neq 0$, maka $g$ juga akan kontinu dan memenuhi $g(xy) = g(x) + g(y)$, yang berkorespondensi dengan sifat fungsi logaritmik.
+Substitusi $x = y = -1 \implies g(1) = 2g(-1) \implies 0=2g(-1) \implies g(-1)=0$.
+Substitusi $y = -1 \implies g(-x) = g(x) + g(-1) \implies g(-x) = g(x)$, mengartikan fungsi bersifat genap. \\
+Oleh sebab itu, solusi general fungsi $g(x)$ yang valid adalah $g(x) = c\ln|x|$ dengan sebarang $c \in \mathbb{R}$.
+Mengembalikan definisi awal:
+\[ f(x) = cx\ln|x| \quad \text{untuk } x \neq 0 \]
+Pengecekan kontinuitas pada $x=0$, dengan aturan L'Hopital $\lim_{x \to 0} cx\ln|x| = c \lim_{x \to 0} \frac{\ln|x|}{1/x} = c \lim_{x \to 0} \frac{1/x}{-1/x^2} = 0$, membuktikan fungsi saling terhubung sempurna dan kontinu di seluruh rentang bilangan real. Alhasil solusinya adalah:
+\[ \begin{cases} f(x) = c x \ln|x|, & x \neq 0 \\ f(x) = 0, & x = 0 \end{cases} \quad \text{(untuk } c \in \mathbb{R} \text{)} \]
+
+\vspace{0.5cm}
+
+\textbf{Solusi Kombinatorika} \\
+Tinjau cara pembentukan anggota dengan mendahulukan ukuran tim $k$:
+Kita dapat memilih $k$ anggota tim dari total $n$ siswa di sekolah dalam $\binom{n}{k}$ cara. Dari $k$ anggota tersebut, terdapat $k$ cara untuk memilih satu ketua tim. Tiap anggota tim harus bergabung tepat satu kategori lomba, sehingga tiap individu punya 2 opsi yang menghasilkan konfigurasi tim berjumlah $2^k$. Akumulasi untuk setiap kemungkinanan $k$:
+\[ \textbf{Formulasi 1: } \sum_{k=1}^n \binom{n}{k} k 2^k \]
+Selanjutnya, tinjau tanpa ikatan ukuran tim secara terpisah:
+Terdapat $n$ pilihan total calon ketua tim sedari awal, dengan 2 opsi kategori lomba. Sisa $n-1$ penghuni lain memiliki 3 opsi yakni tergabung kategori 1, kategori 2, atau tidak terdaftar keanggotaannya atas tim di lomba ($3^{n-1}$ cara kombinasi). Total kombinasi konfigurasi:
+\[ \textbf{Formulasi 2: } n \cdot 2 \cdot 3^{n-1} \]
+
+\vspace{0.5cm}
+
+\textbf{Solusi Struktur Aljabar} \\
+Jabarkan identitas $(x^2+x)y = y(x^2+x)$ sehingga diperoleh:
+\[ x^2y + xy = yx^2 + yx \tag{i} \]
+
+(a) Mengingat ruang $R$ memperbolehkan keberlakuan operasi sembarang, substitusi elemen $x$ menjadi bentuk negasinya ($-x$) bukan modifikasi esensi, maka substitusikan $x \to -x$ ke persamaan (i):
+\[ (-x)^2y + (-x)y = y(-x)^2 + y(-x) \implies x^2y - xy = yx^2 - yx \tag{ii} \]
+Lakukan operasi eliminasi, dengan mensubstitusi hasil (i) dengan baris persamaan termodifikasi (ii):
+\begin{align*}
+  (x^2y + xy) - (x^2y - xy) & = (yx^2 + yx) - (yx^2 - yx) \\
+  2xy                       & = 2yx
+\end{align*}
+Pernyataan (a) telah terbukti benar.
+
+(b) Ya, pernyataan di atas \textbf{tetap berlaku} dan valid biarpun ruang ekuivalensi yang diperhatikan tidak memiliki elemen identitas $1$, dikarenakan operasi aljabar ring berupa $-x$ sama sekali tidak bergantung pada eksistensi identitas satuan. Pembuktian di bagian (a) sepenuhnya kompatibel baik jika $R$ memiliki elemen satuan atau tidak.
+
 \end{document}
