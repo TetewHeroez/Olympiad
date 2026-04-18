@@ -18,7 +18,7 @@
   SUBBIDANG ALJABAR LINEAR
 \end{center}
 
-Diberikan vektor $v \in \mathbb{R}^3$ dengan $\|v\| = 1$ dan matriks $A = I - 2vv^T$ dengan $I$ merupakan matriks identitas berukuran $3 \times 3$. Tentukan semua nilai eigen dari $A$ beserta multiplisitas geometrinya.
+Diberikan vektor $\mathbf{v} \in \mathbb{R}^3$ dengan $\|\mathbf{v}\| = 1$ dan matriks $A = I - 2\mathbf{v}\mathbf{v}^T$ dengan $I$ merupakan matriks identitas berukuran $3 \times 3$. Tentukan semua nilai eigen dari $A$ beserta multiplisitas geometrinya.
 
 \vspace{0.5cm}
 
@@ -78,18 +78,18 @@ Diberikan ring $R$ dengan elemen satuan 1 dan untuk setiap $x, y \in R$ berlaku
 \vspace{0.5cm}
 
 \textbf{Solusi Aljabar Linear} \\
-Tinjau aksi matriks $A$ pada vektor $v$.
+Tinjau aksi matriks $A$ pada vektor $\mathbf{v}$.
 \[
-  Av = (I - 2vv^T)v = v - 2v(v^Tv) = v - 2v(1) = -v
+  A\mathbf{v} = (I - 2\mathbf{v}\mathbf{v}^T)\mathbf{v} = \mathbf{v} - 2\mathbf{v}(\mathbf{v}^T\mathbf{v}) = \mathbf{v} - 2\mathbf{v}(1) = -\mathbf{v}
 \]
-Hal ini berarti $\lambda_1 = -1$ adalah salah satu nilai eigen dari $A$ dengan vektor eigen $v$.
-Selanjutnya, pilih sebarang vektor tak nol $w \in \mathbb{R}^3$ yang ortogonal terhadap $v$, yakni $v^Tw = 0$.
-Tinjau aksi $A$ pada $w$:
+Hal ini berarti $\lambda_1 = -1$ adalah salah satu nilai eigen dari $A$ dengan vektor eigen $\mathbf{v}$.
+Selanjutnya, pilih sebarang vektor tak nol $\mathbf{w} \in \mathbb{R}^3$ yang ortogonal terhadap $\mathbf{v}$, yakni $\mathbf{v}^T\mathbf{w} = 0$.
+Tinjau aksi $A$ pada $\mathbf{w}$:
 \[
-  Aw = (I - 2vv^T)w = w - 2v(v^Tw) = w - 0 = w
+  A\mathbf{w} = (I - 2\mathbf{v}\mathbf{v}^T)\mathbf{w} = \mathbf{w} - 2\mathbf{v}(\mathbf{v}^T\mathbf{w}) = \mathbf{w} - 0 = \mathbf{w}
 \]
 Maka $\lambda_2 = 1$ adalah nilai eigen dari $A$.
-Karena $v \in \mathbb{R}^3$, ruang ortogonal dari vektor basis $v$ adalah bidang dua dimensi, sehingga multiplisitas geometri untuk nilai eigen $\lambda_2 = 1$ adalah $3-1=2$. Dari sini, semua nilai eigen dan multiplisitas geometrinya telah didapat, yakni $\lambda = -1$ dengan multiplisitas geometri 1 dan $\lambda=1$ dengan multiplisitas geometri 2.
+Karena $\mathbf{v} \in \mathbb{R}^3$, ruang ortogonal dari vektor basis $\mathbf{v}$ adalah bidang dua dimensi, sehingga multiplisitas geometri untuk nilai eigen $\lambda_2 = 1$ adalah $3-1=2$. Dari sini, semua nilai eigen dan multiplisitas geometrinya telah didapat, yakni $\lambda = -1$ dengan multiplisitas geometri 1 dan $\lambda=1$ dengan multiplisitas geometri 2.
 
 \vspace{0.5cm}
 
