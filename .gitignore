@@ -1,0 +1,25 @@
+.vscode/settings.json
+
+# Temporary LaTeX files
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lot
+*.err
+*.bbl
+*.fls
+*.fdb_latexmk
+*.blg
+*.bcf
+*.lof
+*.nav
+*.snm
+*.vrb
+*.bak0
+*.run.xml
+*_minted/
+*.xdv
+*.pre
+*.asy

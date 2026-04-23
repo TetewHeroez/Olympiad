@@ -1,0 +1,201 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[style=ieee,backend=biber]{biblatex}
+\addbibresource{reference.bib}
+\usepackage{colortbl,tabularx,mathrsfs,calligra}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{ragged2e}
+\usepackage[bahasa]{babel}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{pgfplots, tkz-euclide,calc}
+\pgfplotsset{compat=1.18}
+\usepackage{listings}
+
+\graphicspath{{C:/Users/teoso/OneDrive/Documents/Tugas Kuliah/Template Math Depart/}{./foto/}}
+
+\definecolor{HIMAmuda}{HTML}{01D1FD}
+\definecolor{HIMAtua}{HTML}{02016A}
+\definecolor{HIMAabu}{HTML}{CBCBCC}
+\definecolor{PastelGreen}{HTML}{77DD77}
+
+\usetheme{Madrid}
+
+\setbeamercolor{palette primary}{bg=HIMAtua,fg=white}
+\setbeamercolor{palette secondary}{bg=HIMAmuda,fg=black}
+\setbeamercolor{palette tertiary}{bg=HIMAabu,fg=black}
+\setbeamercolor{palette quaternary}{bg=HIMAmuda,fg=white}
+\setbeamercolor{structure}{fg=HIMAmuda} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=HIMAtua} % TOC sections
+\setbeamercolor{bibliography item}{parent=palette secondary}
+\setbeamercolor*{bibliography entry author}{parent=section in toc}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\tikzstyle{startstop} = [ellipse, minimum width=1cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{decision} = [diamond, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=blue!50]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usefonttheme{professionalfonts}
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+% \setbeamercovered{transparent}
+
+
+\theoremstyle{definition}
+% \numberwithin{subsection}{section}
+\newtheorem{definisi}{Definisi}
+\newtheorem{teorema}{TEOREMA}
+\newtheorem{contoh}{Contoh}
+\newtheorem{latihan}{Latihan}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+
+
+\AtBeginEnvironment{contoh}{%
+\setbeamercolor{block title}{use=example text,fg=white,bg=example text.fg!75!black}
+\setbeamercolor{block body}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+}
+\AtBeginEnvironment{definisi}{
+\setbeamercolor{block title}{fg=white,bg=HIMAtua}
+\setbeamercolor{block body}{parent=normal text,bg=HIMAtua!30!white}
+}
+\AtBeginEnvironment{latihan}{%
+  \setbeamercolor{block title}{fg=white,bg=yellow!50!orange} % Set title background to pastel green and text to white
+  \setbeamercolor{block body}{parent=normal text,bg=yellow!30!white} % Set body background to a lighter pastel green
+}
+
+\date{Sabtu, 25 April 2026}
+\title[OSK Matematika]{Pembinaan OSN-K Matematika}
+\author[Tew \& Jun]{Teosofi Hidayah Agung\\Junika Irdia Indi Astudin}
+\institute{MAN 1 Pasuruan}
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% \begin{frame}{Daftar Isi}
+%   \tableofcontents
+% \end{frame}
+
+\section{Panduan OSN}
+\begin{frame}{\insertsection}
+  OSN-K Matematika akan diadakan pada tanggal 18 Juni 2026. Soal yang akan diujikan terdiri dari 10 soal pilihan ganda dan 10 soal isian singkat. Peserta akan diberikan waktu 2 jam 30 menit untuk menyelesaikan semua soal.
+
+  \vspace{0.5cm}
+
+  Panduan Lengkap OSN dapat diakses melalui tautan berikut:
+  \begin{center}
+    \color{blue}\href{https://pusatprestasinasional.kemendikdasmen.go.id/event/riset-dan-inovasi/sma/olimpiade-sains-nasional-2026-2026-sma}{pusatprestasinasional.kemendikdasmen.go.id}
+  \end{center}
+\end{frame}
+
+\section{Silabus}
+\subsection{Aljabar \& Geometri}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+      \begin{table}[H]
+        \centering
+        \begin{tabular}{|>{\columncolor{HIMAtua!20}}c|p{6cm}|}
+          \hline
+          \rowcolor{HIMAmuda!50}
+          \textbf{No} & \textbf{Aljabar}                    \\ \hline
+          A1          & Identitas aljabar                   \\ \hline
+          A2          & Barisan aritmatika/geometri         \\ \hline
+          A3          & Ketaksamaan (AM-GM, Cauchy-Schwarz) \\ \hline
+          A4          & Polinom                             \\ \hline
+          A5          & Akar \& algoritma pembagian         \\ \hline
+        \end{tabular}
+      \end{table}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{table}[H]
+        \centering
+        \begin{tabular}{|>{\columncolor{HIMAtua!20}}c|p{6cm}|}
+          \hline
+          \rowcolor{HIMAmuda!50}
+          \textbf{No} & \textbf{Geometri}        \\ \hline
+          G1          & Angle chasing            \\ \hline
+          G2          & Garis berat/sumbu/tinggi \\ \hline
+          G3          & Lingkaran luar/dalam     \\ \hline
+          G4          & Segi empat tali busur    \\ \hline
+          G5          & Titik kuasa              \\ \hline
+        \end{tabular}
+      \end{table}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Teori Bilangan \& Kombinatorika}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+      \begin{table}[H]
+        \centering
+        \begin{tabular}{|>{\columncolor{HIMAtua!20}}c|p{6cm}|}
+          \hline
+          \rowcolor{HIMAmuda!50}
+          \textbf{No} & \textbf{Kombinatorika}                \\ \hline
+          K1          & Basic counting (permutasi, kombinasi) \\ \hline
+          K2          & Koefisien binomial                    \\ \hline
+          K3          & Peluang                               \\ \hline
+          K4          & Prinsip bijeksi                       \\ \hline
+          K5          & Teori himpunan                        \\ \hline
+        \end{tabular}
+      \end{table}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{table}[H]
+        \centering
+        \begin{tabular}{|>{\columncolor{HIMAtua!20}}c|p{6cm}|}
+          \hline
+          \rowcolor{HIMAmuda!50}
+          \textbf{No} & \textbf{Teori Bilangan} \\ \hline
+          T1          & Keterbagian             \\ \hline
+          T2          & FPB/KPK                 \\ \hline
+          T3          & Bilangan prima          \\ \hline
+          T4          & Persamaan Diophantine   \\ \hline
+          T5          & Kongruensi modulo       \\ \hline
+          T6          & Teorema Fermat \& Euler \\ \hline
+        \end{tabular}
+      \end{table}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\section{\textit{Plan} Pembinaan}
+\begin{frame}{\insertsection}
+  Pembinaan OSN-K Matematika akan dilaksanakan selama 8 minggu, setiap hari Sabtu jam 09:30-11:30.
+  \begin{table}[H]
+    \begin{tabular}{|>{\columncolor{HIMAtua!20}}c|c|c|c|l|c|}
+      \hline
+      \rowcolor{HIMAmuda!50}
+      \textbf{No} & \textbf{Tanggal} & \textbf{Pelaksanaan} & \textbf{Pemateri} & \textbf{Materi} & \textbf{SubMateri} \\ \hline
+      1           & 25 April         & Offline              & Junika            & Kombinatorika   & -                  \\ \hline
+      2           & 2 Mei            & Offline              & Teosofi           & Aljabar         & -                  \\ \hline
+      3           & 9 Mei            & Online               & Junika            & Teori Bilangan  & -                  \\ \hline
+      4           & 16 Mei           & Online               & Teosofi           & Geometri        & -                  \\ \hline
+      5           & 23 Mei           & Online               & Junika            & Kombinatorika   & -                  \\ \hline
+      6           & 30 Mei           & Online               & Teosofi           & Aljabar         & -                  \\ \hline
+      7           & 7 Juni           & Offline              & Junika            & Teori Bilangan  & -                  \\ \hline
+      8           & 14 Juni          & Offline              & Teosofi           & Geometri        & -                  \\ \hline
+    \end{tabular}
+  \end{table}
+
+  \textit{Catatan: Jadwal dapat berubah}
+\end{frame}
+
+\end{document}
