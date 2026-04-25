@@ -1,0 +1,339 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[style=ieee,backend=biber]{biblatex}
+\addbibresource{reference.bib}
+\usepackage{colortbl,tabularx,mathrsfs,calligra}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{ragged2e}
+\usepackage[indonesian]{babel}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{pgfplots, tkz-euclide,calc}
+\pgfplotsset{compat=1.18}
+\usepackage{listings}
+\usepackage{ulem}
+
+\graphicspath{{C:/Users/teoso/OneDrive/Documents/Tugas Kuliah/Template Math Depart/}{./foto/}}
+
+\definecolor{HIMAmuda}{HTML}{01D1FD}
+\definecolor{HIMAtua}{HTML}{02016A}
+\definecolor{HIMAabu}{HTML}{CBCBCC}
+\definecolor{PastelGreen}{HTML}{77DD77}
+
+\usetheme{Madrid}
+
+\setbeamercolor{palette primary}{bg=HIMAtua,fg=white}
+\setbeamercolor{palette secondary}{bg=HIMAmuda,fg=black}
+\setbeamercolor{palette tertiary}{bg=HIMAabu,fg=black}
+\setbeamercolor{palette quaternary}{bg=HIMAmuda,fg=white}
+\setbeamercolor{structure}{fg=HIMAmuda} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=HIMAtua} % TOC sections
+\setbeamercolor{bibliography item}{parent=palette secondary}
+\setbeamercolor*{bibliography entry author}{parent=section in toc}
+
+\usetikzlibrary{shapes.geometric, arrows, calc}
+
+\tikzstyle{startstop} = [ellipse, minimum width=1cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{decision} = [diamond, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=blue!50]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usefonttheme{professionalfonts}
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{bibliography item}[book]
+
+\theoremstyle{definition}
+\newtheorem{definisi}{Definisi}
+\newtheorem{teorema}{Teorema}
+\newtheorem{contoh}{Contoh}
+\newtheorem{latihan}{Latihan}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+
+\AtBeginEnvironment{contoh}{%
+\setbeamercolor{block title}{use=example text,fg=white,bg=example text.fg!75!black}
+\setbeamercolor{block body}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+}
+\AtBeginEnvironment{definisi}{
+\setbeamercolor{block title}{fg=white,bg=HIMAtua}
+\setbeamercolor{block body}{parent=normal text,bg=HIMAtua!30!white}
+}
+\AtBeginEnvironment{latihan}{%
+  \setbeamercolor{block title}{fg=white,bg=yellow!30!orange}
+  \setbeamercolor{block body}{parent=normal text,bg=yellow!30!white}
+}
+\AtBeginEnvironment{teorema}{
+    \setbeamercolor{block title}{bg=darkgray,fg=white}
+    \setbeamercolor{block body}{parent=pallette tertiary,bg=HIMAabu!30!white}
+}
+
+\date{April 2026}
+\title[OSK Matematika - K1]{Pembinaan OSN-K Matematika\\(Pertemuan 1: Basic Counting)}
+\author[Junika]{Junika Irdia Indi Astudin}
+\institute[Man 1 Pasuruan]{MAN 1 Pasuruan}
+\titlegraphic{\includegraphics[width=0.15\textwidth]{../../man1pasuruan.png}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{\textit{Outline}}
+  \tableofcontents
+\end{frame}
+\section{Aturan Penjumlahan dan Perkalian}
+
+\begin{frame}{\insertsection}{\insertsection}
+  \begin{definisi}[Aturan Penjumlahan]
+    Jika ada sebanyak $m$ pilihan pada kejadian pertama dan ada sebanyak $n$ pilihan pada kejadian kedua, dan kedua kejadian itu tidak dapat dilakukan dalam waktu yang sama, maka ada $m+n$ cara untuk memilih satu dari kejadian tersebut. Biasanya pada soal terdapat kata \textbf{"atau"}.
+  \end{definisi}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsection}
+  \begin{contoh}
+    Budi akan menghadiri pesta. Ia harus memilih satu celana dari 4 celana merahnya dan 3 celana birunya. Berapa banyak cara Budi memilih celana?
+
+    \textbf{Penyelesaian : }\\
+    Karena Budi tidak mungkin menggunakan dua celana secara bersamaan, sehingga ia harus memilih $1$ celana dari $4$ celana merah \textbf{atau} $3$ celana biru. Dengan aturan perkalian, banyaknya cara Budi memilih celana adalah
+    $$4+3=7 \text{ cara}.$$
+  \end{contoh}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsection}
+  \begin{definisi}[Aturan Perkalian]
+    Aturan perkalian sering kali disebut dengan \textit{filling slot }aturan pengisian tempat.
+    Misalkan ada $n$ tempat yang tersedia, dengan tempat ke-$1$ memiliki cara sebanyak $k_1$, tempat ke-$2$ memiliki cara sebanyak $k_2$, dan seterusnya sampai tempat ke-$n$ memiliki cara sebanyak $k_n$. Dengan demikian, banyaknya cara mengisi tempat adalah
+    \begin{align}
+      \uline{k_1} \ \uline{k_2} \ \uline{k_3} \ ... \ \uline{k_n} = k_1 \times k_2 \times k_3 \times ... \times k_n.
+    \end{align}
+  \end{definisi}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsection}
+  \begin{contoh}
+    Misalkan terdapat $2$ buah baju dan $3$ buah celana. Berapa banyak seseorang dapat memilih baju dan celana yang akan Ia pakai?
+
+    \textbf{Penyelesaian : }\\
+    Misalkan tempat ke-$1$ adalah banyak cara memilih baju dan tempat ke-$2$ adalah banyak cara memilih celana. Karena banyaknya baju ada $2$ dan celana ada $3$, akibatnya
+    \begin{align}
+      \uline{2} \ \uline{3}=2 \times 3 = 6 \notag
+    \end{align}
+  \end{contoh}
+\end{frame}
+
+\section{Permutasi}
+\subsection{Permutasi Unsur Berbeda}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}
+    Permutasi $r$ objek yang diambil dari $n$ objek berbeda adalah $P_r^n$ yang didefinisikan dengan
+    \begin{align}
+      P_r^n = \frac{n!}{(n-r)!}
+    \end{align}
+  \end{teorema}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Berapa banyak cara menyusun 3 huruf berbeda dari 4 huruf K, L, M, N ?
+
+    \textbf{Penyelesaian : }\\
+    Jika menggunakan \textit{filling slot} yang sebelumnya kita ketahui, maka banyak caranya adalah
+    \begin{align}
+      \uline{4} \ \uline{3} \  \uline{2} = 4 \times 3 \times 2 = 24 \notag
+    \end{align}
+    Atau, karena kita mengambil 3 dari 4 objek berbeda, akibatnya kita dapat menggunakan permutasi dari unsur-unsur yang berbeda, dengan $r=3$ dan $n=4$.
+    \begin{align}
+      P_3^4 = \frac{4!}{(4-3)!}=\frac{4!}{1!}=\frac{4 \times 3 \times 2 \times 1}{1}=24. \notag
+    \end{align}
+  \end{contoh}
+\end{frame}
+
+\subsection{Permutasi Unsur Sama}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}
+    Banyak permutasi $n$ unsur yang memuat $k_1$ unsur yang sama, $k_2$ unsur yang sama, dan seterusnya sampai dengan $k_i$ unsur yang sama, dengan $k_1+k_2+k_3+...+k_i=n$ ditentukan dengan rumus
+    \begin{align}
+      P=\frac{n!}{k_1!k_2!...k_i!}
+    \end{align}
+  \end{teorema}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Ada berapa banyak susunan yang dapat dibentuk dari huruf-huruf B,E,B,E,K?
+
+    \textbf{Penyelesaian : }\\
+    Banyaknya huruf B ada 2, E ada 2, dan K ada 1. Dengan demikian, banyak susunan yang dapat dibuat
+    \begin{align}
+      P=\frac{5!}{2!2!1!}=\frac{5 \times 4 \times 3 \times 2 \times 1}{2 \times 1 \times 2 \times 1}=30. \notag
+    \end{align}
+  \end{contoh}
+\end{frame}
+
+\subsection{Permutasi Siklis}
+\begin{frame}{\insertsection}{\insertsubsection}
+  Bagaimana jika ada $n$ orang duduk melingkari meja bundar? Ada berapa banyak cara menyusunnya?
+  \begin{teorema}
+    Banyaknya permutasi siklis dari $n$ unsur tersebut dirumuskan dengan
+    \begin{align}
+      P(\text{siklis}) = (n-1)!
+    \end{align}
+  \end{teorema}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Jika terdapat tiga orang yang duduk pada tiga kursi yang membentuk suatu lingkaran, maka ada berapa banyak susunan yang mungkin terjadi?
+
+    \textbf{Penyelesaian : }\\
+    Permutasi siklis dengan $n=3$ didapat
+    \begin{align}
+      P(\text{siklis})=(3-1)!=2!=2. \notag
+    \end{align}
+  \end{contoh}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{center}
+    \begin{tikzpicture}[scale=1]
+      % Circle 1
+      \draw (0,0) circle (0.7);
+      \node at (90:0.9) {\small 1};
+      \node at (210:0.9) {\small 2};
+      \node at (330:0.9) {\small 3};
+      \node at (0,-1.2) {\small $123$};
+
+      % Circle 2
+      \draw (2,0) circle (0.7);
+      \node at ($(2,0)+(90:0.9)$) {\small 2};
+      \node at ($(2,0)+(210:0.9)$) {\small 3};
+      \node at ($(2,0)+(330:0.9)$) {\small 1};
+      \node at (2,-1.2) {\small $231$};
+
+      % Circle 3
+      \draw (4,0) circle (0.7);
+      \node at ($(4,0)+(90:0.9)$) {\small 3};
+      \node at ($(4,0)+(210:0.9)$) {\small 1};
+      \node at ($(4,0)+(330:0.9)$) {\small 2};
+      \node at (4,-1.2) {\small $312$};
+
+      \node at (7,0) {\small $123 \sim 231 \sim 312$};
+
+      % Circle 4
+      \draw (0,-3) circle (0.7);
+      \node at ($(0,-3)+(90:0.9)$) {\small 1};
+      \node at ($(0,-3)+(210:0.9)$) {\small 3};
+      \node at ($(0,-3)+(330:0.9)$) {\small 2};
+      \node at (0,-4.4) {\small $132$};
+
+      % Circle 5
+      \draw (2,-3) circle (0.7);
+      \node at ($(2,-3)+(90:0.9)$) {\small 3};
+      \node at ($(2,-3)+(210:0.9)$) {\small 2};
+      \node at ($(2,-3)+(330:0.9)$) {\small 1};
+      \node at (2,-4.4) {\small $321$};
+
+      % Circle 6
+      \draw (4,-3) circle (0.7);
+      \node at ($(4,-3)+(90:0.9)$) {\small 2};
+      \node at ($(4,-3)+(210:0.9)$) {\small 1};
+      \node at ($(4,-3)+(330:0.9)$) {\small 3};
+      \node at (4,-4.4) {\small $213$};
+
+      \node at (7,-3) {\small $132 \sim 321 \sim 213$};
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+% \begin{frame}{\insertsection}{Permutasi String Tertentu}
+%   Pada dasarnya, permutasi ini sama seperti permutasi secara umum. Bedanya hanya pada terdapat \textbf{penyusunan objek di mana sebuah pola/urutan tertentu harus muncul dalam susunan tersebut}.
+
+%   \vspace{0.5cm}
+%   \textbf{Contoh:}
+% \end{frame}
+
+\section{Kombinasi}
+\begin{frame}{\insertsection}
+  \begin{definisi}
+    Suatu kombinasi $r$ unsur yang diambil dari $n$ unsur berbeda yang tersedia adalah suatu pilihan dari r unsur tadi\textbf{ tanpa memperhatikan urutannya}. Banyaknya kombinasi $r$ unsur yang diambil dari $n$ unsur yang tersedia dengan $r \leq n$ dirumuskan dengan
+    \begin{align}
+      C_r^n=\frac{n!}{(n-r)!r!}
+    \end{align}
+  \end{definisi}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{contoh}
+    Berapa banyak cara memilih 2 perwakilan lomba dari 5 siswa yang ada?
+
+    \textbf{Penyelesaian : }\\
+    \begin{align}
+      C_2^5=\frac{5!}{(5-2)!2!}=\frac{5!}{3!2!}=10. \notag
+    \end{align}
+  \end{contoh}
+\end{frame}
+
+
+\section{Distribusi dan Partisi}
+\begin{frame}{\insertsection}
+  \begin{definisi}
+    Sebuah partisi dari A adalah kumpulan dari himpunan bagian tak kosong yang saling lepas (disjoint subsets) dari A yang gabungannya adalah seluruh A.
+  \end{definisi}
+
+  Selanjutnya, partisi $A$ elemen ke dalam $k$ bagian dapat diartikan menjadi distribusi $A$ elemen ke dalam $k$ kotak.
+  Untuk menyelsaikan soal tipe ini, dapat menggunakan aturan penjumlahan dan perkalian, permutasi, kombinasi, dan \textbf{stars and bars}.
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{teorema}[Stars and Bars]
+    Misalkan $r$ dan $k$ adalah bilangan bulat non-negatif. Banyaknya solusi non-negatif dari
+    $$x_1+x_2+\ldots+x_k=r$$
+    adalah $\begin{pmatrix}
+        r+k-1 \\k-1
+      \end{pmatrix}=\begin{pmatrix}
+        r+k-1 \\r
+      \end{pmatrix}$.
+  \end{teorema}
+\end{frame}
+
+\section{\textit{ Problem }}
+\begin{frame}{\insertsection}
+  \begin{latihan}
+    Suatu sekolah mempunyai lima kelompok belajar siswa kelas 11. Kelompok-kelompok belajar itu berturut-turut mengirimkan $2, 2, 2, 3,$ dan $3$ siswa untuk suatu pertemuan. Mereka akan duduk melingkar sehingga setiap siswa memiliki paling sedikit satu teman dari kelompok belajar yang sama yang duduk di sampingnya. Banyaknya cara melakukan hal tersebut adalah \ldots
+
+    \vspace{0.2cm}
+    \textit{(Dua cara mereka duduk melingkar dianggap sama jika salah satu cara dapat diperoleh dari cara yang lain dengan suatu rotasi)}
+  \end{latihan}
+\end{frame}
+
+
+\begin{frame}{Referensi}
+  \begin{thebibliography}{9}
+
+    \bibitem{eddy}
+    Eddy Hermanto,
+    \emph{Diktat Pembinaan Olimpiade Matematika}.
+
+    \bibitem{soberon}
+    Pablo Sober\'on,
+    \emph{Problem-Solving Methods in Combinatorics}.
+
+    \bibitem{brualdi}
+    Richard A. Brualdi,
+    \emph{Introductory Combinatorics}.
+
+  \end{thebibliography}
+\end{frame}
+
+
+\end{document}

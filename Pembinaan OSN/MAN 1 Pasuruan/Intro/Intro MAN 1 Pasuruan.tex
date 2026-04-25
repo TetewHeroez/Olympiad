@@ -4,7 +4,7 @@
 \usepackage{colortbl,tabularx,mathrsfs,calligra}
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
 \usepackage{ragged2e}
-\usepackage[bahasa]{babel}
+\usepackage[indonesian]{babel}
 \usepackage{tikz}
 \usepackage{caption}
 \usepackage{wrapfig}
@@ -46,7 +46,7 @@
 
 \usefonttheme{professionalfonts}
 \setbeamertemplate{theorems}[numbered]
-\setbeamertemplate{bibliography item}{\insertbiblabel}
+\setbeamertemplate{bibliography item}[book]
 % \setbeamercovered{transparent}
 
 
@@ -74,11 +74,16 @@
   \setbeamercolor{block title}{fg=white,bg=yellow!50!orange} % Set title background to pastel green and text to white
   \setbeamercolor{block body}{parent=normal text,bg=yellow!30!white} % Set body background to a lighter pastel green
 }
+\AtBeginEnvironment{teorema}{
+    \setbeamercolor{block title}{bg=darkgray,fg=white}
+    \setbeamercolor{block body}{parent=pallette tertiary,bg=HIMAabu!30!white}
+}
 
 \date{Sabtu, 25 April 2026}
 \title[OSK Matematika]{Pembinaan OSN-K Matematika}
 \author[Tew \& Jun]{Teosofi Hidayah Agung\\Junika Irdia Indi Astudin}
-\institute{MAN 1 Pasuruan}
+\institute[Man 1 Pasuruan]{MAN 1 Pasuruan}
+\titlegraphic{\includegraphics[width=0.15\textwidth]{../../man1pasuruan.png}}
 
 \begin{document}
 \begin{frame}
@@ -136,6 +141,7 @@
       \end{table}
     \end{column}
   \end{columns}
+
 \end{frame}
 
 \subsection{Teori Bilangan \& Kombinatorika}
@@ -151,8 +157,7 @@
           K1          & Basic counting (permutasi, kombinasi) \\ \hline
           K2          & Koefisien binomial                    \\ \hline
           K3          & Peluang                               \\ \hline
-          K4          & Prinsip bijeksi                       \\ \hline
-          K5          & Teori himpunan                        \\ \hline
+          K4          & Teori himpunan                        \\ \hline
         \end{tabular}
       \end{table}
     \end{column}
@@ -164,38 +169,50 @@
           \rowcolor{HIMAmuda!50}
           \textbf{No} & \textbf{Teori Bilangan} \\ \hline
           T1          & Keterbagian             \\ \hline
-          T2          & FPB/KPK                 \\ \hline
-          T3          & Bilangan prima          \\ \hline
-          T4          & Persamaan Diophantine   \\ \hline
-          T5          & Kongruensi modulo       \\ \hline
-          T6          & Teorema Fermat \& Euler \\ \hline
+          T2          & Kongruensi modulo       \\ \hline
+          T3          & Persamaan Kongruensi    \\ \hline
         \end{tabular}
       \end{table}
     \end{column}
   \end{columns}
+
 \end{frame}
 
 
 \section{\textit{Plan} Pembinaan}
 \begin{frame}{\insertsection}
-  Pembinaan OSN-K Matematika akan dilaksanakan selama 8 minggu, setiap hari Sabtu jam 09:30-11:30.
+  Pembinaan OSN-K Matematika akan dilaksanakan selama \textbf{8 minggu}, setiap \textbf{hari Sabtu jam 09:30-11:30}. Setiap \textbf{2 minggu} akan diadakan tryout untuk mengukur pemahaman tentang materi di dua minggu terakhir.
   \begin{table}[H]
     \begin{tabular}{|>{\columncolor{HIMAtua!20}}c|c|c|c|l|c|}
       \hline
       \rowcolor{HIMAmuda!50}
       \textbf{No} & \textbf{Tanggal} & \textbf{Pelaksanaan} & \textbf{Pemateri} & \textbf{Materi} & \textbf{SubMateri} \\ \hline
-      1           & 25 April         & Offline              & Junika            & Kombinatorika   & -                  \\ \hline
-      2           & 2 Mei            & Offline              & Teosofi           & Aljabar         & -                  \\ \hline
-      3           & 9 Mei            & Online               & Junika            & Teori Bilangan  & -                  \\ \hline
-      4           & 16 Mei           & Online               & Teosofi           & Geometri        & -                  \\ \hline
-      5           & 23 Mei           & Online               & Junika            & Kombinatorika   & -                  \\ \hline
-      6           & 30 Mei           & Online               & Teosofi           & Aljabar         & -                  \\ \hline
-      7           & 7 Juni           & Offline              & Junika            & Teori Bilangan  & -                  \\ \hline
-      8           & 14 Juni          & Offline              & Teosofi           & Geometri        & -                  \\ \hline
+      1           & 25 April         & Offline              & Junika            & Kombinatorika   & K1                 \\ \hline
+      2           & 2 Mei            & Offline              & Teosofi           & Aljabar         & A1, A2, A4         \\ \hline
+      3           & 9 Mei            & Online               & Junika            & Teori Bilangan  & T1, T2             \\ \hline
+      4           & 16 Mei           & Online               & Teosofi           & Geometri        & G1, G2, G3         \\ \hline
+      5           & 23 Mei           & Online               & Junika            & Kombinatorika   & K2, K3, K4         \\ \hline
+      6           & 30 Mei           & Online               & Teosofi           & Aljabar         & A5, A3             \\ \hline
+      7           & 7 Juni           & Offline              & Junika            & Teori Bilangan  & T2, T3             \\ \hline
+      8           & 14 Juni          & Offline              & Teosofi           & Geometri        & G4, G5             \\ \hline
     \end{tabular}
   \end{table}
 
   \textit{Catatan: Jadwal dapat berubah}
+\end{frame}
+
+\section{Referensi}
+\begin{frame}{\insertsection}
+  \begin{thebibliography}{9}
+    \bibitem{aops1}
+    Art of Problem Solving, \emph{List of Olympiad Problems},
+    \url{https://artofproblemsolving.com/community/}
+
+    \bibitem{aops2}
+    Art of Problem Solving, \emph{Olympiad Book},
+    \url{https://artofproblemsolving.com/wiki/index.php/Olympiad_books}
+
+  \end{thebibliography}
 \end{frame}
 
 \end{document}
