@@ -1,0 +1,128 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[style=ieee,backend=biber]{biblatex}
+\addbibresource{reference.bib}
+\usepackage{colortbl,tabularx,mathrsfs,calligra}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{ragged2e}
+\usepackage[indonesian]{babel}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{pgfplots, tkz-euclide,calc}
+\pgfplotsset{compat=1.18}
+\usepackage{listings}
+\usepackage{ulem}
+
+\graphicspath{{C:/Users/teoso/OneDrive/Documents/Tugas Kuliah/Template Math Depart/}{./foto/}}
+
+\definecolor{HIMAmuda}{HTML}{01D1FD}
+\definecolor{HIMAtua}{HTML}{02016A}
+\definecolor{HIMAabu}{HTML}{CBCBCC}
+\definecolor{PastelGreen}{HTML}{77DD77}
+
+\usetheme{Madrid}
+
+\setbeamercolor{palette primary}{bg=HIMAtua,fg=white}
+\setbeamercolor{palette secondary}{bg=HIMAmuda,fg=black}
+\setbeamercolor{palette tertiary}{bg=HIMAabu,fg=black}
+\setbeamercolor{palette quaternary}{bg=HIMAmuda,fg=white}
+\setbeamercolor{structure}{fg=HIMAmuda} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=HIMAtua} % TOC sections
+\setbeamercolor{bibliography item}{parent=palette secondary}
+\setbeamercolor*{bibliography entry author}{parent=section in toc}
+
+\usetikzlibrary{shapes.geometric, arrows, calc}
+
+\tikzstyle{startstop} = [ellipse, minimum width=1cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{decision} = [diamond, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=blue!50]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usefonttheme{professionalfonts}
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{bibliography item}[book]
+
+\theoremstyle{definition}
+\newtheorem{definisi}{Definisi}
+\newtheorem{teorema}{Teorema}
+\newtheorem{contoh}{Contoh}
+\newtheorem{latihan}{Latihan}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+
+\AtBeginEnvironment{contoh}{%
+\setbeamercolor{block title}{use=example text,fg=white,bg=example text.fg!75!black}
+\setbeamercolor{block body}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+}
+\AtBeginEnvironment{definisi}{
+\setbeamercolor{block title}{fg=white,bg=HIMAtua}
+\setbeamercolor{block body}{parent=normal text,bg=HIMAtua!30!white}
+}
+\AtBeginEnvironment{latihan}{%
+  \setbeamercolor{block title}{fg=white,bg=yellow!30!orange}
+  \setbeamercolor{block body}{parent=normal text,bg=yellow!30!white}
+}
+\AtBeginEnvironment{teorema}{
+    \setbeamercolor{block title}{bg=darkgray,fg=white}
+    \setbeamercolor{block body}{parent=pallette tertiary,bg=HIMAabu!30!white}
+}
+
+\date{25 April 2026}
+\title[OSK Matematika - Aljabar]{Pembinaan OSN-K Matematika\\(Pertemuan 2: Identitas, Barisan, dan Polinomial)}
+\author[Tetew]{Teosofi Hidayah Agung}
+\institute[Man 1 Pasuruan]{MAN 1 Pasuruan}
+\titlegraphic{\includegraphics[width=0.15\textwidth]{../../man1pasuruan.png}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{\textit{Outline}}
+  \tableofcontents
+\end{frame}
+\section{Identitas Aljabar}
+
+\begin{frame}{\insertsection}{\insertsection}
+  \begin{definisi}[Aturan Penjumlahan]
+    Jika ada sebanyak $m$ pilihan pada kejadian pertama dan ada sebanyak $n$ pilihan pada kejadian kedua, dan kedua kejadian itu tidak dapat dilakukan dalam waktu yang sama, maka ada $m+n$ cara untuk memilih satu dari kejadian tersebut. Biasanya pada soal terdapat kata \textbf{"atau"}.
+  \end{definisi}
+\end{frame}
+
+\section{Barisan}
+\section{Deret}
+\subsection{Deret Teleskopik}
+
+\section{Polinomial}
+
+\section*{\textit{Problem}}
+\begin{frame}{\insertsection}
+  \begin{latihan}[KSN-K 2021]
+    Misalkan $u_1, u_2, u_3$ barisan aritmetika dengan suku-suku bilangan real positif.
+    Jika $\dfrac{u_1 + u_2}{u_3} = \dfrac{11}{21}$, maka nilai $\dfrac{u_2 + u_3}{u_1}$ adalah \ldots
+  \end{latihan}
+  \begin{latihan}[KSN-K 2021]
+    Koefisien suku $x^7$ pada penjabaran $(1 + x)(2 + x^2)(3 + x^3)(4 + x^4)(5 + x^5)$ adalah \ldots
+  \end{latihan}
+  \begin{latihan}[KSN-K 2021]
+    Diketahui fungsi $f$ terdefinisi di semua bilangan real selain $0$ dan $1$ memenuhi persamaan
+    $
+      (x+1)f(-x) + \frac{1-x}{4x} f\left(\frac{1}{x}\right) = \frac{100(x^2+4)}{x}.
+    $
+    Nilai dari $f(2) + f(3) + f(4) + \cdots + f(400)$ adalah \ldots
+  \end{latihan}
+
+\end{frame}
+
+
+\end{document}
