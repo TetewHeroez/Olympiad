@@ -76,8 +76,8 @@
     \setbeamercolor{block body}{parent=pallette tertiary,bg=HIMAabu!30!white}
 }
 
-\date{April 2026}
-\title[OSK Matematika - K1]{Pembinaan OSN-K Matematika\\(Pertemuan 1: Basic Counting)}
+\date{25 April 2026}
+\title[OSK Matematika - Kombinatorika]{Pembinaan OSN-K Matematika\\(Pertemuan 1: Basic Counting)}
 \author[Junika]{Junika Irdia Indi Astudin}
 \institute[Man 1 Pasuruan]{MAN 1 Pasuruan}
 \titlegraphic{\includegraphics[width=0.15\textwidth]{../../man1pasuruan.png}}
@@ -255,12 +255,16 @@
   \end{center}
 \end{frame}
 
-% \begin{frame}{\insertsection}{Permutasi String Tertentu}
-%   Pada dasarnya, permutasi ini sama seperti permutasi secara umum. Bedanya hanya pada terdapat \textbf{penyusunan objek di mana sebuah pola/urutan tertentu harus muncul dalam susunan tersebut}.
+\begin{frame}{\insertsection}{Permutasi String Tertentu}
+  Pada dasarnya, permutasi ini sama seperti permutasi secara umum. Bedanya hanya pada terdapat \textbf{penyusunan objek di mana sebuah pola/urutan tertentu harus muncul dalam susunan tersebut}.
 
-%   \vspace{0.5cm}
-%   \textbf{Contoh:}
-% \end{frame}
+  \vspace{0.5cm}
+  \textbf{Contoh:}
+  \begin{enumerate}
+    \item Berapa banyak susunan kata dari huruf-huruf $P,A,S,U,R,U,A,N$ jika huruf $P$ harus berdekatan dan di sebelah kiri huruf $R$?
+    \item Berapa banyak susunan kata dari huruf-huruf $P,A,S,U,R,U,A,N$ jika huruf $P$ dan $R$ harus berdekatan?
+  \end{enumerate}
+\end{frame}
 
 \section{Kombinasi}
 \begin{frame}{\insertsection}
@@ -306,33 +310,131 @@
   \end{teorema}
 \end{frame}
 
-\section{\textit{ Problem }}
-\begin{frame}{\insertsection}
-  \begin{latihan}
-    Suatu sekolah mempunyai lima kelompok belajar siswa kelas 11. Kelompok-kelompok belajar itu berturut-turut mengirimkan $2, 2, 2, 3,$ dan $3$ siswa untuk suatu pertemuan. Mereka akan duduk melingkar sehingga setiap siswa memiliki paling sedikit satu teman dari kelompok belajar yang sama yang duduk di sampingnya. Banyaknya cara melakukan hal tersebut adalah \ldots
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Berapa solusi bilangan bulat dari
+    $$w_1+w_2+w_3+w_4=7,$$
+    dengan $w_1 \geq 1$ dan $w_3 \geq 2$.\\
+    \textbf{Penyelesaian:}\\
+    Jika menggunnakan teorema stars and bars, maka diperoleh nilai $w_1,w_2,w_3,w_4 \geq 0.$ Namun dengan batasan pada soal, dimisalkan $w_1=y_1+1, w_2=y_2, w_3=y_3+2,$ dan $w_4=y_4$ dengan $y_1,y_2,y_3,y_4 \geq 0.$ Diperoleh
+    $$y_1+y_2+y_3+y_4=4,$$
+    dengan stars and bar diperoleh banyaknya solusi
+    $\begin{pmatrix}
+        4+4-1 \\4
+      \end{pmatrix}=\begin{pmatrix}
+        7 \\ 4
+      \end{pmatrix}=\frac{7.6.5}{3.2.1}=35.$
+  \end{contoh}
+\end{frame}
 
-    \vspace{0.2cm}
-    \textit{(Dua cara mereka duduk melingkar dianggap sama jika salah satu cara dapat diperoleh dari cara yang lain dengan suatu rotasi)}
-  \end{latihan}
+\section{Prinsip Injeksi dan Bijeksi}
+\begin{frame}{\insertsection}
+  \begin{definisi}
+    Misalkan $A$ dan $B$ adalah himpunan. Suatu fungsi $f : A \to B$ disebut
+    \textit{injektif} (atau satu-satu) jika untuk setiap $a_1, a_2 \in A$ berlaku
+    \[
+      f(a_1) = f(a_2) \Rightarrow a_1 = a_2.
+    \]
+  \end{definisi}
+
+  \begin{teorema}
+    Misalkan $A$ dan $B$ adalah himpunan hingga. Jika terdapat fungsi injektif
+    $f : A \to B$, maka berlaku
+    \[
+      |A| \leq |B|.
+    \]
+  \end{teorema}
 \end{frame}
 
 
-\begin{frame}{Referensi}
-  \begin{thebibliography}{9}
+\begin{frame}{\insertsection}
+  \begin{definisi}\textbf{(Fungsi Surjektif)}
+    Misalkan $f : A \to B$ adalah fungsi. Fungsi $f$ disebut
+    \textit{surjektif} jika untuk setiap $b \in B$, terdapat $a \in A$ sehingga
+    \[
+      f(a) = b.
+    \]
+  \end{definisi}
 
-    \bibitem{eddy}
-    Eddy Hermanto,
-    \emph{Diktat Pembinaan Olimpiade Matematika}.
+  \begin{definisi}
+    Misalkan $A$ dan $B$ adalah himpunan. Suatu fungsi $f : A \to B$ disebut
+    \textit{bijektif} jika $f$ bersifat injektif dan surjektif.
+  \end{definisi}
 
-    \bibitem{soberon}
-    Pablo Sober\'on,
-    \emph{Problem-Solving Methods in Combinatorics}.
+  \begin{teorema}
+    Misalkan $A$ dan $B$ adalah himpunan hingga. Jika terdapat fungsi bijektif
+    $f : A \to B$, maka berlaku
+    \[
+      |A| = |B|.
+    \]
+  \end{teorema}
+\end{frame}
 
-    \bibitem{brualdi}
-    Richard A. Brualdi,
-    \emph{Introductory Combinatorics}.
+\section*{\textit{ Problem }}
+\begin{frame}{\insertsection}
+  \begin{latihan}
+    \textbf{(OSK 2014 KD 6)} Enam orang siswa akan duduk pada tiga meja bundar, dimana setiap meja akan diduduki oleh minimal satu siswa. Banyaknya cara untuk melakukan hal tersebut adalah \ldots
+  \end{latihan}
+\end{frame}
 
-  \end{thebibliography}
+\begin{frame}{\insertsection}
+  \begin{latihan}
+    \textbf{(OSK 2013 KD 7)} Suatu dadu ditos enam kali. Banyak cara memperoleh jumlah mata yang muncul 28 dengan tepat satu dadu muncul angka 6 adalah \ldots
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}
+    \textbf{(OSK 2012 KD 4)} Diketahui suatu kelas terdiri dari $15$ siswa. Semua siswa tersebut akan dikelompokkan menjadi $4$ kelompok yang terdiri dari $4, 4, 4,$ dan $3$ siswa. Ada berapa cara pengelompokan tersebut?
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}
+    \textbf{(OSK 2014 KD 10)}
+    Suatu perusahaan permen memproduksi empat macam rasa permen. Permen dijual dalam bungkus, setiap bungkus berisi 10 permen dengan setiap rasa permen ada dalam bungkus. Banyaknya macam variasi isi bungkusan permen adalah \ldots
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}
+    \textbf{(OSK 2014 KD 12)}
+    Ada sebanyak $6!$ permutasi dari huruf-huruf OSNMAT. Jika semua permutasi tersebut diurutkan secara abjad dari A ke Z, maka OSNMAT pada urutan ke \ldots
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}
+    \textbf{(OSK 2022 KD 10)}
+    Di dalam suatu ruangan terdapat $12$ kursi yang disusun dalam tiga baris, sehingga baris pertama memuat $3$ kursi, baris kedua memuat $4$ kursi, dan baris terakhir memuat $5$ kursi. Dua belas siswa termasuk Azka dan Budi akan menempati kursi-kursi tersebut. Jika banyaknya cara menempati sehingga Azka dan Budi di baris pertama adalah $A$, maka $\frac{A}{9!} = \dots$
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}
+    \textbf{(OSK 2011 KL 8)} Sekelompok orang akan berjabat tangan. Setiap orang hanya dapat melakukan jabat tangan sekali, dan tidak boleh berjabat tangan dengan dirinya sendiri. Jika dalam sekelompok orang terjadi $190$ jabat tangan, maka banyaknya orang dalam kelompok tersebut adalah \dots
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}
+    \textbf{(OSK 2021 KD 9)}
+    Diketahui ada 6 pasang suami-istri. Dari keenam pasangan tersebut, dipilih 6 orang secara acak. Banyaknya cara untuk memilih 6 orang tersebut sehingga paling banyak terdapat sepasang suami-istri adalah \ldots
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}
+    \textbf{(OSK 2015 KD 7)}Suatu sekolah mempunyai lima kelompok belajar siswa kelas 11. Kelompok-kelompok belajar itu berturut-turut mengirimkan $2, 2, 2, 3,$ dan $3$ siswa untuk suatu pertemuan. Mereka akan duduk melingkar sehingga setiap siswa memiliki paling sedikit satu teman dari kelompok belajar yang sama yang duduk di sampingnya. Banyaknya cara melakukan hal tersebut adalah \ldots\\
+    (Dua cara mereka duduk melingkar dianggap sama jika salah satu cara dapat diperoleh dari cara yang lain dengan suatu rotasi)
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}
+    \textbf{(OSK 2021 KL 8)}
+    Banyaknya barisan ternary (sukunya 0, 1 atau 2) yang memuat 15 suku, memuat tepat 5 (angka) 0 dan setiap di antara dua (angka) 0 ada paling sedikit dua suku bukan 0 adalah \ldots
+  \end{latihan}
 \end{frame}
 
 

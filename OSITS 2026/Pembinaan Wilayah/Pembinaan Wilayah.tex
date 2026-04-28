@@ -1,0 +1,251 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[margin=2cm]{geometry}
+\usepackage{enumitem}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+
+\begin{document}
+
+\begin{center}
+  \Large\textbf{Soal Pembinaan OSITS 2026}
+\end{center}
+\vspace{0.5cm}
+
+\section*{Analisis Real}
+\begin{enumerate}
+  \item Carilah semua fungsi bijektif dan kontinu $f: [0,1] \to [0,1]$ sehingga
+        \[
+          f(2x-f(x))=x \quad \text{untuk setiap } x \in [0,1].
+        \]
+        \textbf{Solusi:}
+
+        \textit{Klaim:} Karena $f$ kontinu dan bijektif pada interval $[0,1]$, maka fungsi $f$ haruslah monoton tegas (strictly monotonic).
+
+        \textit{Bukti:} Andaikan $f$ tidak monoton tegas. Karena $f$ bijektif (otomatis injektif), maka pasti ada tiga titik $x_1 < x_2 < x_3$ di $[0,1]$ sedemikian sehingga $f(x_2)$ tidak berada di antara $f(x_1)$ dan $f(x_3)$. Tanpa mengurangi keumuman, asumsikan $f(x_1) < f(x_3) < f(x_2)$. Karena $f$ kontinu pada $[x_1, x_2]$, menurut Teorema Nilai Antara, terdapat suatu $c \in (x_1, x_2)$ sehingga $f(c) = f(x_3)$. Akan tetapi, $c < x_2 < x_3$, sehingga $c \neq x_3$. Hal ini kontradiksi dengan $f$ yang injektif. Oleh karena itu, kekontinuan dan keinjektifan memaksa $f$ menjadi monoton tegas. $\blacksquare$
+
+        Selain itu, agar komposisi fungsi pada $f(2x-f(x))$ terdefinisi, argumen di dalamnya harus memenuhi $2x - f(x) \in [0,1]$ untuk setiap $x \in [0,1]$.
+        Jika kita substitusi $x = 0$, kita peroleh $f(-f(0)) = 0$. Karena argumen ini harus berada pada domain $[0,1]$, maka $-f(0) \ge 0$. Disisi lain, range fungsi ada di $[0,1]$, yang berarti $f(0) \ge 0$. Dari kedua syarat tersebut, kita dapatkan $f(0) = 0$.
+        Substitusi $x = 1$ memberikan $f(2 - f(1)) = 1$. Dengan alasan yang sama, kita harus memiliki $2 - f(1) \in [0,1]$, yang menyiratkan $f(1) \ge 1$. Namun, karena range fungsi terbatas pada $[0,1]$, maka kita dapatkan $f(1) = 1$.
+
+        Karena $f$ bijektif, ia memiliki invers $f^{-1}$. Terapkan $f^{-1}$ pada kedua ruas persamaan awal:
+        \[
+          2x - f(x) = f^{-1}(x) \implies f(x) + f^{-1}(x) = 2x
+        \]
+        Karena $f$ memetakan $[0,1]$ ke $[0,1]$ secara bijektif, kita dapat mensubstitusi $x$ dengan $f(t)$ untuk suatu $t \in [0,1]$. Persamaannya menjadi:
+        \[
+          f(f(t)) + f^{-1}(f(t)) = 2f(t)
+        \]
+        Berdasarkan sifat fungsi invers $f^{-1}(f(t)) = t$, persamaan disederhanakan menjadi:
+        \[
+          f(f(t)) + t = 2f(t) \implies f(f(t)) - 2f(t) + t = 0
+        \]
+        Karena ini berlaku untuk setiap $t \in [0,1]$, kita dapat menuliskan ulangnya sebagai:
+        \[
+          f(f(x)) - 2f(x) + x = 0, \quad \text{untuk setiap } x \in [0,1].
+        \]
+
+        Ambil sembarang titik awal $x_0 \in [0,1]$. Definisikan sebuah barisan $(x_n)$ dengan mengenakan fungsi $f$ secara berulang, yakni $x_{n+1} = f(x_n)$ untuk setiap bilangan bulat $n \ge 0$. Hal tersebut dapat dilakukan karena $f$ memetakan $[0,1]$ ke $[0,1]$, sehingga setiap suku dalam barisan ini tetap berada di dalam interval $[0,1]$.
+
+        Berdasarkan persamaan komposisi pada poin 2, jika kita evaluasi di $x = x_n$, kita peroleh:
+        \[
+          f(f(x_n)) - 2f(x_n) + x_n = 0
+        \]
+        \[
+          x_{n+2} - 2x_{n+1} + x_n = 0 \implies x_{n+2} - x_{n+1} = x_{n+1} - x_n
+        \]
+        Artinya, selisih tiap suku yang berurutan dalam barisan tersebut adalah konstan. Misalkan $c = x_1 - x_0$. Maka barisan $(x_n)$ tidak lain adalah barisan aritmatika dengan beda $c$, sehingga rumusnya dapat ditulis $x_n = x_0 + nc$.
+
+        Kita tahu bahwa range fungsi $f$ sepenuhnya terbatas di $[0,1]$, sehingga nilai $x_n$ juga wajib berada di interval $[0,1]$ untuk setiap $n \ge 0$.
+        \begin{itemize}
+          \item Jika $c > 0$, amati bahwa pertambahan nilai $nc$ akan membuatnya menuju $+\infty$, sehingga untuk $n$ cukup besar pasti $x_n > 1$ (keluar batas atas).
+          \item Jika $c < 0$, peluruhan nilai $nc$ akan menuju $-\infty$, sehingga $x_n < 0$ untuk $n$ besar (keluar batas bawah).
+        \end{itemize}
+
+        Satu-satunya kemungkinan agar seluruh barisan tak hingga $(x_n)$ tetap di dalam interval $[0,1]$ adalah haruslah dipenuhi saat $c = 0$.
+        Disini didapat bahwa nilai $x_1 - x_0 = 0$, artinya $f(x_0) - x_0 = 0 \implies f(x_0) = x_0$.
+
+        Karena titik $x_0$ dipilih sembarang pada $[0,1]$, dipastikan bahwa persamaan $f(x) = x$ akan berlaku untuk setiap $x \in [0,1]$.
+
+        $\therefore$ satu-satunya solusi fungsi adalah $f(x) = x$.
+
+  \item diberikan $a\ne 0$ dan $f: \R \to \R$ sehingga $f$ kontinu dengan $f(2x-f(x)/a)=ax$ untuk setiap $x\in\R$. tentukan semua fungsi $f$
+
+        \textbf{Solusi:}
+
+        Misalkan fungsi bantu $g: \R \to \R$ didefinisikan sebagai $g(x) = 2x - \frac{f(x)}{a}$.
+        Dengan pemisalan tersebut, persamaan fungsi awal dapat ditulis ringkas menjadi $f(g(x)) = ax$.
+        Dari hubungan $g(x)$, kita juga punya ekspresi untuk nilai $f(x)$, yaitu:
+        \[
+          \frac{f(x)}{a} = 2x - g(x) \implies f(x) = a(2x - g(x))
+        \]
+
+        Jika kita substitusikan bentuk ini dengan evaluasi pada titik $g(x)$, kita dapatkan:
+        \[
+          f(g(x)) = a(2g(x) - g(g(x)))
+        \]
+        Berhubung kita dari awal tahu bahwa $f(g(x)) = ax$, maka kedua ruas dapat kita samakan langsung:
+        \[
+          ax = a(2g(x) - g(g(x)))
+        \]
+        Mengingat syarat soal $a \neq 0$, kita boleh membagi ruasnya dengan $a$:
+        \[
+          x = 2g(x) - g(g(x)) \implies g(g(x)) - 2g(x) + x = 0
+        \]
+        Bentuk ekuivalen dari hubungan rekurensi di atas adalah:
+        \[
+          g(g(x)) - g(x) = g(x) - x
+        \]
+
+        Untuk sembarang nilai awal $x_0 \in \R$, definisikan barisan iteratif $x_{n+1} = g(x_n)$ untuk setiap $n \ge 0$.
+        Berdasarkan relasi di atas, kita peroleh hal berikut:
+        \[
+          x_{n+2} - x_{n+1} = x_{n+1} - x_n
+        \]
+
+        Ini berarti barisan $(x_n)$ merupakan barisan aritmatika dengan beda konstan $c(x_0) = g(x_0) - x_0$.
+        Sehingga, n-suku berurutannya adalah:
+        \[
+          x_n = x_0 + n \cdot c(x_0)
+        \]
+
+        Perhatikan bahwa $f$ kontinu, sehingga secara otomatis $g$ juga kontinu.
+        Kekontinuan ini menuntut beda barisan $c(x_0)$ harus berupa suatu nilai konstan untuk seluruh $x_0 \in \R$.
+        Misalkan nilai beda konstan tersebut kita sebut saja $c$.
+
+        Akibatnya, fungsi $g$ berlaku layaknya fungsi translasi biasa untuk setiap titik sejauh nilai konstan $c$, yaitu:
+        \[
+          g(x) = x + c
+        \]
+        untuk suatu konstanta riil $c \in \R$.
+
+        Substitusikan nilai translatif $g(x)$ di atas kembali ke persamaan $f(x)$:
+        \[
+          f(x) = a(2x - g(x)) = a(2x - (x + c)) = a(x - c) = ax - ac
+        \]
+        Karena $-ac$ hanyalah wujud suatu konstanta biasa, kita bisa menamainya $b = -ac$. Fungsi $f(x)$ ditemukan berpola garis lurus: $f(x) = ax + b$.
+
+        Mari kita kalibrasi sepintas balik ke dalam soal asalnya:
+        \begin{align*}
+          f\left(2x - \frac{f(x)}{a}\right) & = f\left(2x - \frac{ax + b}{a}\right) = f\left(x - \frac{b}{a}\right) = a\left(x - \frac{b}{a}\right) + b = ax - b + b = ax.
+        \end{align*}
+
+        Jadi, semua bentuk fungsi yang memenuhi persamaan tersebut adalah $f(x) = ax + b$ untuk suatu konstanta riil $b \in \R$.
+
+
+\end{enumerate}
+
+
+\section*{Aljabar Linier}
+
+\begin{enumerate}
+  \item Misalkan pemetaan $f : M_n \to \R$ dari ruang $M_n$ matriks berukuran $n \times n$ dengan entri riil ke bilangan riil adalah linier, yaitu:
+        \[
+          f(A + B) = f(A) + f(B), \quad f(cA) = cf(A) \quad (1)
+        \]
+        untuk sembarang $A, B \in M_n$ dan $c \in \R$.
+        \begin{enumerate}
+          \item Buktikan bahwa terdapat matriks unik $C \in M_n$ sedemikian sehingga $f(A) = \text{tr}(AC)$ untuk sembarang $A \in M_n$. (Jika $A = \{a_{ij}\}_{i,j=1}^n$ maka $\text{tr}(A) = \sum_{i=1}^n a_{ii}$).
+          \item Misalkan sebagai tambahan dari (1) berlaku juga bahwa:
+                \[
+                  f(AB) = f(BA) \quad (2)
+                \]
+                untuk sembarang $A, B \in M_n$. Buktikan bahwa terdapat $\lambda \in \R$ sedemikian sehingga $f(A) = \lambda \cdot \text{tr}(A)$.
+
+        \end{enumerate}
+
+        \textbf{Solusi:}
+        \begin{enumerate}
+          \item Misalkan $E_{ij}$ melambangkan basis standar untuk $M_n$, yaitu matriks yang bernilai $1$ pada baris ke-$i$ dan kolom ke-$j$, serta bernilai $0$ di tempat lainnya.
+
+                Tinjau sembarang matriks $A = \{a_{ij}\}_{i,j=1}^n \in M_n$. Matriks $A$ dapat dinyatakan sebagai kombinasi linier dari basis-basis tersebut:
+                \[
+                  A = \sum_{i=1}^n \sum_{j=1}^n a_{ij} E_{ij}.
+                \]
+
+                Karena $f$ adalah pemetaan linier, maka berlaku
+                \[
+                  f(A) = \sum_{i=1}^n \sum_{j=1}^n a_{ij} f(E_{ij}).
+                \]
+
+                Selanjutnya, misalkan $C = \{c_{ij}\}_{i,j=1}^n$ adalah suatu matriks di $M_n$. Perhatikan hasil perkalian matriks $AC$. Entri diagonal ke-$i$ dari $AC$ adalah
+                \[
+                  (AC)_{ii} = \sum_{j=1}^n a_{ij} c_{ji}.
+                \]
+
+                Dengan demikian, trace dari matriks $AC$ adalah
+                \[
+                  \text{tr}(AC) = \sum_{i=1}^n (AC)_{ii} = \sum_{i=1}^n \sum_{j=1}^n a_{ij} c_{ji}.
+                \]
+
+                Agar $f(A) = \text{tr}(AC)$ terpenuhi untuk setiap matriks $A \in M_n$, kita cukup menyamakan koefisien dari $a_{ij}$ pada ruas fungsi dan ruas trace. Kita memperoleh
+                \[
+                  c_{ji} = f(E_{ij})
+                \]
+                untuk setiap $1 \le i, j \le n$. Karena $f(E_{ij})$ selalu terdefinisi untuk setiap basis matriks, maka wujud matriks $C$ tersebut selalu ada.
+
+                Untuk membuktikan keunikannya, misalkan terdapat matriks lain $C'$ yang juga memenuhi $f(A) = \text{tr}(AC')$. Kita peroleh
+                \[
+                  \text{tr}(AC) = \text{tr}(AC') \implies \text{tr}(A(C - C')) = 0
+                \]
+                untuk setiap matriks $A \in M_n$. Jika kita pilih $A = E_{ji}$, maka $\text{tr}(E_{ji}(C - C'))$ tepat mengisolasi entri baris ke-$i$ dan kolom ke-$j$ dari matriks $C - C'$, sehingga
+                \[
+                  (C - C')_{ij} = 0 \implies c_{ij} = c'_{ij}.
+                \]
+                Karena hal ini berlaku untuk setiap $i, j$, maka haruslah $C = C'$. Jadi, matriks $C$ tersebut unik.
+          \item Dari poin (a), kita tahu bahwa ada matriks $C$ sehingga $f(X) = \text{tr}(XC)$ untuk sembarang matriks $X$.
+                Aplikasikan hal ini ke persamaan asalnya yaitu $f(AB) = f(BA)$, sehingga kita memperoleh
+                \[
+                  \text{tr}(ABC) = \text{tr}(BAC).
+                \]
+
+                Kita tahu sifat dasar dari trace matriks adalah invarian terhadap permutasi siklik berputar, yaitu $\text{tr}(BAC) = \text{tr}(ACB)$.
+                Dengan menggabungkan persamaan tersebut, kita bisa peroleh bahwa
+                \[
+                  \text{tr}(ABC) = \text{tr}(ACB).
+                \]
+
+                Persamaan ini bisa diolah ruasnya menjadi
+                \[
+                  \text{tr}(ABC) - \text{tr}(ACB) = 0 \implies \text{tr}(A(BC - CB)) = 0.
+                \]
+
+                Karena persamaan di atas mensyaratkan berlaku untuk sembarang matriks $A \in M_n$, maka kita bisa memilih nilai evaluasinya pada $A = (BC - CB)^T$. Kita peroleh
+                \[
+                  \text{tr}((BC - CB)^T(BC - CB)) = 0.
+                \]
+
+                Ingat bahwa untuk sembarang matriks riil $M$, operasi $\text{tr}(M^TM)$ sejatinya akan menghasilkan jumlahan kuadrat dari semua entri matriks $M$. Oleh karena itu, $\text{tr}(M^TM) = 0$ hanya dipenuhi apabila komponen entri $M = 0$.
+                Dari observasi ini haruslah
+                \[
+                  BC - CB = 0 \implies BC = CB.
+                \]
+
+                Karena hal perolehan ini berlaku konsisten untuk sembarang matriks $B \in M_n$, matriks $C$ ini ternyata harus selalu komutatif terhadap sembarang matriks berukuran $n \times n$.
+                Satu-satunya matriks yang memiliki sifat sedemikian rupa ("komutatif dengan semua matriks") tiada lain adalah matriks skalar (kelipatan dari matriks identitas).
+                Maka $C = \lambda I$ untuk suatu skalar $\lambda \in \R$.
+
+                Substitusikan kembali nilai $C = \lambda I$ ini ke persamaan fungsi $f$, sehingga kita peroleh
+                \[
+                  f(A) = \text{tr}(A(\lambda I)) = \text{tr}(\lambda A) = \lambda \cdot \text{tr}(A).
+                \]
+                Terbukti bahwa terdapat $\lambda \in \R$ sedemikian sehingga $f(A) = \lambda \cdot \text{tr}(A)$.
+        \end{enumerate}
+
+
+\end{enumerate}
+
+\section*{Analisis Kompleks}
+
+\section*{Kombinatorika}
+
+\section*{Struktur Aljabar}
+
+
+\end{document}
