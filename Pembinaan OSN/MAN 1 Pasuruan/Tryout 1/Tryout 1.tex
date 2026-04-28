@@ -1,0 +1,51 @@
+\documentclass[11pt,a4paper,DIV=12]{scrartcl}
+
+\makeatletter
+\def\input@path{{../../../}}
+\makeatother
+
+\usepackage[sexy]{evan}
+% \usepackage[sexy]{../../../evan}
+
+% Override environment "problem" agar hanya menampilkan angka
+\makeatletter
+\newtheoremstyle{justnumber}
+  {8pt} % space above
+  {8pt} % space below
+  {\normalfont} % body font
+  {} % indent amount
+  {\color{blue!40!black}\bfseries} % head font
+  {} % punctuation after head
+  {0.5em} % space after head
+  {\thmnumber{#2}.\thmnote{ (\small #3)}} % head spec (hanya angka dan note)
+
+% Hapus definisi problem lama di dalam makeatletter agar @ terbaca
+\let\problem\relax
+\let\endproblem\relax
+\let\c@problem\relax
+\let\theproblem\relax
+\makeatother
+
+\theoremstyle{justnumber}
+\newtheorem{problem}{}
+
+\begin{document}
+\title{Tryout 1 Pembinaan OSK Matematika}
+\author{MAN 1 Pasuruan}
+\date{23 April 2025}
+\maketitle
+\noindent\textbf{Petunjuk pengerjaan:}
+\begin{itemize}
+  \item Waktu pengerjaan adalah 120 menit.
+  \item Terdapat 20 soal yang terdiri dari 10 soal pilihan ganda dan 10 soal kemampuan isian singkat.
+  \item Nilai soal pilihan ganda adalah {\color{green!70!black}$B=+1$}, {\color{red}$S=0$}, $K=0$.
+  \item Nilai soal isian singkat adalah {\color{green!70!black}$B=+4$}, {\color{red}$S=0$}, $K=0$.
+  \item Gunakan bolpoin untuk menulis jawaban, dan coretlah jawaban yang salah.
+\end{itemize}
+
+\section*{Pilihan Ganda}
+
+
+\section*{Isian Singkat}
+
+\end{document}
