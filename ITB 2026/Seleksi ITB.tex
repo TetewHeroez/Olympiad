@@ -1,0 +1,156 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage[indonesian]{babel}
+\usepackage{enumitem}
+
+\begin{document}
+\begin{center}
+  \Large \textbf{Soal dan Pembahasan Seleksi ONMIPA ITB}
+\end{center}
+\vspace{0.5cm}
+
+\section*{Soal}
+
+\begin{enumerate}[leftmargin=*, label=\arabic*.]
+  \item Diberikan himpunan $A_1 = \{1\} = B_1$ dengan
+        $A_n = \{3^{n-2} + x \mid x \in B_{n-1}\}$ dan $B_n = A_n \cup B_{n-1}$
+        \begin{enumerate}[label=(\alph*)]
+          \item Buktikan $|B_n| = 2^{n-1}$
+          \item Tidak ada tiga elemen berbeda sehingga membentuk barisan aritmetika di $B_n$
+        \end{enumerate}
+
+  \item Diketahui $f : [0, 1] \to \mathbb{R}$ kontinu dan dapat diintegralkan pada $[0, 1]$. Untuk setiap $x$ di $[0, 1]$, berlaku
+        \[ f(x) \leq \int_0^1 f(t) \, dt \]
+        Tentukan semua fungsi $f$.
+
+  \item Diberikan $f : \mathbb{C} \to \mathbb{C}$ adalah polinomial berderajat $n$ dengan $f(z) = a_0z^n + a_1z^{n-1} + a_2z^{n-2} + \dots$. Diketahui bahwa kontur $C$ mengandung semua akar-akar dari $f$.
+        \begin{enumerate}[label=(\alph*)]
+          \item Buktikan bahwa
+                \[ \frac{1}{2\pi i} \int_C z \frac{f'(z)}{f(z)} \, dz = -\frac{a_1}{a_0} \]
+          \item Buktikan bahwa
+                \[ \frac{1}{2\pi i} \int_C z^2 \frac{f'(z)}{f(z)} \, dz = \frac{a_1^2 - 2a_0a_2}{a_0^2} \]
+        \end{enumerate}
+
+  \item Diberikan transformasi linear $T$ dengan $T^2 = T$ dalam ruang vektor $V$.
+        \begin{enumerate}[label=(\alph*)]
+          \item Buktikan $V = \ker(T) \oplus \text{im}(T)$
+          \item Berikan contoh transformasi linear $T$ pada $V = \mathbb{R}^2$ dengan $T^2 = T$ (selain transformasi nol dan identitas), lalu tentukan basis dari $\ker(T)$ dan $\text{im}(T)$.
+        \end{enumerate}
+
+  \item Diberikan $R$ ring komutatif dan himpunan $I = \{x \in R \mid \exists n \in \mathbb{N}, x^n = 0\}$.
+        \begin{enumerate}[label=(\alph*)]
+          \item Buktikan bahwa $I$ adalah ideal di $R$.
+          \item Jika $I$ hanya mengandung $0$, apakah $R$ merupakan \textit{integral domain}? Jika iya, buktikan. Jika tidak, berikan \textit{counterexample}.
+        \end{enumerate}
+\end{enumerate}
+
+\newpage
+\section*{Solusi}
+
+\begin{enumerate}[leftmargin=*, label=\arabic*.]
+  \item \textbf{Solusi:}
+        \begin{enumerate}[label=(\alph*)]
+          \item Diketahui $B_1 = \{1\}$ dan $B_n = A_n \cup B_{n-1}$ dengan $A_n = \{3^{n-2} + x \mid x \in B_{n-1}\}$.\\
+                Setiap elemen di $B_{n-1}$ merupakan penjumlahan bentuk $\sum c_k 3^k$ dengan $c_k \in \{0, 1\}$.
+                Nilai maksimal elemen pada $B_{n-1}$ adalah:
+                \[ 1 + 3^0 + 3^1 + \dots + 3^{n-3} = 1 + \frac{3^{n-2}-1}{2} = \frac{3^{n-2}+1}{2} \]
+                Karena $\frac{3^{n-2}+1}{2} < 3^{n-2}$ untuk $n \geq 2$, maka semua elemen di $B_{n-1}$ bernilai kurang dari $3^{n-2}$.
+                Sementara itu, elemen di $A_n$ memiliki nilai minimal $3^{n-2} + 1$. Oleh karena itu, $A_n \cap B_{n-1} = \emptyset$.
+                Akibatnya, $|B_n| = |A_n| + |B_{n-1}|$. Karena himpunan $A_n$ didefinisikan dari himpunan $B_{n-1}$ ditambah suatu konstanta, maka $|A_n| = |B_{n-1}|$.
+                Jadi $|B_n| = 2|B_{n-1}|$. Dengan basis $|B_1| = 1$, terbukti secara induksi bahwa $|B_n| = 2^{n-1}$.
+
+          \item Anggota dari himpunan $B_n$ dapat diekspresikan secara unik dalam bentuk $1 + \sum_{k=0}^{n-2} c_k 3^k$ dengan $c_k \in \{0, 1\}$. \\
+                Misalkan, untuk tujuan kontradiksi, ada 3 elemen berbeda $x, y, z \in B_n$ yang membentuk barisan aritmetika, sehingga $x + z = 2y$.
+                Misalkan $x = 1 + \sum a_k 3^k, y = 1 + \sum b_k 3^k, z = 1 + \sum c_k 3^k$, di mana $a_k, b_k, c_k \in \{0, 1\}$. Mengingat representasi basis 3 bersifat unik dan tidak ada pertambahan digit antar perpangkatan (\textit{carrying}):
+                \[ a_k + c_k = 2b_k \text{ untuk semua } k \]
+                Karena $a_k, c_k \in \{0, 1\}$, kemungkinan penjumlahannya adalah $0, 1$, atau $2$. Jika $b_k = 0$, maka $a_k + c_k = 0 \implies a_k = 0, c_k = 0$. Jika $b_k = 1$, maka $a_k + c_k = 2 \implies a_k = 1, c_k = 1$.
+                Dalam setiap kasus, $a_k = b_k = c_k$. Ini berarti $x = y = z$, yang kontradiksi dengan asumsi bahwa ketiganya berbeda. Terbukti bahwa tidak ada tiga elemen di $B_n$ yang membentuk barisan aritmetika.
+        \end{enumerate}
+
+  \item \textbf{Solusi:}
+        Diberikan $f(x) \leq \int_0^1 f(t) \, dt$ untuk semua $x \in [0, 1]$.
+        Misalkan $C = \int_0^1 f(t) \, dt$, maka $f(x) \leq C$ untuk semua $x \in [0, 1]$.
+        Integralkan kedua ruas dari $0$ sampai $1$:
+        \[ \int_0^1 f(x) \, dx \leq \int_0^1 C \, dx \implies C \leq C \]
+        Perhatikan bahwa $f(x) - C \leq 0$. Jika terdapat $x_0$ sedemikian sehingga $f(x_0) < C$, karena $f$ kontinu, akan terdapat sebuah interval di mana $f(x) < C$.
+        Hal ini akan menyebabkan $\int_0^1 f(x) \, dx < \int_0^1 C \, dx = C$, yang kontradiksi dengan asumsi bahwa integral tersebut bernilai persis $C$.
+        Oleh karena itu, kita harus memiliki $f(x) = C$ untuk semua $x \in [0, 1]$. Jadi, semua fungsi $f$ yang memenuhi adalah fungsi konstan $f(x) = c$ dengan $c \in \mathbb{R}$.
+
+  \item \textbf{Solusi:}
+        Misalkan $r_1, r_2, \dots, r_n$ adalah akar-akar dari polinomial $f(z)$. Maka $f(z) = a_0 \prod_{k=1}^n (z - r_k)$.
+        Turunan logaritmiknya adalah $\frac{f'(z)}{f(z)} = \sum_{k=1}^n \frac{1}{z - r_k}$.
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Berdasarkan Teorema Residu (atau Prinsip Argumen), integral pada kontur $C$ yang mengelilingi semua pole adalah jumlahan peliknya (residu).
+                \[ \frac{1}{2\pi i} \int_C z \frac{f'(z)}{f(z)} \, dz = \sum_{k=1}^n \text{Res}_{z=r_k} \left( \frac{z}{z - r_k} \right) = \sum_{k=1}^n r_k \]
+                Dari Teorema Vieta pada persamaan $a_0z^n + a_1z^{n-1} + \dots = 0$, jumlah dari semua akar adalah $\sum_{k=1}^n r_k = -\frac{a_1}{a_0}$.
+                Maka terbukti integralnya bernilai $-\frac{a_1}{a_0}$.
+
+          \item Serupa dengan bagian (a), fungsi di dalam integral kini dikalikan $z^2$:
+                \[ \frac{1}{2\pi i} \int_C z^2 \frac{f'(z)}{f(z)} \, dz = \sum_{k=1}^n \text{Res}_{z=r_k} \left( \frac{z^2}{z - r_k} \right) = \sum_{k=1}^n r_k^2 \]
+                Kita tahu bahwa $\sum_{k=1}^n r_k^2 = \left(\sum_{k=1}^n r_k\right)^2 - 2\sum_{i<j} r_i r_j$.
+                Dengan Teorema Vieta:
+                \[ \sum_{k=1}^n r_k = -\frac{a_1}{a_0}, \quad \sum_{i<j} r_i r_j = \frac{a_2}{a_0} \]
+                Disubstitusikan akan menghasilkan:
+                \[ \sum_{k=1}^n r_k^2 = \left(-\frac{a_1}{a_0}\right)^2 - 2 \left(\frac{a_2}{a_0}\right) = \frac{a_1^2}{a_0^2} - \frac{2a_0a_2}{a_0^2} = \frac{a_1^2 - 2a_0a_2}{a_0^2} \]
+                Terbukti.
+        \end{enumerate}
+
+  \item \textbf{Solusi:}
+        \begin{enumerate}[label=(\alph*)]
+          \item Untuk pembuktian penjumlahan langsung ($\oplus$), kita perlu membuktikan dua hal: $V = \ker(T) + \text{im}(T)$ dan $\ker(T) \cap \text{im}(T) = \{0\}$.
+
+                \textbf{Pertama}, ambil sembarang $v \in V$. Kita dapat menuliskan $v = (v - T(v)) + T(v)$.
+                Misalkan $x = v - T(v)$ dan $y = T(v)$.
+                Jelas bahwa $y = T(v) \in \text{im}(T)$.
+                Sementara untuk $x$, perhatikan bahwa $T(x) = T(v - T(v)) = T(v) - T^2(v)$. Karena $T^2 = T$, maka $T(x) = T(v) - T(v) = 0$, sehingga $x \in \ker(T)$.
+                Maka $V = \ker(T) + \text{im}(T)$.
+
+                \textbf{Kedua}, misalkan $v \in \ker(T) \cap \text{im}(T)$.
+                Karena $v \in \text{im}(T)$, maka $v = T(w)$ untuk suatu $w \in V$.
+                Karena $v \in \ker(T)$, maka $T(v) = 0$.
+                Sehingga kita dapatkan $0 = T(v) = T(T(w)) = T^2(w)$. Karena $T^2 = T$, maka $0 = T(w) = v$.
+                Jadi, perpotongannya adalah trivial, $\ker(T) \cap \text{im}(T) = \{0\}$. Terbukti $V = \ker(T) \oplus \text{im}(T)$.
+
+          \item Transformasi yang memenuhi ini secara geometri dinamakan unjuran (proyeksi). Contoh di $V = \mathbb{R}^2$ adalah dengan proyeksi pada bidang.
+                Didefinisikan $T(x, y) = (x, 0)$
+                Kita cek kepatuhannya: $T^2(x, y) = T(T(x,y)) = T(x, 0) = (x, 0) = T(x,y)$.
+                \begin{itemize}
+                  \item \textbf{Basis ker($T$):}
+                        $T(x, y) = (0, 0) \implies (x, 0) = (0, 0) \implies x = 0, y \text{ bebas}$.
+                        Vektor-vektor kernel berbentuk $(0, y) = y(0, 1)$, basisnya adalah $\{(0, 1)\}$.
+                  \item \textbf{Basis im($T$):}
+                        Peta dari $T$ adalah semua vektor berbentuk $(x, 0) = x(1, 0)$, sehingga basisnya adalah $\{(1, 0)\}$.
+                \end{itemize}
+        \end{enumerate}
+
+  \item \textbf{Solusi:}
+        $I$ dikenal sebagai kumpulan nilradikal dari $R$.
+        \begin{enumerate}[label=(\alph*)]
+          \item Jelas $0 \in I$ karena $0^1 = 0$.
+                Ambil sembarang $x, y \in I$, maka ada $n, m \in \mathbb{N}$ dengan $x^n = 0$ dan $y^m = 0$.
+                Karena $R$ komutatif, kita boleh menggunakan Teorema Binomial:
+                \[ (x-y)^{n+m} = \sum_{k=0}^{n+m} \binom{n+m}{k} x^k (-y)^{n+m-k} \]
+                Pada setiap suku, bisa dipastikan bahwa salah satu dari $k \geq n$ atau $n+m-k \geq m$ pasti terpenuhi (\textit{Pigeonhole Principle}).
+                Jika $k \geq n$, maka $x^k = 0$. Jika $n+m-k \geq m$, $y^{n+m-k} = 0$.
+                Maka semua suku bernilai $0$, yang bermakna $(x-y)^{n+m} = 0$, sehingga $x-y \in I$.
+                Selanjutnya, jika $x \in I$ dan $r \in R$, karena sifat komutatif:
+                \[ (rx)^n = r^n x^n = r^n \cdot 0 = 0 \implies rx \in I \]
+                Terbukti $I$ adalah sebuah Ideal pada $R$.
+
+          \item \textbf{Tidak}. Jika $I = \{0\}$ (tidak ada elemen nilpoten selain 0) tidak serta merta membuat $R$ adalah \textit{integral domain}. \\
+                \textbf{Counterexample}:
+                Pandang ring $R = \mathbb{Z}_6$ (bilangan modulo 6). Elemennya adalah $\{0, 1, 2, 3, 4, 5\}$.
+                \begin{itemize}
+                  \item $1^n = 1 \neq 0$
+                  \item $2^2 = 4, 2^3 = 8 \equiv 2 \pmod 6$, sehingga $2^n$ tidak akan pernah 0.
+                  \item $3^2 = 9 \equiv 3 \pmod 6 \implies 3^n \neq 0$
+                  \item $4^2 = 16 \equiv 4 \pmod 6 \implies 4^n \neq 0$
+                  \item $5^2 = 25 \equiv 1 \pmod 6 \implies 5^n \neq 0$
+                \end{itemize}
+                Dengan demikian $I = \{0\}$. Namun, $\mathbb{Z}_6$ punya pembagi nol yaitu $2 \cdot 3 = 6 \equiv 0 \pmod 6$, yang artinya ia bukan suatu \textit{integral domain}.
+        \end{enumerate}
+\end{enumerate}
+
+\end{document}

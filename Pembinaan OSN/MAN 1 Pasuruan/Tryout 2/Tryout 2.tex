@@ -1,0 +1,191 @@
+\documentclass[11pt,a4paper,DIV=12]{scrartcl}
+\usepackage{multicol}
+\makeatletter
+\def\input@path{{../../../}}
+\makeatother
+
+\usepackage[sexy]{evan}
+% \usepackage[sexy]{../../../evan}
+
+% Override environment "problem" agar hanya menampilkan angka
+\makeatletter
+\newtheoremstyle{justnumber}
+  {8pt} % space above
+  {8pt} % space below
+  {\normalfont} % body font
+  {} % indent amount
+  {\color{blue!40!black}\bfseries} % head font
+  {} % punctuation after head
+  {0.5em} % space after head
+  {\thmnumber{#2}.\thmnote{ (\small #3)}} % head spec (hanya angka dan note)
+
+% Hapus definisi problem lama di dalam makeatletter agar @ terbaca
+\let\problem\relax
+\let\endproblem\relax
+\let\c@problem\relax
+\let\theproblem\relax
+\makeatother
+
+\theoremstyle{justnumber}
+\newtheorem{problem}{}
+
+\begin{document}
+\title{Tryout 2 Pembinaan OSK Matematika}
+\author{MAN 1 Pasuruan}
+\date{23 April 2025}
+\maketitle
+\noindent\textbf{Petunjuk pengerjaan:}
+\begin{itemize}
+  \item Waktu pengerjaan adalah 120 menit.
+  \item Terdapat 20 soal yang terdiri dari 10 soal pilihan ganda dan 10 soal kemampuan isian singkat.
+  \item Nilai soal pilihan ganda adalah {\color{green!70!black}$B=+1$}, {\color{red}$S=0$}, $K=0$.
+  \item Nilai soal isian singkat adalah {\color{green!70!black}$B=+4$}, {\color{red}$S=0$}, $K=0$.
+  \item Gunakan bolpoin untuk menulis jawaban, dan coretlah jawaban yang salah.
+\end{itemize}
+
+\section*{Pilihan Ganda}
+\begin{problem}
+  Perhatikan segiempat $ABCD$ berikut.
+  \begin{center}
+    \begin{tikzpicture}[scale=0.8, line join=round, line cap=round, rotate=5]
+
+      % --- KOORDINAT MATEMATIS PRESISI ---
+      % Berdasarkan perhitungan trigonometri dari soal:
+      \coordinate (D) at (0,0);
+      \coordinate (A) at ({3*sqrt(3)}, 3);
+      \coordinate (C) at ({3*sqrt(3)+3}, 0);
+      \coordinate (B) at ({6*sqrt(3)+3}, {3*sqrt(3)});
+
+      % --- GAMBAR GARIS ---
+      \draw[thick] (D) -- (C) -- (B) -- (A) -- cycle;
+      \draw[thick] (A) -- (C); % Garis diagonal
+
+      % --- LABEL TITIK ---
+      \node[left, xshift=-2pt] at (D) {$D$};
+      \node[below right, yshift=-2pt] at (C) {$C$};
+      \node[right, xshift=2pt] at (B) {$B$};
+      \node[left, xshift=-2pt, yshift=2pt] at (A) {$A$};
+
+      % --- LABEL PANJANG SISI ---
+      \node[above left] at ($(D)!0.5!(A)$) {$6$ cm};
+      \node[above left] at ($(A)!0.5!(B)$) {$6\sqrt{2}$ cm};
+
+      % --- PENANDA SUDUT MANUAL (Anti-Error) ---
+      % Sudut ADC = 30
+      \draw (D) ++(0:0.7) arc (0:30:0.7);
+      \node at ($(D) + (15:1.1)$) {\footnotesize $30^\circ$};
+
+      % Sudut ACD = 45
+      % Garis CD berarah 180 derajat dari C, garis CA berarah 135 derajat dari C
+      \draw (C) ++(135:0.7) arc (135:180:0.7);
+      \node at ($(C) + (157.5:1.1)$) {\footnotesize $45^\circ$};
+
+      % Sudut CAB = 60
+      % Garis AC berarah -45 derajat dari A, garis AB berarah 15 derajat dari A
+      \draw (A) ++(-45:0.6) arc (-45:15:0.6);
+      \node at ($(A) + (-15:1.0)$) {\footnotesize $60^\circ$};
+
+    \end{tikzpicture}
+  \end{center}
+  Diketahui bahwa panjang $AD$ adalah $6$ cm, dan $AB$ adalah $6\sqrt{2}$ cm. Jika $\angle ADC = 30^\circ$, $\angle ACD = 45^\circ$, dan $\angle CAB = 60^\circ$, maka carilah panjang $BC^2$!
+  \begin{multicols}{5}
+    \begin{enumerate}
+      \item[(A)] $36$
+      \item[(B)] $54$
+      \item[(C)] $72$
+      \item[(D)] $90$
+      \item[(E)] $126$
+    \end{enumerate}
+  \end{multicols}
+\end{problem}
+
+\begin{problem}
+  Seorang pemborong ingin membuat penyangga atap gedung pertemuan yang mempunyai lebar $12\sqrt{3}$ m. Penyangga atap tersebut dibuat dengan menggabungkan dua kerangka besi yang berbentuk segitiga siku-siku seperti gambar ($\angle B = 30^\circ$, $AD \perp BC$, $DE \perp AB$, $EF \perp BC$, dan seterusnya sampai menuju tak-hingga). Jika panjang besi maksimal yang diperlukan untuk membuat satu kerangka segitiga tersebut dapat dinyatakan dengan $a\sqrt{b} + c$, maka nilai $a + b + c$ adalah...
+  \begin{center}
+    \begin{tikzpicture}[line join=round, line cap=round, thick]
+
+      % Skala dasar diatur langsung lebih kecil (misal panjang AB jadi 8 unit di kanvas)
+      % Hal ini menghindari penggunaan angka asli 12\sqrt{3} yang kebesaran
+      \def\W{8}
+
+      % Koordinat Sudut Utama Segitiga
+      \coordinate (A) at (0,0);
+      \coordinate (B) at (\W,0);
+      % Karena sudut B = 30 derajat, maka tan(30) = AC / AB -> 1/sqrt(3) = AC / W
+      \coordinate (C) at (0, {\W/sqrt(3)});
+
+      % Menggambar segitiga utama
+      \draw (A) -- (B) -- (C) -- cycle;
+
+      % Titik-titik zig-zag menggunakan proyeksi ortogonal otomatis TikZ
+      \coordinate (D) at ($(B)!(A)!(C)$);
+      \coordinate (E) at ($(A)!(D)!(B)$);
+      \coordinate (F) at ($(B)!(E)!(C)$);
+      \coordinate (G) at ($(A)!(F)!(B)$);
+
+      % Menggambar garis penyangga zig-zag
+      \draw (A) -- (D) -- (E) -- (F) -- (G);
+
+      % Efek titik-titik putus (dan seterusnya menuju tak-hingga)
+      \coordinate (H) at ($(B)!(G)!(C)$);
+      \draw[dashed] (G) -- (H);
+
+      % --- PENANDA SUDUT SIKU-SIKU (Manual Anti-Error) ---
+      \def\sqsize{0.25cm} % Ukuran kotak siku-siku
+
+      % Siku di A
+      \draw (0,\sqsize) -- (\sqsize,\sqsize) -- (\sqsize,0);
+
+      % Siku di D (antara AD dan DC)
+      \coordinate (Dd1) at ($(D)!\sqsize!(A)$);
+      \coordinate (Dd2) at ($(D)!\sqsize!(C)$);
+      \draw (Dd1) -- ($(Dd1)+(Dd2)-(D)$) -- (Dd2);
+
+      % Siku di E (antara DE dan EA)
+      \coordinate (Ed1) at ($(E)!\sqsize!(D)$);
+      \coordinate (Ed2) at ($(E)!\sqsize!(A)$);
+      \draw (Ed1) -- ($(Ed1)+(Ed2)-(E)$) -- (Ed2);
+
+      % Siku di F (antara EF dan FC)
+      \coordinate (Fd1) at ($(F)!\sqsize!(E)$);
+      \coordinate (Fd2) at ($(F)!\sqsize!(C)$);
+      \draw (Fd1) -- ($(Fd1)+(Fd2)-(F)$) -- (Fd2);
+
+      % Siku di G (antara FG dan GA)
+      \coordinate (Gd1) at ($(G)!\sqsize!(F)$);
+      \coordinate (Gd2) at ($(G)!\sqsize!(A)$);
+      \draw (Gd1) -- ($(Gd1)+(Gd2)-(G)$) -- (Gd2);
+
+      % --- PENANDA SUDUT 30 DERAJAT ---
+      \draw (B) ++(180:1.2) arc (180:150:1.2);
+      \node at ($(B) + (165:1.6)$) {$30^\circ$};
+
+      % --- LABEL TITIK ---
+      \node[below left] at (A) {A};
+      \node[below right] at (B) {B};
+      \node[above left] at (C) {C};
+      \node[above right, xshift=2pt] at (D) {D};
+      \node[below] at (E) {E};
+      \node[above right, xshift=2pt] at (F) {F};
+      \node[below] at (G) {G};
+
+      % --- LABEL PANJANG AB ---
+      \draw[<->, >=stealth, very thin] (0,-0.6) -- (\W,-0.6);
+      \node[fill=white, inner sep=2pt] at ({\W/2},-0.6) {$12\sqrt{3}$ m};
+
+    \end{tikzpicture}
+  \end{center}
+  \begin{multicols}{5}
+    \begin{enumerate}
+      \item[(A)] $51$
+      \item[(B)] $63$
+      \item[(C)] $99$
+      \item[(D)] $108$
+      \item[(E)] $111$
+    \end{enumerate}
+  \end{multicols}
+\end{problem}
+
+\section*{Isian Singkat}
+
+\end{document}
