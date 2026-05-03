@@ -36,15 +36,17 @@
 \begin{document}
 \title{Tryout 1 Pembinaan OSK Matematika}
 \author{MAN 1 Pasuruan}
-\date{23 April 2025}
+\date{Mei 2025}
 \maketitle
 \noindent\textbf{Petunjuk pengerjaan:}
 \begin{itemize}
-  \item Waktu pengerjaan adalah 120 menit.
+  \item Waktu pengerjaan adalah 150 menit.
   \item Terdapat 20 soal yang terdiri dari 10 soal pilihan ganda dan 10 soal isian singkat.
-  \item Nilai soal pilihan ganda adalah {\color{green!70!black}$B=+1$}, {\color{red}$S=0$}, $K=0$.
-  \item Nilai soal isian singkat adalah {\color{green!70!black}$B=+4$}, {\color{red}$S=0$}, $K=0$.
-  \item Gunakan bolpoin untuk menulis jawaban, dan coretlah jawaban yang salah.
+  \item Nilai soal pilihan ganda adalah {\color{green!70!black}1 poin}, dan nilai soal isian singkat adalah {\color{green!70!black}4 poin}.
+  \item {\color{red}Tidak ada} pengurangan nilai untuk jawaban yang salah/kosong.
+  \item Pada soal pilihan ganda, berikan tanda {\color{blue}silang ($\times$)} pada jawaban yang benar
+  \item Pada soal isian singkat, tuliskan {\color{blue}jawaban akhir} saja.
+  \item Gunakan bolpoin untuk menjawab, kesalahan pada jawaban diperbaiki dengan mencoret.
 \end{itemize}
 
 \section*{Pilihan Ganda}
@@ -122,19 +124,120 @@
   %KJ: D
 \end{problem}
 
-% \begin{problem}
+\begin{problem}
+  Diketahui $a$ dan $b$ suatu bilangan real sedemikian sehingga $a, 6, b$ membentuk barisan aritmetika dan $b, 2, a$ membentuk barisan geometri. Tentukan nilai dari $a^2 + b^2$.
+  \begin{multicols}{5}
+    \begin{enumerate}
+      \item[(A)] 128
+      \item[(B)] 132
+      \item[(C)] 136
+      \item[(D)] 140
+      \item[(E)] 144
+    \end{enumerate}
+  \end{multicols}
+  %KJ: C
+  %Pembahasan Singkat:
+  %Barisan aritmetika a, 6, b  =>  2(6) = a + b  =>  a + b = 12.
+  %Barisan geometri b, 2, a  =>  2^2 = ab  =>  ab = 4.
+  %Nilai a^2 + b^2 = (a+b)^2 - 2ab = (12)^2 - 2(4) = 144 - 8 = 136.
+\end{problem}
 
-%   \begin{multicols}{5}
-%     \begin{enumerate}
-%       \item[(A)] $-2$
-%       \item[(B)] $\dfrac{1}{2}$
-%       \item[(C)] $2$
-%       \item[(D)] $\dfrac{1}{4}$
-%       \item[(E)] $4$
-%     \end{enumerate}
-%   \end{multicols}
-%   %KJ: C
-% \end{problem}
+\begin{problem}
+  Misalkan $a$ dan $b$ bilangan bulat positif yang saling relatif prima memenuhi
+  \[
+    \frac{1 + 2 + 3 + \cdots + 110}{2 + 3 + 4 + \cdots + 120} = \frac{a}{b}
+  \]
+  nilai dari $a + b$ adalah \dots
+  \begin{multicols}{5}
+    \begin{enumerate}
+      \item[(A)] 13264
+      \item[(B)] 13364
+      \item[(C)] 13464
+      \item[(D)] 13564
+      \item[(E)] 13664
+    \end{enumerate}
+  \end{multicols}
+  %KJ: B
+  %Pembahasan Singkat:
+  %Pembilang: Deret aritmetika 1 s.d 110 = (110/2) * (1 + 110) = 55 * 111 = 6105.
+  %Penyebut: Deret aritmetika 2 s.d 120 (ada 119 suku) = (119/2) * (2 + 120) = 119 * 61 = 7259.
+  %Pecahan 6105/7259. Faktor 6105 = 3 * 5 * 11 * 37. Faktor 7259 = 7 * 17 * 61.
+  %Karena tidak ada faktor prima yang sama, a = 6105 dan b = 7259 (sudah relatif prima).
+  %a + b = 6105 + 7259 = 13364.
+\end{problem}
+
+\begin{problem}
+  Diberikan fungsi kuadrat $f(x) = mx^2 + nx + o$ yang memenuhi $f(5) = 25$ dan $f(6) = 36$. Jika $m \neq 1$ maka nilai dari $\frac{o - n}{m - 1}$ adalah \dots
+  \begin{multicols}{5}
+    \begin{enumerate}
+      \item[(A)] 11
+      \item[(B)] 25
+      \item[(C)] 30
+      \item[(D)] 36
+      \item[(E)] 41
+    \end{enumerate}
+  \end{multicols}
+  %KJ: E
+  %Pembahasan Singkat:
+  %(Asumsi typo soal, "Jika a != 1" seharusnya "Jika m != 1").
+  %f(5) = 25m + 5n + o = 25
+  %f(6) = 36m + 6n + o = 36
+  %Kurangkan f(6) - f(5) => 11m + n = 11  =>  n = 11 - 11m = 11(1 - m).
+  %Substitusi n ke f(5): 25m + 5(11 - 11m) + o = 25  =>  -30m + 55 + o = 25  =>  o = 30m - 30 = 30(m - 1).
+  %Maka (o - n) / (m - 1) = (30(m - 1) - 11(1 - m)) / (m - 1) = (30(m - 1) + 11(m - 1)) / (m - 1) = 41.
+\end{problem}
+
+\begin{problem}
+  Diberikan bilangan real $a, b,$ dan $c$ yang memenuhi persamaan
+  \[
+    \begin{cases}
+      a^2 = -6b - 14 \\
+      b^2 = 8c - 23  \\
+      c^2 = 4a + 8
+    \end{cases}
+  \]
+  Tentukan nilai dari $a + b + c$.
+  \begin{multicols}{5}
+    \begin{enumerate}
+      \item[(A)] 1
+      \item[(B)] 2
+      \item[(C)] 3
+      \item[(D)] 4
+      \item[(E)] 5
+    \end{enumerate}
+  \end{multicols}
+  %KJ: C
+  %Pembahasan Singkat:
+  %Jumlahkan ketiga persamaan dan pindahkan semua ruas ke kiri:
+  %a^2 + b^2 + c^2 + 6b + 14 - 8c + 23 - 4a - 8 = 0
+  %a^2 - 4a + b^2 + 6b + c^2 - 8c + 29 = 0
+  %Bentuk kuadrat sempurna: (a - 2)^2 - 4 + (b + 3)^2 - 9 + (c - 4)^2 - 16 + 29 = 0
+  %(a - 2)^2 + (b + 3)^2 + (c - 4)^2 = 0
+  %Karena a, b, c real, maka a = 2, b = -3, c = 4.
+  %a + b + c = 2 + (-3) + 4 = 3.
+\end{problem}
+
+\begin{problem}
+  Diketahui $x$ dan $y$ dua bilangan positif yang memenuhi $x + \frac{1}{y} = \frac{1}{2024}$. Tentukan nilai terkecil yang mungkin dari $y + \frac{1}{x}$.
+  \begin{multicols}{5}
+    \begin{enumerate}
+      \item[(A)] 2024
+      \item[(B)] 4048
+      \item[(C)] 6072
+      \item[(D)] 8096
+      \item[(E)] 10120
+    \end{enumerate}
+  \end{multicols}
+  %KJ: D
+  %Pembahasan Singkat:
+  %Misalkan 1/2024 = k. Kita punya x + 1/y = k => x = (ky - 1)/y. Karena x,y > 0, maka ky - 1 > 0.
+  %Akan diminimalkan E = y + 1/x = y + y/(ky - 1).
+  %Misalkan ky - 1 = t (t > 0), maka y = (t + 1)/k.
+  %E = (t + 1)/k + (t + 1)/(kt) = (1/k) * (t + 1 + 1 + 1/t) = (1/k) * (t + 1/t + 2).
+  %Berdasarkan ketaksamaan AM-GM, t + 1/t >= 2.
+  %Maka E >= (1/k) * (2 + 2) = 4/k = 4 * 2024 = 8096.
+\end{problem}
+
 
 
 
@@ -181,8 +284,9 @@
 \end{problem}
 
 \begin{problem}
-  Carilah nilai dari $A/1012$, dimana
+  Diketahui $A$ adalah jumlah dari suku-suku berikut:
   $$A = \frac{1^3 + 1}{1 + 1} + \frac{2^3 + 1}{2 + 1} + \frac{3^3 + 1}{3 + 1} + \cdots + \frac{2024^3 + 1}{2024 + 1}$$
+  Carilah nilai dari $\dfrac{A}{1012}$.
 
   %KJ: 2731052 
   \answerbox
@@ -194,6 +298,64 @@
   untuk semua bilangan bulat $x, y$. Jika $f(2024) = 2025$ dan $f(2025) = -2024$. Maka carilah nilai dari $f(1) + f(2) + \dots + f(2024)$
 
   %KJ: 1012
+  \answerbox
+\end{problem}
+
+\begin{problem}
+  Misalkan $p, q$, dan $r$ merupakan akar-akar dari persamaan $x^3 - 3x + 5 = 0$. Tentukan nilai dari $p^4 + q^4 + r^4$.
+
+  %KJ: 18
+  %Pembahasan Singkat:
+  %Berdasarkan Teorema Vieta: p+q+r = 0, pq+qr+rp = -3, pqr = -5.
+  %Dari persamaan, x^3 = 3x - 5. Kalikan dengan x, diperoleh x^4 = 3x^2 - 5x.
+  %Maka p^4 + q^4 + r^4 = 3(p^2 + q^2 + r^2) - 5(p+q+r).
+  %Nilai p^2 + q^2 + r^2 = (p+q+r)^2 - 2(pq+qr+rp) = 0^2 - 2(-3) = 6.
+  %Sehingga, p^4 + q^4 + r^4 = 3(6) - 5(0) = 18.
+  \answerbox
+\end{problem}
+
+\begin{problem}
+  Misalkan $x$ dan $y$ adalah bilangan real yang memenuhi $7x + 7y + 7xy - 3xy^2 - 3x^2y = 40$ dan $2x + 2y + 2xy + xy^2 + x^2y = 4$. Tentukan nilai dari $\lfloor x + y \rfloor$.
+
+  %KJ: 4
+  %Pembahasan Singkat:
+  %Misalkan s = x+y dan p = xy.
+  %Persamaan 1: 7s + 7p - 3ps = 40
+  %Persamaan 2: 2s + 2p + ps = 4 => ps = 4 - 2s - 2p
+  %Substitusi ps ke Persamaan 1: 7s + 7p - 3(4 - 2s - 2p) = 40
+  %7s + 7p - 12 + 6s + 6p = 40 => 13s + 13p = 52 => s + p = 4 => p = 4 - s.
+  %Substitusi p = 4-s ke ps: (4-s)s = 4 - 2s - 2(4-s) = -4.
+  %Maka 4s - s^2 = -4 => s^2 - 4s - 4 = 0.
+  %Solusi untuk s adalah s = 2 \pm 2\sqrt{2}.
+  %Syarat x,y real adalah \Delta = s^2 - 4p \ge 0 => s^2 - 4(4-s) \ge 0 => s^2 + 4s - 16 \ge 0.
+  %Cek s_1 = 2 + 2\sqrt{2} \approx 4.82, memenuhi syarat \ge -2 + 2\sqrt{5} (\approx 2.47).
+  %Cek s_2 = 2 - 2\sqrt{2} \approx -0.82, tidak memenuhi syarat.
+  %Maka s = x+y = 2 + 2\sqrt{2} \approx 4.828. Nilai \lfloor x+y \rfloor = 4.
+  \answerbox
+\end{problem}
+
+\begin{problem}
+  Misalkan $a$ dan $b$ adalah bilangan bulat positif yang relatif prima sehingga $\frac{a}{b}$ adalah jumlah semua solusi riil dari persamaan
+  \[
+    \sqrt[3]{3x - 4} + \sqrt[3]{5x - 6} = \sqrt[3]{x - 2} + \sqrt[3]{7x - 8}.
+  \]
+  Tentukan nilai dari $a + b$.
+
+  %KJ: 13
+  %Pembahasan Singkat:
+  %Misalkan A=3x-4, B=5x-6, C=x-2, D=7x-8. 
+  %Perhatikan bahwa A+B = 8x-10 dan C+D = 8x-10. Jadi A+B = C+D.
+  %Persamaan: \sqrt[3]{A} + \sqrt[3]{B} = \sqrt[3]{C} + \sqrt[3]{D}. Pangkatkan 3 kedua ruas.
+  %A + B + 3\sqrt[3]{AB}(\sqrt[3]{A}+\sqrt[3]{B}) = C + D + 3\sqrt[3]{CD}(\sqrt[3]{C}+\sqrt[3]{D}).
+  %Karena A+B = C+D, maka ruas ini saling meniadakan. Sisa:
+  %\sqrt[3]{AB}(\sqrt[3]{A}+\sqrt[3]{B}) = \sqrt[3]{CD}(\sqrt[3]{C}+\sqrt[3]{D}).
+  %Kasus 1: \sqrt[3]{A}+\sqrt[3]{B} = 0 => A = -B => 3x-4 = -5x+6 => 8x = 10 => x = 5/4.
+  %Kasus 2: Jika penjumlahannya \neq 0, kita bisa coret sehingga AB = CD.
+  %(3x-4)(5x-6) = (x-2)(7x-8)
+  %15x^2 - 38x + 24 = 7x^2 - 22x + 16
+  %8x^2 - 16x + 8 = 0 => x^2 - 2x + 1 = 0 => x = 1.
+  %Jumlah semua solusi = 5/4 + 1 = 9/4 = a/b.
+  %Maka a = 9 dan b = 4 (sudah relatif prima). Nilai a+b = 9+4 = 13.
   \answerbox
 \end{problem}
 
