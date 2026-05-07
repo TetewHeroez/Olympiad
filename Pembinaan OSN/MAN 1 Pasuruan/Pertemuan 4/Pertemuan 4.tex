@@ -1,0 +1,521 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[style=ieee,backend=biber]{biblatex}
+\addbibresource{reference.bib}
+\usepackage{colortbl,tabularx,mathrsfs,calligra}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{cancel}
+\usepackage{ragged2e}
+\usepackage[indonesian]{babel}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{pgfplots, tkz-euclide,calc}
+\pgfplotsset{compat=1.18}
+\usepackage{listings}
+\usepackage{ulem}
+
+\graphicspath{{C:/Users/teoso/OneDrive/Documents/Tugas Kuliah/Template Math Depart/}{./foto/}}
+
+\definecolor{HIMAmuda}{HTML}{01D1FD}
+\definecolor{HIMAtua}{HTML}{02016A}
+\definecolor{HIMAabu}{HTML}{CBCBCC}
+\definecolor{PastelGreen}{HTML}{77DD77}
+
+\usetheme{Madrid}
+
+\setbeamercolor{palette primary}{bg=HIMAtua,fg=white}
+\setbeamercolor{palette secondary}{bg=HIMAmuda,fg=black}
+\setbeamercolor{palette tertiary}{bg=HIMAabu,fg=black}
+\setbeamercolor{palette quaternary}{bg=HIMAmuda,fg=white}
+\setbeamercolor{structure}{fg=HIMAmuda} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=HIMAtua} % TOC sections
+\setbeamercolor{bibliography item}{parent=palette secondary}
+\setbeamercolor*{bibliography entry author}{parent=section in toc}
+
+\usetikzlibrary{shapes.geometric, arrows, calc}
+
+\tikzstyle{startstop} = [ellipse, minimum width=1cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{decision} = [diamond, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=blue!50]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usefonttheme{professionalfonts}
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{bibliography item}[book]
+
+\theoremstyle{definition}
+\newtheorem{definisi}{Definisi}
+\newtheorem{teorema}{Teorema}
+\newtheorem{contoh}{Contoh}
+\newtheorem{latihan}{Latihan}
+\newtheorem{proposisi}{Proposisi}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+
+\AtBeginEnvironment{contoh}{%
+\setbeamercolor{block title}{use=example text,fg=white,bg=example text.fg!75!black}
+\setbeamercolor{block body}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+\setbeamercolor{item}{fg=example text.fg}
+}
+\AtBeginEnvironment{definisi}{
+\setbeamercolor{block title}{fg=white,bg=HIMAtua}
+\setbeamercolor{block body}{parent=normal text,bg=HIMAtua!30!white}
+\setbeamercolor{item}{fg=HIMAtua}
+}
+\AtBeginEnvironment{latihan}{%
+  \setbeamercolor{block title}{fg=white,bg=yellow!30!orange}
+  \setbeamercolor{block body}{parent=normal text,bg=yellow!30!white}
+  \setbeamercolor{item}{fg=yellow!30!orange}
+}
+\AtBeginEnvironment{teorema}{
+    \setbeamercolor{block title}{bg=darkgray,fg=white}
+    \setbeamercolor{block body}{parent=pallette tertiary,bg=HIMAabu!30!white}
+    \setbeamercolor{item}{fg=HIMAabu}
+}
+\AtBeginEnvironment{proposisi}{
+    \setbeamercolor{block title}{bg=teal,fg=white}
+    \setbeamercolor{block body}{parent=pallette tertiary,bg=teal!30!white}
+    \setbeamercolor{item}{fg=teal}
+}
+
+\date{25 April 2026}
+\title[OSK Matematika - Aljabar]{Pembinaan OSN-K Matematika\\(Pertemuan 2: Identitas Aljabar, Barisan, dan Polinomial)}
+\author[Tetew]{Teosofi Hidayah Agung}
+\institute[Man 1 Pasuruan]{MAN 1 Pasuruan}
+\titlegraphic{\includegraphics[width=0.15\textwidth]{../../man1pasuruan.png}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{\textit{Outline}}
+  \tableofcontents
+\end{frame}
+\section{Identitas Aljabar}
+\subsection{Identitas v.s. Persamaan}
+\begin{frame}{\insertsection}{\insertsubsection}
+  Identitas biasanya disimbolkan dengan tanda `$=$'. perhatikan perbedaan antara identitas dan persamaan berikut:
+  \begin{itemize}
+    \item $x^2 - 1 = (x-1)(x+1)$ adalah sebuah identitas, karena berlaku untuk semua nilai $x$.
+    \item $x^2 - 1 = 0$ adalah sebuah persamaan, karena hanya berlaku untuk nilai $x=1,-1$.
+  \end{itemize}
+  \textbf{Identitas} sering digunakan untuk \textbf{menyederhanakan suatu ekspresi}, sedangkan \textbf{persamaan} digunakan untuk \textbf{mencari nilai variabel} yang memenuhi kondisi tertentu.
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  identitas selalu tergantung pada domain variabelnya. Domain variabel yang dimaksud adalah bilangan real.
+  \begin{contoh}
+    \begin{itemize}
+      \item $\dfrac{x^2-1}{x-1} = x+1$ adalah sebuah identitas, karena berlaku untuk semua nilai $x \neq 1$.
+      \item $\sqrt{x^2+6x+9} = x+3$ adalah sebuah identitas, karena berlaku untuk semua nilai $x \geq -3$.
+      \item $\dfrac{1}{x} + \dfrac{1}{y} = \dfrac{x+y}{xy}$ adalah sebuah identitas, karena berlaku untuk semua nilai $x,y \neq 0$.
+    \end{itemize}
+  \end{contoh}
+\end{frame}
+
+\subsection{Beberapa Identitas Umum}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{block}{Kuadrat Binomial dan Trinomial}
+        \noindent\vspace*{-0.5cm}
+        \begin{flalign*}
+          (x \pm y)^2   & = x^2 \pm 2xy + y^2                 & \\
+          (x + y + z)^2 & = x^2 + y^2 + z^2 + 2(xy + yz + zx) & \\
+          (x \pm y)^3   & = x^3 \pm 3x^2y + 3xy^2 \pm y^3     & \\
+          (x \pm y)^3   & = x^3 \pm y^3 \pm 3xy(x \pm y)      &
+        \end{flalign*}
+      \end{block}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{block}{Pemfaktoran}
+        \noindent\vspace*{-0.5cm}
+        \begin{flalign*}
+          x^2 - y^2 & = (x-y)(x+y)            & \\
+          x^3 - y^3 & = (x-y)(x^2 + xy + y^2) & \\
+          x^3 + y^3 & = (x+y)(x^2 - xy + y^2) &
+        \end{flalign*}
+      \end{block}
+    \end{column}
+  \end{columns}
+  \begin{block}{Binomial Newton}
+    Pada kombinatorika, terdapat identitas yang dikenal dengan nama \textbf{Binomial Newton}, yaitu
+    \[
+      (x+y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k} y^k,\quad \text{untuk } n \in \mathbb{N} \cup \{0\}.
+    \]
+  \end{block}
+
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{block}{Jumlahan $n$ pangkat pertama}
+    \begin{align*}
+      \sum_{k=1}^n k   & = 1+2+3\cdots+(n-1)+n = \frac{n(n+1)}{2}                          \\
+      \sum_{k=1}^n k^2 & = 1^2+2^2+3^2\cdots+(n-1)^2+n^2 = \frac{n(n+1)(2n+1)}{6}          \\
+      \sum_{k=1}^n k^3 & = 1^3+2^3+3^3\cdots+(n-1)^3+n^3 = \left(\frac{n(n+1)}{2}\right)^2
+    \end{align*}
+  \end{block}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}
+    Untuk setiap bilangan real $x,y$ dan bilangan asli $n$, berlaku
+    \begin{align*}
+      x^n - y^n & = (x-y)(x^{n-1} + x^{n-2}y + \cdots + xy^{n-2} + y^{n-1})
+    \end{align*}
+    Sedangkan jika $n$ \textbf{ganjil}, maka juga berlaku
+    \begin{align*}
+      x^n + y^n & = (x+y)(x^{n-1} - x^{n-2}y + \cdots - xy^{n-2} + y^{n-1})
+    \end{align*}
+  \end{teorema}
+\end{frame}
+
+\subsection{Manipulasi Aljabar}
+\begin{frame}{\insertsection}{\insertsubsection}
+  Manipulasi aljabar adalah proses mengubah suatu ekspresi aljabar menjadi bentuk yang lebih sederhana atau lebih mudah untuk dianalisis.
+  \begin{contoh}
+    Tentukan semua pasangan bilangan bulat positif $(a,b)$ yang memenuhi $ab+a+b=11$
+    \onslide<2->{\textbf{Jawab:}
+      Gunakan identitas $(a+1)(b+1) = ab + a + b + 1$ untuk menyelesaikan soal ini.
+      \begin{align*}
+        ab + a + b              & = 11 \\
+        \implies ab + a + b + 1 & = 12 \\
+        \implies (a+1)(b+1)     & = 12
+      \end{align*}
+      Sehingga, pasangan bilangan bulat positif $(a,b)$ yang memenuhi adalah $(1,5), (2,3),  (3,2), $ $ (5,1)$.
+    }
+  \end{contoh}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{proposisi}[Bentuk Akar Kuadrat Bersarang]
+    Misalkan $a,b,c > 0$. Jika terdapat bilangan real $m,n \ge 0$ sehingga
+    \[
+      \sqrt{a \pm b\sqrt{c}} = \sqrt{m} \pm \sqrt{n},
+    \]
+    maka berlaku
+    \[
+      m+n = a
+      \quad \text{dan} \quad
+      mn = \frac{b^2 c}{4}.
+    \]
+  \end{proposisi}
+  \begin{contoh}
+    Bentuk $\sqrt{7 + 4\sqrt{3}}$ dapat disederhanakan menjadi $2 + \sqrt{3}$, karena $2^2 + (\sqrt{3})^2 = 7$ dan $2 \cdot 2 \cdot \sqrt{3} = 4\sqrt{3}$.
+  \end{contoh}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{alertblock}{Kesalahan Umum}
+    Saat melakukan manipulasi aljabar, penting untuk memperhatikan domain dari variabel yang digunakan. Misalnya saat menyelesaikan persamaan $x^2=x$, perhatikan bahwa
+    \[
+      x^{\cancel{2}}=\cancel{x}\implies x=1
+    \]
+    Namun, pada langkah tersebut, kita telah menghilangkan solusi $x=0$ yang sebenarnya juga memenuhi persamaan tersebut.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Diberikan bilangan $x$ dan $y$ adalah bilangan real berbeda yang tidak 0 sehingga memenuhi persamaan
+    $$x + \frac{2}{x} = y + \frac{2}{y}$$
+    Berapakah nilai $xy$ yang memenuhi?
+
+    \onslide<2->{\textbf{Jawab:}
+      \begin{align*}
+        x + \frac{2}{x}           = y + \frac{2}{y}
+        \implies x - y             = \frac{2}{y} - \frac{2}{x}
+        \implies \underbrace{\cancel{(x-y)}xy  = 2\cancel{(x-y)}}_{x\neq y}
+        \implies xy                = 2
+      \end{align*}
+      \textit{Catatan: tidak perlu tau nilai $x,y$ untuk menjawab beberapa soal nantinya}
+    }
+  \end{contoh}
+\end{frame}
+
+\section{Barisan}
+\begin{frame}{\insertsection}
+  \begin{definisi}
+    Barisan adalah sebuah fungsi yang memetakan bilangan asli ($\mathbb{N}$) ke suatu himpunan, dalam hal ini biasanya bilangan real ($\mathbb{R}$). Barisan biasanya dinyatakan dalam bentuk $a_n$ atau $\{a_n\}$, dimana $n$ adalah indeks yang menunjukkan posisi suku dalam barisan.
+  \end{definisi}
+  \begin{contoh}
+    \begin{itemize}
+      \item Barisan Fibonacci: $a_1 = 1, a_2 = 1$, dan $a_n = a_{n-1} + a_{n-2}$ untuk $n > 2$ menghasilkan barisan $1, 1, 2, 3, 5, 8, \ldots$
+      \item Barisan Harmonik: $a_n = \frac{1}{n}$ menghasilkan barisan $1, \frac{1}{2}, \frac{1}{3}, \ldots$
+    \end{itemize}
+  \end{contoh}
+\end{frame}
+
+\subsection{Barisan Aritmatika}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{definisi}
+    Barisan aritmatika adalah barisan yang memiliki beda yang konstan antara suku-sukunya. Beda tersebut disebut dengan $b$ dan dapat dihitung dengan rumus $b = a_{n+1} - a_n$ untuk setiap $n\in\N$.
+  \end{definisi}
+  \begin{teorema}
+    Rumus suku ke-$n$ barisan aritmatika adalah $a_n = a_1 + (n-1)b$, dimana $a_1$ adalah suku pertama dan $b$ adalah beda.
+  \end{teorema}
+\end{frame}
+
+\subsection{Barisan Geometri}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{definisi}
+    Barisan geometri adalah barisan yang memiliki rasio yang konstan antara suku-sukunya. Rasio tersebut disebut dengan $r$ dan dapat dihitung dengan rumus $r = \dfrac{a_{n+1}}{a_n}$ untuk setiap $n\in\N$.
+  \end{definisi}
+  \begin{teorema}
+    Rumus suku ke-$n$ barisan geometri adalah $a_n = a_1 r^{n-1}$, dimana $a_1$ adalah suku pertama dan $r$ adalah rasio.
+  \end{teorema}
+\end{frame}
+
+\section{Deret}
+\begin{frame}{\insertsection}
+  \begin{definisi}
+    Deret adalah jumlah dari suku-suku dalam suatu barisan. Deret biasanya dinyatakan dalam bentuk $S_n = a_1 + a_2 + \cdots + a_n$ atau $S_n = \sum_{k=1}^n a_k$, dimana $a_k$ adalah suku ke-$k$ dalam barisan.
+  \end{definisi}
+  \begin{contoh}
+    \begin{itemize}
+      \item Deret aritmatika: $S_n = a + (a + b) + (a + 2b) + \cdots + (a + (n-1)b)= \dfrac{n}{2}[2a + (n-1)b]$
+      \item Deret geometri: $S_n = a + a r + a r^2 + \cdots + a r^{n-1} = a \dfrac{r^n - 1}{r - 1}$, untuk $r \neq 1$
+    \end{itemize}
+  \end{contoh}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{proposisi}
+    Jika $S_n = \sum_{k=1}^n a_k$, maka $a_n = S_n - S_{n-1}$ untuk $n \ge 2$.
+  \end{proposisi}
+  \begin{contoh}
+    Diberikan $S_n = 2n^2 + 3n$. Carilah $a_n$.
+
+    \onslide<2->{\textbf{Jawab:}
+      \begin{align*}
+        a_n & = S_n - S_{n-1}                            = (2n^2 + 3n) - [2(n-1)^2 + 3(n-1)]               \\
+            & = (2n^2 + 3n) - [2(n^2 - 2n + 1) + 3n - 3]                                                   \\
+            & = (2n^2 + 3n) - (2n^2 - n - 1)                                                      = 4n + 1
+      \end{align*}}
+  \end{contoh}
+\end{frame}
+
+\subsection{Deret Tak Hingga}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{definisi}
+    Deret tak hingga adalah jumlah dari suku-suku dalam suatu barisan yang tidak terbatas. Deret tak hingga biasanya dinyatakan dalam bentuk $S = a_1 + a_2 + a_3 + \cdots$ atau $S = \sum_{k=1}^\infty a_k$, dimana $a_k$ adalah suku ke-$k$ dalam barisan.
+  \end{definisi}
+  \begin{contoh}
+    Deret geometri tak hingga: $S = a + a r + a r^2 + \cdots = \dfrac{a}{1 - r}$, untuk $|r| < 1$
+  \end{contoh}
+  Hal tersebut dapat terjadi karna untuk $|r| < 1$, maka $\lim_{n \to \infty} a r^n = 0$.
+  \begin{alertblock}{Catatan}
+    Tidak semua deret tak hingga memiliki jumlah yang terdefinisi. Deret yang memiliki jumlah terdefinisi disebut dengan \textbf{deret konvergen}, sedangkan deret yang tidak memiliki jumlah terdefinisi disebut dengan \textbf{deret divergen}.
+  \end{alertblock}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  Jika kita membicarakan fungsi dapat diperoleh hal berikut
+  \begin{proposisi}
+    Misalkan $|x| < 1$. Maka, berlaku
+    \begin{align*}
+      \frac{1}{1-x}          & = 1 + x + x^2 + x^3 + \cdots = \sum_{k=0}^\infty x^k                                                                \\
+      \frac{1}{(1-x)^2}      & = 1 + 2x + 3x^2 + 4x^3 + \cdots = \sum_{k=1}^\infty kx^{k-1}                                                        \\
+      \vdots                 &                                                                                                                     \\
+      \frac{n!}{(1-x)^{n+1}} & = n! + (n+1)!x + \frac{(n+2)!}{2!}x^2 + \frac{(n+3)!}{3!}x^3 + \cdots = \sum_{k=n}^\infty \frac{k!}{(k-n)!} x^{k-n}
+    \end{align*}
+  \end{proposisi}
+\end{frame}
+
+
+\subsection{Deret \textit{Telescoping}}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{definisi}
+    Deret teleskopik adalah deret yang suku-sukunya sebagian besar saling menghilangkan bila dijumlahkan satu sama lain.
+  \end{definisi}
+  Bentuk paling umum yang sering muncul berasal dari dekomposisi pecahan parsial:
+  \begin{align*}
+    \frac{1}{n(n+1)} = \frac{1}{n} - \frac{1}{n+1}
+  \end{align*}
+  Sehingga, penjumlahannya menjadi:
+  \begin{align*}
+    \sum_{k=1}^n \frac{1}{k(k+1)} & = \left(\frac{1}{1} - \frac{1}{2}\right) + \left(\frac{1}{2} - \frac{1}{3}\right) + \dots + \left(\frac{1}{n} - \frac{1}{n+1}\right) \\
+                                  & = 1 - \frac{1}{n+1}
+  \end{align*}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Hitunglah nilai dari $\displaystyle\sum_{k=1}^{2026} \log\left(1 + \frac{1}{k}\right)$.
+
+    \onslide<2->{\textbf{Jawab:}
+      \begin{align*}
+        \sum_{k=1}^{2026} \log\left(1 + \frac{1}{k}\right) & = \sum_{k=1}^{2026} \log\left(\frac{k+1}{k}\right) = \sum_{k=1}^{2026} [\log(k+1) - \log(k)]                   \\
+                                                           & = (\cancel{\log 2} - \log 1) + (\cancel{\log 3} - \cancel{\log 2}) + \cdots + (\log 2027 - \cancel{\log 2026}) \\
+                                                           & = \log 2027
+      \end{align*}}
+  \end{contoh}
+\end{frame}
+
+\section{Polinomial}
+\begin{frame}{\insertsection}
+  \begin{definisi}
+    Suatu \textbf{polinomial} atas bilangan real adalah fungsi $P(x)$ yang berbentuk
+    \[
+      P(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0,
+    \]
+    dengan:
+    \begin{itemize}
+      \item $n \in \mathbb{N} \cup \{0\}$,
+      \item $a_0, a_1, \ldots, a_n \in \mathbb{R}$,
+      \item dan $a_n \neq 0$.
+    \end{itemize}
+    Bilangan $n$ disebut sebagai \textbf{derajat} dari polinomial $P(x)$, dan ditulis $\deg(P) = n$.
+  \end{definisi}
+\end{frame}
+\subsection{Teorema Sisa dan Faktor}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}[Teorema Sisa]
+    Jika suatu polinomial $P(x)$ dibagi dengan linear berderajat satu $(x-c)$, maka sisanya adalah $P(c)$.
+  \end{teorema}
+  \begin{teorema}[Teorema Faktor]
+    Bilangan $c$ adalah akar dari persamaan $P(x) = 0$ jika dan hanya jika $(x-c)$ adalah faktor dari polinomial $P(x)$. Dengan kata lain, $P(c) = 0$ atau $P(x)=(x-c)Q(x)$ untuk suatu polinomial $Q(x)$.
+  \end{teorema}
+\end{frame}
+
+\subsection{Teorema Vieta}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}[Teorema Vieta]
+    Jika $P(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0$ adalah suatu polinomial dengan akar-akarnya $x_1, x_2, \ldots, x_n$, maka berlaku hubungan berikut:
+    \begin{align*}
+      \sum_{i=1}^n x_i                 & = x_1 + x_2 + \cdots + x_n = -\frac{a_{n-1}}{a_n}                \\
+      \sum_{1 \le i < j \le n} x_i x_j & = x_1 x_2 + x_1 x_3 + \cdots + x_{n-1} x_n = \frac{a_{n-2}}{a_n} \\
+      % \sum_{1 \le i < j < k \le n} x_i x_j x_k & = x_1 x_2 x_3 + \cdots + x_{n-2} x_{n-1} x_n = -\frac{a_{n-3}}{a_n} \\
+                                       & \vdots                                                           \\
+      \prod_{i=1}^n x_i                & = x_1 x_2 \cdots x_n = (-1)^n \frac{a_0}{a_n}
+    \end{align*}
+  \end{teorema}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  Teorema Vieta memberikan hubungan antara koefisien suatu polinomial dengan akar-akarnya.
+  \begin{block}{Persamaan Kuadrat $ax^2+bx+c=0$}
+    Mempunyai akar $x_1$ dan $x_2$. Maka:
+    \[ x_1 + x_2 = -\frac{b}{a}, \quad x_1 x_2 = \frac{c}{a} \]
+  \end{block}
+  \begin{block}{Persamaan Kubik $ax^3+bx^2+cx+d=0$}
+    Mempunyai akar $x_1, x_2, x_3$. Maka:
+    \begin{align*}
+      x_1 + x_2 + x_3              = -\frac{b}{a},\quad
+      x_1 x_2 + x_2 x_3 + x_3 x_1  = \frac{c}{a}  \quad
+      x_1 x_2 x_3                  = -\frac{d}{a}
+    \end{align*}
+  \end{block}
+\end{frame}
+
+\section*{\textit{Problem}}
+\begin{frame}{\insertsection}
+  \begin{latihan}[OSK 2011]
+    Tentukan nilai dari $3x^2y^2$ jika $x$ dan $y$ adalah bilangan bulat yang memenuhi persamaan
+    \[
+      y^2 + 3x^2y^2 = 30x^2 + 517.
+    \]
+  \end{latihan}
+  \begin{latihan}[OSK 2016]
+    Misalkan $a$ adalah bilangan real sehingga polinomial $p(x) = x^4 + 4x + a$ habis dibagi oleh $(x-c)^2$ untuk suatu bilangan real $c$. Nilai $a$ yang memenuhi adalah \ldots
+  \end{latihan}
+  \begin{latihan}[OSK 2017]
+    Misalkan $P(x)$ suatu polinom berderajat $4$ yang memiliki nilai maksimum $2018$ di $x=0$ dan $x=2$. Jika $P(1)=2017$, maka nilai $P(3)$ adalah \ldots
+  \end{latihan}
+  % \begin{latihan}[OSK 2017]
+  %   Misalkan $P(x)$ suatu polinom berderajat $4$ yang memiliki nilai maksimum $2018$ di $x=0$ dan $x=2$. Jika $P(1)=2017$, maka nilai $P(3)$ adalah \ldots
+  % \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  % \begin{latihan}[OSK 2022]
+  %   Misalkan $f(x) = a^2 x + 200$. Jika $f(20) + f^{-1}(22) = f^{-1}(20) + f(22)$, maka $f(1) = \ldots$
+  % \end{latihan}
+  \begin{latihan}[OSK 2019]
+    Misalkan
+    \[
+      a = 2\sqrt{2} - \sqrt{8 - 4\sqrt{2}}
+      \quad \text{dan} \quad
+      b = 2\sqrt{2} + \sqrt{8 - 4\sqrt{2}}.
+    \]
+    Jika
+    $
+      \frac{a}{b} + \frac{b}{a} = x + y\sqrt{2},
+    $
+    dengan $x, y$ bilangan bulat, maka nilai $x + y$ adalah \ldots
+  \end{latihan}
+
+  \begin{latihan}[OSK 2022]
+    Jika
+    $
+      \displaystyle\sum_{k=1}^{\infty} \frac{2k + B}{3^{k+1}} = 20,
+    $
+    maka $B = \ldots$
+  \end{latihan}
+
+
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}[OSK 2016]
+    Diberikan barisan $\{a_n\}$ dan $\{b_n\}$ dengan
+    \[
+      a_n = \frac{1}{n\sqrt{n}}
+      \quad \text{dan} \quad
+      b_n = \frac{1}{\left(1+\frac{1}{n}\right) + \sqrt{1+\frac{1}{n}}},
+    \]
+    untuk setiap bilangan asli $n$. Misalkan
+    \[
+      S_n = a_1b_1 + a_2b_2 + \cdots + a_n b_n.
+    \]
+    Banyaknya bilangan asli $n$ dengan $n \le 2016$ sehingga $S_n$ merupakan bilangan rasional adalah \ldots
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}[KSN-K 2021]
+    Misalkan $u_1, u_2, u_3$ barisan aritmetika dengan suku-suku bilangan real positif.
+    Jika $\dfrac{u_1 + u_2}{u_3} = \dfrac{11}{21}$, maka nilai $\dfrac{u_2 + u_3}{u_1}$ adalah \ldots
+  \end{latihan}
+  \begin{latihan}[KSN-K 2021]
+    Koefisien suku $x^7$ pada penjabaran $(1 + x)(2 + x^2)(3 + x^3)(4 + x^4)(5 + x^5)$ adalah \ldots
+  \end{latihan}
+  \begin{latihan}[KSN-K 2021]
+    Diketahui fungsi $f$ terdefinisi di semua bilangan real selain $0$ dan $1$ memenuhi persamaan
+    $
+      (x+1)f(-x) + \frac{1-x}{4x} f\left(\frac{1}{x}\right) = \frac{100(x^2+4)}{x}.
+    $
+    Nilai dari $f(2) + f(3) + f(4) + \cdots + f(400)$ adalah \ldots
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{Referensi}
+  \begin{thebibliography}{9}
+
+    \bibitem{eddy}
+    Eddy Hermanto,
+    \emph{Diktat Pembinaan Olimpiade Matematika}.
+
+    \bibitem{parvardi}
+    Amir Parvardi,
+    \emph{Olympiad Algebra Book (Vol I): 1220 Polynomials \& Trigonometry Problems}.
+
+    \bibitem{andreescu}
+    Titu Andreescu-Navid Safaei-Alessandro Ventullo,
+    \emph{Awesome Polynomials for Mathematics Competitions}.
+
+  \end{thebibliography}
+\end{frame}
+
+
+\end{document}
