@@ -1,0 +1,546 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{colortbl,tabularx,mathrsfs,calligra}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{ragged2e}
+\usepackage[indonesian]{babel}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{pgfplots, tkz-euclide,calc}
+\usepackage{cite}
+\pgfplotsset{compat=1.18}
+\usepackage{listings}
+\usepackage{ulem}
+
+\graphicspath{{C:/Users/teoso/OneDrive/Documents/Tugas Kuliah/Template Math Depart/}{./foto/}}
+
+\definecolor{HIMAmuda}{HTML}{01D1FD}
+\definecolor{HIMAtua}{HTML}{02016A}
+\definecolor{HIMAabu}{HTML}{CBCBCC}
+\definecolor{PastelGreen}{HTML}{77DD77}
+
+\usetheme{Madrid}
+
+\setbeamercolor{palette primary}{bg=HIMAtua,fg=white}
+\setbeamercolor{palette secondary}{bg=HIMAmuda,fg=black}
+\setbeamercolor{palette tertiary}{bg=HIMAabu,fg=black}
+\setbeamercolor{palette quaternary}{bg=HIMAmuda,fg=white}
+\setbeamercolor{structure}{fg=HIMAmuda} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=HIMAtua} % TOC sections
+\setbeamercolor{bibliography item}{parent=palette secondary}
+\setbeamercolor*{bibliography entry author}{parent=section in toc}
+
+\usetikzlibrary{shapes.geometric, arrows, calc}
+
+\tikzstyle{startstop} = [ellipse, minimum width=1cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{decision} = [diamond, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=blue!50]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usefonttheme{professionalfonts}
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{bibliography item}[book]
+
+\theoremstyle{definition}
+\newtheorem{definisi}{Definisi}
+\newtheorem{proposisi}{Proposisi}
+\newtheorem{teorema}{Teorema}
+\newtheorem{lema}{Lema}
+\newtheorem{akibat}{Akibat}
+\newtheorem{contoh}{Contoh}
+\newtheorem{latihan}{Latihan}
+
+\providecommand{\definisiautorefname}{Definisi}
+\providecommand{\proposisiautorefname}{Proposisi}
+\providecommand{\lemaautorefname}{Lema}
+\providecommand{\teoremaautorefname}{Teorema}
+\providecommand{\akibatautorefname}{Akibat}
+\providecommand{\contohautorefname}{Contoh}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+
+\AtBeginEnvironment{contoh}{%
+\setbeamercolor{block title}{use=example text,fg=white,bg=example text.fg!75!black}
+\setbeamercolor{block body}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+}
+\AtBeginEnvironment{definisi}{
+\setbeamercolor{block title}{fg=white,bg=HIMAtua}
+\setbeamercolor{block body}{parent=normal text,bg=HIMAtua!30!white}
+}
+\AtBeginEnvironment{latihan}{%
+  \setbeamercolor{block title}{fg=white,bg=yellow!30!orange}
+  \setbeamercolor{block body}{parent=normal text,bg=yellow!30!white}
+}
+\AtBeginEnvironment{teorema}{
+    \setbeamercolor{block title}{bg=darkgray,fg=white}
+    \setbeamercolor{block body}{parent=pallette tertiary,bg=HIMAabu!30!white}
+}
+\AtBeginEnvironment{proposisi}{
+    \setbeamercolor{block title}{bg=teal,fg=white}
+    \setbeamercolor{block body}{parent=pallette tertiary,bg=teal!30!white}
+    \setbeamercolor{item}{fg=teal}
+}
+\AtBeginEnvironment{lema}{
+    \setbeamercolor{block title}{bg=lime!70!black,fg=white}
+    \setbeamercolor{block body}{parent=pallette tertiary,bg=lime!30!white}
+    \setbeamercolor{item}{fg=lime}
+}
+
+\date{April 2026}
+\title[OSK Matematika - T1,T2]{Pembinaan OSN-K Matematika\\(Pertemuan 3: Keterbagian dan Modulo)}
+\author[Junika]{Junika Irdia Indi Astudin}
+\institute[MAN 1 Pasuruan]{MAN 1 Pasuruan}
+\titlegraphic{\includegraphics[width=0.15\textwidth]{../../man1pasuruan.png}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{\textit{Outline}}
+  \tableofcontents
+\end{frame}
+\section{Bilangan Ganjil-Genap dan Bilangan Prima}
+\subsection{Bilangan Ganjil-Genap}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \textbf{Sifat-sifat dalam penjumlahan atau pengurangan dua bilangan}
+  \begin{enumerate}
+    \item Bilangan ganjil $\pm$ Bilangan ganjil $ = $ Bilangan genap
+    \item Bilangan ganjil $\pm$ Bilangan genap $ = $ Bilangan ganjil
+    \item Bilangan genap $\pm$ Bilangan ganjil $ = $ Bilangan ganjil
+    \item Bilangan genap $\pm$ Bilangan genap $ = $ Bilangan genap
+  \end{enumerate}
+  \textbf{Sifat-sifat dalam perkalian dua bilangan}
+  \begin{enumerate}
+    \item Bilangan ganjil $\times$ Bilangan ganjil $ = $ Bilangan ganjil
+    \item Bilangan genap $\times$ Bilangan ganjil $ = $ Bilangan genap
+    \item Bilangan ganjil $\times$ Bilangan genap $ = $ Bilangan genap
+    \item Bilangan genap $\times$ Bilangan genap $ = $ Bilangan genap
+  \end{enumerate}
+\end{frame}
+\subsection{Bilangan Prima}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{definisi}
+    Bilangan prima adalah bilangan bulat lebih dari $1$ yang hanya mempunyai dua faktor yaitu 1 dn bilangan dia sendiri.
+  \end{definisi}
+  Beberapa properti dari bilangan prima.
+  \begin{enumerate}
+    \item Bilangan prima adalah bilangan bulat yang lebih besar dari 1.
+    \item Bilangan prima mempunyai tepat dua faktor, yaitu 1 dan bilangan itu sendiri.
+    \item Hanya ada satu bilangan prima genap yaitu 2.
+    \item Dua bilangan prima apa pun selalu saling prima.
+    \item Setiap bilangan dapat dinyatakan sebagai hasil kali bilangan prima.
+  \end{enumerate}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}
+    Setiap bilangan prima $p$ lebih dari $3$, dapat dinyatakan sebagai $p=6n \pm 1$, dengan $n$ adalah bilangan asli.
+  \end{teorema}
+  \begin{definisi}
+    Bilangan komposit adalah bilangan yang lebih besar dari 1 yang mempunyai lebih dari dua faktor.
+  \end{definisi}
+  \begin{teorema}
+    Jika $n$ adalah sebuah bilangan komposit, maka $n$ harus habis dibagi oleh bilangan prima $p$ di mana $p \leq \sqrt{n}.$
+  \end{teorema}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Apakah $331$ merupakan bilangan prima?
+    \onslide<2->{Berdasarkan teorema sebelumnya, jika $331$ tidak habis dibagi oleh bilangan prima $p$ di mana $p \leq \sqrt{331}$, maka $331$ bukan bilangan komposit atau bilangan prima.\\
+        Dapat dicari bilangan prima $p \leq \sqrt{331}$ adalah $2,3,5,7,11,13,17$. Selanjutnya dapat diselidiki bahwa tidak satupun $2,3,5,7,11,13,17$  habis membagi $331$. Dengan demikian $331$ merupakan bilangan prima.}
+  \end{contoh}
+\end{frame}
+
+\section{Faktor Bilangan}
+\begin{frame}{\insertsection}
+  \begin{definisi}
+    Sebuah bilangan bulat $k$ dikatakan faktor dari sebuah bilangan bulat $N$, jika ada sebuah bilangan bulat $n$ sehingga $N=kn$.
+  \end{definisi}
+  \begin{proposisi}
+    Faktor prima dari bilangan bulat $N$ adalah bilangan bulat prima yang merupakan faktor dari $N$. Setiap bilangan bulat positif $N$ lebih dari satu dapat dibentuk sebagai
+    \begin{align}
+      N=p_1^{q_1}p_2^{q_2}p_3^{q_3}\ldots p_n^{q_n}, \notag
+    \end{align}
+    dengan $p_1,p_2,p_3,\ldots,p_n$ adalah bilangan prima dan $q_1,q_2,q_3,\ldots,q_n$ adalah bilangan bulat positif.
+  \end{proposisi}
+
+\end{frame}
+\begin{frame}{\insertsection}
+  \begin{teorema}\label{thm:banyak_faktor}
+    Jika $N=p_1^{q_1}p_2^{q_2}p_3^{q_3}\ldots p_n^{q_n}$, maka $N$ memiliki $(q_1+1)(q_2+1)(q_3+1)\ldots(q_n+1)$ faktor.
+  \end{teorema}
+  \begin{teorema}\label{thm:jumlah_faktor_positif}
+    Jika $N=p_1^{q_1}p_2^{q_2}p_3^{q_3}\ldots p_n^{q_n}$, maka jumlah faktor-faktor positif dari $N$ adalah
+    \begin{align}
+      \frac{p_1^{q_1+1}-1}{p_1-1} \times \frac{p_2^{q_2+1}-1}{p_2-1} \times \ldots \times \frac{p_n^{q_n+1}-1}{p_n-1} \notag
+    \end{align}
+  \end{teorema}
+  \begin{teorema}\label{thm:hasil_kali_faktor}
+    Jika $N=p_1^{q_1}p_2^{q_2}p_3^{q_3}\ldots p_n^{q_n}$ dan mempunyai $d(N)$ faktor, maka hasil kali semua faktor-faktornya adalah
+    \begin{align}
+      N^{\frac{d(N)}{2}} \notag
+    \end{align}
+  \end{teorema}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{contoh}
+    Misalkan faktorisasi prima dari bilangan positif $N$ adalah
+    $$N=2^3.3.a^2.$$
+    Jika jumlah semua faktor positif dari $N$ adalah $3420$, maka nilai $a$ adalah \ldots \\
+    \onslide<2->{Berdasarkan \autoref{thm:jumlah_faktor_positif}, jika $N=2^3.3.a^2$, maka jumlah seluruh faktor positifnya adalah
+        \begin{align*}
+          \frac{2^{3+1}-1}{2-1} \times \frac{3^{1+1}-1}{3-1} \times \frac{a^{2+1}-1}{a-1}\frac{2^{4}-1}{2-1} \times \frac{3^{2}-1}{3-1} \times \frac{a^{3}-1}{a-1}=15 \times 4 \times \frac{a^{3}-1}{a-1} = 3420 \\
+          \implies\frac{a^{3}-1}{a-1} = 57\implies
+          a^3-57a+56=(a-1)(a^2+a-56)=(a-1)(a+8)(a-7)=0
+        \end{align*}
+        Diperoleh kemungkinan nilai $a$ adalah $-8,1,7$, karena $a$ adalah bilangan prima, akibatnya nilai $a$ yang memenuhi adalah $7$.}
+  \end{contoh}
+\end{frame}
+
+\section{Keterbagian}
+\begin{frame}{\insertsection}
+  \begin{definisi}
+    Jika terdapat $k\in \mathbb{Z}$ sehingga $b=a\cdot k$, maka sebuah bilangan $a$ dikatakan membagi $b$ (ditulis $a\,|\,b$), dengan $a,b \in \mathbb{Z}$.
+  \end{definisi}
+  \begin{proposisi}
+    Misalkan $a,b,c,x, y \in \mathbb{Z}$, maka berlaku sifat-sifat di bawah ini :
+    \begin{enumerate}
+      \item $a\,|\,a$
+      \item $a\,|\,0$
+      \item $1\,|\,a$
+      \item Jika $a\,|\,1$, maka $a=\pm 1$
+      \item Jika $a\,|\,b$, maka $a\,|\,xb$
+      \item Jika $ab\,|\,c$, maka $a\,|\,c$ dan $b\,|\,c$
+      \item Jika $a\,|\,b$ dan $b\,|\,c$, maka $a\,|\,c$
+    \end{enumerate}
+  \end{proposisi}
+\end{frame}
+\begin{frame}{\insertsection}
+  \begin{proposisi}
+    \begin{enumerate}
+      \setcounter{enumi}{7}
+      \item Jika $a\,|\,b$ dan $a\,|\,c$, maka $a\,|\,(bx+cy)$
+      \item Jika $a\,|\,b$, maka $xa\,|\,xb$
+      \item Jika $a\,|\,b$ dan $b\,|\,a$ maka $a=\pm b$
+      \item Jika $a\,|\,bc$ dan $FPB(a,b)=1$, maka $a\,|\,c$
+      \item Jika $a\,|\,c$ dan $b\,|\,c$, maka $ab\,|\,c$ dengan syarat a dan b relatif prima  atau $FPB(a,b)=1$. Berlaku sebaliknya.
+    \end{enumerate}
+  \end{proposisi}
+  \textit{Bukti}.
+  Karena $a\,|\,b$ dan $b\,|\,c$, maka terdapat $m,n\in \mathbb{Z}$ sedemikian hingga $b=a.m$ dan $c=b.n$. Kita dapat mensubstitusikan $b=a.m$ ke $c=b.n$, sehingga $c=(a.m)n=a.mn$, karena $mn\in \mathbb{Z}$ akibatnya $a\,|\,c$.
+  \textbf{Bukti lainnya diserahkan kepada pembaca.}
+\end{frame}
+
+
+\begin{frame}{\insertsection}
+  \begin{contoh}[AMC 10B 2010 P11]
+    Sebuah bilangan palindrom diantara $1000$ dan $10,000$ dipilih secara acak. Berapa peluang bahwa bilangan tersebut habis dibagi 7?\\
+    (Catatan: bilangan palindrom adalah bilangan yang sama jika dibaca maju dan mundur. Contoh: 1221, 15651.)\\
+    \onslide<2->{Bilangan palindrom yang dipilih dapat dituliskan sebagai
+        \begin{align}
+          a_010^3+a_110^2+a_210+a_3, \notag
+        \end{align}
+        dengan $a_0,a_1,a_2,a_3 \in \mathbb{Z}$ dan $0\leq a_0,a_1,a_2,a_3 \leq 9$, $a_0\neq0$.
+        Karena bilangan tersebut merupakan bilangan palindrom, akibatnya $a_0=a_3$ dan $a_1=a_2$, sehingga bilangan palindrom tersebut dapat dituliskan menjadi $1001a_0+101a_1$. Perhatikan bahwa $7|1001$, sehingga agar $7|1001a_0+101a_1$, $101a_1$ harus habis dibagi $7$. Diketahui bahwa $FPB(101,7)=1$, sehingga semua kemungkinan nilai $a_1$ adalah $0$ dan $7.$ Dengan demikian ada $2 \times 9$ palindrom yang habis dibagi $7$ dari $9 \times 10$ palindrom yang dapat dipilih. Jadi peluangnya adalah $\frac{2 \times 9}{9 \times  10}=\frac{1}{5}$.}
+  \end{contoh}
+\end{frame}
+\subsection{Sifat Habis Dibagi}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{block}{Uji habis dibagi $2$}
+    $K$ habis dibagi $2^n$ jika dan hanya jika n digit terakhir dari $K$ habis dibagi $2^n$.\\
+    Contoh: $22328$ habis dibagi $2^3$, sebab $328$ habis dibagi $2^3.$
+  \end{block}
+  \begin{block}{Uji habis dibagi $3$}
+    $K$ habis dibagi $3$ jika dan hanya jika jumlah digit $K$ habis dibagi $3$.\\
+    Contoh: $269034$ habis dibagi $3$, sebab $2+6+9+0+3+4=24$ habis dibagi $3$.
+  \end{block}
+  \begin{block}{Uji habis dibagi $5$}
+    $K$ habis dibagi $5$ jika dan hanya jika digit terakhir dari $K$ adalah $0$ atau $5$.\\
+    Contoh: $1075$ dan $8480$ habis dibagi $5$, sebab digit terakhir dari $1075$ adalah $5$ dan digit terakhir dari $8480$ adalah $0$.
+  \end{block}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{block}{Uji habis dibagi $7$}
+    Misalkan $K$ terdiri dari $m$ digit
+    \begin{enumerate}
+      \item Ambil digit ke-$m$(digit terakhir) lalu kali dengan 2
+      \item Kurangkan bilangan $m-1$ digit yang tersisa dengan hasil langkah (1)
+      \item Jika hasil pengurangannya dapat dibagi 7, maka bilangan $m$ digit tersebut dapat dibagi 7. Namun jika hasil pengurangannya masih besar, sehingga tidak yakin dapat dibagi 7 atau tidak, ulangi langkah ke (1) dan (2)
+    \end{enumerate}
+  \end{block}
+  \begin{block}{Uji habis dibagi $9$}
+    $K$ habis dibagi $9$ jika dan hanya jika jumlah digit $K$ habis dibagi $9$.\\
+    Contoh: $80433$ habis dibagi $9$, sebab $8+0+4+3+3=18$ habis dibagi $9$.
+  \end{block}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{block}{Uji habis dibagi $11$}
+    $K$ habis dibagi $11$ jika dan hanya jika selisih antara jumlah digit pada posisi ganjil dengan jumlah digit pada posisi genap habis dibagi $11$.\\
+    Contoh : $44517$ habis dibagi $11$ sebab $(4+5+7)-(4+1)=11$.
+  \end{block}
+  \begin{block}{Uji habis dibagi $13$}
+    Misalkan $K$ terdiri dari $m$ digit
+    \begin{enumerate}
+      \item Ambil digit ke-$m$(digit terakhir) lalu kali dengan 4
+      \item Tambahkan bilangan $m-1$ digit yang tersisa dengan hasil langkah (1)
+      \item Jika hasil penjumlahannya dapat dibagi $13$, maka bilangan $m$ digit tersebut dapat dibagi $13$. Namun jika hasil pengurangannya masih terlalu besar untuk diamati, sehingga tidak yakin dapat dibagi 13 atau tidak, ulangi langkah ke (1) dan (2).
+    \end{enumerate}
+  \end{block}
+\end{frame}
+\begin{frame}{\insertsection}
+  \begin{contoh}
+    Tentukan semua nilai $a$ agar $\overline{837a8}$ habis dibagi $3$.\\
+    \onslide<2->{Berdasarkan uji habis dibagi $3$, $\overline{837a8}$ habis dibagi $3$ jika dan hanya jika $8+3+7+a+8=26+a$ habis dibagi 3. Ingat bahwa $0 \leq a \leq 9$, sehingga nilai $a$ agar $26+a$ habis dibagi $3$ adalah $1,4,$ dan $7$.}
+  \end{contoh}
+\end{frame}
+\subsection{FPB dan KPK}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{definisi}
+    Faktor Persekutuan terbesar (FPB) dari dua bilangan adalah bilangan terbesar yang membagi kedua bilangan tersebut.
+  \end{definisi}
+  \begin{definisi}
+    Kelipatan Persekutuan Terkecil (KPK) dari dua bilangan adalah bilangan terkecil sehingga kelipatan kedua bilangan tersebut.
+  \end{definisi}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{proposisi}
+    Jika faktorisasi prima dari $a$ dan $b$ adalah
+    \[
+      a=r_1^{\alpha_1}r_2^{\alpha_2}r_3^{\alpha_3}\ldots r_n^{\alpha_n}\quad,\quad
+      b=r_1^{\beta_1}r_2^{\beta_2}r_3^{\beta_3}\ldots r_n^{\beta_n}
+    \]
+    maka
+    \begin{align}
+      KPK(a,b) & =r_1^{max\{\alpha_1,\beta_1\}}r_2^{max\{\alpha_2,\beta_2\}}\ldots r_n^{max\{\alpha_n,\beta_n\}} \notag  \\
+      FPB(a,b) & = r_1^{min\{\alpha_1,\beta_1\}}r_2^{min\{\alpha_2,\beta_2\}}\ldots r_n^{min\{\alpha_n,\beta_n\}} \notag
+    \end{align}
+  \end{proposisi}
+  \begin{teorema}
+    Jika $a$ dan $b$ adalah bilangan bulat positif, maka
+    \[\text{FPB}(a,b)\cdot \text{KPK}(a,b)=ab\]
+  \end{teorema}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{proposisi}
+    \begin{enumerate}
+      \item $FPB(0,0)=0$.
+      \item $FPB(p,0)=|p|$, dengan $p \in \mathbb{Z}$.
+      \item $FPB(p,p-1)=1$, dengan $p \in \mathbb{N}$.
+      \item Jika $r=FPB(p,s)$, maka $r|p$ dan $r|s$.
+      \item Jika $a=mp$ dan $b=mq$, maka $FPB(a,b)=m \times FPB(p,q)$
+      \item Jika $FPB(p,s)=r$, maka $p=rk$ dan $s=rl$ dengan $k,l \in \mathbb{Z}$ $FPB(k,l)=1$.
+      \item Jika $a>b>0$ dan $a=bq+r$ untuk $a,b,q,r \in  \mathbb{N}$, maka $FPB(a,b)=FPB(q,r)$.
+    \end{enumerate}
+  \end{proposisi}
+  \begin{lema}[Bézout Lemma]
+    Untuk setiap $a,b \in \mathbb{Z}$ terdapat bilangan bulat x dan y yang memenuhi $ax + by = FPB(a, b).$
+  \end{lema}
+\end{frame}
+\begin{frame}{\insertsection}
+  \begin{contoh}[AMC 10A 2022 P7]
+    KPK dari bilangan bulat positif $n$ dan $18$ adalah $180$, dan FPB dari bilangan bulat positif $n$ dan $45$ adalah $15$. Berapa jumlah digit dari bilangan bulat positif $n$?
+    \onslide<2->{Perhatikan bahwa
+        \begin{align}
+          18=2.3^2, \notag
+          180=2^2.3^2.5, \notag
+          45=3^2.5, \notag
+          15=3.5
+        \end{align}
+        Misalkan $n=2^a.3^b.5^c$, sehingga
+        \begin{align}
+          KPK(n,18)=KPK(2^a.3^b.5^c,2.3^2)=2^{max\{a,1\}}.3^{max\{b,2\}}.5^{max\{c,0\}}=2^2.3^2.5, \notag
+        \end{align}
+        di mana $a=2, b \in {0,1,2}, c=1$,
+        dan
+        \begin{align}
+          FPB(n,45)=FPB(2^a.3^b.5^c,3^2.5)=2^{min\{a,0\}}.3^{min\{b,2\}}.5^{min\{c,1\}}=3.5, \notag
+        \end{align}
+        di mana $b=1$.\\
+        Dengan demikian $n=2^2.3.5=60$, sehingga jumlah digit dari $n$ adalah $6+0=6.$}
+  \end{contoh}
+\end{frame}
+\section{Modulo}
+\begin{frame}{\insertsection}
+  \begin{definisi}
+    Untuk $a,b,c \in \mathbb{Z}$ dengan $c\ne 0$, jika $a-b$ habis dibagi $c$, maka $a$ dikatakan kongruen dengan $b$ modulo $c$, ditulis $a \equiv b (\text{mod }c)$.
+  \end{definisi}
+  \begin{proposisi}
+    Misalkan $a,b,c,d$ dan $m$ bilangan bulat dan $m>0$, berlaku sifat-sifat sebagai berikut:
+    \begin{enumerate}
+      \item Jika $a\equiv b (\text{mod }m)$, maka $b\equiv a (\text{mod }m)$.
+      \item Jika $a\equiv a_0 (\text{mod }m)$ dan $b\equiv b_0 (\text{mod }m)$, maka $a \pm b\equiv a_0 \pm b_0 (\text{mod }m)$
+      \item Jika $a\equiv a_0 (\text{mod }m)$ dan $b\equiv b_0 (\text{mod }m)$, maka $ab\equiv a_0b_0 (\text{mod }m)$
+      \item Jika $a\equiv b (\text{mod }m)$, maka $a^n\equiv b^n (\text{mod }m)$
+      \item Jika $a\equiv b (\text{mod }m)$, maka $a\equiv b \pm m (\text{mod }m)$
+      \item Jika $a\equiv b (\text{mod }m)$ dan $b\equiv c (\text{mod }m)$, maka $a\equiv c (\text{mod }m)$
+    \end{enumerate}
+  \end{proposisi}
+\end{frame}
+\begin{frame}{\insertsection}
+  \begin{proposisi}
+    \begin{enumerate}
+      \setcounter{enumi}{6}
+      \item Jika $a\equiv b (\text{mod }m)$ dan $c\equiv d (\text{mod }m)$, maka $a+b\equiv c+d (\text{mod }m)$
+      \item Jika $a\equiv b (\text{mod }m)$ dan $c\equiv d (\text{mod }m)$, maka $ab\equiv cd (\text{mod }m)$
+    \end{enumerate}
+  \end{proposisi}
+\end{frame}
+\section*{Contoh Soal}
+\begin{frame}{\insertsection}
+  \begin{contoh}[KL No 16 OSK SMA 2023]
+    Misalkan $n=2^a3^b$ dengan $a$ dan $b$ bilangan asli. Jika hasil kali semua faktor positif dari $n$ adalah $12^{90}$, maka nilai $ab=$ \ldots
+  \end{contoh}
+  \onslide<2->{Misalkan $d(N)$ adalah banyak faktor $n$. Berdasarkan Teorema \autoref{thm:banyak_faktor}, diperoleh
+      \begin{align}
+        d(N)=(a+1)(b+1) \notag
+      \end{align}
+      Selanjutnya, berdasarkan Teorema \autoref{thm:hasil_kali_faktor}, diperoleh
+      \begin{align}
+        12^{90}       & =\left(2^a3^b \right)^{\frac{(a+1)(b+1)}{2}} \notag         \\
+        2^{180}3^{90} & =2^{\frac{a(a+1)(b+1)}{2}}3^{\frac{b(a+1)(b+1)}{2}}, \notag
+      \end{align}}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  sehingga
+  \begin{align}
+    90  & = \frac{b(a+1)(b+1)}{2} \notag                              \\
+    180 & = \frac{a(a+1)(b+1)}{2}=2 \frac{b(a+1)(b+1)}{2}=b(a+1)(b+1)
+  \end{align}
+  \begin{align}
+    \frac{a(a+1)(b+1)}{2}     & =\frac{b(a+1)(b+1)}{2}=b(a+1)(b+1) \notag \\
+    (a+1)(b+1)(\frac{a}{2}-b) & =0.\notag
+  \end{align}
+  Karena $a-1 \neq 0$ dan $b-1 \neq 0$, akibatnya $\frac{a}{2}-b=0 \iff a=2b.$ Selanjutnya, substitusikan kembali $a=2b$ ke persamaan (1)
+  \begin{align}
+    b(a+1)(b+1)=b(2b+1)(b+1)=180=2^23^25. \notag
+  \end{align}
+  Dari persamaan tersebut diperoleh $b=4$ dan $a=2b=8.$ Dengan demikian nilai $ab=32.$
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{contoh}[AMC 10A 2016 P25]
+    Berapa banyak pasangan bilangan bulat positif $(x,y,z)$ yang memenuhi  $KPK(x,y) = 72, KPK(x,z) = 600 \text{ dan KPK}(y,z)=900$?
+  \end{contoh}
+  \onslide<2->{Kita tahu faktorisasi prima $72,600,900$ adalah
+      \begin{align}
+         & KPK(x,y) = 72=2^3 \times 3^2 \notag             \\
+         & KPK(x,z) = 600 = 2^3 \times 3 \times 5^2 \notag \\
+         & KPK(y,z)=900=2^2 \times 3^2 \times 5^2 \notag
+      \end{align}
+      Misalkan $x=2^a \times 3^b \times 5^c, \quad y=2^d \times 3^e \times 5^f$ dan $z=2^g \times 3^h \times 5^i$. Dari definisi KPK, kita memperoleh
+      \begin{center}
+        max$(a,d)=3$ \\
+        max$(b,e)=2$ \\
+        max$(a,g)=3$
+      \end{center}}
+\end{frame}
+\begin{frame}{\insertsection}
+  \begin{center}
+    max$(b,h)=1$ \\
+    max$(c,i)=2$ \\
+    max$(d,g)=2$ \\
+    max$(e,h)=2$ \\
+    max$(f,i)=2$
+  \end{center}
+  Karena $KPK(x,y)$ bukan kelipatan $5$, akibatnya $c=f=0$ dan $i=2$ Karena max$(a,d)=3$, max$(a,g)=3$, dan max$(d,g)=2$, akibatnya juga $a=3$. Dengan cara yang sama, diperoleh $e=2$. Sehingga kita telah memperoleh $a=3, c=0, e=2, f=0, i=2.$ Selanjutnya, terdapat 2 persamaan yang tidak bisa diperoleh nilai secara pasti, yaitu max$(b,h)=1$ dan max$(d,g)=2$. Dengan demikian, dapat diperoleh pasangan $(b,h)$ yaitu $(1,0),(0,1),(1,1)$ dan  pasangan $(d,g)$ yaitu $(2,0),(2,1),(2,2),(1,2),(0,2)$. Jadi, kemungkinan $(x,y,z)$ ada $3 \times 5=15.$
+\end{frame}
+\section*{Latihan Soal}
+\begin{frame}{\insertsection}
+  \begin{latihan}[OSK 2025]
+    Bilangan bulat positif terkecil $n$ sehingga $n!$ habis dibagi oleh $1430$ adalah \ldots
+    \textit{Catatan: Untuk sembarang bilangan asli $n$, notasi $n!$ merupakan hasil kali $1 \times 2 \times 3 \times \cdots \times n$.}
+  \end{latihan}
+
+  \begin{latihan}[OSK 2025]
+    Bilangan bulat terbesar $n$, sedemikian sehingga
+    \[
+      \gcd\big(1 + 2 + \cdots + n,\; 1^2 + 2^2 + \cdots + n^2\big) < 100
+    \]
+    adalah \ldots
+  \end{latihan}
+
+  \begin{latihan}[OSK 2025]
+    Dari digit-digit dari bilangan $6,7,8,\ldots,n$ dituliskan dari kiri ke kanan (tanpa spasi) membentuk suatu bilangan baru $K$, nilai $n$ terkecil sehingga $K$ habis dibagi $7$ adalah \ldots
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}[OSK 2024]
+    Misalkan $a,b$ bilangan bulat positif yang tidak memiliki faktor persekutuan positif selain $1$. Jika berlaku
+    \[
+      \frac{1+2+3+\cdots+104}{3+4+5+\cdots+106} = \frac{a}{b},
+    \]
+    maka nilai $a+b$ adalah \ldots
+  \end{latihan}
+  \begin{latihan}[OSK 2024]
+    Banyak bilangan dua digit $\overline{ab}$ dengan $a,b \neq 0$ sehingga $\overline{ab} + \overline{ba}$ merupakan bilangan kelipatan $66$ adalah \ldots
+  \end{latihan}
+  \begin{latihan}[OSK 2024]
+    Misalkan $k$ adalah bilangan bulat positif terkecil kelipatan $2024$ yang memiliki $28$ faktor positif. Sisa hasil bagi $k$ oleh $100$ adalah \ldots
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+
+  % ===== OSK 2023 =====
+  \begin{latihan}[OSK 2023]
+    Sisa pembagian bilangan $5^{2022} + 11^{2022}$ oleh $64$ adalah \ldots
+  \end{latihan}
+
+  \begin{latihan}[OSK 2023]
+    Banyaknya bilangan $4$-digit yang habis dibagi $3$ dan memuat angka $6$ adalah \ldots
+  \end{latihan}
+
+  \begin{latihan}[OSK 2023]
+    Misalkan $n = 2^a 3^b$ dengan $a$ dan $b$ bilangan asli. Jika hasil kali semua faktor positif dari $n$ adalah $12^{90}$, maka nilai $ab$ = \ldots
+  \end{latihan}
+
+  \begin{latihan}[OSK 2023]
+    Misalkan $p$ dan $n$ dua bilangan asli dengan $p$ bilangan prima sedemikian sehingga $p$ membagi $n^2 + 4$ dan membagi $p^2 + 4$. Jika $p < 200$, maka nilai terbesar yang mungkin dari $n$ adalah \ldots
+  \end{latihan}
+\end{frame}
+
+% \begin{frame}{Referensi}
+%   \begin{thebibliography}{9}
+
+%     \bibitem{eddy}
+%     Eddy Hermanto,
+%     \emph{Diktat Pembinaan Olimpiade Matematika}.
+
+%     \bibitem{soberon}
+%     Pablo Sober\'on,
+%     \emph{Problem-Solving Methods in Combinatorics}.
+
+%     \bibitem{brualdi}
+%     Richard A. Brualdi,
+%     \emph{Introductory Combinatorics}.
+
+%   \end{thebibliography}
+% \end{frame}
+\begin{frame}{Referensi}
+  \nocite{factor}
+  \nocite{dividing}
+  \nocite{primenumber}
+  \nocite{primenumber2}
+  \nocite{diktat}
+  \bibliographystyle{plain}
+  \bibliography{referensi}
+
+\end{frame}
+
+
+\end{document}
