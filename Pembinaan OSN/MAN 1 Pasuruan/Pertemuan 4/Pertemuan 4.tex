@@ -112,7 +112,7 @@
     \setbeamercolor{item}{fg=magenta}
 }
 
-\date{9 Mei 2026}
+\date{17 Mei 2026}
 \title[OSK Matematika - Geometri]{Pembinaan OSN-K Matematika\\(Pertemuan 4: \textit{Angle Chasing} dan Segitiga)}
 \author[Tetew]{Teosofi Hidayah Agung}
 \institute[MAN 1 Pasuruan]{MAN 1 Pasuruan}
@@ -144,7 +144,7 @@
 
 \subsection{Sudut}
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{proposisi}\label{prop:sudut_dasar}
+  \begin{proposisi}[Sudut Dasar\label{prop:sudut_dasar}]
     Sudut dinyatakan dalam satuan derajat, yang dilambangkan dengan tanda $^\circ$. Ukuran $360^\circ$ melambangkan satu putaran penuh.
 
     \vspace{0.5em}
@@ -197,7 +197,7 @@
   \end{center}
 \end{frame}
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{proposisi}\label{prop:transversal_dua_garis_sejajar}
+  \begin{proposisi}[Ekivalensi Sudut Transversal\label{prop:transversal_dua_garis_sejajar}]
     Misal garis $AB$ dan $CD$ sejajar, $P$ dan $Q$ adalah titik perpotongan garis transversal $XY$ dengan $AB$ dan $CD$ berturut-turut.
     \begin{center}
       \begin{tikzpicture}[scale=1, every node/.style={font=\footnotesize}]
@@ -278,8 +278,8 @@
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{contoh}\label{cth:transversal}
-    Tentukan besar sudut yang belum diketahui (ditandai dengan $x$).
+  \begin{contoh}
+    Tentukan besar sudut yang belum diketahui (ditandai dengan $x$).\label{cth:transversal}
     \begin{center}
       \begin{tikzpicture}[scale=0.9, every node/.style={font=\footnotesize}]
         \coordinate (A) at (0,5);
@@ -373,7 +373,7 @@
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}\label{thm:jumlah_sudut_segitiga}
+  \begin{teorema}[Jumlah Sudut Segitiga\label{thm:jumlah_sudut_segitiga}]
     Jumlah ketiga sudut dalam segitiga adalah $180^\circ$.
   \end{teorema}
   \begin{center}
@@ -404,7 +404,7 @@
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}[Segitiga Sama Kaki]\label{thm:segitiga_sama_kaki}
+  \begin{teorema}[Segitiga Sama Kaki\label{thm:segitiga_sama_kaki}]
     Dalam sebuah segitiga $\Delta ABC$, dua sisi akan sama panjang jika dan hanya jika sudut yang berhadapan dengan sisi-sisi tersebut sama besar. Dengan kata lain, $\overline{AB} = \overline{AC}$ jika dan hanya jika $\angle ABC = \angle ACB$.
   \end{teorema}
   \begin{center}
@@ -453,7 +453,7 @@
         \coordinate (B) at (0,0);
         \coordinate (C) at (4,0);
         \coordinate (A) at (5, 2.5);
-        \draw[thick] (B) -- (A) -- (C) -- cycle;
+        \draw[thick] (B) -- node[sloped] {$|||$} (A) -- node[sloped] {$|$} (C) -- node[sloped] {$||$} cycle;
 
         \pic[draw, fill=purple, ultra thick, angle radius=0.5cm] {angle = A--C--B};
         \pic[draw, fill=cyan, thick, angle radius=0.5cm] {angle = B--A--C};   % 
@@ -797,7 +797,7 @@
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}\label{thm:sudut_pusat_keliling}
+  \begin{teorema}[Perbandingan Sudut Pusat dan Keliling\label{thm:sudut_pusat_keliling}]
     Besar sudut pusat adalah dua kali besar sudut keliling yang menghadap busur yang sama. Dengan kata lain,jika $M, N, A$ merupakan titik pada lingkaran yang berpusat $O$, maka $\angle MON = 2 \times \angle MAN$.
   \end{teorema}
   \begin{center}
@@ -906,8 +906,8 @@
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{contoh}\label{cth:sudut_pusat_keliling}
-    Perhatikan bangun datar setengah lingkaran dengan diameter $AD$ dan pusat lingkaran $M$ berikut. Misalkan $B$ dan $C$ adalah titik-titik pada lingkaran sedemikian sehingga $AC$ tegak lurus $BM$ dan $BD$ memotong $AC$ di $P$. Jika besar $\angle CAD = 24^\circ$, maka tentukan $\angle CPD + \angle MBD$.
+  \begin{contoh}
+    Perhatikan bangun datar setengah lingkaran dengan diameter $AD$ dan pusat lingkaran $M$ berikut. Misalkan $B$ dan $C$ adalah titik-titik pada lingkaran sedemikian sehingga $AC$ tegak lurus $BM$ dan $BD$ memotong $AC$ di $P$. Jika besar $\angle CAD = 24^\circ$, maka tentukan $\angle CPD + \angle MBD$.\label{cth:sudut_pusat_keliling}
     \begin{center}
       \begin{tikzpicture}[scale=1, every node/.style={font=\small}]
         \def\R{3}
@@ -950,7 +950,7 @@
           \item<3-> $\angle MBD= \angle BDA = \frac{1}{2} \times 66^\circ = 33^\circ$. (\myref{thm:segitiga_sama_kaki},\myref{thm:sudut_pusat_keliling})
           \item<4-> $\angle CPD = \angle CAD + \angle ADP = 24^\circ + 33^\circ = 57^\circ$. (\myref{thm:jumlah_sudut_segitiga})
         \end{itemize}
-        $\quad \therefore\angle CPD + \angle MBD = 57^\circ + 33^\circ = \mathbf{90^\circ}$
+        \onslide<5->{$\quad \therefore\angle CPD + \angle MBD = 57^\circ + 33^\circ = \mathbf{90^\circ}$}
       \end{column}
       \begin{column}{0.45\textwidth}
         \begin{center}
@@ -1147,6 +1147,77 @@
   \end{block}
 \end{frame}
 
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Pada segitiga siku-siku \(ABC\) dengan \(\angle A=90^\circ\), diketahui
+    $
+      \overline{AB}=8$, $ \overline{AC}=6.
+    $
+    Titik \(D\) terletak pada sisi \(BC\) sehingga
+    $
+      \angle BAD=\angle ACB.
+    $
+    Tentukan panjang \(BD\).\\
+    \onslide<2->{\textbf{Jawab}:
+        \begin{columns}
+          \begin{column}{0.6\textwidth}
+            \small
+            \begin{itemize}
+              \item $\angle BAD = \angle ACB$ dan $\angle BAC = 90^\circ$.
+              \item<3-> $\angle CAD = 90^\circ - \alpha = \angle ABC$ (Misalkan $\beta$).
+              \item<4-> $\triangle ABD \sim \triangle ACB$ (Kriteria AA).
+              \item<5-> $\overline{BC}=\sqrt{\overline{AB}^2 + \overline{AC}^2} = \sqrt{8^2 + 6^2} = 10$.
+              \item<6-> $\displaystyle\frac{\overline{BD}}{\overline{AB}}=\frac{\overline{AB}}{\overline{BC}}\implies \overline{BD}=\frac{\overline{AB}^2}{\overline{BC}}=\frac{8^2}{10}=\frac{64}{10}=\boxed{\frac{32}{5}}$.
+            \end{itemize}
+          \end{column}
+          \begin{column}{0.4\textwidth}
+            \begin{center}
+              \begin{tikzpicture}[scale=0.5,every node/.style={font=\footnotesize}]
+                \coordinate (A) at (0,0);
+                \coordinate (B) at (8,0);
+                \coordinate (C) at (0,6);
+                \coordinate (D) at ($(B)!(A)!(C)$);
+
+                \draw (A)--(B)--(C)--cycle;
+                \draw (A)--(D);
+
+                \node[right] at (B) {$B$};
+                \node[below left] at (A) {$A$};
+                \node[above] at (C) {$C$};
+                \node[above right] at (D) {$D$};
+
+                \node[below] at ($(A)!0.5!(B)$) {$8$};
+                \node[left] at ($(A)!0.5!(C)$) {$6$};
+
+                \draw (0.35,0)--(0.35,0.35)--(0,0.35);
+
+                \draw[red,thick] pic["$\alpha$",draw=red,angle radius=15,angle eccentricity=0.5]
+                  {angle=B--A--D};
+                \draw[red,thick] pic["$\alpha$",draw=red,angle radius=15,angle eccentricity=0.5]
+                  {angle=A--C--B};
+                \onslide<3->{\draw[purple,thick] pic["\tiny$\beta$",draw=purple,angle radius=20,angle eccentricity=0.6]
+                      {angle=D--A--C};
+                    \draw[purple,thick] pic["\tiny$\beta$",draw=purple,angle radius=20,angle eccentricity=0.6]
+                      {angle=D--B--A};}
+
+                \onslide<4->{
+                    \draw[blue,thick] (B)--(A)--(D);
+                    \draw[blue,thick] (A)--(C)--(B);
+                    \pic[draw, angle radius=0.2cm] {right angle = C--D--A};
+                    \pic[draw, angle radius=0.2cm] {right angle = A--D--B};
+                  }
+
+                \onslide<5->{
+                    \draw [decorate,decoration={brace,amplitude=5pt,mirror,raise=3ex}]
+                    (B) -- (C) node[midway,yshift=5ex,xshift=3ex]{$10$};
+                  }
+              \end{tikzpicture}
+            \end{center}
+          \end{column}
+        \end{columns}}
+  \end{contoh}
+\end{frame}
+
 \subsection{Garis Berat}
 \begin{frame}{\insertsection}{\insertsubsection}
   \begin{definisi}[Garis Berat / \textit{Median}]
@@ -1182,7 +1253,7 @@
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}
+  \begin{teorema}[Perbandingan Titik Berat\label{thm:perbandingan_titik_berat}]
     Ketiga garis berat pada suatu segitiga berpotongan tepat pada satu titik tunggal yang disebut \textbf{titik berat} (centroid), dinotasikan dengan $G$. Titik ini membagi masing-masing garis berat dengan perbandingan $2:1$.
   \end{teorema}
 
@@ -1260,6 +1331,79 @@
   \end{center}
 \end{frame}
 
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Pada segitiga \(ABC\), garis berat \(AD\) dan \(BE\) berpotongan di \(G\).
+    Melalui \(G\) dibuat garis yang sejajar dengan \(BC\), memotong \(AB\) di \(P\)
+    dan memotong \(AC\) di \(Q\).
+    Jika
+    $
+      \overline{BC}=18,
+    $
+    tentukan panjang \(PQ\).\\
+    \onslide<2->{\textbf{Jawab}:}
+    \begin{columns}
+      \begin{column}{0.58\textwidth}
+        \begin{itemize}
+          \item<2-> $AG:GD=2:1\implies\frac{AG}{AD}=\frac{2}{3}.$ (\myref{thm:perbandingan_titik_berat})
+          \item<3-> $\triangle AGP\sim\triangle ADB$ dan $\triangle AGQ\sim\triangle ADC$ (\myref{prop:transversal_dua_garis_sejajar}, Kriteria AA).
+          \item<4-> $\displaystyle\frac{\overline{AP}}{{\overline{AB}}}=\frac{AG}{AD}=\frac{2}{3}$ dan $\displaystyle\frac{\overline{AQ}}{\overline{AC}}=\frac{AG}{AD}=\frac{2}{3}$.
+          \item<5-> $\displaystyle\frac{\overline{PQ}}{\overline{BC}}=\frac{\overline{AP}}{\overline{AB}}=\frac{2}{3}\implies \overline{PQ}=\frac{2}{3}\cdot 18=\boxed{12}$.
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.42\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.65,every node/.style={font=\footnotesize}]
+          \coordinate (A) at (3,4.5);
+          \coordinate (B) at (0,0);
+          \coordinate (C) at (8,0);
+          \coordinate (D) at ($(B)!0.5!(C)$);
+          \coordinate (E) at ($(A)!0.5!(C)$);
+          \coordinate (G) at ($(A)!2/3!(D)$);
+          \coordinate (P) at ($(A)!2/3!(B)$);
+          \coordinate (Q) at ($(A)!2/3!(C)$);
+
+          \onslide<2->{
+              \node[above] at (A) {$A$};
+              \node[left] at (B) {$B$};
+              \node[right] at (C) {$C$};
+              \node[below] at (D) {$D$};
+              \node[right] at (E) {$E$};
+              \node[above left] at (G) {$G$};
+              \node[left] at (P) {$P$};
+              \node[right] at (Q) {$Q$};
+              \draw (A)--(B)--(C)--cycle;
+              \draw (A)--(D);
+              % \draw (B)--(E);
+              \draw (P)--(Q);
+              \fill (D) circle (1.2pt);
+              \fill (E) circle (1.2pt);
+              \fill (G) circle (1.2pt);
+              \fill (P) circle (1.2pt);
+              \fill (Q) circle (1.2pt);
+              \draw[red,thick] (A)--(D);
+              \node[right,red] at ($(A)!0.32!(D)$) {$2k$};
+              \node[right,red] at ($(A)!0.83!(D)$) {$k$};
+            }
+
+          \onslide<3->{
+              \draw[blue,thick] (A)--(P)--(G);
+              \draw[blue,thick] (A)--(B)--(D);
+              \draw[orange,thick] (A)--(Q)--(G);
+              \draw[orange,thick] (A)--(C)--(D);
+            }
+
+          \onslide<4->{
+              \draw[green!50!black,thick] (P)--node[midway,below left] {$2l$} (Q);
+              \draw[green!50!black,thick] (B)--node[midway,below left] {$3l$} (C);
+            }
+        \end{tikzpicture}
+      \end{column}
+    \end{columns}
+  \end{contoh}
+
+\end{frame}
+
 \subsection{Garis Bagi}
 \begin{frame}{\insertsection}{\insertsubsection}
   \begin{definisi}[Garis Bagi / \textit{Angle Bisector}]
@@ -1334,11 +1478,11 @@
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{definisi}
-    Titik potong ketiga garis bagi pada $\triangle ABC$ (biasanya dinotasikan dengan $O$ atau $I$) disebut sebagai \textbf{titik pusat lingkaran dalam} (incenter).
-  \end{definisi}
-  \begin{definisi}
+  \begin{definisi}[Lingkaran Dalam / \textit{Incircle}]
     Lingkaran yang berpusat di titik tersebut dan menyinggung ketiga sisi $\triangle ABC$ disebut \textbf{lingkaran dalam} (incircle).
+  \end{definisi}
+  \begin{definisi}[Titik Pusat Lingkaran Dalam / \textit{Incenter}]
+    Titik potong ketiga garis bagi pada $\triangle ABC$ (biasanya dinotasikan dengan $O$ atau $I$) disebut sebagai \textbf{titik pusat lingkaran dalam} (incenter).
   \end{definisi}
   \begin{lema}
     Setiap titik yang terletak pada sebuah garis bagi sudut memiliki jarak tegak lurus yang sama terhadap kedua lengan sudut tersebut.
@@ -1346,23 +1490,105 @@
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}
-    Pada $\triangle ABC$, jika $\overline{AD}$ adalah panjang garis bagi yang ditarik dari titik $A$ ke sisi $BC$, berlaku
-    \[\frac{\overline{BD}}{\overline{DC}} = \frac{\overline{AB}}{\overline{AC}}\]
+  \begin{teorema}[Perbandingan Garis Bagi\label{thm:perbandingan_garis_bagi}]
+    Pada $\triangle ABC$, jika $AD$ adalah garis bagi sudut $A$ yang ditarik dari titik $A$ ke sisi $BC$, maka berlaku
+    \[
+      \frac{\overline{BD}}{\overline{DC}}=\frac{\overline{AB}}{\overline{AC}}.
+    \]
+    Selain itu, berlaku pula
+    \[
+      \frac{\overline{BD}}{\overline{BC}}=\frac{\overline{AB}}{\overline{AB}+\overline{AC}},
+      \qquad
+      \frac{\overline{DC}}{\overline{BC}}=\frac{\overline{AC}}{\overline{AB}+\overline{AC}}.
+    \]
   \end{teorema}
-  \begin{teorema}
-    Misalkan $r$ adalah jari-jari lingkaran dalam pada $\triangle ABC$, $L$ adalah luas $\triangle ABC$, dan $s$ adalah setengah keliling segitiga yaitu $s = \frac{a+b+c}{2}$. Maka berlaku hubungan:
-    $$ r = \frac{L}{s} $$
+  \begin{teorema}[Jari-jari Lingkaran Dalam\label{thm:jari_jari_lingkaran_dalam}]
+    Misalkan $r$ adalah jari-jari lingkaran dalam pada $\triangle ABC$, $L$ adalah luas $\triangle ABC$, dan $s$ adalah setengah keliling segitiga yaitu $s = \frac{a+b+c}{2}$. Maka berlaku hubungan
+    $ r = \frac{L}{s} $
   \end{teorema}
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
   \begin{teorema}
-    Misalkan panjang sisi-sisi $\triangle ABC$ adalah $a, b, c$, dan $AD$ adalah garis bagi sudut $A$ yang memotong sisi $BC$ di $D$. Jika panjang segmen $BD = m$ dan $DC = n$, maka panjang garis bagi $AD$ dapat dihitung dengan:
-    $$ AD^2 = bc - mn $$
-    Atau jika menggunakan sudut, panjang $AD$ dapat dicari dengan:
-    $$ AD = \frac{2bc \cos(\frac{A}{2})}{b+c} $$
+    Pada $\triangle ABC$, jika $AD$ adalah garis bagi sudut $A$ yang memotong sisi $BC$ di titik $D$, maka panjang garis bagi $AD$ dapat dihitung dengan:
+    \[
+      \overline{AD}^2 = \overline{AB} \cdot \overline{AC} - \overline{BD} \cdot \overline{DC}, \quad \text{atau} \quad \overline{AD}^2 = \overline{AB} \cdot \overline{AC} \left(1 - \frac{\overline{BC}^2}{(\overline{AB} + \overline{AC})^2}\right).
+    \]
+    Atau jika menggunakan sudut, panjang $\overline{AD}$ dapat dicari dengan:
+    \[
+      \overline{AD}=\frac{2\cdot \overline{AB}\cdot \overline{AC}\cdot \cos\left(\frac{\angle A}{2}\right)}{\overline{AB}+\overline{AC}}.
+    \]
   \end{teorema}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Pada segitiga \(ABC\), \(AD\) adalah garis bagi sudut \(A\) yang memotong \(BC\) di \(D\).
+    Melalui \(D\) dibuat garis \(DE\parallel AB\) yang memotong \(AC\) di \(E\).
+    Diketahui
+    $
+      \overline{AB}=6,$ $\overline{AC}=10,$ $\overline{BC}=8.
+    $
+    Tentukan panjang \(CE\).\\
+    \onslide<2->{\textbf{Jawab}:}
+    \begin{columns}
+      \begin{column}{0.56\textwidth}
+        \begin{itemize}
+          \item<2-> $\triangle DEC \sim \triangle BAC$ (\myref{prop:transversal_dua_garis_sejajar}, Kriteria AA).
+          \item<3-> $\dfrac{x}{8-x}=\dfrac{6}{10}\implies x=3$. (\myref{thm:perbandingan_garis_bagi})
+          \item<4-> $\displaystyle\frac{\overline{CE}}{\overline{AC}}=\frac{\overline{DC}}{\overline{BC}}\implies \overline{CE}=\frac{5}{8}\cdot 10=\boxed{\frac{25}{4}}$.
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.44\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.7,every node/.style={font=\footnotesize}]
+          \coordinate (B) at (0,0);
+          \coordinate (C) at (8,0);
+          \coordinate (A) at (2,4);
+          \coordinate (D) at (3,0);
+          \coordinate (E) at (4.25,2.5);
+
+          \onslide<2-3>{
+              \node[below,blue] at ($(B)!0.5!(D)$) {$x$};
+              \node[below,blue] at ($(D)!0.5!(C)$) {$8-x$};
+            }
+          \onslide<2-4>{
+              \node[above right,blue] at ($(A)!0.5!(E)$) {$y$};
+              \node[above right,blue] at ($(E)!0.5!(C)$) {$10-y$};
+            }
+
+          \onslide<2->{
+              \node[above] at (A) {$A$};
+              \node[left] at (B) {$B$};
+              \node[right] at (C) {$C$};
+              \node[below] at (D) {$D$};
+              \node[above right] at (E) {$E$};
+              \fill (D) circle (1.2pt);
+              \fill (E) circle (1.2pt);
+              \pic[draw,angle radius=10,angle eccentricity=0.6, fill=cyan!20]
+              {angle=B--A--D};
+              \pic[draw,angle radius=10,angle eccentricity=0.6,fill=cyan!20]
+              {angle=D--A--C};
+              \pic[draw,angle radius=10,angle eccentricity=0.6, fill=cyan!20]
+              {angle=D--E--C};
+              \pic[draw,angle radius=10,angle eccentricity=0.6, fill=magenta!20]
+              {angle=C--B--A};
+              \pic[draw,angle radius=10,angle eccentricity=0.6, fill=magenta!20]
+              {angle=C--D--E};
+              \draw[purple] (A)--(B)--(C)--cycle;
+              \draw (A)--(D);
+              \draw[purple] (D)--(E);
+              \node[above left,blue] at ($(A)!0.5!(B)$) {$6$};
+            }
+
+          \onslide<4->{
+              \node[below,blue] at ($(B)!0.5!(D)$) {$3$};
+              \node[below,blue] at ($(D)!0.5!(C)$) {$5$};
+            }
+        \end{tikzpicture}
+      \end{column}
+    \end{columns}
+  \end{contoh}
 \end{frame}
 
 \subsection{Garis Sumbu}
@@ -1388,9 +1614,9 @@
 
       \draw[fill=orange!5] (A) -- (B) -- (C) -- cycle;
 
-      \draw[dashed] ($(D)!-1.5cm!(O)$) -- ($(D)!4cm!(O)$);
-      \draw[dashed] ($(E)!-4cm!(O)$) -- ($(E)!2cm!(O)$);
-      \draw[dashed] ($(F)!-4cm!(O)$) -- ($(F)!2cm!(O)$);
+      \draw[dashed] ($(D)!-1.5cm!(O)$) -- ($(D)!4.5cm!(O)$);
+      \draw[dashed] ($(E)!-2.5cm!(O)$) -- ($(E)!4cm!(O)$);
+      \draw[dashed] ($(F)!-2cm!(O)$) -- ($(F)!5cm!(O)$);
 
       \draw[red, thick] (O) -- (A);
       \draw[red, thick] (O) -- (B);
@@ -1421,16 +1647,164 @@
       \draw[line width=1pt] ($(tB2)!1mm!(F) + ($(tB2)!1.5mm!90:(B)$) - (tB2)$) -- ($(tB2)!1mm!(F) + ($(tB2)!1.5mm!-90:(B)$) - (tB2)$);
       \draw[line width=1pt] ($(tB2)!-1mm!(F) + ($(tB2)!1.5mm!90:(B)$) - (tB2)$) -- ($(tB2)!-1mm!(F) + ($(tB2)!1.5mm!-90:(B)$) - (tB2)$);
 
+      \fill (F) circle (1.5pt);
+      \fill (E) circle (1.5pt);
+      \fill (D) circle (1.5pt);
+      \fill[red] (O) circle (2pt);
+
       \node[above, blue] at (A) {$A$};
       \node[below left, blue] at (B) {$B$};
       \node[below right, blue] at (C) {$C$};
-      \node[below, blue] at (D) {$D$};
-      \node[above right, blue] at (E) {$E$};
+      \node[below right, blue] at (D) {$D$};
+      \node[above, blue] at (E) {$E$};
       \node[left, blue] at (F) {$F$};
       \node[above left, red] at (O) {$O$};
 
     \end{tikzpicture}
   \end{center}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{lema}[Sifat Garis Sumbu\label{lem:garis_sumbu_sama_jarak}]
+    Misalkan $l$ adalah garis sumbu dari segmen $AB$ dan $P$ adalah sebuah titik pada $l$. Maka $P$ memiliki jarak yang sama ke titik $A$ dan $B$, yaitu $\overline{PA} = \overline{PB}$.
+  \end{lema}
+  \begin{center}
+    \begin{tikzpicture}[scale=0.7, thick, every node/.style={font=\scriptsize}]
+      \coordinate (B) at (0, 0);
+      \coordinate (C) at (6, 0);
+      \coordinate (A) at (2.5, 4.5);
+
+      \coordinate (D) at ($(B)!0.5!(C)$);
+      \coordinate (E) at ($(A)!0.5!(C)$);
+      \coordinate (F) at ($(A)!0.5!(B)$);
+
+      \path[name path=perpBC] (D) -- ($(D)!5cm!90:(C)$);
+      \path[name path=perpAB] (F) -- ($(F)!5cm!-90:(A)$);
+      \path [name intersections={of=perpBC and perpAB, by=O}];
+
+      \coordinate (P) at ($(O)+(0,2)$);
+
+      % \draw let \p1 = ($(O)-(A)$) in (O) circle ({veclen(\x1,\y1)});
+
+      \draw[fill=orange!5] (A) -- (B) -- (C) -- cycle;
+
+      % \draw[red, thick] (O) -- (A);
+      \draw[red, thick] (O) -- (B);
+      \draw[red, thick] (O) -- (C);
+
+      \pic [draw, fill=green!20, angle radius=3mm] {right angle = O--D--C};
+      \pic [draw, fill=green!20, angle radius=3mm] {right angle = B--D--O};
+
+      \draw[dashed] ($(D)!-0.5cm!(O)$) -- ($(D)!5cm!(O)$) node[right] {$l$};
+      % \pic [draw, fill=green!20, angle radius=3mm] {right angle = O--E--A};
+      % \pic [draw, fill=green!20, angle radius=3mm] {right angle = O--F--B};
+
+      \coordinate (tB1) at ($(B)!0.5!(D)$);
+      \coordinate (tC1) at ($(D)!0.5!(C)$);
+      \draw[line width=1pt] ($(tB1)!2mm!90:(C)$) -- ($(tB1)!2mm!-90:(C)$);
+      \draw[line width=1pt] ($(tC1)!2mm!90:(C)$) -- ($(tC1)!2mm!-90:(C)$);
+
+      \draw[brown] (B) -- node[sloped] {$||$} (P) -- node[sloped] {$||$} (C);
+
+      % \coordinate (tA1) at ($(A)!0.5!(E)$);
+      % \coordinate (tC2) at ($(E)!0.5!(C)$);
+      % \draw[line width=1pt] ($(tA1)!1.5mm!90:(C)$) -- ($(tA1)!1.5mm!-90:(C)$);
+      % \draw[line width=1pt] ($(tA1)!1mm!(A) + ($(tA1)!1.5mm!90:(C)$) - (tA1)$) -- ($(tA1)!1mm!(A) + ($(tA1)!1.5mm!-90:(C)$) - (tA1)$);
+      % \draw[line width=1pt] ($(tC2)!1.5mm!90:(C)$) -- ($(tC2)!1.5mm!-90:(C)$);
+      % \draw[line width=1pt] ($(tC2)!1mm!(E) + ($(tC2)!1.5mm!90:(C)$) - (tC2)$) -- ($(tC2)!1mm!(E) + ($(tC2)!1.5mm!-90:(C)$) - (tC2)$);
+
+      % \coordinate (tA2) at ($(A)!0.5!(F)$);
+      % \coordinate (tB2) at ($(F)!0.5!(B)$);
+      % \draw[line width=1pt] ($(tA2)!1.5mm!90:(B)$) -- ($(tA2)!1.5mm!-90:(B)$);
+      % \draw[line width=1pt] ($(tA2)!1mm!(A) + ($(tA2)!1.5mm!90:(B)$) - (tA2)$) -- ($(tA2)!1mm!(A) + ($(tA2)!1.5mm!-90:(B)$) - (tA2)$);
+      % \draw[line width=1pt] ($(tA2)!-1mm!(A) + ($(tA2)!1.5mm!90:(B)$) - (tA2)$) -- ($(tA2)!-1mm!(A) + ($(tA2)!1.5mm!-90:(B)$) - (tA2)$);
+      % \draw[line width=1pt] ($(tB2)!1.5mm!90:(B)$) -- ($(tB2)!1.5mm!-90:(B)$);
+      % \draw[line width=1pt] ($(tB2)!1mm!(F) + ($(tB2)!1.5mm!90:(B)$) - (tB2)$) -- ($(tB2)!1mm!(F) + ($(tB2)!1.5mm!-90:(B)$) - (tB2)$);
+      % \draw[line width=1pt] ($(tB2)!-1mm!(F) + ($(tB2)!1.5mm!90:(B)$) - (tB2)$) -- ($(tB2)!-1mm!(F) + ($(tB2)!1.5mm!-90:(B)$) - (tB2)$);
+
+      % \fill (F) circle (1.5pt);
+      % \fill (E) circle (1.5pt);
+      \fill (D) circle (1.5pt);
+      \fill[red] (O) circle (2pt);
+      \fill[brown] (P) circle (2pt);
+
+      \node[above, blue] at (A) {$A$};
+      \node[below left, blue] at (B) {$B$};
+      \node[below right, blue] at (C) {$C$};
+      \node[below right, blue] at (D) {$D$};
+      % \node[above, blue] at (E) {$E$};
+      % \node[left, blue] at (F) {$F$};
+      \node[above left, red] at (O) {$O$};
+      \node[left, brown] at (P) {$P$};
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=0.7, thick, every node/.style={font=\scriptsize}]
+      \coordinate (B) at (0, 0);
+      \coordinate (C) at (6, 0);
+      \coordinate (A) at (2.5, 4.5);
+
+      \coordinate (D) at ($(B)!0.5!(C)$);
+      \coordinate (E) at ($(A)!0.5!(C)$);
+      \coordinate (F) at ($(A)!0.5!(B)$);
+
+      \path[name path=perpBC] (D) -- ($(D)!5cm!90:(C)$);
+      \path[name path=perpAB] (F) -- ($(F)!5cm!-90:(A)$);
+      \path [name intersections={of=perpBC and perpAB, by=O}];
+
+      \coordinate (P) at ($(F)!4cm!(O)$);
+
+      % \draw let \p1 = ($(O)-(A)$) in (O) circle ({veclen(\x1,\y1)});
+
+      \draw[fill=orange!5] (A) -- (B) -- (C) -- cycle;
+
+      \draw[red, thick] (O) -- (A);
+      \draw[red, thick] (O) -- (B);
+      % \draw[red, thick] (O) -- (C);
+
+      \pic [draw, fill=green!20, angle radius=3mm] {right angle = O--F--B};
+      \pic [draw, fill=green!20, angle radius=3mm] {right angle = O--F--A};
+      \draw[dashed] ($(F)!-1cm!(O)$) -- ($(F)!5cm!(O)$) node[right] {$l$};
+
+
+      % \coordinate (tB1) at ($(B)!0.5!(D)$);
+      % \coordinate (tC1) at ($(D)!0.5!(C)$);
+      % \draw[line width=1pt] ($(tB1)!2mm!90:(C)$) -- ($(tB1)!2mm!-90:(C)$);
+      % \draw[line width=1pt] ($(tC1)!2mm!90:(C)$) -- ($(tC1)!2mm!-90:(C)$);
+
+      \draw[brown] (A) -- node[sloped] {$||$} (P) -- node[sloped] {$||$} (B);
+
+      \coordinate (tA1) at ($(A)!0.5!(E)$);
+      \coordinate (tC2) at ($(E)!0.5!(C)$);
+      \draw[line width=1pt] ($(tA1)!1.5mm!90:(C)$) -- ($(tA1)!1.5mm!-90:(C)$);
+      \draw[line width=1pt] ($(tA1)!1mm!(A) + ($(tA1)!1.5mm!90:(C)$) - (tA1)$) -- ($(tA1)!1mm!(A) + ($(tA1)!1.5mm!-90:(C)$) - (tA1)$);
+      \draw[line width=1pt] ($(tC2)!1.5mm!90:(C)$) -- ($(tC2)!1.5mm!-90:(C)$);
+      \draw[line width=1pt] ($(tC2)!1mm!(E) + ($(tC2)!1.5mm!90:(C)$) - (tC2)$) -- ($(tC2)!1mm!(E) + ($(tC2)!1.5mm!-90:(C)$) - (tC2)$);
+
+      % \coordinate (tA2) at ($(A)!0.5!(F)$);
+      % \coordinate (tB2) at ($(F)!0.5!(B)$);
+      % \draw[line width=1pt] ($(tA2)!1.5mm!90:(B)$) -- ($(tA2)!1.5mm!-90:(B)$);
+      % \draw[line width=1pt] ($(tA2)!1mm!(A) + ($(tA2)!1.5mm!90:(B)$) - (tA2)$) -- ($(tA2)!1mm!(A) + ($(tA2)!1.5mm!-90:(B)$) - (tA2)$);
+      % \draw[line width=1pt] ($(tA2)!-1mm!(A) + ($(tA2)!1.5mm!90:(B)$) - (tA2)$) -- ($(tA2)!-1mm!(A) + ($(tA2)!1.5mm!-90:(B)$) - (tA2)$);
+      % \draw[line width=1pt] ($(tB2)!1.5mm!90:(B)$) -- ($(tB2)!1.5mm!-90:(B)$);
+      % \draw[line width=1pt] ($(tB2)!1mm!(F) + ($(tB2)!1.5mm!90:(B)$) - (tB2)$) -- ($(tB2)!1mm!(F) + ($(tB2)!1.5mm!-90:(B)$) - (tB2)$);
+      % \draw[line width=1pt] ($(tB2)!-1mm!(F) + ($(tB2)!1.5mm!90:(B)$) - (tB2)$) -- ($(tB2)!-1mm!(F) + ($(tB2)!1.5mm!-90:(B)$) - (tB2)$);
+
+      \fill (F) circle (1.5pt);
+      % \fill (E) circle (1.5pt);
+      % \fill (D) circle (1.5pt);
+      \fill[red] (O) circle (2pt);
+      \fill[brown] (P) circle (2pt);
+
+      \node[above, blue] at (A) {$A$};
+      \node[below left, blue] at (B) {$B$};
+      \node[below right, blue] at (C) {$C$};
+      % \node[below right, blue] at (D) {$D$};
+      % \node[above, blue] at (E) {$E$};
+      \node[left, blue] at (F) {$F$};
+      \node[above left, red] at (O) {$O$};
+      \node[left, brown,above] at (P) {$P$};
+    \end{tikzpicture}
+  \end{center}
+
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
@@ -1441,6 +1815,10 @@
   \begin{definisi}[Lingkaran Luar / \textit{Circumcircle}]
     Lingkaran yang kelilingnya melalui ketiga titik sudut sebuah segitiga. Pusat dari lingkaran ini adalah titik sumbu.
   \end{definisi}
+
+  \begin{lema}
+    Pada sebuah segitiga, hanya ada satu (tunggal) titik sumbu yang merupakan perpotongan dari ketiga garis sumbu sisi-sisi segitiga tersebut.
+  \end{lema}
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
@@ -1458,6 +1836,80 @@
     \]
   \end{teorema}
 
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Pada segitiga \(ABC\), diketahui
+    $
+      \angle B=70^\circ,$ $\angle C=50^\circ.
+    $
+    Garis sumbu ruas garis \(AB\) memotong perpanjangan\(AC\) melewati $C$ di titik \(P\).
+    Tentukan besar sudut
+    $
+      \angle BPC.
+    $\\
+    \onslide<2->{\textbf{Jawab}:}
+    \begin{columns}
+      \begin{column}{0.58\textwidth}
+        \begin{itemize}
+          \item<2-> $\angle A=180^\circ-(50^\circ+70^\circ)=60^\circ$.
+          \item<3-> $AP=PB$ (\myref{lem:garis_sumbu_sama_jarak}).
+          \item<4-> $\triangle AMP\cong \triangle BMP$ (Kriteria SAS).
+          \item<5-> $\angle BPC = \angle ABP + \angle PBA = 60^\circ + 60^\circ = \boxed{120^\circ}$.
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.42\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.85,every node/.style={font=\footnotesize}]
+          \coordinate (A) at (0,0);
+          \coordinate (C) at (6,0);
+          \coordinate (B) at (1.5,3);
+          \coordinate (M) at ($(A)!0.5!(B)$);
+          \coordinate (P) at (3.75,0);
+
+          \onslide<2-3>{
+              \pic["\tiny$70^\circ$",draw,fill=red!20,angle radius=15,angle eccentricity=0.6]
+              {angle=A--B--C};
+            }
+          \onslide<3->{
+              \pic["\tiny$60^\circ$",draw,fill=blue!20,angle radius=18,angle eccentricity=0.7]
+              {angle=C--A--B};
+              \draw (B) -- node[sloped] {$||$} (P);
+              \draw (A) -- node[sloped] {$||$} (P);
+            }
+
+          \onslide<4->{
+              \pic["\tiny$60^\circ$",draw,fill=blue!20,angle radius=18,angle eccentricity=0.6]
+              {angle=A--B--P};
+            }
+
+          \onslide<5->{
+              \pic["\tiny$120^\circ$",draw,fill=purple!20,angle radius=15,angle eccentricity=0.6]
+              {angle=C--P--B};
+            }
+          \onslide<2->{
+              \pic["\tiny$50^\circ$",draw,fill=yellow!20,angle radius=25,angle eccentricity=0.7]
+              {angle=B--C--A};
+              \pic [draw, fill=green!20, angle radius=3mm] {right angle = A--M--P};
+              \pic [draw, fill=green!20, angle radius=3mm] {right angle = B--M--P};
+
+              \node[below left] at (A) {$A$};
+              \node[above] at (B) {$B$};
+              \node[below] at (C) {$C$};
+              \node[below] at (P) {$P$};
+              \node[above left] at (M) {$M$};
+
+              \draw (A)-- node[sloped] {$|$} (M)-- node[sloped] {$|$} (B)--(C)--cycle;
+              \draw (M) -- (P);
+
+              \fill (P) circle (1.2pt);
+              \fill (M) circle (1.2pt);
+            }
+        \end{tikzpicture}
+      \end{column}
+    \end{columns}
+  \end{contoh}
 \end{frame}
 
 \subsection{Garis Tinggi}
@@ -1530,9 +1982,9 @@
 
       \coordinate (D) at ($(A)!(B)!(C)$);
 
-      \draw[dashed, thick] (B) -- (D);
-
       \draw[fill=orange!10] (A) -- (B) -- (C) -- cycle;
+
+      \draw[dashed, thick] (B) -- (D);
 
       \pic [draw, fill=green!20, angle radius=4mm] {right angle = A--B--C};
       \pic [draw, fill=green!20, angle radius=3mm] {right angle = B--D--C};
@@ -1570,6 +2022,73 @@
       a \cdot t_a = b \cdot t_b = c \cdot t_c = 2L
     \]
   \end{akibat}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Diberikan sebuah segitiga lancip $ABC$ dengan titik tinggi $H$. Garis tinggi dari titik $A$ memotong sisi $BC$ di titik $D$, dan garis tinggi dari titik $B$ memotong sisi $AC$ di titik $E$. Jika diketahui besar $\angle BAC = 45^\circ$ dan $\overline{BC} = 10$, maka tentukanlah panjang dari ruas garis $AH$!\\
+    \onslide<2->{\textbf{Jawab}:}
+    \begin{columns}[T]
+      \begin{column}{0.45\textwidth}
+        \begin{tikzpicture}[scale=0.8,every node/.style={font=\footnotesize}]
+          % 1. Gambar Dasar (Muncul di semua slide)
+          \coordinate (A) at (-4, 0);
+          \coordinate (E) at (0, 0);
+          \coordinate (C) at (3, 0);
+          \coordinate (B) at (0, 4);
+          \coordinate (H) at (0, 3);
+          \coordinate (D) at ($(B)!(A)!(C)$);
+
+          \onslide<3->{
+              \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=green!30] {angle = E--B--C};
+              \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=green!30] {angle = C--A--D};
+            }
+
+          \only<2>{
+              \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=blue!30] {angle = E--A--B};
+              \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=blue!30] {angle = A--B--E};
+            }
+
+
+          \onslide<2->{
+              \pic [draw, fill=blue!15, angle radius=3mm] {right angle = A--E--B};
+              \pic [draw, fill=blue!15, angle radius=3mm] {right angle = A--D--C};
+              \pic [draw, fill=blue!15, angle radius=3mm] {right angle = B--E--C};
+
+              \draw[thick] (A) -- (B) -- (C) -- cycle;
+              \draw[thick] (A) -- (D);
+              \draw[thick] (B) -- (E);
+
+              \node[left] at (A) {$A$};
+              \node[above] at (B) {$B$};
+              \node[right] at (C) {$C$};
+              \node[below] at (E) {$E$};
+              \node[above right, xshift=1mm] at (D) {$D$};
+              \node[left, yshift=2mm] at (H) {$H$};
+              \draw[very thick, red] (-2, -0.1) -- (-2, 0.1);
+              \draw[very thick, red] (-0.1, 2) -- (0.1, 2);
+
+              \fill (H) circle (1.5pt);
+            }
+
+          \onslide<4->{
+              \fill[yellow, opacity=0.4] (A) -- (H) -- (E) -- cycle;
+              \fill[magenta, opacity=0.3] (B) -- (C) -- (E) -- cycle;
+            }
+        \end{tikzpicture}
+      \end{column}
+      \begin{column}{0.55\textwidth}
+        \begin{itemize}
+          \item<2-> $\triangle ABE$ siku-siku di $E$. $\angle ABE = 45^\circ$ dan $\color{red}{AE = BE}$.
+
+          \item<3-> $\angle C$ penyiku $\angle DAC$, sehingga $\angle DAC = \angle CBE$.
+
+          \item<4-> $\triangle AHE \cong \triangle BCE$. (Kriteria ASA)
+          \item <5-> $AH = BC = \boxed{10}$.
+        \end{itemize}
+      \end{column}
+    \end{columns}
+  \end{contoh}
 \end{frame}
 
 % \subsection{Teorema Umum}
