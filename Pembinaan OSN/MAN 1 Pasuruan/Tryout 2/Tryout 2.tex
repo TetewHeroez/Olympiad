@@ -26,13 +26,25 @@
 \let\theproblem\relax
 \makeatother
 
+\newcommand\answerbox{%%
+\vspace*{0.5cm}%
+\noindent\textbf{\textsf{Jawab}}: \fbox{\rule{14cm}{0pt}\rule[-0.2ex]{0pt}{1.9ex}}}
+
 \theoremstyle{justnumber}
 \newtheorem{problem}{}
+
+\newenvironment{choices}[1][5]{%
+  \begin{multicols}{#1}%
+  \begin{enumerate}[label=(\Alph*)]%
+}{%
+  \end{enumerate}%
+  \end{multicols}%
+}
 
 \begin{document}
 \title{Tryout 2 Pembinaan OSK Matematika}
 \author{MAN 1 Pasuruan}
-\date{23 April 2025}
+\date{Mei 2025}
 \maketitle
 \noindent\textbf{Petunjuk pengerjaan:}
 \begin{itemize}
@@ -45,147 +57,491 @@
 
 \section*{Pilihan Ganda}
 \begin{problem}
-  Perhatikan segiempat $ABCD$ berikut.
-  \begin{center}
-    \begin{tikzpicture}[scale=0.8, line join=round, line cap=round, rotate=5]
+Berapa banyak dari sepuluh suku pertama barisan
+\[
+  121,11211,1112111,\dots
+\]
+yang merupakan bilangan prima?
 
-      % --- KOORDINAT MATEMATIS PRESISI ---
-      % Berdasarkan perhitungan trigonometri dari soal:
-      \coordinate (D) at (0,0);
-      \coordinate (A) at ({3*sqrt(3)}, 3);
-      \coordinate (C) at ({3*sqrt(3)+3}, 0);
-      \coordinate (B) at ({6*sqrt(3)+3}, {3*sqrt(3)});
+\begin{choices}
+  \item $0$
+  \item $1$
+  \item $2$
+  \item $3$
+  \item $4$
+\end{choices}
+%KJ : A
+\end{problem}
+\begin{problem}
+Salah satu dari bilangan berikut tidak habis dibagi oleh bilangan prima mana pun yang kurang dari \(10\).
+Bilangan yang manakah itu?
 
-      % --- GAMBAR GARIS ---
-      \draw[thick] (D) -- (C) -- (B) -- (A) -- cycle;
-      \draw[thick] (A) -- (C); % Garis diagonal
+\begin{choices}
+  \item $2^{606}-1$
+  \item $2^{606}+1$
+  \item $2^{607}-1$
+  \item $2^{607}+1$
+  \item $2^{607}+3^{607}$
+\end{choices}
+%KJ : C
+\end{problem}
+\begin{problem}
+Barisan \(a_0,a_1,a_2,\dots\) adalah suatu barisan aritmetika naik ketat yang terdiri dari bilangan bulat positif dan memenuhi
+\[
+  2^{a_7}=2^{27}\cdot a_7.
+\]
 
-      % --- LABEL TITIK ---
-      \node[left, xshift=-2pt] at (D) {$D$};
-      \node[below right, yshift=-2pt] at (C) {$C$};
-      \node[right, xshift=2pt] at (B) {$B$};
-      \node[left, xshift=-2pt, yshift=2pt] at (A) {$A$};
+Berapakah nilai minimum yang mungkin dari \(a_2\)?
 
-      % --- LABEL PANJANG SISI ---
-      \node[above left] at ($(D)!0.5!(A)$) {$6$ cm};
-      \node[above left] at ($(A)!0.5!(B)$) {$6\sqrt{2}$ cm};
+\begin{choices}
+  \item $8$
+  \item $12$
+  \item $16$
+  \item $17$
+  \item $22$
+\end{choices}
+%KJ : B
+\end{problem}
+\begin{problem}
+Misalkan \(a,b,c,\) dan \(d\) adalah bilangan bulat positif yang memenuhi semua relasi berikut:
+\[
+  abcd=2^6\cdot 3^9\cdot 5^7
+\]
+\[
+  \operatorname{lcm}(a,b)=2^3\cdot 3^2\cdot 5^3
+\]
+\[
+  \operatorname{lcm}(a,c)=2^3\cdot 3^3\cdot 5^3
+\]
+\[
+  \operatorname{lcm}(a,d)=2^3\cdot 3^3\cdot 5^3
+\]
+\[
+  \operatorname{lcm}(b,c)=2^1\cdot 3^3\cdot 5^2
+\]
+\[
+  \operatorname{lcm}(b,d)=2^2\cdot 3^3\cdot 5^2
+\]
+\[
+  \operatorname{lcm}(c,d)=2^2\cdot 3^3\cdot 5^2
+\]
 
-      % --- PENANDA SUDUT MANUAL (Anti-Error) ---
-      % Sudut ADC = 30
-      \draw (D) ++(0:0.7) arc (0:30:0.7);
-      \node at ($(D) + (15:1.1)$) {\footnotesize $30^\circ$};
+Berapakah \(\gcd(a,b,c,d)\)?
 
-      % Sudut ACD = 45
-      % Garis CD berarah 180 derajat dari C, garis CA berarah 135 derajat dari C
-      \draw (C) ++(135:0.7) arc (135:180:0.7);
-      \node at ($(C) + (157.5:1.1)$) {\footnotesize $45^\circ$};
+\begin{choices}
+  \item $30$
+  \item $45$
+  \item $3$
+  \item $15$
+  \item $6$
+\end{choices}
+%KJ : C
+\end{problem}
+\begin{problem}
+Berapakah digit puluhan dari \(6^{66}\)?
 
-      % Sudut CAB = 60
-      % Garis AC berarah -45 derajat dari A, garis AB berarah 15 derajat dari A
-      \draw (A) ++(-45:0.6) arc (-45:15:0.6);
-      \node at ($(A) + (-15:1.0)$) {\footnotesize $60^\circ$};
+\begin{choices}
+  \item $1$
+  \item $3$
+  \item $5$
+  \item $7$
+  \item $9$
+\end{choices}
+\end{problem}
+\begin{problem}
+Perhatikan segiempat $ABCD$ berikut.
+\begin{center}
+  \begin{tikzpicture}[scale=0.8, line join=round, line cap=round, rotate=5]
+    \coordinate (D) at (0,0);
+    \coordinate (A) at ({3*sqrt(3)}, 3);
+    \coordinate (C) at ({3*sqrt(3)+3}, 0);
+    \coordinate (B) at ({6*sqrt(3)+3}, {3*sqrt(3)});
 
-    \end{tikzpicture}
-  \end{center}
-  Diketahui bahwa panjang $AD$ adalah $6$ cm, dan $AB$ adalah $6\sqrt{2}$ cm. Jika $\angle ADC = 30^\circ$, $\angle ACD = 45^\circ$, dan $\angle CAB = 60^\circ$, maka carilah panjang $BC^2$!
-  \begin{multicols}{5}
-    \begin{enumerate}
-      \item[(A)] $36$
-      \item[(B)] $54$
-      \item[(C)] $72$
-      \item[(D)] $90$
-      \item[(E)] $126$
-    \end{enumerate}
-  \end{multicols}
+    \draw[thick] (D) -- (C) -- (B) -- (A) -- cycle;
+    \draw[thick] (A) -- (C);
+
+    \node[left, xshift=-2pt] at (D) {$D$};
+    \node[below right, yshift=-2pt] at (C) {$C$};
+    \node[right, xshift=2pt] at (B) {$B$};
+    \node[left, xshift=-2pt, yshift=2pt] at (A) {$A$};
+
+    \node[above left] at ($(D)!0.5!(A)$) {$6$ cm};
+    \node[above left] at ($(A)!0.5!(B)$) {$6\sqrt{2}$ cm};
+
+    \draw (D) ++(0:0.7) arc (0:30:0.7);
+    \node at ($(D) + (15:1.1)$) {\footnotesize $30^\circ$};
+
+    \draw (C) ++(135:0.7) arc (135:180:0.7);
+    \node at ($(C) + (157.5:1.1)$) {\footnotesize $45^\circ$};
+
+    \draw (A) ++(-45:0.6) arc (-45:15:0.6);
+    \node at ($(A) + (-15:1.0)$) {\footnotesize $60^\circ$};
+
+  \end{tikzpicture}
+\end{center}
+Diketahui bahwa panjang $AD$ adalah $6$ cm, dan $AB$ adalah $6\sqrt{2}$ cm. Jika $\angle ADC = 30^\circ$, $\angle ACD = 45^\circ$, dan $\angle CAB = 60^\circ$, maka carilah panjang $BC^2$!
+\begin{choices}
+  \item $36$
+  \item $54$
+  \item $72$
+  \item $90$
+  \item $126$
+\end{choices}
+%KJ : C
 \end{problem}
 
 \begin{problem}
-  Seorang pemborong ingin membuat penyangga atap gedung pertemuan yang mempunyai lebar $12\sqrt{3}$ m. Penyangga atap tersebut dibuat dengan menggabungkan dua kerangka besi yang berbentuk segitiga siku-siku seperti gambar ($\angle B = 30^\circ$, $AD \perp BC$, $DE \perp AB$, $EF \perp BC$, dan seterusnya sampai menuju tak-hingga). Jika panjang besi maksimal yang diperlukan untuk membuat satu kerangka segitiga tersebut dapat dinyatakan dengan $a\sqrt{b} + c$, maka nilai $a + b + c$ adalah...
-  \begin{center}
-    \begin{tikzpicture}[line join=round, line cap=round, thick]
+Seorang pemborong ingin membuat penyangga atap gedung pertemuan yang mempunyai lebar $12\sqrt{3}$ m. Penyangga atap tersebut dibuat dengan menggabungkan dua kerangka besi yang berbentuk segitiga siku-siku seperti gambar ($\angle B = 30^\circ$, $AD \perp BC$, $DE \perp AB$, $EF \perp BC$, dan seterusnya sampai menuju tak-hingga). Jika panjang besi maksimal yang diperlukan untuk membuat satu kerangka segitiga tersebut dapat dinyatakan dengan $a\sqrt{b} + c$, maka nilai $a + b + c$ adalah...
+\begin{center}
+  \begin{tikzpicture}[line join=round, line cap=round, thick]
+    \def\W{8}
 
-      % Skala dasar diatur langsung lebih kecil (misal panjang AB jadi 8 unit di kanvas)
-      % Hal ini menghindari penggunaan angka asli 12\sqrt{3} yang kebesaran
-      \def\W{8}
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (\W,0);
 
-      % Koordinat Sudut Utama Segitiga
-      \coordinate (A) at (0,0);
-      \coordinate (B) at (\W,0);
-      % Karena sudut B = 30 derajat, maka tan(30) = AC / AB -> 1/sqrt(3) = AC / W
-      \coordinate (C) at (0, {\W/sqrt(3)});
+    \coordinate (C) at (0, {\W/sqrt(3)});
 
-      % Menggambar segitiga utama
-      \draw (A) -- (B) -- (C) -- cycle;
+    \draw (A) -- (B) -- (C) -- cycle;
 
-      % Titik-titik zig-zag menggunakan proyeksi ortogonal otomatis TikZ
-      \coordinate (D) at ($(B)!(A)!(C)$);
-      \coordinate (E) at ($(A)!(D)!(B)$);
-      \coordinate (F) at ($(B)!(E)!(C)$);
-      \coordinate (G) at ($(A)!(F)!(B)$);
+    \coordinate (D) at ($(B)!(A)!(C)$);
+    \coordinate (E) at ($(A)!(D)!(B)$);
+    \coordinate (F) at ($(B)!(E)!(C)$);
+    \coordinate (G) at ($(A)!(F)!(B)$);
 
-      % Menggambar garis penyangga zig-zag
-      \draw (A) -- (D) -- (E) -- (F) -- (G);
+    \draw (A) -- (D) -- (E) -- (F) -- (G);
 
-      % Efek titik-titik putus (dan seterusnya menuju tak-hingga)
-      \coordinate (H) at ($(B)!(G)!(C)$);
-      \draw[dashed] (G) -- (H);
+    \coordinate (H) at ($(B)!(G)!(C)$);
+    \draw[dashed] (G) -- (H);
 
-      % --- PENANDA SUDUT SIKU-SIKU (Manual Anti-Error) ---
-      \def\sqsize{0.25cm} % Ukuran kotak siku-siku
+    \def\sqsize{0.25cm} % Ukuran kotak siku-siku
 
-      % Siku di A
-      \draw (0,\sqsize) -- (\sqsize,\sqsize) -- (\sqsize,0);
+    % Siku di A
+    \draw (0,\sqsize) -- (\sqsize,\sqsize) -- (\sqsize,0);
 
-      % Siku di D (antara AD dan DC)
-      \coordinate (Dd1) at ($(D)!\sqsize!(A)$);
-      \coordinate (Dd2) at ($(D)!\sqsize!(C)$);
-      \draw (Dd1) -- ($(Dd1)+(Dd2)-(D)$) -- (Dd2);
+    % Siku di D (antara AD dan DC)
+    \coordinate (Dd1) at ($(D)!\sqsize!(A)$);
+    \coordinate (Dd2) at ($(D)!\sqsize!(C)$);
+    \draw (Dd1) -- ($(Dd1)+(Dd2)-(D)$) -- (Dd2);
 
-      % Siku di E (antara DE dan EA)
-      \coordinate (Ed1) at ($(E)!\sqsize!(D)$);
-      \coordinate (Ed2) at ($(E)!\sqsize!(A)$);
-      \draw (Ed1) -- ($(Ed1)+(Ed2)-(E)$) -- (Ed2);
+    % Siku di E (antara DE dan EA)
+    \coordinate (Ed1) at ($(E)!\sqsize!(D)$);
+    \coordinate (Ed2) at ($(E)!\sqsize!(A)$);
+    \draw (Ed1) -- ($(Ed1)+(Ed2)-(E)$) -- (Ed2);
 
-      % Siku di F (antara EF dan FC)
-      \coordinate (Fd1) at ($(F)!\sqsize!(E)$);
-      \coordinate (Fd2) at ($(F)!\sqsize!(C)$);
-      \draw (Fd1) -- ($(Fd1)+(Fd2)-(F)$) -- (Fd2);
+    % Siku di F (antara EF dan FC)
+    \coordinate (Fd1) at ($(F)!\sqsize!(E)$);
+    \coordinate (Fd2) at ($(F)!\sqsize!(C)$);
+    \draw (Fd1) -- ($(Fd1)+(Fd2)-(F)$) -- (Fd2);
 
-      % Siku di G (antara FG dan GA)
-      \coordinate (Gd1) at ($(G)!\sqsize!(F)$);
-      \coordinate (Gd2) at ($(G)!\sqsize!(A)$);
-      \draw (Gd1) -- ($(Gd1)+(Gd2)-(G)$) -- (Gd2);
+    % Siku di G (antara FG dan GA)
+    \coordinate (Gd1) at ($(G)!\sqsize!(F)$);
+    \coordinate (Gd2) at ($(G)!\sqsize!(A)$);
+    \draw (Gd1) -- ($(Gd1)+(Gd2)-(G)$) -- (Gd2);
 
-      % --- PENANDA SUDUT 30 DERAJAT ---
-      \draw (B) ++(180:1.2) arc (180:150:1.2);
-      \node at ($(B) + (165:1.6)$) {$30^\circ$};
+    % --- PENANDA SUDUT 30 DERAJAT ---
+    \draw (B) ++(180:1.2) arc (180:150:1.2);
+    \node at ($(B) + (165:1.6)$) {$30^\circ$};
 
-      % --- LABEL TITIK ---
-      \node[below left] at (A) {A};
-      \node[below right] at (B) {B};
-      \node[above left] at (C) {C};
-      \node[above right, xshift=2pt] at (D) {D};
-      \node[below] at (E) {E};
-      \node[above right, xshift=2pt] at (F) {F};
-      \node[below] at (G) {G};
+    % --- LABEL TITIK ---
+    \node[below left] at (A) {$A$};
+    \node[below right] at (B) {$B$};
+    \node[above left] at (C) {$C$};
+    \node[above right, xshift=2pt] at (D) {$D$};
+    \node[below] at (E) {$E$};
+    \node[above right, xshift=2pt] at (F) {$F$};
+    \node[below] at (G) {$G$};
 
-      % --- LABEL PANJANG AB ---
-      \draw[<->, >=stealth, very thin] (0,-0.6) -- (\W,-0.6);
-      \node[fill=white, inner sep=2pt] at ({\W/2},-0.6) {$12\sqrt{3}$ m};
+    % --- LABEL PANJANG AB ---
+    \draw[<->, >=stealth, very thin] (0,-0.8) -- (\W,-0.8);
+    \node[fill=white, inner sep=2pt] at ({\W/2},-0.8) {$12\sqrt{3}$ m};
 
-    \end{tikzpicture}
-  \end{center}
-  \begin{multicols}{5}
-    \begin{enumerate}
-      \item[(A)] $51$
-      \item[(B)] $63$
-      \item[(C)] $99$
-      \item[(D)] $108$
-      \item[(E)] $111$
-    \end{enumerate}
-  \end{multicols}
+  \end{tikzpicture}
+\end{center}
+\begin{choices}
+  \item $51$
+  \item $63$
+  \item $99$
+  \item $108$
+  \item $111$
+\end{choices}
+\end{problem}
+
+\begin{problem}
+Diberikan \(\triangle ABC\) dengan \(G\) adalah titik beratnya dan \(W\) adalah titik tengah \(AB\).
+Garis bagi dalam \(\angle BAC\) memotong \(BC\) di \(Z\).
+Garis \(WG\) dan \(CG\) berturut-turut memotong \(AZ\) di titik \(Y\) dan \(X\). Jika \(Y\) terletak di antara \(X\) dan \(Z\), serta
+$
+  XY \cdot YZ = 3 \cdot 5,
+$
+dan
+$
+  AB+AC=30,
+$
+maka tentukan panjang \(WY\).
+\begin{choices}
+  \item $3$
+  \item $4$
+  \item $5$
+  \item $6$
+  \item $7$
+\end{choices}
+\end{problem}
+
+\begin{problem}
+Diberikan trapesium \(ABCD\) dengan \(AD \parallel BC\) dan \(E\) titik pada \(CD\) sehingga
+$
+  DE = EC = BC.
+$
+Diketahui
+$
+  \angle ABC=\angle BAD=90^\circ
+$
+dan
+$
+  \angle ADE=75^\circ.
+$
+Jika
+$
+  \angle BAE=\left(\frac{a}{b}\right)^\circ
+$
+untuk suatu bilangan asli \(a\) dan \(b\) dengan \(\text{FPB}(a,b)=1\), maka nilai dari \(ab\) adalah \(\dots\)
+
+\begin{choices}
+  \item $120$
+  \item $90$
+  \item $210$
+  \item $270$
+  \item $150$
+\end{choices}
+\end{problem}
+
+\begin{problem}
+Diberikan segitiga sembarang \(ABC\).
+Dari sudut \(A\) ditarik sebuah garis yang memotong \(BC\) di \(J\), dari sudut \(B\) ditarik sebuah garis yang memotong \(AC\) di \(H\), dan dari sudut \(C\) ditarik sebuah garis yang memotong \(AB\) di \(I\).
+Diketahui garis \(AJ\) memotong \(CI\) di titik \(D\), garis \(AJ\) memotong \(BH\) di titik \(E\), dan garis \(CI\) memotong \(BH\) di titik \(F\).
+Jika
+$
+  AE=ED,\; DC=FD,\; \text{dan}\; BF=FE,
+$
+maka perbandingan luas \(\triangle EFD\) terhadap luas \(\triangle ABC\) dapat dinyatakan dalam bentuk
+$
+  \frac ab
+$
+dengan \(a\) dan \(b\) saling prima.
+Tentukan nilai dari
+$
+  a+b.
+$
+
+\begin{choices}
+  \item $7$
+  \item $8$
+  \item $9$
+  \item $10$
+  \item $12$
+\end{choices}
+
+%KJ : 8
 \end{problem}
 
 \section*{Isian Singkat}
+\begin{problem}
+Terdapat \(8! = 40320\) bilangan bulat positif delapan digit yang menggunakan masing-masing digit
+$
+  1,2,3,4,5,6,7,8
+$
+tepat satu kali.
+Misalkan \(N\) adalah banyaknya bilangan tersebut yang habis dibagi oleh \(22\).
+Tentukan selisih antara \(N\) dan \(2026\).
+
+\answerbox
+%KJ : 278
+\end{problem}
+
+\begin{problem}
+Misalkan \(N\) adalah bilangan bulat positif empat digit terbesar dengan sifat bahwa apabila salah satu digitnya diubah menjadi \(1\), maka bilangan yang dihasilkan habis dibagi \(7\).
+Misalkan \(Q\) dan \(R\) berturut-turut adalah hasil bagi dan sisa ketika \(N\) dibagi oleh \(1000\).
+Tentukan nilai \(Q+R\).
+%KJ : 699
+\answerbox
+\end{problem}
+
+\begin{problem}
+Untuk setiap bilangan asli \(n\), definisikan \(\phi(n)\) sebagai banyak bilangan asli yang tidak lebih dari \(n\) dan relatif prima dengan \(n\).
+Sebagai contoh,
+$
+  \phi(3)=2,\qquad \phi(6)=2,\qquad \phi(10)=4.
+$
+Tentukan bilangan asli terbesar \(k\) yang mungkin sehingga semua bilangan
+$
+  \phi(n),\phi(n+1),\dots,\phi(n+k-1)
+$
+merupakan bilangan prima untuk suatu bilangan asli \(n\).
+
+\answerbox
+% KJ : 2
+\end{problem}
+
+\begin{problem}
+Untuk setiap bilangan asli \(n\), definisikan \(p_n\) sebagai faktor prima terkecil dari
+$
+  n^8+1.
+$
+Tentukan sisa dari
+$
+  p_1+p_2+p_3+\cdots+p_{2021}
+$
+ketika dibagi oleh \(16\).
+
+\answerbox
+%KJ : 8
+\end{problem}
+
+\begin{problem}
+Diketahui
+$
+  20! = \overline{24329a20081766bc000},
+$
+dengan \(a\), \(b\), dan \(c\) adalah digit-digit yang belum diketahui dari \(20!\).
+Tentukan nilai dari
+$
+  a+b+c.
+$
+
+
+\answerbox
+%KJ : 4
+\end{problem}
+
+\begin{problem}
+Sebuah lingkaran dengan pusat \(O\) merupakan lingkaran luar segitiga \(ABC\).
+Tali busur \(AB\) berjarak \(5\) dari titik \(O\) dan tali busur \(AC\) berjarak \(5\sqrt{2}\) dari titik \(O\).
+
+Jika jari-jari lingkaran adalah \(10\), maka \(BC^2\) dapat dinyatakan dalam bentuk
+$
+  a+b\sqrt{c},
+$
+dengan \(c\) bilangan bulat positif yang bebas kuadrat.
+Tentukan nilai dari
+$
+  a+b+c.
+$
+
+\answerbox
+%KJ : 303
+\end{problem}
+
+\begin{problem}
+Dalam sebuah segitiga \(ABC\), misalkan \(E\) adalah titik tengah \(AC\) dan \(F\) adalah titik tengah \(AB\).
+Garis berat \(BE\) dan \(CF\) berpotongan di \(G\).
+Misalkan \(Y\) dan \(Z\) masing-masing adalah titik tengah dari \(BE\) dan \(CF\).
+Jika luas segitiga \(ABC\) adalah \(480\), carilah luas segitiga \(GYZ\).
+
+\answerbox
+\end{problem}
+
+\begin{problem}
+Perhatikan gambar berikut.
+\begin{center}
+  \begin{tikzpicture}[scale=0.12]
+
+    % Titik sudut persegi panjang
+    \coordinate (A) at (6.5,0);
+    \coordinate (B) at (50,0);
+    \coordinate (C) at (50,34);
+    \coordinate (D) at (6.5,34);
+
+    % Persegi panjang
+    \draw[thick] (A)--(B)--(C)--(D)--cycle;
+
+    % Lingkaran besar
+    \draw[thick] (21.5,15) circle (15);
+
+    % Lingkaran kecil
+    \draw[thick] (42,26) circle (8);
+
+    % Label titik
+    \node[below left] at (A) {$A$};
+    \node[below right] at (B) {$B$};
+    \node[above right] at (C) {$C$};
+    \node[above left] at (D) {$D$};
+
+  \end{tikzpicture}
+\end{center}
+Dua lingkaran dengan jari-jari \(17\) dan \(9\) saling bersinggungan.
+Jika \(AB=50\), maka tentukan luas persegi panjang \(ABCD\).
+
+\answerbox
+\end{problem}
+
+\begin{problem}
+Diberikan \(\triangle ABC\) dengan
+$
+  AB=20,\; BC=22,\; CA=2\sqrt{129}.
+$
+Titik \(T\) diletakkan di dalam segitiga tersebut sedemikian sehingga
+\[
+  \angle TAC+\angle TBC=90^\circ-\angle ACB.
+\]
+Tentukan nilai minimum dari panjang \(CT\).
+
+\answerbox
+\end{problem}
+
+\begin{problem}
+Pada gambar berikut, diketahui bahwa
+$
+  AE = 25\% \text{ dari } AC
+$
+dan
+$
+  AF = ED.
+$
+Jika luas segitiga \(ABC\) adalah \(636\text{ cm}^2\), tentukan luas daerah yang diarsir.
+\begin{center}
+  \begin{tikzpicture}[scale=0.9]
+
+    % Titik
+    \coordinate (A) at (0,5);
+    \coordinate (B) at (-1,0);
+    \coordinate (C) at (6,3);
+
+    % D di BC
+    \coordinate (D) at ($(B)!0.65!(C)$);
+
+    % F di AC atas
+    \coordinate (F) at ($(A)!0.55!(C)$);
+
+    \coordinate (E) at (intersection cs:
+    first line={(A)--(D)},
+    second line={(F)--(B)});
+
+    % Arsiran kiri
+    \fill[gray!55] (A)--(B)--(E)--cycle;
+
+    % Arsiran kanan
+    \fill[gray!55] (F)--(C)--(D)--(E)--cycle;
+
+    % Segitiga utama
+    \draw[thick] (A)--(B)--(C)--cycle;
+
+    % Garis dalam
+    \draw[thick] (B)--(F);
+    \draw[thick] (A)--(D);
+
+    % Label
+    \node[above] at (A) {$A$};
+    \node[below] at (B) {$B$};
+    \node[right] at (C) {$C$};
+    \node[right] at (D) {$D$};
+    \node[below] at (E) {$E$};
+    \node[above] at (F) {$F$};
+
+  \end{tikzpicture}
+\end{center}
+
+\answerbox
+% KJ : 318
+\end{problem}
 
 \end{document}
