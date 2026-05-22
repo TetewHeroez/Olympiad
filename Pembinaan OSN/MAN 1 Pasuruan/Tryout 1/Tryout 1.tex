@@ -1,4 +1,5 @@
 \documentclass[11pt,a4paper,DIV=12]{scrartcl}
+\PassOptionsToPackage{dvipsnames}{xcolor}
 \usepackage{multicol}
 \makeatletter
 \def\input@path{{../../../}}
@@ -9,7 +10,7 @@
 
 % Override environment "problem" agar hanya menampilkan angka
 \makeatletter
-\newtheoremstyle{justnumber}
+\newtheoremstyle{problemstyle}
   {8pt} % space above
   {8pt} % space below
   {\normalfont} % body font
@@ -20,18 +21,38 @@
   {\thmnumber{#2}.\thmnote{ (\small #3)}} % head spec (hanya angka dan note)
 
 % Hapus definisi problem lama di dalam makeatletter agar @ terbaca
-\let\problem\relax
-\let\endproblem\relax
-\let\c@problem\relax
-\let\theproblem\relax
+\let\problem\@undefined
+\let\endproblem\@undefined
+\let\c@problem\@undefined
+\let\theproblem\@undefined
+\makeatother
+
+\makeatletter
+\newtheoremstyle{answerstyle}
+  {8pt} % space above
+  {8pt} % space below
+  {\normalfont} % body font
+  {} % indent amount
+  {\color{blue!40!black}\bfseries} % head font
+  {} % punctuation after head
+  {\newline} % space after head <- INI UNTUK NEWLINE / ENTER
+  {\thmnumber{#2}. \thmnote{\fbox{\bfseries #3}}} % head spec (hanya angka dan note)
+
+% Hapus definisi answer lama di dalam makeatletter agar @ terbaca
+\let\answer\@undefined
+\let\endanswer\@undefined
+\let\c@answer\@undefined
+\let\theanswer\@undefined
 \makeatother
 
 \newcommand\answerbox{%%
 \vspace*{0.5cm}%
 \noindent\textbf{\textsf{Jawab}}: \fbox{\rule{14cm}{0pt}\rule[-0.2ex]{0pt}{1.9ex}}}
 
-\theoremstyle{justnumber}
+\theoremstyle{problemstyle}
 \newtheorem{problem}{}
+\theoremstyle{answerstyle}
+\newtheorem{answer}{}
 
 \begin{document}
 \title{Tryout 1 Pembinaan OSK Matematika}
@@ -83,7 +104,6 @@
   Ucup sedang menyusun kata-kata yang terdiri dari huruf-huruf
   $$M,E,J,I,K,U$$
   Tentukan banyaknya susunan kata yang terdiri dari 5 huruf, dengan syarat bahwa jika huruf $J$ dan $K$ digunakan dalam susunan tersebut, maka tidak boleh bersebelahan.
-
   \begin{multicols}{5}
     \begin{enumerate}[label=(\Alph*)]
       \item 720
@@ -136,10 +156,6 @@
     \end{enumerate}
   \end{multicols}
   %KJ: C
-  %Pembahasan Singkat:
-  %Barisan aritmetika a, 6, b  =>  2(6) = a + b  =>  a + b = 12.
-  %Barisan geometri b, 2, a  =>  2^2 = ab  =>  ab = 4.
-  %Nilai a^2 + b^2 = (a+b)^2 - 2ab = (12)^2 - 2(4) = 144 - 8 = 136.
 \end{problem}
 
 \begin{problem}
@@ -158,12 +174,6 @@
     \end{enumerate}
   \end{multicols}
   %KJ: B
-  %Pembahasan Singkat:
-  %Pembilang: Deret aritmetika 1 s.d 110 = (110/2) * (1 + 110) = 55 * 111 = 6105.
-  %Penyebut: Deret aritmetika 2 s.d 120 (ada 119 suku) = (119/2) * (2 + 120) = 119 * 61 = 7259.
-  %Pecahan 6105/7259. Faktor 6105 = 3 * 5 * 11 * 37. Faktor 7259 = 7 * 17 * 61.
-  %Karena tidak ada faktor prima yang sama, a = 6105 dan b = 7259 (sudah relatif prima).
-  %a + b = 6105 + 7259 = 13364.
 \end{problem}
 
 \begin{problem}
@@ -178,13 +188,6 @@
     \end{enumerate}
   \end{multicols}
   %KJ: E
-  %Pembahasan Singkat:
-  %(Asumsi typo soal, "Jika a != 1" seharusnya "Jika m != 1").
-  %f(5) = 25m + 5n + o = 25
-  %f(6) = 36m + 6n + o = 36
-  %Kurangkan f(6) - f(5) => 11m + n = 11  =>  n = 11 - 11m = 11(1 - m).
-  %Substitusi n ke f(5): 25m + 5(11 - 11m) + o = 25  =>  -30m + 55 + o = 25  =>  o = 30m - 30 = 30(m - 1).
-  %Maka (o - n) / (m - 1) = (30(m - 1) - 11(1 - m)) / (m - 1) = (30(m - 1) + 11(m - 1)) / (m - 1) = 41.
 \end{problem}
 
 \begin{problem}
@@ -207,14 +210,6 @@
     \end{enumerate}
   \end{multicols}
   %KJ: C
-  %Pembahasan Singkat:
-  %Jumlahkan ketiga persamaan dan pindahkan semua ruas ke kiri:
-  %a^2 + b^2 + c^2 + 6b + 14 - 8c + 23 - 4a - 8 = 0
-  %a^2 - 4a + b^2 + 6b + c^2 - 8c + 29 = 0
-  %Bentuk kuadrat sempurna: (a - 2)^2 - 4 + (b + 3)^2 - 9 + (c - 4)^2 - 16 + 29 = 0
-  %(a - 2)^2 + (b + 3)^2 + (c - 4)^2 = 0
-  %Karena a, b, c real, maka a = 2, b = -3, c = 4.
-  %a + b + c = 2 + (-3) + 4 = 3.
 \end{problem}
 
 \begin{problem}
@@ -229,13 +224,6 @@
     \end{enumerate}
   \end{multicols}
   %KJ: D
-  %Pembahasan Singkat:
-  %Misalkan 1/2026 = k. Kita punya x + 1/y = k => x = (ky - 1)/y. Karena x,y > 0, maka ky - 1 > 0.
-  %Akan diminimalkan E = y + 1/x = y + y/(ky - 1).
-  %Misalkan ky - 1 = t (t > 0), maka y = (t + 1)/k.
-  %E = (t + 1)/k + (t + 1)/(kt) = (1/k) * (t + 1 + 1 + 1/t) = (1/k) * (t + 1/t + 2).
-  %Berdasarkan ketaksamaan AM-GM, t + 1/t >= 2.
-  %Maka E >= (1/k) * (2 + 2) = 4/k = 4 * 2026 = 8104.
 \end{problem}
 
 
@@ -287,11 +275,6 @@
   Carilah nilai dari $\dfrac{A}{1013}$.
 
   %KJ: 2736452 
-  %Pembahasan Singkat:
-  %Perhatikan bahwa (k^3 + 1)/(k + 1) = k^2 - k + 1.
-  %Maka A = \sum_{k=1}^{n} (k^2 - k + 1) = \frac{n(n+1)(2n+1)}{6} - \frac{n(n+1)}{2} + n = \frac{n(n^2+2)}{3}.
-  %Untuk n = 2026, kita diminta mencari A / 1013, yang sama dengan 2A / 2026 = 2A / n.
-  %Jadi, 2A/n = 2(n^2 + 2)/3 = 2(2026^2 + 2)/3 = 2(4104676 + 2)/3 = 2(4104678)/3 = 8209356 / 3 = 2736452.
   \answerbox
 \end{problem}
 
@@ -301,14 +284,6 @@
   untuk semua bilangan bulat $x, y$. Jika $f(2026) = 2027$ dan $f(2027) = -2026$. Maka carilah nilai dari $f(1) + f(2) + \dots + f(2026)$
 
   %KJ: 1013
-  %Pembahasan Singkat:
-  %Misalkan y = -x, maka f(2x) = f(0). Artinya semua f(bilangan genap) = f(0).
-  %Karena 2026 genap, maka f(0) = f(2026) = 2027.
-  %Misalkan y = x - 1, maka f(1) = f(x^2 - (x-1)^2) = f(2x - 1). Artinya semua f(bilangan ganjil) = f(1).
-  %Karena 2027 ganjil, maka f(1) = f(2027) = -2026.
-  %Deret f(1) + f(2) + ... + f(2026) terdiri dari 1013 suku ganjil dan 1013 suku genap.
-  %Setiap pasangan (ganjil + genap) = -2026 + 2027 = 1.
-  %Total jumlah = 1013 pasangan * 1 = 1013.
   \answerbox
 \end{problem}
 
@@ -316,12 +291,6 @@
   Misalkan $p, q$, dan $r$ merupakan akar-akar dari persamaan $x^3 - 3x + 5 = 0$. Tentukan nilai dari $p^4 + q^4 + r^4$.
 
   %KJ: 18
-  %Pembahasan Singkat:
-  %Berdasarkan Teorema Vieta: p+q+r = 0, pq+qr+rp = -3, pqr = -5.
-  %Dari persamaan, x^3 = 3x - 5. Kalikan dengan x, diperoleh x^4 = 3x^2 - 5x.
-  %Maka p^4 + q^4 + r^4 = 3(p^2 + q^2 + r^2) - 5(p+q+r).
-  %Nilai p^2 + q^2 + r^2 = (p+q+r)^2 - 2(pq+qr+rp) = 0^2 - 2(-3) = 6.
-  %Sehingga, p^4 + q^4 + r^4 = 3(6) - 5(0) = 18.
   \answerbox
 \end{problem}
 
@@ -329,19 +298,6 @@
   Misalkan $x$ dan $y$ adalah bilangan real yang memenuhi $7x + 7y + 7xy - 3xy^2 - 3x^2y = 40$ dan $2x + 2y + 2xy + xy^2 + x^2y = 4$. Tentukan nilai dari $\lfloor x + y \rfloor$.
 
   %KJ: 4
-  %Pembahasan Singkat:
-  %Misalkan s = x+y dan p = xy.
-  %Persamaan 1: 7s + 7p - 3ps = 40
-  %Persamaan 2: 2s + 2p + ps = 4 => ps = 4 - 2s - 2p
-  %Substitusi ps ke Persamaan 1: 7s + 7p - 3(4 - 2s - 2p) = 40
-  %7s + 7p - 12 + 6s + 6p = 40 => 13s + 13p = 52 => s + p = 4 => p = 4 - s.
-  %Substitusi p = 4-s ke ps: (4-s)s = 4 - 2s - 2(4-s) = -4.
-  %Maka 4s - s^2 = -4 => s^2 - 4s - 4 = 0.
-  %Solusi untuk s adalah s = 2 \pm 2\sqrt{2}.
-  %Syarat x,y real adalah \Delta = s^2 - 4p \ge 0 => s^2 - 4(4-s) \ge 0 => s^2 + 4s - 16 \ge 0.
-  %Cek s_1 = 2 + 2\sqrt{2} \approx 4.82, memenuhi syarat \ge -2 + 2\sqrt{5} (\approx 2.47).
-  %Cek s_2 = 2 - 2\sqrt{2} \approx -0.82, tidak memenuhi syarat.
-  %Maka s = x+y = 2 + 2\sqrt{2} \approx 4.828. Nilai \lfloor x+y \rfloor = 4.
   \answerbox
 \end{problem}
 
@@ -353,21 +309,476 @@
   Tentukan nilai dari $a + b$.
 
   %KJ: 13
-  %Pembahasan Singkat:
-  %Misalkan A=3x-4, B=5x-6, C=x-2, D=7x-8. 
-  %Perhatikan bahwa A+B = 8x-10 dan C+D = 8x-10. Jadi A+B = C+D.
-  %Persamaan: \sqrt[3]{A} + \sqrt[3]{B} = \sqrt[3]{C} + \sqrt[3]{D}. Pangkatkan 3 kedua ruas.
-  %A + B + 3\sqrt[3]{AB}(\sqrt[3]{A}+\sqrt[3]{B}) = C + D + 3\sqrt[3]{CD}(\sqrt[3]{C}+\sqrt[3]{D}).
-  %Karena A+B = C+D, maka ruas ini saling meniadakan. Sisa:
-  %\sqrt[3]{AB}(\sqrt[3]{A}+\sqrt[3]{B}) = \sqrt[3]{CD}(\sqrt[3]{C}+\sqrt[3]{D}).
-  %Kasus 1: \sqrt[3]{A}+\sqrt[3]{B} = 0 => A = -B => 3x-4 = -5x+6 => 8x = 10 => x = 5/4.
-  %Kasus 2: Jika penjumlahannya \neq 0, kita bisa coret sehingga AB = CD.
-  %(3x-4)(5x-6) = (x-2)(7x-8)
-  %15x^2 - 38x + 24 = 7x^2 - 22x + 16
-  %8x^2 - 16x + 8 = 0 => x^2 - 2x + 1 = 0 => x = 1.
-  %Jumlah semua solusi = 5/4 + 1 = 9/4 = a/b.
-  %Maka a = 9 dan b = 4 (sudah relatif prima). Nilai a+b = 9+4 = 13.
   \answerbox
 \end{problem}
+
+\newpage
+\title{Solusi Tryout 1 Pembinaan OSK Matematika}
+\author{}
+\date{}
+\maketitle
+\vspace{-2cm}
+\section*{Pilihan Ganda}
+
+\begin{answer}[D. 4023]
+  Angka ganjil yang mungkin muncul adalah 1, 3, 5, 7, dan 9. Kita bagi menjadi beberapa kasus.
+  \begin{itemize}
+    \item \textbf{Bilangan 0 - 999}:
+          Bilangan-bilangan ini dapat dipandang sebagai 000, 001, ..., 999. Pada setiap posisi (satuan, puluhan, ratusan), angka 0 sampai 9 muncul sama banyak, yaitu 100 kali. Karena ada 5 angka ganjil, maka pada setiap posisi terdapat 5 $\cdot$ 100 = 500 angka ganjil. Dengan 3 posisi, total angka ganjil pada bagian ini adalah 3 $\cdot$ 500 = 1500.
+    \item \textbf{Bilangan 1000 - 1999}:
+          Angka ribuan selalu 1, sehingga dari posisi ribuan diperoleh 1000 angka ganjil. Tiga posisi sisanya berjalan dari 000 sampai 999, menyumbang lagi 1500 angka ganjil. Jadi total angka ganjil pada bagian ini adalah 1000 + 1500 = 2500.
+    \item \textbf{Bilangan 2000 - 2026}:
+          Angka ribuan selalu 2, sehingga tidak menyumbang angka ganjil. Cukup diperhatikan tiga angka terakhir (000 sampai 026).
+          \begin{itemize}[label=$\blacksquare$]
+            \item Posisi puluhan, angka ganjil muncul saat puluhannya 1, yaitu 2010 sampai 2019, sehingga ada 10 angka ganjil.
+            \item Posisi satuan, dari 2000 sampai 2026, angka ganjil muncul sebanyak 13 kali.
+          \end{itemize}
+          Jadi total angka ganjil pada bagian ini adalah 10 + 13 = 23.
+  \end{itemize}
+
+  Maka total angka ganjil dari 0 sampai 2026 adalah 1500 + 2500 + 23 = $\boxed{4023}$.
+\end{answer}
+
+\begin{answer}[D. 389]
+  Diketahui bahwa $b$ merupakan kelipatan dari $|a-c|$. Hal ini berarti $b = k|a-c|$ untuk suatu bilangan cacah $k \ge 0$.
+  Karena merupakan digit bilangan $3$-angka (ratusan, puluhan, satuan), digit pertama yakni $a \in \{1,\dots,9\}$, serta $b,c \in \{0,\dots,9\}$.
+
+  \begin{itemize}
+    \item Jika $|a-c| = 0$, yaitu $a = c$, maka kelipatannya yang bernilai $1$ digit hanyalah $b = 0$.
+          Bilangan yang valid memiliki bentuk $101, 202, \dots, 909$, yakni ada sebanyak $9$ bilangan.
+    \item Jika $|a-c| = x > 0$, maka jumlah pasangan $(a,c)$ dengan elemen unik dapat dihitung, kemudian dikali dengan banyak kelipatan valid untuk digit $b$:
+          \begin{align*}
+            x=1 & \implies b \in \{0,1,2,\dots,9\}. \text{ Pasangan } (a,c) \text{ ada } 17 \implies 17 \times 10 = 170       \\
+            x=2 & \implies b \in \{0,2,4,6,8\}. \text{ Pasangan } (a,c) \text{ ada } 15 \implies 15 \times 5 = 75             \\
+            x=3 & \implies b \in \{0,3,6,9\}. \text{ Pasangan } (a,c) \text{ ada } 13 \implies 13 \times 4 = 52               \\
+            x=4 & \implies b \in \{0,4,8\}. \text{ Pasangan } (a,c) \text{ ada } 11 \implies 11 \times 3 = 33                 \\
+            x=5 & \implies b \in \{0,5\}. \text{ Pasangan } (a,c) \text{ ada } 9 \implies 9 \times 2 = 18                     \\
+            x=6 & \implies b \in \{0,6\}. \text{ Pasangan } (a,c) \text{ ada } 7 \implies 7 \times 2 = 14                     \\
+            x=7 & \implies b \in \{0,7\}. \text{ Pasangan } (a,c) \text{ ada } 5 \implies 5 \times 2 = 10                     \\
+            x=8 & \implies b \in \{0,8\}. \text{ Pasangan } (a,c) \text{ ada } 3 \implies 3 \times 2 = 6                      \\
+            x=9 & \implies b \in \{0,9\}. \text{ Pasangan } (a,c) \text{ ada } 1 \text{ yakni } (9,0) \implies 1 \times 2 = 2
+          \end{align*}
+  \end{itemize}
+  Jumlah total bilangannya adalah $9 + 170 + 75 + 52 + 33 + 18 + 14 + 10 + 6 + 2 = \boxed{389}$.
+\end{answer}
+
+\begin{answer}[C. 528]
+  Jumlah semua kemungkinan memilih $5$ huruf dari opsi huruf dan menyusunnya adalah
+  \[ |U| = P(6,5) = \frac{6!}{(6-5)!} = 720. \]
+  Misalkan $A$ adalah himpunan susunan kata sehingga $J$ dan $K$ berdampingan.\\
+  Jika $J$ dan $K$ harus berdampingan pada $5$-blok yang dipilih, kita bisa menyatukannya dalam satu "kotak" $\boxed{JK}$ atau $\boxed{KJ}$ (2 kemungkinan).
+  Berarti kita harus menyertakan "kotak" ini bersama $3$ huruf lain dari sisa huruf $\{M, A, U, E\}$.
+  \begin{itemize}
+    \item Banyak cara memilih $3$ huruf ekstra: $\binom{4}{3} = 4$.
+    \item Kita menyusun bentuk blok $\boxed{JK}$ bersama $3$ huruf tersebut menjadi: $4! = 24$ susunan.
+    \item Urutan internal $J$ dan $K$ bisa dibalik menjadi $\boxed{JK}$ atau $\boxed{KJ}$ adalah $2! = 2$ susunan.
+  \end{itemize}
+  Maka susunan huruf $J$ dan $K$ yang berdampingan ada sebanyak
+  \begin{align*}
+    |A|=\binom{4}{3} \times 4! \times 2 = 4 \times 24 \times 2 = 192
+  \end{align*}
+  Sehingga susunan valid di mana $J$ dan $K$ tidak berdampingan di $5$-urutan tersebut adalah:
+  \[ |A^C| = |U| - |A| = 720 - 192 = \boxed{528} \]
+\end{answer}
+
+\begin{answer}[E. 52]
+  Pertama, hitung susunan yang dapat menjadi menaik setelah satu kartu dihapus.
+  \begin{itemize}
+    \item Jika setelah satu kartu dihapus lima kartu sisanya menaik, maka susunannya dapat dipandang sebagai urutan menaik $1,2,3,4,5,6$ yang salah satu kartunya dipindah ke tempat lain. Misalnya $1,2,5,3,4,6$ dapat diperoleh dari $1,2,3,4,5,6$ dengan memindahkan kartu $5$ ke antara $2$ dan $3$.
+    \item Ada $6$ pilihan kartu yang dipindahkan. Setelah kartunya dipilih, ada $5$ posisi baru selain posisi semula. Jadi mula-mula ada $6 \cdot 5=30$ cara.
+    \item Namun, ada susunan yang terhitung dua kali, yaitu susunan yang hanya menukar dua kartu bersebelahan. Misalnya $1,2,3,5,4,6$ bisa dianggap memindahkan $5$ ke kanan atau memindahkan $4$ ke kiri. Banyak pasangan bersebelahan pada urutan menaik adalah $5$, maka banyak susunan berbeda yang diperoleh adalah $30-5=25$.
+    \item Angka $25$ ini belum memuat susunan yang sudah menaik, yaitu $1,2,3,4,5,6$, karena pada proses sebelumnya kita selalu memindahkan kartu ke posisi lain. Susunan ini juga memenuhi syarat, sebab kartu mana pun dapat dihapus dan sisanya tetap menaik. Jadi banyak susunan untuk kasus menaik adalah $25+1=26$.
+    \item Dengan cara yang sama, banyak susunan untuk kasus menurun juga $26$.
+  \end{itemize}
+  Tidak ada susunan yang sekaligus bisa menjadi menaik dan menurun setelah penghapusan satu kartu. Maka total susunan yang memenuhi syarat adalah $26+26=\boxed{52}$.
+\end{answer}
+
+\begin{answer}[D. 6]
+  Misalkan banyak remaja adalah $r$, banyak laki-laki dewasa adalah $l$, dan banyak perempuan dewasa adalah $p$.
+  Karena setiap kelompok hanya berjabat tangan dengan sesama kelompoknya, banyak jabat tangan seluruhnya adalah
+  $$\binom{r}{2}+\binom{l}{2}+\binom{p}{2}=21.$$
+  Diketahui laki-laki dewasa lebih banyak daripada perempuan dewasa dan remaja, sehingga $l>p$ dan $l>r$. Kita coba nilai $l$ yang mungkin.
+  \begin{itemize}
+    \item Jika $l=7$, maka $\binom{7}{2}=21$. Artinya tidak boleh ada jabat tangan lain, sehingga harus $\binom{r}{2}=0$ dan $\binom{p}{2}=0$. Ini membuat $r$ dan $p$ masing-masing paling banyak $1$, padahal pesta dihadiri oleh remaja laki-laki dan perempuan serta perempuan dewasa. Jadi kasus ini tidak sesuai.
+    \item Jika $l=6$, maka $\binom{6}{2}=15$. Sisa jabat tangan adalah $21-15=6$. Nilai ini masih dapat dipenuhi, misalnya dengan $\binom{3}{2}+\binom{3}{2}=3+3=6$. Jadi $l=6$ mungkin.
+    \item Jika $l\leq 5$, maka karena $l>p$ dan $l>r$, nilai terbesar yang mungkin adalah $l=5$, $r=4$, dan $p=4$. Jumlah jabat tangannya paling banyak $\binom{5}{2}+\binom{4}{2}+\binom{4}{2}=10+6+6=22$, tetapi untuk mencapai $21$ tidak ada kombinasi yang cocok dengan $r,p<5$.
+  \end{itemize}
+  Maka banyak laki-laki dewasa yang hadir adalah $\boxed{6}$.
+\end{answer}
+
+\begin{answer}[C. 136]
+  Karena $a,6,b$ membentuk barisan aritmetika, maka suku tengah sama dengan rata-rata dua suku lainnya, yaitu $6=\frac{a+b}{2}$, sehingga $a+b=12$. Karena $b,2,a$ membentuk barisan geometri, maka kuadrat suku tengah sama dengan hasil kali dua suku lainnya, yaitu $2^2=ab$, sehingga $ab=4$.
+  Yang ditanyakan adalah $a^2+b^2$. Gunakan identitas $a^2+b^2=(a+b)^2-2ab$, maka
+  \[
+    a^2+b^2=12^2-2\cdot 4=144-8=136.
+  \]
+\end{answer}
+
+\begin{answer}[B. 13364]
+  Gunakan rumus jumlah bilangan asli berurutan, yaitu $1+2+\cdots+n=\frac{n(n+1)}{2}$.
+  \begin{itemize}
+    \item Pembilangnya adalah jumlah bilangan dari $1$ sampai $110$, sehingga $$1+2+\cdots+110=\frac{110\cdot 111}{2}=6105.$$
+    \item Penyebutnya adalah $2+3+\cdots+120$. Jumlah ini dapat dihitung dari jumlah $1+2+\cdots+120$, lalu dikurangi $1$. Maka
+          \[
+            2+3+\cdots+120=\frac{120\cdot 121}{2}-1=7260-1=7259.
+          \]
+  \end{itemize}
+  Jadi pecahan pada soal menjadi $\frac{6105}{7259}$.
+  Karena $\gcd(6105,7259)=1$, pecahan tersebut sudah paling sederhana. Maka $a=6105$ dan $b=7259$, sehingga $a+b=6105+7259=\boxed{13364}$.
+
+\end{answer}
+
+\begin{answer}[E. 41]
+  Substitusi $x=5$ dan $x=6$ ke fungsi tersebut menghasilkan
+  \begin{align}
+    25m+5n+o & = 25, \label{eq:fungsi-1} \\
+    36m+6n+o & = 36. \label{eq:fungsi-2}
+  \end{align}
+  Kurangkan \eqref{eq:fungsi-1} dari \eqref{eq:fungsi-2}, maka diperoleh
+  $
+    11m+n=11.
+  $
+  atau $n=11-11m$.
+  Substitusikan $n=11-11m$ ke \eqref{eq:fungsi-1}. Maka
+  \[
+    25m+5(11-11m)+o=25.
+  \]
+  Dari sini diperoleh $25m+55-55m+o=25$, sehingga $o=30m-30$.
+  Sekarang kita hitung nilai $o-n$:
+  \[
+    o-n=(30m-30)-(11-11m)=41m-41=41(m-1).
+  \]
+  Karena $m\neq 1$, maka
+  \[
+    \frac{o-n}{m-1}=\frac{41(m-1)}{m-1}=\boxed{41}.
+  \]
+\end{answer}
+
+\begin{answer}[C. 3]
+  Pindahkan semua persamaan pada soal ke satu ruas, sehingga diperoleh
+  \begin{align*}
+    a^2+6b+14 & = 0, \\
+    b^2-8c+23 & = 0, \\
+    c^2-4a-8  & = 0.
+  \end{align*}
+  Jumlahkan ketiganya, maka
+  \[
+    a^2+b^2+c^2-4a+6b-8c+29=0.
+  \]
+  Bentuk ini dapat ditulis sebagai
+  \[
+    (a-2)^2+(b+3)^2+(c-4)^2=0.
+  \]
+  Karena setiap bentuk kuadrat bernilai tidak negatif, jumlahnya bisa $0$ hanya jika semuanya bernilai $0$. Maka $a=2$, $b=-3$, dan $c=4$. Jadi $a+b+c=2+(-3)+4=\boxed{3}$.
+\end{answer}
+
+\begin{answer}[D. 8104]
+  Diketahui $x+\frac{1}{y}=\frac{1}{2026}$ dengan $x,y>0$. Dari persamaan tersebut, diperoleh $x=\frac{1}{2026}-\frac{1}{y}=\frac{y-2026}{2026y}$. Karena $x>0$ dan $2026y>0$, maka harus $y>2026$.
+  Dari $x=\frac{y-2026}{2026y}$, diperoleh $\frac{1}{x}=\frac{2026y}{y-2026}$. Jadi
+  \[
+    y+\frac{1}{x}=y+\frac{2026y}{y-2026}.
+  \]
+  Misalkan $t=y-2026$, dengan $t>0$. Maka $y=2026+t$, sehingga
+  \[
+    y+\frac{1}{x}=2026+t+\frac{2026(2026+t)}{t}=4052+t+\frac{2026^2}{t}.
+  \]
+  Dengan AM-GM, $t+\frac{2026^2}{t}\geq 2\sqrt{t\cdot \frac{2026^2}{t}}=4052$. Jadi nilai terkecilnya adalah $4052+4052=\boxed{8104}$.
+\end{answer}
+
+\section*{Isian Singkat}
+
+\begin{answer}[768]
+  Misalkan pengantin laki-laki adalah $P_L$ dan pengantin perempuan adalah $P_P$. Selain mereka, ada $4$ laki-laki dan $4$ perempuan.
+  Akan dipilih $6$ orang termasuk kedua pengantin, berarti kita perlu memilih $4$ orang lagi dari $8$ orang selain pengantin. Misalkan dari $4$ orang tambahan itu dipilih $k$ laki-laki dan $4-k$ perempuan.\\
+  Karena tidak boleh ada laki-laki dan perempuan yang berdekatan kecuali pengantin, maka semua laki-laki harus berada dalam satu "kotak" dan semua perempuan juga dalam satu "kotak". Satu-satunya batas antara dua "kotak" itu harus berupa pasangan pengantin, yaitu $P_L$ bersebelahan dengan $P_P$.
+  \begin{itemize}
+    \item Banyak cara memilih $k$ laki-laki dari $4$ laki-laki selain pengantin adalah $\binom{4}{k}$.
+    \item Banyak cara memilih $4-k$ perempuan dari $4$ perempuan selain pengantin adalah $\binom{4}{4-k}$.
+    \item Setelah orang-orang dipilih, urutan "kotak" laki-laki dan "kotak" perempuan bisa $2$ cara. Dalam "kotak" laki-laki, $P_L$ harus berada di dekat batas, sehingga $k$ laki-laki lain dapat disusun dalam $k!$ cara. Dalam "kotak" perempuan, $P_P$ juga harus berada di dekat batas, sehingga $4-k$ perempuan lain dapat disusun dalam $(4-k)!$ cara.
+  \end{itemize}
+
+  Jadi banyak cara untuk nilai $k$ tertentu adalah
+  \[
+    2\binom{4}{k}\binom{4}{4-k}k!(4-k)!.
+  \]
+  Maka total banyak cara adalah
+  \[
+    \sum_{k=0}^{4}2\binom{4}{k}\binom{4}{4-k}k!(4-k)!.
+  \]
+  Karena $\binom{4}{4-k}=\binom{4}{k}$, diperoleh
+  \[
+    \sum_{k=0}^{4}2\binom{4}{k}^2k!(4-k)!
+    =2(24+96+144+96+24)=768.
+  \]
+  Jadi banyaknya cara adalah $\boxed{768}$.
+\end{answer}
+
+\begin{answer}[4]
+  Pada langkah ke-$1$, dimasukkan $1$ bola ke kotak $A$. Pada langkah ke-$2$, dimasukkan $2$ bola ke kotak $B$. Pada langkah ke-$3$, dimasukkan $3$ bola ke kotak $C$, dan seterusnya. Jadi sampai langkah ke-$n$, banyak bola yang sudah dimasukkan adalah
+  \[
+    1+2+\cdots+n=\frac{n(n+1)}{2}.
+  \]
+  Kita cari langkah yang memuat bola $2026$. Perhatikan bahwa
+  \[
+    \frac{63\cdot 64}{2}=2016
+    \quad\text{dan}\quad
+    \frac{64\cdot 65}{2}=2080.
+  \]
+  Artinya, sampai langkah ke-$63$ baru ada $2016$ bola, sedangkan sampai langkah ke-$64$ sudah ada $2080$ bola. Jadi bola $2026$ dimasukkan pada langkah ke-$64$.\\
+  Kotak berulang setiap $5$ langkah dengan pola $A,B,C,D,E$. Karena $64=5\cdot 12+4$, maka langkah ke-$64$ jatuh pada kotak ke-$4$, yaitu kotak $D$. Jadi bola $2026$ dimasukkan ke kotak $\boxed{D}$.
+\end{answer}
+
+\begin{answer}[8]
+  Sisi dadu adalah $3,5,8,13,21,34$, yaitu bagian dari barisan Fibonacci. Kita ingin jumlah dua lemparan juga merupakan salah satu bilangan pada sisi dadu.
+  Jumlah yang memenuhi adalah
+  \[
+    3+5=8,\qquad 5+8=13,\qquad 8+13=21,\qquad 13+21=34.
+  \]
+  Karena dadu dilempar dua kali, urutan lemparan diperhatikan. Maka pasangan yang memenuhi adalah
+  \[
+    (3,5),(5,3),(5,8),(8,5),(8,13),(13,8),(13,21),(21,13).
+  \]
+  Jadi ada $\boxed{8}$ kemungkinan.
+\end{answer}
+
+\begin{answer}[19]
+  Kita diberikan persamaan garis $ax+by=0$ dengan $(a,b)\in\{0,1,2,3,6,7\}^2$.
+
+  \begin{itemize}
+    \item Kasus $a=0$ dan $b\neq 0$: garisnya $y=0$, satu garis.
+    \item Kasus $b=0$ dan $a\neq 0$: garisnya $x=0$, satu garis.
+    \item Kasus $a\neq 0$ dan $b\neq 0$: gradien garis $m=-\frac{a}{b}$. Kita hitung semua gradien unik.
+  \end{itemize}
+
+  Susun $a$ dan $b$ dalam tabel untuk $a,b\in\{1,2,3,6,7\}$:
+
+  \begin{center}
+    \begin{tabular}{c|ccccc}
+      $a\backslash b$ & 1  & 2    & 3    & 6    & 7    \\
+      \hline
+      1               & -1 & -1/2 & -1/3 & -1/6 & -1/7 \\
+      2               & -2 & -1   & -2/3 & -1/3 & -2/7 \\
+      3               & -3 & -3/2 & -1   & -1/2 & -3/7 \\
+      6               & -6 & -3   & -2   & -1   & -6/7 \\
+      7               & -7 & -7/2 & -7/3 & -7/6 & -1
+    \end{tabular}
+  \end{center}
+  Dari tabel, pecahan yang berbeda adalah
+  \[
+    -1, -\frac{1}{2}, -\frac{1}{3}, -\frac{1}{6}, -\frac{1}{7}, -2, -\frac{2}{3}, -\frac{2}{7}, -3, -\frac{3}{2}, -\frac{3}{7}, -6, -\frac{6}{7}, -7, -\frac{7}{2}, -\frac{7}{3}, -\frac{7}{6}
+  \]
+  Ada $17$ pecahan berbeda, sehingga ada $17$ gradien berbeda untuk kasus $a,b\neq 0$.
+  Tambahkan dua garis sumbu, yaitu $x=0$ dan $y=0$. Maka banyak garis berbeda adalah $17+2=19$.\\
+  Cara lain adalah dengan mengamati bahwa beberapa pasangan $(a,b)$ menghasilkan gradien yang sama.
+  \begin{itemize}
+    \item Kasus $a=0$, $b\neq 0$: garis $y=0$, 1 garis.
+    \item Kasus $b=0$, $a\neq 0$: garis $x=0$, 1 garis.
+    \item Kasus $a,b\neq 0$: gradien $m=-\frac{a}{b}$. Beberapa pasangan $(a,b)$ menghasilkan gradien sama:
+          \begin{itemize}
+            \item $m=-1$: $(1,1),(2,2),(3,3),(6,6),(7,7)$ → dihitung 1 garis
+            \item $m=-\frac12$: $(1,2),(3,6)$ → 1 garis
+            \item $m=-2$: $(2,1),(6,3)$ → 1 garis
+            \item $m=-\frac13$: $(1,3),(2,6)$ → 1 garis
+            \item $m=-3$: $(3,1),(6,2)$ → 1 garis
+          \end{itemize}
+  \end{itemize}
+  Total pasangan $a,b\neq 0$ ada $5\cdot 5=25$. Dari daftar di atas, $8$ pasangan menghasilkan gradien yang sudah dihitung, sehingga banyak garis berbeda dari kasus ini adalah $25-8=17$. \\
+  Ditambah 2 garis sumbu ($x=0$ dan $y=0$), total garis berbeda adalah $17+2=19$.
+  Jadi banyak garis berbeda adalah $\boxed{19}$.
+\end{answer}
+
+\begin{answer}[3108]
+  Bilangan awal adalah $26$, sehingga digit $2$ selalu sebelum $6$. Kita menyisipkan $3$ digit berbeda dari $\{0,1,3,4,5,7,8,9\}$ untuk membentuk bilangan $5$ digit dengan semua digit berbeda.
+  \begin{itemize}
+    \item Pilih dan urutkan 3 digit tambahan: $8\cdot 7\cdot 6 = 336$.
+    \item Pilih posisi digit $2$ dan $6$ dalam 5 posisi, dengan $2$ selalu sebelum $6$: $\binom{5}{2} = 10$.
+    \item Total susunan awal: $10 \cdot 336 = 3360$.
+    \item Jika digit pertama bilangan adalah $0$, maka susunan tersebut bukan bilangan $5$ digit. Banyak susunan seperti ini dihitung sebagai berikut: pilih 2 posisi untuk $2$ dan $6$ dari 4 posisi tersisa, lalu isi dua posisi lain dengan dua digit tambahan dari 7 digit yang tersisa, sehingga $6\cdot 42 = 252$ susunan tidak valid.
+    \item Jumlah bilangan $5$ digit valid: $3360 - 252 = 3108$.
+  \end{itemize}
+  Jadi banyak bilangan yang dapat diperoleh adalah $\boxed{3108}$.
+\end{answer}
+
+\begin{answer}[2736452]
+  Perhatikan bahwa setiap suku pada jumlah tersebut dapat disederhanakan dengan rumus pemfaktoran $n^3+1=(n+1)(n^2-n+1)$. Maka
+  \[
+    \frac{n^3+1}{n+1}=n^2-n+1.
+  \]
+  Jadi
+  \[
+    A=\sum_{n=1}^{2026}(n^2-n+1).
+  \]
+  Gunakan rumus $\sum_{n=1}^{N} n=\frac{N(N+1)}{2}$ dan $\sum_{n=1}^{N} n^2=\frac{N(N+1)(2N+1)}{6}$. Untuk $N=2026$, diperoleh
+  \[
+    A=\frac{2026\cdot 2027\cdot 4053}{6}-\frac{2026\cdot 2027}{2}+2026.
+  \]
+  Karena yang ditanya adalah $\frac{A}{1013}$ dan $2026=2\cdot 1013$, kita sederhanakan langsung:
+  \[
+    \frac{A}{1013}
+    =\frac{2\cdot 2027\cdot 4053}{6}-\frac{2\cdot 2027}{2}+2.
+  \]
+  Maka
+  \[
+    \frac{A}{1013}
+    =\frac{2027\cdot 4053}{3}-2027+2.
+  \]
+  Karena $4053=3\cdot 1351$, maka
+  \[
+    \frac{A}{1013}=2027\cdot 1351-2025=2736452.
+  \]
+  Jadi jawabannya adalah $\boxed{2736452}$.
+\end{answer}
+
+\begin{answer}[1013]
+  Perhatikan bahwa $x^2 - y^2 = (x-y)(x+y)$. Jika kita ambil $y=0$, diperoleh $f(x) = f(x^2)$.
+  Selain itu, dari $f(x-y)=f(x^2-y^2)$, ambil $y = x-1$, maka:
+  \[
+    f(1) = f(x-(x-1)) = f(x^2-(x-1)^2) = f(2x-1)
+  \]
+  untuk semua bilangan bulat $x$. Jadi $f$ bersifat \textbf{periodik dengan periode 2} pada argumen ganjil: $f(1)=f(3)=f(5)=\dots=f(2025)$.
+  Dari kondisi soal:
+  \[
+    f(2026) = 2027, \quad f(2027) = -2026.
+  \]
+  Perhatikan pola dari identitas $f(x) = f(x^2)$: jika $x$ genap, $x^2$ genap, sehingga semua $f$ pada argumen genap sama dengan $f$ pada 0. Jika $x$ ganjil, $x^2$ ganjil, sehingga semua $f$ pada argumen ganjil sama dengan $f$ pada 1.
+  Maka penjumlahan dapat dipisahkan menjadi ganjil dan genap:
+  \[
+    f(1)+f(2)+\dots+f(2026) = \sum_{\substack{k=1\\ k \text{ ganjil}}}^{2025} f(k) + \sum_{\substack{k=2\\ k \text{ genap}}}^{2026} f(k)
+  \]
+  Jumlah bilangan ganjil dari 1 sampai 2025 adalah 1013 bilangan. Semua sama dengan $f(1)$. Jumlah bilangan genap dari 2 sampai 2026 adalah 1013 bilangan. Semua sama dengan $f(2026)=2027$.
+  Jika $f(1)= -2026$ (sesuai $f(2027)=-2026$), maka:
+  \[
+    f(1)+f(2)+\dots+f(2026) = 1013 \cdot (-2026) + 1013 \cdot 2027 = 1013.
+  \]
+  Jadi jawabannya adalah $\boxed{1013}$.
+\end{answer}
+
+\begin{answer}[18]
+  Gunakan identitas Newton untuk polinomial kubik $x^3+ax^2+bx+c=0$ dengan akar $p,q,r$:
+  \[
+    p+q+r = -a = 0, \quad pq+qr+rp = b = -3, \quad pqr = -c = -5.
+  \]
+  Identitas kuadrat dari akar:
+  \[
+    p^2+q^2+r^2 = (p+q+r)^2 - 2(pq+qr+rp) = 0^2 - 2(-3) = 6.
+  \]
+  Identitas pangkat empat:
+  \[
+    p^4+q^4+r^4 = (p^2+q^2+r^2)^2 - 2(p^2q^2+q^2r^2+r^2p^2).
+  \]
+  Hitung $p^2q^2 + q^2r^2 + r^2p^2$ dengan $(pq+qr+rp)^2 = p^2q^2+q^2r^2+r^2p^2 + 2pqr(p+q+r)$. Karena $p+q+r=0$, maka
+  \[
+    p^2q^2+q^2r^2+r^2p^2 = (pq+qr+rp)^2 = (-3)^2 = 9.
+  \]
+  Maka
+  \[
+    p^4+q^4+r^4 = (p^2+q^2+r^2)^2 - 2(p^2q^2+q^2r^2+r^2p^2) = 6^2 - 2\cdot 9 = 36-18=\boxed{18}.
+  \]
+\end{answer}
+
+\begin{answer}[4]
+
+  Faktor kedua persamaan dengan $s=x+y$ dan $p=xy$:
+  \[
+    7s - 3 s p + 7 p = 40, \qquad 2 s + s p + 2 p = 4.
+  \]
+  Dari persamaan kedua diperoleh
+  \[
+    s (2+p) + 2p = 4 \implies s = \frac{4 - 2p}{2 + p}.
+  \]
+  Substitusi ke persamaan pertama:
+  \[
+    7 \frac{4 - 2p}{2 + p} - 3p \frac{4 - 2p}{2 + p} + 7p = \frac{28 - 26p + 6 p^2}{2 + p} + 7p = 40.
+  \]
+  Gabungkan pecahan:
+  \[
+    28 - 26p + 6p^2 + 7p(2+p) = 28 - 26p + 6p^2 + 14p + 7p^2 = 28 - 12p + 13p^2.
+  \]
+  Samakan dengan $40(2+p) = 80 + 40p$:
+  \[
+    13p^2 - 12p + 28 = 80 + 40p \implies 13p^2 - 52p - 52 = 0 \implies p^2 - 4p -4 = 0.
+  \]
+  Penyelesaian kuadrat:
+  \[
+    p = 2 \pm 2 \sqrt{2}.
+  \]
+  Maka
+  \[
+    s = x+y = \frac{4 - 2p}{2 + p}.
+  \]
+  \begin{itemize}
+    \item Untuk $p = 2 + 2\sqrt{2}$:
+          \[
+            s = \frac{4 - 2(2 + 2\sqrt{2})}{2 + (2 + 2\sqrt{2})} = \frac{-4\sqrt{2}}{4 + 2 \sqrt{2}} = - \frac{2 \sqrt{2}}{2 + \sqrt{2}}.
+          \]
+    \item Untuk $p = 2 - 2\sqrt{2}$:
+          \[
+            s = \frac{4 - 2(2 - 2\sqrt{2})}{2 + (2 - 2\sqrt{2})} = \frac{4\sqrt{2}}{4 - 2 \sqrt{2}} = \frac{2 \sqrt{2}}{2 - \sqrt{2}}.
+          \]
+  \end{itemize}
+  Nilai positif untuk $s$ adalah $\frac{2 \sqrt{2}}{2 - \sqrt{2}}$, sehingga
+  \[
+    \lfloor x+y \rfloor = \boxed{4}.
+  \]
+\end{answer}
+
+\begin{answer}[13]
+  Misalkan
+  \[
+    A = 3x - 4, \quad B = 5x - 6, \quad C = x - 2, \quad D = 7x - 8.
+  \]
+  Perhatikan jumlah kedua sisi:
+  \[
+    A + B = (3x-4) + (5x-6) = 8x - 10, \quad
+    C + D = (x-2) + (7x-8) = 8x - 10.
+  \]
+  Karena nilainya sama, kita memiliki
+  \[
+    A + B = C + D.
+  \]
+  Misalkan
+  \[
+    u = \sqrt[3]{A}, \quad v = \sqrt[3]{B}, \quad w = \sqrt[3]{C}, \quad z = \sqrt[3]{D}.
+  \]
+  Persamaan awal berubah menjadi
+  \[
+    u + v = w + z.
+  \]
+  Pangkatkan kedua sisi tiga, sehingga
+  \[
+    u^3 + v^3 + 3uv(u+v) = w^3 + z^3 + 3wz(w+z).
+  \]
+  Dengan $u^3 = A$, $v^3 = B$, $w^3 = C$, $z^3 = D$, dan $u+v = w+z$, persamaan di atas menyederhanakan menjadi
+  \[
+    3uv(u+v) = 3wz(w+z) \implies (u+v)(uv - wz) = 0.
+  \]
+  Terdapat dua kemungkinan untuk memenuhi persamaan tersebut
+  \begin{itemize}
+    \item $u + v = 0$
+          Maka $u = -v$, sehingga $A = -B$. Dengan $A+B = 0$, kita peroleh
+          \[
+            8x - 10 = 0 \implies x = \frac{5}{4}.
+          \]
+    \item  $uv - wz = 0$
+          Maka $uv = wz$. Karena $u+v = w+z$ dan $uv = wz$, himpunan $\{u,v\}$ identik dengan $\{w,z\}$. Ada dua kemungkinan:
+          \begin{itemize}
+            \item $u = w \implies A = C \implies 3x-4 = x-2 \implies x = 1$
+            \item $u = z \implies A = D \implies 3x-4 = 7x-8 \implies x = 1$
+          \end{itemize}
+          Kedua kemungkinan menghasilkan $x = 1$.
+  \end{itemize}
+  Solusi riil dari persamaan tersebut adalah
+  \[
+    x = 1 \quad \text{dan} \quad x = \frac{5}{4}.
+  \]
+  Jumlah semua solusi riil:
+  \[
+    1 + \frac{5}{4} = \frac{9}{4}.
+  \]
+  Dengan $\frac{a}{b} = \frac{9}{4}$, maka $a = 9$ dan $b = 4$, sehingga
+  \[
+    a+b = 9+4 = \boxed{13}.
+  \]
+\end{answer}
 
 \end{document}
