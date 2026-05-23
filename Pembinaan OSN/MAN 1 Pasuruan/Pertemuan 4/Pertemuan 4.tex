@@ -124,9 +124,12 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{\textit{Outline}}
-  \tableofcontents
-\end{frame}
+\AtBeginSection{
+  {
+      \begin{frame}{\textit{Outline}}
+        \tableofcontents[currentsection]
+      \end{frame}}
+}
 
 \section{\textit{Angle Chasing}}
 \begin{frame}{\insertsection}
@@ -220,39 +223,39 @@
         \coordinate (X) at ($(P) + (\ang:1.5)$);
         \coordinate (Y) at ($(Q) + ({180+\ang}:1.5)$);
 
-          \begin{scope}
-            \clip (P) circle (\radPQ);
-            \fill[blue!30] (P) -- ++(0:1) arc (0:\ang:1) -- cycle;
-            \fill[orange!40] (P) -- ++(\ang:1) arc (\ang:180:1) -- cycle;
-            \fill[blue!30] (P) -- ++(180:1) arc (180:{180+\ang}:1) -- cycle;
-            \fill[orange!40] (P) -- ++({180+\ang}:1) arc ({180+\ang}:360:1) -- cycle;
-          \end{scope}
-          \draw (P) circle (\radPQ);
+        \begin{scope}
+          \clip (P) circle (\radPQ);
+          \fill[blue!30] (P) -- ++(0:1) arc (0:\ang:1) -- cycle;
+          \fill[orange!40] (P) -- ++(\ang:1) arc (\ang:180:1) -- cycle;
+          \fill[blue!30] (P) -- ++(180:1) arc (180:{180+\ang}:1) -- cycle;
+          \fill[orange!40] (P) -- ++({180+\ang}:1) arc ({180+\ang}:360:1) -- cycle;
+        \end{scope}
+        \draw (P) circle (\radPQ);
 
-          \begin{scope}
-            \clip (Q) circle (\radPQ);
-            \fill[blue!30] (Q) -- ++(0:1) arc (0:\ang:1) -- cycle;
-            \fill[orange!40] (Q) -- ++(\ang:1) arc (\ang:180:1) -- cycle;
-            \fill[blue!30] (Q) -- ++(180:1) arc (180:{180+\ang}:1) -- cycle;
-            \fill[orange!40] (Q) -- ++({180+\ang}:1) arc ({180+\ang}:360:1) -- cycle;
-          \end{scope}
-          \draw (Q) circle (\radPQ);
+        \begin{scope}
+          \clip (Q) circle (\radPQ);
+          \fill[blue!30] (Q) -- ++(0:1) arc (0:\ang:1) -- cycle;
+          \fill[orange!40] (Q) -- ++(\ang:1) arc (\ang:180:1) -- cycle;
+          \fill[blue!30] (Q) -- ++(180:1) arc (180:{180+\ang}:1) -- cycle;
+          \fill[orange!40] (Q) -- ++({180+\ang}:1) arc ({180+\ang}:360:1) -- cycle;
+        \end{scope}
+        \draw (Q) circle (\radPQ);
 
-          \draw (A) -- (B);
-          \draw (C) -- (D);
-          \draw (Y) -- (X);
+        \draw (A) -- (B);
+        \draw (C) -- (D);
+        \draw (Y) -- (X);
 
-          \filldraw (A) circle (\radPt) node[left] {$A$};
-          \filldraw (B) circle (\radPt) node[right] {$B$};
-          \filldraw (C) circle (\radPt) node[left] {$C$};
-          \filldraw (D) circle (\radPt) node[right] {$D$};
-          \filldraw (X) circle (\radPt) node[right] {$X$};
-          \filldraw (Y) circle (\radPt) node[left] {$Y$};
-          \filldraw (P) circle (\radPt);
-          \filldraw (Q) circle (\radPt);
+        \filldraw (A) circle (\radPt) node[left] {$A$};
+        \filldraw (B) circle (\radPt) node[right] {$B$};
+        \filldraw (C) circle (\radPt) node[left] {$C$};
+        \filldraw (D) circle (\radPt) node[right] {$D$};
+        \filldraw (X) circle (\radPt) node[right] {$X$};
+        \filldraw (Y) circle (\radPt) node[left] {$Y$};
+        \filldraw (P) circle (\radPt);
+        \filldraw (Q) circle (\radPt);
 
-          \node at ($(P) + ({90+(\ang/2)}:{0.25})$) {$P$};
-          \node at ($(Q) + ({90+(\ang/2)}:{0.25})$) {$Q$};
+        \node at ($(P) + ({90+(\ang/2)}:{0.25})$) {$P$};
+        \node at ($(Q) + ({90+(\ang/2)}:{0.25})$) {$Q$};
 
       \end{tikzpicture}
     \end{center}
@@ -353,8 +356,8 @@
                 2/DL/D/E/28^\circ/orange/0.6cm/1.6
               } {
                 \onslide<\slide->{
-                    \pic [draw=\pColor, fill=\pColor!30, angle radius=\pRad, "\color{\pColor}$\pText$", angle eccentricity=\pEcc] {angle = \pA--\pB--\pC};
-                  }
+                  \pic [draw=\pColor, fill=\pColor!30, angle radius=\pRad, "\color{\pColor}$\pText$", angle eccentricity=\pEcc] {angle = \pA--\pB--\pC};
+                }
               }
           \end{tikzpicture}
         \end{center}
@@ -741,10 +744,10 @@
       \end{tikzpicture}
     \end{center}
     \onslide<2->{\textbf{Jawab}:
-        \begin{itemize}
-          \item Sudut Interior: $90^\circ + 90^\circ + 2x + 3x + 260^\circ = 540^\circ \implies x = 20^\circ \implies y =120$.
-          \item Sudut Eksterior: $y -80^\circ + (180^\circ - 2x) + 90^\circ + 90^\circ  = 360^\circ \implies y = 120^\circ$.
-        \end{itemize}}
+      \begin{itemize}
+        \item Sudut Interior: $90^\circ + 90^\circ + 2x + 3x + 260^\circ = 540^\circ \implies x = 20^\circ \implies y =120$.
+        \item Sudut Eksterior: $y -80^\circ + (180^\circ - 2x) + 90^\circ + 90^\circ  = 360^\circ \implies y = 120^\circ$.
+      \end{itemize}}
   \end{contoh}
 \end{frame}
 
@@ -972,11 +975,11 @@
             \pic[draw, "$24^\circ$", angle radius=0.8cm, angle eccentricity=1.3, font=\tiny] {angle = D--A--C};
 
             \onslide<2->{\pic[draw=green!70!black, fill=green!40, "\tiny$66^\circ$", angle radius=0.55cm, angle eccentricity=0.6, font=\tiny] {angle = B--M--A};
-                \pic[draw=orange, fill=orange!40, "\tiny $114^\circ$", angle radius=0.55cm, angle eccentricity=0.6, font=\tiny] {angle = D--M--B};}
+              \pic[draw=orange, fill=orange!40, "\tiny $114^\circ$", angle radius=0.55cm, angle eccentricity=0.6, font=\tiny] {angle = D--M--B};}
 
             \onslide<3->{\pic[draw=blue, fill=blue!20, "\tiny$33^\circ$", angle radius=0.5cm, angle eccentricity=1.6, font=\tiny] {angle = M--B--D};
-                \pic[draw=blue, fill=blue!20, "\tiny$33^\circ$", angle radius=0.6cm, angle eccentricity=1.4, font=\tiny] {angle = B--D--A};
-              }
+              \pic[draw=blue, fill=blue!20, "\tiny$33^\circ$", angle radius=0.6cm, angle eccentricity=1.4, font=\tiny] {angle = B--D--A};
+            }
 
             \onslide<4->{\pic[draw=purple, fill=purple!20, "\tiny$57^\circ$", angle radius=0.35cm, angle eccentricity=1.7, font=\tiny] {angle = D--P--C};}
 
@@ -1159,62 +1162,62 @@
     $
     Tentukan panjang \(BD\).\\
     \onslide<2->{\textbf{Jawab}:
-        \begin{columns}
-          \begin{column}{0.6\textwidth}
-            \small
-            \begin{itemize}
-              \item $\angle BAD = \angle ACB$ dan $\angle BAC = 90^\circ$.
-              \item<3-> $\angle CAD = 90^\circ - \alpha = \angle ABC$ (Misalkan $\beta$).
-              \item<4-> $\triangle ABD \sim \triangle ACB$ (Kriteria AA).
-              \item<5-> $\overline{BC}=\sqrt{\overline{AB}^2 + \overline{AC}^2} = \sqrt{8^2 + 6^2} = 10$.
-              \item<6-> $\displaystyle\frac{\overline{BD}}{\overline{AB}}=\frac{\overline{AB}}{\overline{BC}}\implies \overline{BD}=\frac{\overline{AB}^2}{\overline{BC}}=\frac{8^2}{10}=\frac{64}{10}=\boxed{\frac{32}{5}}$.
-            \end{itemize}
-          \end{column}
-          \begin{column}{0.4\textwidth}
-            \begin{center}
-              \begin{tikzpicture}[scale=0.5,every node/.style={font=\footnotesize}]
-                \coordinate (A) at (0,0);
-                \coordinate (B) at (8,0);
-                \coordinate (C) at (0,6);
-                \coordinate (D) at ($(B)!(A)!(C)$);
+      \begin{columns}
+        \begin{column}{0.6\textwidth}
+          \small
+          \begin{itemize}
+            \item $\angle BAD = \angle ACB$ dan $\angle BAC = 90^\circ$.
+            \item<3-> $\angle CAD = 90^\circ - \alpha = \angle ABC$ (Misalkan $\beta$).
+            \item<4-> $\triangle ABD \sim \triangle ACB$ (Kriteria AA).
+            \item<5-> $\overline{BC}=\sqrt{\overline{AB}^2 + \overline{AC}^2} = \sqrt{8^2 + 6^2} = 10$.
+            \item<6-> $\displaystyle\frac{\overline{BD}}{\overline{AB}}=\frac{\overline{AB}}{\overline{BC}}\implies \overline{BD}=\frac{\overline{AB}^2}{\overline{BC}}=\frac{8^2}{10}=\frac{64}{10}=\boxed{\frac{32}{5}}$.
+          \end{itemize}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+          \begin{center}
+            \begin{tikzpicture}[scale=0.5,every node/.style={font=\footnotesize}]
+              \coordinate (A) at (0,0);
+              \coordinate (B) at (8,0);
+              \coordinate (C) at (0,6);
+              \coordinate (D) at ($(B)!(A)!(C)$);
 
-                \draw (A)--(B)--(C)--cycle;
-                \draw (A)--(D);
+              \draw (A)--(B)--(C)--cycle;
+              \draw (A)--(D);
 
-                \node[right] at (B) {$B$};
-                \node[below left] at (A) {$A$};
-                \node[above] at (C) {$C$};
-                \node[above right] at (D) {$D$};
+              \node[right] at (B) {$B$};
+              \node[below left] at (A) {$A$};
+              \node[above] at (C) {$C$};
+              \node[above right] at (D) {$D$};
 
-                \node[below] at ($(A)!0.5!(B)$) {$8$};
-                \node[left] at ($(A)!0.5!(C)$) {$6$};
+              \node[below] at ($(A)!0.5!(B)$) {$8$};
+              \node[left] at ($(A)!0.5!(C)$) {$6$};
 
-                \draw (0.35,0)--(0.35,0.35)--(0,0.35);
+              \draw (0.35,0)--(0.35,0.35)--(0,0.35);
 
-                \draw[red,thick] pic["$\alpha$",draw=red,angle radius=15,angle eccentricity=0.5]
-                  {angle=B--A--D};
-                \draw[red,thick] pic["$\alpha$",draw=red,angle radius=15,angle eccentricity=0.5]
-                  {angle=A--C--B};
-                \onslide<3->{\draw[purple,thick] pic["\tiny$\beta$",draw=purple,angle radius=20,angle eccentricity=0.6]
-                      {angle=D--A--C};
-                    \draw[purple,thick] pic["\tiny$\beta$",draw=purple,angle radius=20,angle eccentricity=0.6]
-                      {angle=D--B--A};}
+              \draw[red,thick] pic["$\alpha$",draw=red,angle radius=15,angle eccentricity=0.5]
+                {angle=B--A--D};
+              \draw[red,thick] pic["$\alpha$",draw=red,angle radius=15,angle eccentricity=0.5]
+                {angle=A--C--B};
+              \onslide<3->{\draw[purple,thick] pic["\tiny$\beta$",draw=purple,angle radius=20,angle eccentricity=0.6]
+                  {angle=D--A--C};
+                \draw[purple,thick] pic["\tiny$\beta$",draw=purple,angle radius=20,angle eccentricity=0.6]
+                  {angle=D--B--A};}
 
-                \onslide<4->{
-                    \draw[blue,thick] (B)--(A)--(D);
-                    \draw[blue,thick] (A)--(C)--(B);
-                    \pic[draw, angle radius=0.2cm] {right angle = C--D--A};
-                    \pic[draw, angle radius=0.2cm] {right angle = A--D--B};
-                  }
+              \onslide<4->{
+                \draw[blue,thick] (B)--(A)--(D);
+                \draw[blue,thick] (A)--(C)--(B);
+                \pic[draw, angle radius=0.2cm] {right angle = C--D--A};
+                \pic[draw, angle radius=0.2cm] {right angle = A--D--B};
+              }
 
-                \onslide<5->{
-                    \draw [decorate,decoration={brace,amplitude=5pt,mirror,raise=3ex}]
-                    (B) -- (C) node[midway,yshift=5ex,xshift=3ex]{$10$};
-                  }
-              \end{tikzpicture}
-            \end{center}
-          \end{column}
-        \end{columns}}
+              \onslide<5->{
+                \draw [decorate,decoration={brace,amplitude=5pt,mirror,raise=3ex}]
+                (B) -- (C) node[midway,yshift=5ex,xshift=3ex]{$10$};
+              }
+            \end{tikzpicture}
+          \end{center}
+        \end{column}
+      \end{columns}}
   \end{contoh}
 \end{frame}
 
@@ -1364,39 +1367,39 @@
           \coordinate (Q) at ($(A)!2/3!(C)$);
 
           \onslide<2->{
-              \node[above] at (A) {$A$};
-              \node[left] at (B) {$B$};
-              \node[right] at (C) {$C$};
-              \node[below] at (D) {$D$};
-              \node[right] at (E) {$E$};
-              \node[above left] at (G) {$G$};
-              \node[left] at (P) {$P$};
-              \node[right] at (Q) {$Q$};
-              \draw (A)--(B)--(C)--cycle;
-              \draw (A)--(D);
-              % \draw (B)--(E);
-              \draw (P)--(Q);
-              \fill (D) circle (1.2pt);
-              \fill (E) circle (1.2pt);
-              \fill (G) circle (1.2pt);
-              \fill (P) circle (1.2pt);
-              \fill (Q) circle (1.2pt);
-              \draw[red,thick] (A)--(D);
-              \node[right,red] at ($(A)!0.32!(D)$) {$2k$};
-              \node[right,red] at ($(A)!0.83!(D)$) {$k$};
-            }
+            \node[above] at (A) {$A$};
+            \node[left] at (B) {$B$};
+            \node[right] at (C) {$C$};
+            \node[below] at (D) {$D$};
+            \node[right] at (E) {$E$};
+            \node[above left] at (G) {$G$};
+            \node[left] at (P) {$P$};
+            \node[right] at (Q) {$Q$};
+            \draw (A)--(B)--(C)--cycle;
+            \draw (A)--(D);
+            % \draw (B)--(E);
+            \draw (P)--(Q);
+            \fill (D) circle (1.2pt);
+            \fill (E) circle (1.2pt);
+            \fill (G) circle (1.2pt);
+            \fill (P) circle (1.2pt);
+            \fill (Q) circle (1.2pt);
+            \draw[red,thick] (A)--(D);
+            \node[right,red] at ($(A)!0.32!(D)$) {$2k$};
+            \node[right,red] at ($(A)!0.83!(D)$) {$k$};
+          }
 
           \onslide<3->{
-              \draw[blue,thick] (A)--(P)--(G);
-              \draw[blue,thick] (A)--(B)--(D);
-              \draw[orange,thick] (A)--(Q)--(G);
-              \draw[orange,thick] (A)--(C)--(D);
-            }
+            \draw[blue,thick] (A)--(P)--(G);
+            \draw[blue,thick] (A)--(B)--(D);
+            \draw[orange,thick] (A)--(Q)--(G);
+            \draw[orange,thick] (A)--(C)--(D);
+          }
 
           \onslide<4->{
-              \draw[green!50!black,thick] (P)--node[midway,below left] {$2l$} (Q);
-              \draw[green!50!black,thick] (B)--node[midway,below left] {$3l$} (C);
-            }
+            \draw[green!50!black,thick] (P)--node[midway,below left] {$2l$} (Q);
+            \draw[green!50!black,thick] (B)--node[midway,below left] {$3l$} (C);
+          }
         \end{tikzpicture}
       \end{column}
     \end{columns}
@@ -1549,42 +1552,42 @@
           \coordinate (E) at (4.25,2.5);
 
           \onslide<2-3>{
-              \node[below,blue] at ($(B)!0.5!(D)$) {$x$};
-              \node[below,blue] at ($(D)!0.5!(C)$) {$8-x$};
-            }
+            \node[below,blue] at ($(B)!0.5!(D)$) {$x$};
+            \node[below,blue] at ($(D)!0.5!(C)$) {$8-x$};
+          }
           \onslide<2-4>{
-              \node[above right,blue] at ($(A)!0.5!(E)$) {$y$};
-              \node[above right,blue] at ($(E)!0.5!(C)$) {$10-y$};
-            }
+            \node[above right,blue] at ($(A)!0.5!(E)$) {$y$};
+            \node[above right,blue] at ($(E)!0.5!(C)$) {$10-y$};
+          }
 
           \onslide<2->{
-              \node[above] at (A) {$A$};
-              \node[left] at (B) {$B$};
-              \node[right] at (C) {$C$};
-              \node[below] at (D) {$D$};
-              \node[above right] at (E) {$E$};
-              \fill (D) circle (1.2pt);
-              \fill (E) circle (1.2pt);
-              \pic[draw,angle radius=10,angle eccentricity=0.6, fill=cyan!20]
-              {angle=B--A--D};
-              \pic[draw,angle radius=10,angle eccentricity=0.6,fill=cyan!20]
-              {angle=D--A--C};
-              \pic[draw,angle radius=10,angle eccentricity=0.6, fill=cyan!20]
-              {angle=D--E--C};
-              \pic[draw,angle radius=10,angle eccentricity=0.6, fill=magenta!20]
-              {angle=C--B--A};
-              \pic[draw,angle radius=10,angle eccentricity=0.6, fill=magenta!20]
-              {angle=C--D--E};
-              \draw[purple] (A)--(B)--(C)--cycle;
-              \draw (A)--(D);
-              \draw[purple] (D)--(E);
-              \node[above left,blue] at ($(A)!0.5!(B)$) {$6$};
-            }
+            \node[above] at (A) {$A$};
+            \node[left] at (B) {$B$};
+            \node[right] at (C) {$C$};
+            \node[below] at (D) {$D$};
+            \node[above right] at (E) {$E$};
+            \fill (D) circle (1.2pt);
+            \fill (E) circle (1.2pt);
+            \pic[draw,angle radius=10,angle eccentricity=0.6, fill=cyan!20]
+            {angle=B--A--D};
+            \pic[draw,angle radius=10,angle eccentricity=0.6,fill=cyan!20]
+            {angle=D--A--C};
+            \pic[draw,angle radius=10,angle eccentricity=0.6, fill=cyan!20]
+            {angle=D--E--C};
+            \pic[draw,angle radius=10,angle eccentricity=0.6, fill=magenta!20]
+            {angle=C--B--A};
+            \pic[draw,angle radius=10,angle eccentricity=0.6, fill=magenta!20]
+            {angle=C--D--E};
+            \draw[purple] (A)--(B)--(C)--cycle;
+            \draw (A)--(D);
+            \draw[purple] (D)--(E);
+            \node[above left,blue] at ($(A)!0.5!(B)$) {$6$};
+          }
 
           \onslide<4->{
-              \node[below,blue] at ($(B)!0.5!(D)$) {$3$};
-              \node[below,blue] at ($(D)!0.5!(C)$) {$5$};
-            }
+            \node[below,blue] at ($(B)!0.5!(D)$) {$3$};
+            \node[below,blue] at ($(D)!0.5!(C)$) {$5$};
+          }
         \end{tikzpicture}
       \end{column}
     \end{columns}
@@ -1869,43 +1872,43 @@
           \coordinate (P) at (3.75,0);
 
           \onslide<2-3>{
-              \pic["\tiny$70^\circ$",draw,fill=red!20,angle radius=15,angle eccentricity=0.6]
-              {angle=A--B--C};
-            }
+            \pic["\tiny$70^\circ$",draw,fill=red!20,angle radius=15,angle eccentricity=0.6]
+            {angle=A--B--C};
+          }
           \onslide<3->{
-              \pic["\tiny$60^\circ$",draw,fill=blue!20,angle radius=18,angle eccentricity=0.7]
-              {angle=C--A--B};
-              \draw (B) -- node[sloped] {$||$} (P);
-              \draw (A) -- node[sloped] {$||$} (P);
-            }
+            \pic["\tiny$60^\circ$",draw,fill=blue!20,angle radius=18,angle eccentricity=0.7]
+            {angle=C--A--B};
+            \draw (B) -- node[sloped] {$||$} (P);
+            \draw (A) -- node[sloped] {$||$} (P);
+          }
 
           \onslide<4->{
-              \pic["\tiny$60^\circ$",draw,fill=blue!20,angle radius=18,angle eccentricity=0.6]
-              {angle=A--B--P};
-            }
+            \pic["\tiny$60^\circ$",draw,fill=blue!20,angle radius=18,angle eccentricity=0.6]
+            {angle=A--B--P};
+          }
 
           \onslide<5->{
-              \pic["\tiny$120^\circ$",draw,fill=purple!20,angle radius=15,angle eccentricity=0.6]
-              {angle=C--P--B};
-            }
+            \pic["\tiny$120^\circ$",draw,fill=purple!20,angle radius=15,angle eccentricity=0.6]
+            {angle=C--P--B};
+          }
           \onslide<2->{
-              \pic["\tiny$50^\circ$",draw,fill=yellow!20,angle radius=25,angle eccentricity=0.7]
-              {angle=B--C--A};
-              \pic [draw, fill=green!20, angle radius=3mm] {right angle = A--M--P};
-              \pic [draw, fill=green!20, angle radius=3mm] {right angle = B--M--P};
+            \pic["\tiny$50^\circ$",draw,fill=yellow!20,angle radius=25,angle eccentricity=0.7]
+            {angle=B--C--A};
+            \pic [draw, fill=green!20, angle radius=3mm] {right angle = A--M--P};
+            \pic [draw, fill=green!20, angle radius=3mm] {right angle = B--M--P};
 
-              \node[below left] at (A) {$A$};
-              \node[above] at (B) {$B$};
-              \node[below] at (C) {$C$};
-              \node[below] at (P) {$P$};
-              \node[above left] at (M) {$M$};
+            \node[below left] at (A) {$A$};
+            \node[above] at (B) {$B$};
+            \node[below] at (C) {$C$};
+            \node[below] at (P) {$P$};
+            \node[above left] at (M) {$M$};
 
-              \draw (A)-- node[sloped] {$|$} (M)-- node[sloped] {$|$} (B)--(C)--cycle;
-              \draw (M) -- (P);
+            \draw (A)-- node[sloped] {$|$} (M)-- node[sloped] {$|$} (B)--(C)--cycle;
+            \draw (M) -- (P);
 
-              \fill (P) circle (1.2pt);
-              \fill (M) circle (1.2pt);
-            }
+            \fill (P) circle (1.2pt);
+            \fill (M) circle (1.2pt);
+          }
         \end{tikzpicture}
       \end{column}
     \end{columns}
@@ -2040,41 +2043,41 @@
           \coordinate (D) at ($(B)!(A)!(C)$);
 
           \onslide<3->{
-              \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=green!30] {angle = E--B--C};
-              \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=green!30] {angle = C--A--D};
-            }
+            \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=green!30] {angle = E--B--C};
+            \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=green!30] {angle = C--A--D};
+          }
 
           \only<2>{
-              \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=blue!30] {angle = E--A--B};
-              \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=blue!30] {angle = A--B--E};
-            }
+            \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=blue!30] {angle = E--A--B};
+            \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=blue!30] {angle = A--B--E};
+          }
 
 
           \onslide<2->{
-              \pic [draw, fill=blue!15, angle radius=3mm] {right angle = A--E--B};
-              \pic [draw, fill=blue!15, angle radius=3mm] {right angle = A--D--C};
-              \pic [draw, fill=blue!15, angle radius=3mm] {right angle = B--E--C};
+            \pic [draw, fill=blue!15, angle radius=3mm] {right angle = A--E--B};
+            \pic [draw, fill=blue!15, angle radius=3mm] {right angle = A--D--C};
+            \pic [draw, fill=blue!15, angle radius=3mm] {right angle = B--E--C};
 
-              \draw[thick] (A) -- (B) -- (C) -- cycle;
-              \draw[thick] (A) -- (D);
-              \draw[thick] (B) -- (E);
+            \draw[thick] (A) -- (B) -- (C) -- cycle;
+            \draw[thick] (A) -- (D);
+            \draw[thick] (B) -- (E);
 
-              \node[left] at (A) {$A$};
-              \node[above] at (B) {$B$};
-              \node[right] at (C) {$C$};
-              \node[below] at (E) {$E$};
-              \node[above right, xshift=1mm] at (D) {$D$};
-              \node[left, yshift=2mm] at (H) {$H$};
-              \draw[very thick, red] (-2, -0.1) -- (-2, 0.1);
-              \draw[very thick, red] (-0.1, 2) -- (0.1, 2);
+            \node[left] at (A) {$A$};
+            \node[above] at (B) {$B$};
+            \node[right] at (C) {$C$};
+            \node[below] at (E) {$E$};
+            \node[above right, xshift=1mm] at (D) {$D$};
+            \node[left, yshift=2mm] at (H) {$H$};
+            \draw[very thick, red] (-2, -0.1) -- (-2, 0.1);
+            \draw[very thick, red] (-0.1, 2) -- (0.1, 2);
 
-              \fill (H) circle (1.5pt);
-            }
+            \fill (H) circle (1.5pt);
+          }
 
           \onslide<4->{
-              \fill[yellow, opacity=0.4] (A) -- (H) -- (E) -- cycle;
-              \fill[magenta, opacity=0.3] (B) -- (C) -- (E) -- cycle;
-            }
+            \fill[yellow, opacity=0.4] (A) -- (H) -- (E) -- cycle;
+            \fill[magenta, opacity=0.3] (B) -- (C) -- (E) -- cycle;
+          }
         \end{tikzpicture}
       \end{column}
       \begin{column}{0.55\textwidth}
