@@ -78,6 +78,10 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\C}{\mathbb{C}}
 
+\usepackage{scalerel}
+\usepackage{polynom}
+\newcommand{\longdiv}{\smash{\mkern-0.43mu\vstretch{1.31}{\hstretch{.7}{)}}\mkern-5.2mu\vstretch{1.31}{\hstretch{.7}{)}}}}
+
 \AtBeginEnvironment{contoh}{%
 \setbeamercolor{block title}{use=example text,fg=white,bg=example text.fg!75!black}
 \setbeamercolor{block body}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
@@ -120,7 +124,7 @@
 }
 
 \date{30 Mei 2026}
-\title[OSK Matematika - Aljabar]{Pembinaan OSN-K Matematika\\(Pertemuan 6: Ketaksamaan dan Polinomial)}
+\title[OSK Matematika - Aljabar]{Pembinaan OSN-K Matematika\\(Pertemuan 6: Ketaksamaan dan Pembagian Polinomial)}
 \author[Tetew]{Teosofi Hidayah Agung}
 \institute[MAN 1 Pasuruan]{MAN 1 Pasuruan}
 \titlegraphic{\includegraphics[width=0.15\textwidth]{../../man1pasuruan.png}}
@@ -158,10 +162,10 @@
       x+y \geq 2\sqrt{xy}.
     \]
     \onslide<2->{\textbf{Jawab}: Menggunakan \myref{prop:trivial}, kita dapat menulis
-      \[
-        (\sqrt{x} - \sqrt{y})^2 \geq 0 \implies x + y - 2\sqrt{xy} \geq 0 \implies x+y \geq 2\sqrt{xy}.
-      \]
-      Kesamaan terjadi jika dan hanya jika $x = y$.}
+        \[
+          (\sqrt{x} - \sqrt{y})^2 \geq 0 \implies x + y - 2\sqrt{xy} \geq 0 \implies x+y \geq 2\sqrt{xy}.
+        \]
+        Kesamaan terjadi jika dan hanya jika $x = y$.}
   \end{contoh}
   \onslide<2->{\myref{prop:trivial} adalah sebuah ide dasar untuk membuktikan banyak ketaksamaan lainnya, dalam hal ini adalah contoh ketaksamaan AM-GM yang akan kita bahas nanti.  }
 \end{frame}
@@ -201,14 +205,14 @@
   \begin{contoh}[AMC 10B 2006]
     Dalam sebuah segitiga dengan panjang sisi bilangan bulat, panjang sisi pertama adalah tiga kali panjang sisi kedua, dan panjang sisi ketiga adalah $15$. Berapakah keliling maksimum yang mungkin dari segitiga tersebut?\\
     \onslide<2->{\textbf{Solusi:} Misalkan panjang sisi kedua adalah $x$, maka panjang sisi pertama adalah $3x$. Karena panjang sisi ketiga adalah $15$, kita dapat menggunakan ketaksamaan segitiga untuk menentukan nilai $x$:
-      \begin{align*}
-        3x + x > 15  \implies x > \frac{15}{4} = 3.75\quad\text{dan}\quad x + 15 > 3x \implies x < 7.5.
-      \end{align*}
-      Karena $x$ harus berupa bilangan bulat, maka nilai $x$ yang memenuhi adalah $4$, $5$, $6$, atau $7$. Sehingga keliling maksimum adalah
-      $
-        3x + x + 15 = 3(7) + 7 + 15 = \boxed{43}.
-      $
-    }
+        \begin{align*}
+          3x + x > 15  \implies x > \frac{15}{4} = 3.75\quad\text{dan}\quad x + 15 > 3x \implies x < 7.5.
+        \end{align*}
+        Karena $x$ harus berupa bilangan bulat, maka nilai $x$ yang memenuhi adalah $4$, $5$, $6$, atau $7$. Sehingga keliling maksimum adalah
+        $
+          3x + x + 15 = 3(7) + 7 + 15 = \boxed{43}.
+        $
+      }
   \end{contoh}
 \end{frame}
 
@@ -235,15 +239,15 @@
     $$|x^2 - 4x + 3| + |x^2 - 9| = |2x^2 - 4x - 6|$$
 
     \onslide<2->{\textbf{Solusi:}
-      Misalkan ekspresi di dalam nilai mutlak pada ruas kiri sebagai
-      \begin{align*}
-        a  = x^2 - 4x + 3\quad\text{dan} \quad
-        b  = x^2 - 9
-      \end{align*}
-      Perhatikan hasil penjumlahan dari $a$ dan $b$
-      \begin{align*}
-        a + b & = (x^2 - 4x + 3) + (x^2 - 9) = 2x^2 - 4x - 6
-      \end{align*}}
+        Misalkan ekspresi di dalam nilai mutlak pada ruas kiri sebagai
+        \begin{align*}
+          a  = x^2 - 4x + 3\quad\text{dan} \quad
+          b  = x^2 - 9
+        \end{align*}
+        Perhatikan hasil penjumlahan dari $a$ dan $b$
+        \begin{align*}
+          a + b & = (x^2 - 4x + 3) + (x^2 - 9) = 2x^2 - 4x - 6
+        \end{align*}}
   \end{contoh}
 \end{frame}
 
@@ -285,11 +289,11 @@
     Tentukan nilai minimum dari fungsi $f(x) = x + \dfrac{1}{x^2}$ untuk $x > 0$.\label{cth:AM-GM}
 
     \onslide<2->{\textbf{Solusi:}
-      Jika kita langsung menerapkan Ketaksamaan AM-GM pada dua suku $x$ dan $\frac{1}{x^2}$, kita akan mendapatkan:
-      $$f(x) = x + \frac{1}{x^2} \ge 2\sqrt{x \cdot \frac{1}{x^2}} = 2\sqrt{\frac{1}{x}}$$
-      Perhatikan bahwa variabel $x$ tidak saling menghilangkan di ruas kanan. Ini berarti kita tidak mendapatkan batasan nilai berupa angka konstan (tetap).
+        Jika kita langsung menerapkan Ketaksamaan AM-GM pada dua suku $x$ dan $\frac{1}{x^2}$, kita akan mendapatkan:
+        $$f(x) = x + \frac{1}{x^2} \ge 2\sqrt{x \cdot \frac{1}{x^2}} = 2\sqrt{\frac{1}{x}}$$
+        Perhatikan bahwa variabel $x$ tidak saling menghilangkan di ruas kanan. Ini berarti kita tidak mendapatkan batasan nilai berupa angka konstan (tetap).
 
-      Untuk mengakalinya, kita harus menyamakan pangkat $x$ di pembilang dan penyebut saat dikalikan nanti. Karena di penyebut ada $x^2$, kita butuh $x^2$ di pembilang. Caranya adalah dengan memecah suku $x$ menjadi dua bagian yang sama, yaitu $\frac{x}{2} + \frac{x}{2}$.}
+        Untuk mengakalinya, kita harus menyamakan pangkat $x$ di pembilang dan penyebut saat dikalikan nanti. Karena di penyebut ada $x^2$, kita butuh $x^2$ di pembilang. Caranya adalah dengan memecah suku $x$ menjadi dua bagian yang sama, yaitu $\frac{x}{2} + \frac{x}{2}$.}
   \end{contoh}
 \end{frame}
 
@@ -421,7 +425,7 @@
     \]
     Kesamaan terjadi jika dan hanya jika $\displaystyle\frac{a_1}{b_1} = \frac{a_2}{b_2} = \cdots = \frac{a_n}{b_n}$.
   \end{lema}
-  \myref{lem:titu} diperoleh dengan menerapkan \myref{thm:cauchy-schwarz} pada dua barisan yaitu $a_i/\sqrt{b_i}$ dan $\sqrt{b_i}$.
+  \myref{lem:titu} diperoleh dengan menerapkan \myref{thm:cauchy-schwarz} pada dua barisan yaitu $a_i/\sqrt{b_i}$ dan $\sqrt{b_i}$. Lema ini sering disebut juga sebagai \textit{Cauchy-Schwarz Engel}.
 \end{frame}
 \begin{frame}{\insertsection}{\insertsubsection}
   \begin{contoh}
@@ -432,10 +436,10 @@
 
     \onslide<2->{\textbf{Jawab:}
 
-      Tinjau sebagai penjumlahan dua bagian $E_1 = \frac{x^4}{y} + \frac{y^4}{x}$ dan $E_2 = \frac{2}{xy}$. Terapkan Lema Titu (\myref{lem:titu})  pada $E_1$:
-      \[
-        E_1 = \frac{(x^2)^2}{y} + \frac{(y^2)^2}{x} \ge \frac{(x^2+y^2)^2}{x+y} = \frac{(x^2+y^2)^2}{2}
-      \]}
+        Tinjau sebagai penjumlahan dua bagian $E_1 = \frac{x^4}{y} + \frac{y^4}{x}$ dan $E_2 = \frac{2}{xy}$. Terapkan Lema Titu (\myref{lem:titu})  pada $E_1$:
+        \[
+          E_1 = \frac{(x^2)^2}{y} + \frac{(y^2)^2}{x} \ge \frac{(x^2+y^2)^2}{x+y} = \frac{(x^2+y^2)^2}{2}
+        \]}
   \end{contoh}
 \end{frame}
 \begin{frame}{\insertsection}{\insertsubsection}
@@ -462,7 +466,7 @@
     \]
     Jumlahkan batas minimum dari masing-masing bagian untuk mendapatkan batas total:
     \[
-      E_1 + E_2= \frac{x^4}{y} + \frac{y^4}{x} + \frac{2}{xy} \ge 2 + 2 = 4
+      \frac{x^4}{y} + \frac{y^4}{x} + \frac{2}{xy} = E_1 + E_2\ge 2 + 2 = 4
     \]
     Kesamaan terpenuhi jika dan hanya jika $x = y = 1$. Jadi, nilai minimum dari ekspresi tersebut adalah $4$.
   \end{exampleblock}
@@ -511,10 +515,10 @@
     jika $x, y,$ dan $z$ adalah bilangan real positif yang memenuhi $x^2 + y^2 + z^2 = 12$.
 
     \onslide<2->{\textbf{Jawab:}
-      Misalkan terdapat himpunan yang terdiri dari bilangan $x, y,$ dan $z$. Kita dapat mengurutkan elemen-elemen tersebut dari yang terbesar hingga terkecil. Sebut urutan ini sebagai $p \ge q \ge r$
+        Misalkan terdapat himpunan yang terdiri dari bilangan $x, y,$ dan $z$. Kita dapat mengurutkan elemen-elemen tersebut dari yang terbesar hingga terkecil. Sebut urutan ini sebagai $p \ge q \ge r$
 
-      Dari urutan tersebut dapat diperoleh dua urutan yang lain yaitu
-      \[ \frac{1}{p} \le \frac{1}{q} \le \frac{1}{r} \quad\text{dan}\quad p^3 \ge q^3 \ge r^3\]}
+        Dari urutan tersebut dapat diperoleh dua urutan yang lain yaitu
+        \[ \frac{1}{p} \le \frac{1}{q} \le \frac{1}{r} \quad\text{dan}\quad p^3 \ge q^3 \ge r^3\]}
   \end{contoh}
 \end{frame}
 \begin{frame}{\insertsection}{\insertsubsection}
@@ -653,19 +657,19 @@
 
     \onslide<2->{\textbf{Bukti:}
 
-      Definisikan fungsi $f(x) = \sin x$. Karena $A, B$, dan $C$ adalah sudut-sudut dalam sebuah segitiga, maka domain yang kita tinjau adalah $x \in (0, \pi)$.
-      Fakta bahwa grafik fungsi $f(x) = \sin x$ bersifat konkaf pada interval tersebut.
-      \begin{center}
-        \begin{tikzpicture}[scale=0.8, every node/.style={font=\footnotesize}]
-          \draw[-Latex] (-0.5, 0) -- (7, 0) node[right] {$x$};
-          \draw[-Latex] (0, -1.5) -- (0, 1.5) node[above] {$f(x)$};
-          \draw[blue, thick, domain=0:2*pi, samples=100] plot (\x, {sin(deg(\x))}) node[above] {$f(x) = \sin x$};
-          \foreach \x/\xtext in {0/0, {pi/2}/\frac{\pi}{2}, pi/\pi} {
-              \draw[red, dashed] ({\x}, 0) -- ({\x}, {sin(deg(\x))}) node[above] {$\xtext$};
-              \draw[fill=red] ({\x}, {sin(deg(\x))}) circle (2pt);
-            }
-        \end{tikzpicture}
-      \end{center}}
+        Definisikan fungsi $f(x) = \sin x$. Karena $A, B$, dan $C$ adalah sudut-sudut dalam sebuah segitiga, maka domain yang kita tinjau adalah $x \in (0, \pi)$.
+        Fakta bahwa grafik fungsi $f(x) = \sin x$ bersifat konkaf pada interval tersebut.
+        \begin{center}
+          \begin{tikzpicture}[scale=0.8, every node/.style={font=\footnotesize}]
+            \draw[-Latex] (-0.5, 0) -- (7, 0) node[right] {$x$};
+            \draw[-Latex] (0, -1.5) -- (0, 1.5) node[above] {$f(x)$};
+            \draw[blue, thick, domain=0:2*pi, samples=100] plot (\x, {sin(deg(\x))}) node[above] {$f(x) = \sin x$};
+            \foreach \x/\xtext in {0/, {pi/2}/\frac{\pi}{2}, pi/\pi} {
+                \draw[red, dashed] ({\x}, 0) -- ({\x}, {sin(deg(\x))}) node[above] {$\xtext$};
+                \draw[fill=red] ({\x}, {sin(deg(\x))}) circle (2pt);
+              }
+          \end{tikzpicture}
+        \end{center}}
   \end{contoh}
 \end{frame}
 \begin{frame}{\insertsection}{\insertsubsection}
@@ -680,9 +684,68 @@
 \end{frame}
 
 
-\section{Polinomial}
-\subsection{Algoritma Pembagian Polinomial}
-
+\section{Pembagian Polinomial}
+\begin{frame}{\insertsection}
+  \begin{proposisi}
+    Misalkan $P(x)$ dan $D(x)$ adalah polinomial dengan koefisien real, dan $D(x)$ bukan polinomial nol. Maka terdapat polinomial $Q(x)$ dan $R(x)$ sehingga\label{prop:pembagian_polinom}
+    \[
+      P(x) = D(x) Q(x) + R(x),
+    \]
+    dengan derajat $R(x)$ lebih kecil dari derajat $D(x)$ atau $R(x)$ adalah polinomial nol. Polinomial $Q(x)$ disebut \textit{hasil bagi} dari pembagian $P(x)$ oleh $D(x)$, dan polinomial $R(x)$ disebut \textit{sisa} dari pembagian tersebut.
+  \end{proposisi}
+  Pada dasarnya, \myref{prop:pembagian_polinom} dapat dinyatakan sebagai
+  \[
+    \frac{P(x)}{D(x)} = Q(x) + \frac{R(x)}{D(x)}.
+  \]
+\end{frame}
+\begin{frame}{\insertsection}
+  \begin{contoh}
+    \begin{itemize}
+      \item Misalkan $P(x) = x + 1$ dan $D(x) = x - 1$. Maka
+            $\frac{x+1}{x-1} = 1 + \frac{2}{x-1}$, artinya $Q(x) = 1$ dan $R(x) = 2$.\\
+            $\therefore\; P(x) = x + 1 = (x - 1)(1) + 2$.
+      \item Misalkan $P(x) = 2x^3 + 3x^2 - x + 5$ dan $D(x) = x^2 - 1$. Maka
+            $\frac{2x^3 + 3x^2 - x + 5}{x^2 - 1} = 2x + 3 + \frac{4x + 8}{x^2 - 1}$, artinya $Q(x) = 2x + 3$ dan $R(x) = 4x + 8$.\\
+            $\therefore\; P(x) = 2x^3 + 3x^2 - x + 5 = (x^2 - 1)(2x + 3) + (4x + 8)$.
+      \item Misalkan $P(x) = x - 1$ dan $D(x) = x^2 + 1$. Maka
+            $\frac{x-1}{x^2 + 1} = 0 + \frac{x-1}{x^2 + 1}$, artinya $Q(x) = 0$ dan $R(x) = x-1$.\\
+            $\therefore\; P(x) = x - 1 = (x^2 + 1)(0) + (x - 1)$.
+    \end{itemize}
+  \end{contoh}
+\end{frame}
+\subsection{Metode \textit{Long Division}}
+\begin{frame}{\insertsection}{\insertsubsection}
+  Pembagian polinomial dengan metode \textit{long division} atau biasanya dalam keseharian disebut ``porogapit'', merupakan suatu teknik untuk membagi suatu polinomial dengan polinomial lainnya. Proses ini mirip dengan pembagian bilangan biasa.
+  \begin{contoh}
+    Misalkan kita memiliki polinom $P(x) = x^4+x^3+x^2+x$ yang akan dibagi dengan $(x^3 + 1)$.
+    \[
+      \arraycolsep=1pt
+      \renewcommand\arraystretch{1.2}
+      \begin{array}{*1r @{\hskip\arraycolsep}c@{\hskip\arraycolsep} *{11}r}
+              &          & x   & +1    &             \\
+        \cline{2-6}
+        x^3+1 & \longdiv & x^4 & + x^3 & + x^2 & +x  \\
+              &          & x^4 & + x                 \\
+        \cline{2-5}
+              &          &     & x^3   & + x^2       \\
+              &          &     & x^3   & +1          \\
+        \cline{4-6}
+              &          &     &       & x^2   & - 1 \\
+      \end{array}\]
+  \end{contoh}
+\end{frame}
+\subsection{Metode Horner}
+\begin{frame}{\insertsection}{\insertsubsection}
+  Metode Horner atau biasa dikenal sebagai \textit{synthetic division} merupakan suatu teknik yang lebih efisien untuk membagi suatu polinomial dengan polinomial linear.
+  \begin{contoh}
+    Misalkan kita memiliki polinom $P(x) = 2x^3 + 3x^2 - x + 5$ dan kita ingin membaginya dengan $D(x) = x - 1$.
+    Pertama, kita tulis koefisien dari $P(x)$ dalam urutan menurun. Kemudian kita lakukan proses berikut:
+    \begin{center}
+      \polyhornerscheme[x=1]{2x^3 + 3x^2 - x + 5}
+    \end{center}
+    Hasil bagi dari pembagian ini adalah $Q(x) = 2x^2 + 5x + 4$ dan sisa dari pembagian tersebut adalah $R(x) = 9$. Jadi, $P(x) = (x - 1)(2x^2 + 5x + 4) + 9.$
+  \end{contoh}
+\end{frame}
 
 \section*{\textit{Problems}}
 \begin{frame}{\insertsection}
@@ -713,43 +776,57 @@
     \]
 
   \end{latihan}
-\end{frame}
-
-\begin{frame}{\insertsection}
-  \begin{latihan}[OSK 2024]
-    Suatu segienam beraturan disisipkan ke dalam sebuah persegi panjang
-    seperti terlihat pada gambar di bawah ini. Jika luas $A$ dan $B$
-    berturut-turut adalah $24$ dan $23$, maka luas segienam beraturan
-    adalah \ldots
-
-    \begin{center}
-      \begin{tikzpicture}[scale=1]
-        \draw[thick] (-1.95,-1.95) rectangle (1.95,1.95);
-        \draw[blue,fill=blue!10,thick] (-1.95,0.5) -- (-1.95,1.95) -- (-0.5,1.95) -- cycle;
-        \draw[red,fill=red!10,thick] (-1.95,0.5) -- (-1.95,-1.95) -- (0.5,-1.95) -- (-1.42,-1.42) -- cycle;
-        \node[blue] at (-1.5,1.5) {\small$A$};
-        \node[red] at (-1.6,-1.6) {\small$B$};
-        \foreach \x in {-15,45,...,285} {
-            \draw[thick] (\x:2 cm) -- (\x + 60:2 cm);
-          }
-      \end{tikzpicture}
-    \end{center}
+  \begin{latihan}[OSK 2022]
+    Jika sisa pembagian
+    \[
+      x^{2023}+x^{1012}+x^{506}+x^{253}+x^{127}
+    \]
+    oleh \(x^2-1\) adalah \(Ax+B\), maka nilai dari \(3A+4B\) adalah \(\ldots\).
   \end{latihan}
 \end{frame}
 
 \begin{frame}{\insertsection}
-  \begin{latihan}[OSK 2024]
-    Diberikan sebuah segitiga $ABC$ yang siku-siku pada sudut $B$.
-    Lingkaran $\omega$ merupakan lingkaran dalam segitiga $ABC$ yang
-    menyinggung sisi $BC$ pada titik $D$. Titik $E$ terletak pada
-    $\omega$ sehingga $PE$ merupakan diameter dari $\omega$.
-    Perpanjangan garis $AE$ memotong $\omega$ kedua kalinya pada titik
-    $F$, dan memotong sisi $BC$ pada titik $G$. Apabila $EF=3$ dan $FG=4$, maka panjang $AE$ dapat dinyatakan dalam bentuk
+  \begin{latihan}[KSN-K 2020]
+    Himpunan penyelesaian dari persamaan
+    \[
+      |x+1|+\left|\frac{19}{x-1}\right|=\frac{20-x^2}{1-x}
+    \]
+    adalah interval \([a,b)\). Nilai dari \(b-a\) adalah \(\ldots\).
+  \end{latihan}
+  \begin{latihan}[OSK 2019]
+    Bilangan real terbesar \(M\) sehingga untuk setiap \(x\) positif berlaku
+    \[
+      (x+1)(x+3)(x+5)(x+11)\geq Mx
+    \]
+    adalah \(\ldots\).
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}[OSK 2018]
+    Diberikan bilangan real \(x\) dan \(y\) yang memenuhi
     $
-      \frac{p\sqrt{q}}{r},
+      \frac{1}{2}<\frac{x}{y}<2.
     $
-    dengan $p,q,r$ merupakan bilangan bulat positif, satu-satunya faktor
-    kuadrat dari $q$ adalah $1$, dan $\gcd(p,r)=1$. Nilai dari $p+q+r$ adalah \ldots
+    Nilai minimum dari
+    \[
+      \frac{x}{2y-x}+\frac{2y}{2x-y}
+    \]
+    adalah \(\ldots\).
+  \end{latihan}
+  \begin{latihan}[OSK 2016]
+    Diberikan \(a\) dan \(b\) bilangan real dengan
+    $
+      \sqrt{a}-\sqrt{b}=20.
+    $
+    Nilai maksimum dari \(a-5b\) adalah \(\ldots\)
+  \end{latihan}
+  \begin{latihan}[OSK 2014]
+    Untuk \(0<x<\pi\), nilai minimum dari
+    $
+      \dfrac{16\sin^2 x+9}{\sin x}
+    $
+    adalah \(\ldots\).
   \end{latihan}
 \end{frame}
 
