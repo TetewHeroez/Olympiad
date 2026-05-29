@@ -651,21 +651,21 @@
   \begin{contoh}
     Buktikan bahwa untuk sebarang $\triangle ABC$, berlaku $\sin A + \sin B + \sin C \le \frac{3\sqrt{3}}{2}$.\label{cth:jensen}
 
-    \textbf{Bukti:}
+    \onslide<2->{\textbf{Bukti:}
 
-    Definisikan fungsi $f(x) = \sin x$. Karena $A, B$, dan $C$ adalah sudut-sudut dalam sebuah segitiga, maka domain yang kita tinjau adalah $x \in (0, \pi)$.
-    Fakta bahwa grafik fungsi $f(x) = \sin x$ bersifat konkaf pada interval tersebut.
-    \begin{center}
-      \begin{tikzpicture}[scale=0.8, every node/.style={font=\footnotesize}]
-        \draw[-Latex] (-0.5, 0) -- (7, 0) node[right] {$x$};
-        \draw[-Latex] (0, -1.5) -- (0, 1.5) node[above] {$f(x)$};
-        \draw[blue, thick, domain=0:2*pi, samples=100] plot (\x, {sin(deg(\x))}) node[above] {$f(x) = \sin x$};
-        \foreach \x/\xtext in {0/0, {pi/2}/\frac{\pi}{2}, pi/\pi} {
-            \draw[red, dashed] ({\x}, 0) -- ({\x}, {sin(deg(\x))}) node[above] {$\xtext$};
-            \draw[fill=red] ({\x}, {sin(deg(\x))}) circle (2pt);
-          }
-      \end{tikzpicture}
-    \end{center}
+      Definisikan fungsi $f(x) = \sin x$. Karena $A, B$, dan $C$ adalah sudut-sudut dalam sebuah segitiga, maka domain yang kita tinjau adalah $x \in (0, \pi)$.
+      Fakta bahwa grafik fungsi $f(x) = \sin x$ bersifat konkaf pada interval tersebut.
+      \begin{center}
+        \begin{tikzpicture}[scale=0.8, every node/.style={font=\footnotesize}]
+          \draw[-Latex] (-0.5, 0) -- (7, 0) node[right] {$x$};
+          \draw[-Latex] (0, -1.5) -- (0, 1.5) node[above] {$f(x)$};
+          \draw[blue, thick, domain=0:2*pi, samples=100] plot (\x, {sin(deg(\x))}) node[above] {$f(x) = \sin x$};
+          \foreach \x/\xtext in {0/0, {pi/2}/\frac{\pi}{2}, pi/\pi} {
+              \draw[red, dashed] ({\x}, 0) -- ({\x}, {sin(deg(\x))}) node[above] {$\xtext$};
+              \draw[fill=red] ({\x}, {sin(deg(\x))}) circle (2pt);
+            }
+        \end{tikzpicture}
+      \end{center}}
   \end{contoh}
 \end{frame}
 \begin{frame}{\insertsection}{\insertsubsection}
