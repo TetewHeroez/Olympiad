@@ -1,0 +1,707 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[style=ieee,backend=biber]{biblatex}
+\addbibresource{reference.bib}
+\usepackage{colortbl,tabularx,mathrsfs,calligra}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{cancel}
+\usepackage{ragged2e}
+\usepackage[indonesian]{babel}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{pgfplots, tkz-euclide,calc}
+\pgfplotsset{compat=1.18}
+\usepackage{listings}
+\usepackage{ulem}
+\usepackage{hyperref}
+
+\graphicspath{{C:/Users/teoso/OneDrive/Documents/Tugas Kuliah/Template Math Depart/}{./foto/}}
+
+\definecolor{HIMAmuda}{HTML}{01D1FD}
+\definecolor{HIMAtua}{HTML}{02016A}
+\definecolor{HIMAabu}{HTML}{CBCBCC}
+\definecolor{PastelGreen}{HTML}{77DD77}
+
+\usetheme{Madrid}
+
+\setbeamercolor{palette primary}{bg=HIMAtua,fg=white}
+\setbeamercolor{palette secondary}{bg=HIMAmuda,fg=black}
+\setbeamercolor{palette tertiary}{bg=HIMAabu,fg=black}
+\setbeamercolor{palette quaternary}{bg=HIMAmuda,fg=white}
+\setbeamercolor{structure}{fg=HIMAmuda} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=HIMAtua} % TOC sections
+\setbeamercolor{bibliography item}{parent=palette secondary}
+\setbeamercolor*{bibliography entry author}{parent=section in toc}
+
+\usetikzlibrary{shapes.geometric, arrows, calc, intersections}
+
+\tikzstyle{startstop} = [ellipse, minimum width=1cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{decision} = [diamond, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=blue!50]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usefonttheme{professionalfonts}
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{bibliography item}[book]
+
+\theoremstyle{definition}
+\newtheorem{definisi}{Definisi}
+\newtheorem{proposisi}{Proposisi}
+\newtheorem{teorema}{Teorema}
+\newtheorem{lema}{Lema}
+\newtheorem{akibat}{Akibat}
+\newtheorem{contoh}{Contoh}
+\newtheorem{latihan}{Latihan}
+\newtheorem{catatan}{Catatan}
+
+\usepackage[nameinlink]{cleveref}
+\crefname{teorema}{Teorema}{Teorema}
+\crefname{proposisi}{Proposisi}{Proposisi}
+\crefname{definisi}{Definisi}{Definisi}
+\crefname{lema}{Lema}{Lema}
+\crefname{akibat}{Akibat}{Akibat}
+\crefname{contoh}{Contoh}{Contoh}
+\crefname{latihan}{Latihan}{Latihan}
+\crefname{catatan}{Catatan}{Catatan}
+
+\newcommand{\myref}[1]{\hyperref[#1]{\nameCref{#1} \ref*{#1}}}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+
+\AtBeginEnvironment{contoh}{%
+\setbeamercolor{block title}{use=example text,fg=white,bg=example text.fg!75!black}
+\setbeamercolor{block body}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+\setbeamercolor{item}{fg=example text.fg}
+}
+\AtBeginEnvironment{definisi}{
+\setbeamercolor{block title}{fg=white,bg=HIMAtua}
+\setbeamercolor{block body}{parent=normal text,bg=HIMAtua!30!white}
+\setbeamercolor{item}{fg=HIMAtua}
+}
+\AtBeginEnvironment{latihan}{%
+  \setbeamercolor{block title}{fg=white,bg=yellow!30!orange}
+  \setbeamercolor{block body}{parent=normal text,bg=yellow!30!white}
+  \setbeamercolor{item}{fg=yellow!30!orange}
+}
+\AtBeginEnvironment{teorema}{
+    \setbeamercolor{block title}{bg=darkgray,fg=white}
+    \setbeamercolor{block body}{parent=pallette tertiary,bg=HIMAabu!30!white}
+    \setbeamercolor{item}{fg=HIMAabu}
+}
+\AtBeginEnvironment{proposisi}{
+    \setbeamercolor{block title}{bg=teal!90!black,fg=white}
+    \setbeamercolor{block body}{parent=pallette tertiary,bg=teal!30!white}
+    \setbeamercolor{item}{fg=teal!90!black}
+}
+\AtBeginEnvironment{lema}{
+    \setbeamercolor{block title}{bg=lime!70!black,fg=white}
+    \setbeamercolor{block body}{parent=pallette tertiary,bg=lime!30!white}
+    \setbeamercolor{item}{fg=lime}
+}
+\AtBeginEnvironment{akibat}{
+    \setbeamercolor{block title}{bg=magenta,fg=white}
+    \setbeamercolor{block body}{parent=pallette tertiary,bg=magenta!30!white}
+    \setbeamercolor{item}{fg=magenta}
+}
+\AtBeginEnvironment{catatan}{
+    \setbeamercolor{block title}{use=block title alerted, bg=block title alerted.bg, fg=block title alerted.fg}
+    \setbeamercolor{block body}{use=block body alerted, bg=block body alerted.bg, fg=block body alerted.fg}
+    \setbeamercolor{item}{fg=alerted text.fg}
+}
+
+\date{30 Mei 2026}
+\title[OSK Matematika - Aljabar]{Pembinaan OSN-K Matematika\\(Pertemuan 6: Ketaksamaan dan Polinomial)}
+\author[Tetew]{Teosofi Hidayah Agung}
+\institute[MAN 1 Pasuruan]{MAN 1 Pasuruan}
+\titlegraphic{\includegraphics[width=0.15\textwidth]{../../man1pasuruan.png}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+\begin{frame}{\textit{Outline}}
+  \tableofcontents
+\end{frame}
+
+
+\section{Ketaksamaan}
+\begin{frame}{\insertsection}
+  \textbf{Ketaksamaan} adalah suatu pernyataan yang menyatakan bahwa suatu nilai lebih besar, lebih kecil, atau sama dengan nilai lainnya. Biasanya disimbolkan dengan tanda $>$, $<$, $\geq$, atau $\leq$.
+  \begin{block}{Kegunaan menganalisa ketaksamaan aljabar}
+    \begin{itemize}
+      \item \textbf{Optimasi (Maksimum/Minimum)}: Menentukan nilai maksimum atau minimum dari suatu fungsi atau ekspresi.
+      \item \textbf{Pembuktian}: Membuktikan bahwa suatu ekspresi aljabar selalu lebih besar dari ekspresi lainnya untuk kondisi apa pun.
+      \item \textbf{Batas Solusi (Bounding)}: Di soal Teori Bilangan atau Kombinatorika, ketaksamaan sering dipakai untuk membatasi rentang pencarian agar kita tidak perlu mencoba angka satu per satu sampai tak terhingga.
+    \end{itemize}
+  \end{block}
+\end{frame}
+\begin{frame}{\insertsection}
+  \begin{proposisi}[Ketaksamaan Trivial\label{prop:trivial}]
+    Untuk setiap bilangan real $x$, berlaku $x^2 \geq 0$.
+  \end{proposisi}
+  \begin{contoh}
+    Buktikan bahwa untuk setiap bilangan real non-negatif $x$ dan $y$, berlaku\label{cth:trivial}
+    \[
+      x+y \geq 2\sqrt{xy}.
+    \]
+    \onslide<2->{\textbf{Jawab}: Menggunakan \myref{prop:trivial}, kita dapat menulis
+        \[
+          (\sqrt{x} - \sqrt{y})^2 \geq 0 \implies x + y - 2\sqrt{xy} \geq 0 \implies x+y \geq 2\sqrt{xy}.
+        \]
+        Kesamaan terjadi jika dan hanya jika $x = y$.}
+  \end{contoh}
+  \onslide<2->{\myref{prop:trivial} adalah sebuah ide dasar untuk membuktikan banyak ketaksamaan lainnya, dalam hal ini adalah contoh ketaksamaan AM-GM yang akan kita bahas nanti.  }
+\end{frame}
+\subsection{Ketaksamaan Segitiga}
+\begin{frame}{\insertsection}{\insertsubsection}
+  Tinjau sebuah segitiga sembarang dengan titik $A$, $B$, dan $C$. Gunakan hukum cosinus dan fakta bahwa $-1\leq\cos(\theta) \leq 1$ untuk setiap garis yang menghubungkan titik-titik tersebut, maka dapat diperoleh:
+  \begin{columns}[T]
+    \begin{column}{0.65\textwidth}
+      \begin{align*}
+        \overline{AB}^2 & \leq \overline{AC}^2 + \overline{BC}^2 + 2 \cdot \overline{AC} \cdot \overline{BC} = (\overline{AC} + \overline{BC})^2, \\
+        \overline{AC}^2 & \leq \overline{AB}^2 + \overline{BC}^2 + 2 \cdot \overline{AB} \cdot \overline{BC} = (\overline{AB} + \overline{BC})^2, \\
+        \overline{BC}^2 & \leq \overline{AB}^2 + \overline{AC}^2 + 2 \cdot \overline{AB} \cdot \overline{AC} = (\overline{AB} + \overline{AC})^2.
+      \end{align*}
+      Sehingga diperoleh ketaksamaan segitiga untuk setiap sisi segitiga $ABC$ adalah
+      \[
+        \overline{AB} \leq \overline{AC} + \overline{BC}, \quad \overline{AC} \leq \overline{AB} + \overline{BC}, \quad \overline{BC} \leq \overline{AB} + \overline{AC}.
+      \]
+    \end{column}
+    \begin{column}{0.3\textwidth}
+      \noindent
+      \begin{tikzpicture}[scale=0.9, every node/.style={font=\small}, >=stealth, rotate=90]
+        \coordinate (B) at (0,0);
+        \coordinate (C) at (4,0);
+        \coordinate (A) at (5, 2.5);
+        \draw[thick] (B) -- node[sloped,rotate=90] {$|||$} (A) -- node[sloped,rotate=90] {$|$} (C) -- node[sloped,rotate=90] {$||$} cycle;
+
+        \fill[black] (A) circle (1.2pt) node[above=2pt] {$A$};
+        \fill[black] (B) circle (1.2pt) node[left=2pt] {$B$};
+        \fill[black] (C) circle (1.2pt) node[right=2pt] {$C$};
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}[AMC 10B 2006]
+    Dalam sebuah segitiga dengan panjang sisi bilangan bulat, panjang sisi pertama adalah tiga kali panjang sisi kedua, dan panjang sisi ketiga adalah $15$. Berapakah keliling maksimum yang mungkin dari segitiga tersebut?\\
+    \onslide<2->{\textbf{Solusi:} Misalkan panjang sisi kedua adalah $x$, maka panjang sisi pertama adalah $3x$. Karena panjang sisi ketiga adalah $15$, kita dapat menggunakan ketaksamaan segitiga untuk menentukan nilai $x$:
+        \begin{align*}
+          3x + x > 15  \implies x > \frac{15}{4} = 3.75\quad\text{dan}\quad x + 15 > 3x \implies x < 7.5.
+        \end{align*}
+        Karena $x$ harus berupa bilangan bulat, maka nilai $x$ yang memenuhi adalah $4$, $5$, $6$, atau $7$. Sehingga keliling maksimum adalah
+        $
+          3x + x + 15 = 3(7) + 7 + 15 = \boxed{43}.
+        $
+      }
+  \end{contoh}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  Dari sebuah segitiga, dapat diperoleh beberapa abstraksi ketaksamaan yang berlaku untuk bilangan real.
+  \begin{teorema}[Ketaksamaan Segitiga]
+    Untuk setiap bilangan real $a$ dan $b$, berlaku\label{thm:segitiga}
+    \[
+      |a + b| \leq |a| + |b|.
+    \]
+  \end{teorema}
+  \begin{akibat}
+    Untuk setiap bilangan real $a_1, a_2, \ldots, a_n$, berlaku\label{thm:segitiga_general}
+    \[
+      |a_1 + a_2 + \cdots + a_n| \leq |a_1| + |a_2| + \cdots + |a_n|.
+    \]
+  \end{akibat}
+  Kesamaan pada \myref{thm:segitiga} dan \myref{thm:segitiga_general} terjadi \textbf{jika dan hanya jika} semua bilangan real-nya memiliki tanda yang sama (semua positif atau semua negatif).
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Tentukan semua bilangan real $x$ yang memenuhi persamaan berikut:\label{cth:triangle_inequality}
+    $$|x^2 - 4x + 3| + |x^2 - 9| = |2x^2 - 4x - 6|$$
+
+    \onslide<2->{\textbf{Solusi:}
+        Misalkan ekspresi di dalam nilai mutlak pada ruas kiri sebagai
+        \begin{align*}
+          a  = x^2 - 4x + 3\quad\text{dan} \quad
+          b  = x^2 - 9
+        \end{align*}
+        Perhatikan hasil penjumlahan dari $a$ dan $b$
+        \begin{align*}
+          a + b & = (x^2 - 4x + 3) + (x^2 - 9) = 2x^2 - 4x - 6
+        \end{align*}}
+  \end{contoh}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{exampleblock}{\myref{cth:triangle_inequality}}
+    Bentuk $a+b$ tepat sama dengan ekspresi di dalam nilai mutlak pada ruas kanan persamaan. Sehingga, persamaan tersebut dapat ditulis kembali menjadi
+    $$|a| + |b| = |a + b|$$
+    Berdasarkan \myref{thm:segitiga}, kondisi kesamaan terjadi jika dan hanya jika $a$ dan $b$ tidak memiliki tanda yang berlawanan, yang berarti
+    $$a \cdot b \ge 0\implies(x^2 - 4x + 3)(x^2 - 9) \ge 0\implies(x - 1)(x + 3)(x - 3)^2 \ge 0$$
+    Jadi, himpunan penyelesaian dari persamaan tersebut adalah
+    $$\{x \in \mathbb{R} \mid x \le -3 \text{ atau } x \ge 1\}$$
+  \end{exampleblock}
+\end{frame}
+\subsection{Ketaksamaan QM-AM-GM-HM}
+\begin{frame}{\insertsection}{\insertsubsection}
+  Pertama kita definisikan beberapa jenis ``rataan'' yang akan digunakan.
+  \begin{definisi}
+    Misalkan $x_1, x_2, \ldots, x_n$ adalah bilangan real positif. Maka kita definisikan beberapa jenis rataan sebagai berikut:
+    \begin{itemize}
+      \item \textbf{Rataan Kuadrat} (\textit{Quadratic Mean}): $\displaystyle\boxed{\mathbf{QM} = \sqrt{\frac{x_1^2 + x_2^2 + \cdots + x_n^2}{n}}}$
+      \item \textbf{Rataan Aritmetika} (\textit{Arithmetic Mean}): $\displaystyle\boxed{\mathbf{AM} = \frac{x_1 + x_2 + \cdots + x_n}{n}}$
+      \item \textbf{Rataan Geometrik} (\textit{Geometric Mean}): $\displaystyle\boxed{\mathbf{GM} = \sqrt[n]{x_1 x_2 \cdots x_n}}$
+      \item \textbf{Rataan Harmonik} (\textit{Harmonic Mean}): $\displaystyle\boxed{\mathbf{HM} = \frac{n}{\frac{1}{x_1} + \frac{1}{x_2} + \cdots + \frac{1}{x_n}}}$
+    \end{itemize}
+  \end{definisi}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}[Ketaksamaan QM-AM-GM-HM\label{thm:AM-GM}]
+    Untuk setiap bilangan real positif $x_1, x_2, \ldots, x_n$, berlaku
+    \[
+      \mathbf{QM} \geq \mathbf{AM} \geq \mathbf{GM} \geq \mathbf{HM}.
+    \]
+    Kesamaan terjadi jika dan hanya jika $x_1 = x_2 = \cdots = x_n$.
+  \end{teorema}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Tentukan nilai minimum dari fungsi $f(x) = x + \dfrac{1}{x^2}$ untuk $x > 0$.\label{cth:AM-GM}
+
+    \onslide<2->{\textbf{Solusi:}
+        Jika kita langsung menerapkan Ketaksamaan AM-GM pada dua suku $x$ dan $\frac{1}{x^2}$, kita akan mendapatkan:
+        $$f(x) = x + \frac{1}{x^2} \ge 2\sqrt{x \cdot \frac{1}{x^2}} = 2\sqrt{\frac{1}{x}}$$
+        Perhatikan bahwa variabel $x$ tidak saling menghilangkan di ruas kanan. Ini berarti kita tidak mendapatkan batasan nilai berupa angka konstan (tetap).
+
+        Untuk mengakalinya, kita harus menyamakan pangkat $x$ di pembilang dan penyebut saat dikalikan nanti. Karena di penyebut ada $x^2$, kita butuh $x^2$ di pembilang. Caranya adalah dengan memecah suku $x$ menjadi dua bagian yang sama, yaitu $\frac{x}{2} + \frac{x}{2}$.}
+  \end{contoh}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{exampleblock}{\myref{cth:AM-GM}}
+    Sekarang, terapkan Ketaksamaan AM-GM (\myref{thm:AM-GM}) untuk tiga suku
+    \begin{align*}
+      f(x) = \frac{x}{2} + \frac{x}{2} + \frac{1}{x^2} & \ge 3\sqrt[3]{\frac{\cancel{ x }}{2} \cdot \frac{\cancel{ x }}{2} \cdot \frac{1}{\cancel{ x^2 }}}= 3\sqrt[3]{\frac{1}{4}} = \frac{3}{2}\sqrt[3]{2}
+    \end{align*}
+    Kondisi kesamaan terjadi jika dan hanya jika $\dfrac{x}{2} = \dfrac{1}{x^2}$, yang berarti $x = \sqrt[3]{2}$. Jadi, nilai minimum dari $f(x)$ adalah $\dfrac{3}{2}\sqrt[3]{2}$, yang dicapai saat $x = \sqrt[3]{2}$.
+  \end{exampleblock}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}[AM-GM Berbobot (\textit{Weighted AM-GM})\label{thm:weighted-AM-GM}]
+    Untuk setiap bilangan real positif $x_1, x_2, \ldots, x_n$ dan bobot $w_1, w_2, \ldots, w_n$ yang memenuhi $w_i > 0$ dan $\sum_{i=1}^n w_i = w$, berlaku
+    \[
+      \frac{w_1 x_1 + w_2 x_2 + \cdots + w_n x_n}{w} \geq \sqrt[w]{x_1^{w_1} x_2^{w_2} \cdots x_n^{w_n}}.
+    \]
+    Kesamaan terjadi jika dan hanya jika $x_i$ memiliki nilai yang sama untuk setiap $i=1,2,\dots,n$.
+  \end{teorema}
+\end{frame}
+
+\subsection{Ketaksamaan Cauchy-Schwarz}
+\begin{frame}{\insertsection}{\insertsubsection}
+  Perhatikan gambar luasan daerah yang diarsir pada kedua persegi panjang berikut.
+  \begin{center}
+    \begin{tikzpicture}[
+        thick,
+        every node/.style={font=\footnotesize},
+        green-tri/.style={fill=green!20, draw=green!60!black},
+        red-tri/.style={fill=red!20, draw=red!60!black},
+        blue-tri/.style={fill=blue!20, draw=blue!60!black},
+        yellow-tri/.style={fill=yellow!20, draw=yellow!60!black},
+        text-node/.style={align=left, font=\large},
+        scale=0.7
+      ]
+
+      % Parameter dimensi (bisa disesuaikan)
+      \def\aone{2.5}
+      \def\atwo{1.5}
+      \def\btwo{5.5}
+      \def\bone{2.5}
+
+      % ==========================================
+      % DIAGRAM ATAS
+      % ==========================================
+      \begin{scope}[shift={(0, 0)}]
+        % Bingkai luar
+        \draw (0,0) rectangle (\aone+\btwo, \bone+\atwo);
+
+        % Garis pemisah region unshaded
+        \draw (\aone, 0) -- (\aone, \bone);
+        \draw (0, \bone) -- (\aone, \bone);
+
+        % Segitiga Hijau & Merah (disatukan di kiri atas)
+        \draw[green-tri] (0, \bone+\atwo) -- (\aone, \bone+\atwo) -- (0, \bone) -- cycle;
+        \draw[red-tri] (\aone, \bone) -- (\aone, \bone+\atwo) -- (0, \bone) -- cycle;
+
+        % Segitiga Biru & Kuning (disatukan di kanan bawah)
+        \draw[blue-tri] (\aone, 0) -- (\aone+\btwo, 0) -- (\aone, \bone) -- cycle;
+        \draw[yellow-tri] (\aone+\btwo, \bone) -- (\aone, \bone) -- (\aone+\btwo, 0) -- cycle;
+
+        % Label sisi
+        \node[above] at (\aone/2, \bone+\atwo) {$a_1$};
+        \node[above] at (\aone+\btwo/2, \bone+\atwo) {$b_2$};
+        \node[left] at (0, \bone+\atwo/2) {$a_2$};
+        \node[left] at (0, \bone/2) {$b_1$};
+        \node[right] at (\aone+\btwo, \bone/2) {$b_1$};
+      \end{scope}
+
+      \begin{scope}[shift={(11, 0)}]
+        % Bingkai luar
+        \draw (0,0) rectangle (\btwo+\aone, \bone+\atwo);
+
+        % Koordinat titik sudut jajar genjang di tengah
+        \coordinate (P1) at (0, \bone);
+        \coordinate (P2) at (\btwo, 0);
+        \coordinate (P3) at (\btwo+\aone, \atwo);
+        \coordinate (P4) at (\aone, \bone+\atwo);
+
+        % 4 Segitiga
+        \draw[blue-tri] (0,0) -- (P2) -- (P1) -- cycle;
+        \draw[red-tri] (P2) -- (\btwo+\aone, 0) -- (P3) -- cycle;
+        \draw[yellow-tri] (P3) -- (\btwo+\aone, \atwo+\bone) -- (P4) -- cycle;
+        \draw[green-tri] (P1) -- (P4) -- (0, \atwo+\bone) -- cycle;
+
+        % Label sisi keliling
+        \node[left] at (0, \bone/2) {$b_1$};
+        \node[left] at (0, \bone+\atwo/2) {$a_2$};
+        \node[below] at (\btwo/2, 0) {$b_2$};
+        \node[below] at (\btwo+\aone/2, 0) {$a_1$};
+        \node[above] at (\aone/2, \bone+\atwo) {$a_1$};
+        \node[above] at (\aone+\btwo/2, \bone+\atwo) {$b_2$};
+        \node[right] at (\btwo+\aone, \atwo/2) {$a_2$};
+        \node[right] at (\btwo+\aone, \atwo+\bone/2) {$b_1$};
+
+        % Vektor jajar genjang dan label panjang sisi
+        \draw[->, >=stealth, thick] (P1) -- (P4) node[midway, sloped, below] {\tiny$\sqrt{a_1^2+a_2^2}$};
+        \draw[->, >=stealth, thick] (P1) -- (P2) node[midway, sloped, above] {\tiny$\sqrt{b_1^2+b_2^2}$};
+
+        % Sudut theta
+        \pic [draw, "\tiny$\theta$", angle eccentricity=0.5, angle radius=0.4cm] {angle = P2--P1--P4};
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+  Dari gambar di atas, dapat diperoleh hubungan $a_1 b_1 + a_2 b_2 = \sqrt{a_1^2 + a_2^2}\sqrt{b_1^2 + b_2^2}\sin(\theta)$. karena $\sin(\theta) \leq 1$, maka diperoleh ketaksamaan
+  \[
+    a_1 b_1 + a_2 b_2 \leq \sqrt{a_1^2 + a_2^2}\sqrt{b_1^2 + b_2^2}.
+  \]
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}[Ketaksamaan Cauchy-Schwarz\label{thm:cauchy-schwarz}]
+    Untuk setiap bilangan real $a_1, a_2, \ldots, a_n$ dan $b_1, b_2, \ldots, b_n$, berlaku
+    \[
+      (a_1^2 + a_2^2 + \cdots + a_n^2)(b_1^2 + b_2^2 + \cdots + b_n^2) \geq (a_1 b_1 + a_2 b_2 + \cdots + a_n b_n)^2.
+    \]
+    Kesamaan terjadi jika dan hanya jika terdapat suatu bilangan real $k$ sehingga $a_i = k b_i$ untuk setiap $i = 1, 2, \ldots, n$.
+  \end{teorema}
+  Ketaksamaan Cauchy-Schwarz dapat digeneralisasi untuk sebuah ruang vektor dengan hasil kali dalam, yaitu untuk setiap vektor $\mathbf{u}$ dan $\mathbf{v}$, berlaku
+  \[
+    |\langle \mathbf{u}, \mathbf{v} \rangle| \leq \|\mathbf{u}\| \cdot \|\mathbf{v}\|.
+  \]
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{lema}[Lema Titu\label{lem:titu}]
+    Untuk setiap bilangan real positif $a_1, a_2, \ldots, a_n$ dan $b_1, b_2, \ldots, b_n$, berlaku
+    \[
+      \frac{a_1^2}{b_1} + \frac{a_2^2}{b_2} + \cdots + \frac{a_n^2}{b_n} \geq \frac{(a_1 + a_2 + \cdots + a_n)^2}{b_1 + b_2 + \cdots + b_n}.
+    \]
+    Kesamaan terjadi jika dan hanya jika $\displaystyle\frac{a_1}{b_1} = \frac{a_2}{b_2} = \cdots = \frac{a_n}{b_n}$.
+  \end{lema}
+  \myref{lem:titu} diperoleh dengan menerapkan \myref{thm:cauchy-schwarz} pada dua barisan yaitu $a_i/\sqrt{b_i}$ dan $\sqrt{b_i}$.
+\end{frame}
+\subsection{Ketaksamaan Renata}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{catatan}
+    Dalam literatur matematika, ketaksamaan renata seharusnya dikenal sebagai \textit{Rearrangement Inequality}. Jadi secara informal,``renata'' dapat diartikan ``penataan ulang''.
+  \end{catatan}
+  \begin{definisi}
+    Permutasi $\sigma$ adalah suatu fungsi bijektif dari himpunan $\{1, 2, \ldots, n\}$ ke dirinya sendiri. Dengan kata lain, $\sigma$ adalah suatu cara untuk mengatur ulang elemen-elemen dalam himpunan tersebut.
+  \end{definisi}
+  \begin{contoh}
+    Misalkan kita memiliki himpunan $\{1, 2, 3\}$. Beberapa contoh permutasi adalah:
+    \begin{itemize}
+      \item $\sigma_1$: $1 \mapsto 1$, $2 \mapsto 2$, $3 \mapsto 3$ (identitas)
+      \item $\sigma_2$: $1 \mapsto 2$, $2 \mapsto 3$, $3 \mapsto 1$ (rotasi)
+      \item $\sigma_3$: $1 \mapsto 1$, $2 \mapsto 3$, $3 \mapsto 2$ (transposisi)
+    \end{itemize}
+  \end{contoh}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}[Ketaksamaan Renata\label{thm:renata}]
+    Untuk setiap bilangan real $a_1 \leq a_2 \leq \cdots \leq a_n$ dan $b_1 \leq b_2 \leq \cdots \leq b_n$, berlaku
+    \[
+      \sum_{i=1}^n a_i b_i \geq \sum_{i=1}^n a_i b_{\sigma(i)} \geq \sum_{i=1}^n a_i b_{n-i+1}
+    \]
+    untuk setiap permutasi $\sigma$ dari $\{1, 2, \ldots, n\}$.
+  \end{teorema}
+  Intuisi dari ketaksamaan ini adalah bahwa untuk memaksimalkan jumlah hasil kali antara dua barisan yang sudah diurutkan, kita harus mengalikan elemen-elemen yang berurutan (yaitu $a_i$ dengan $b_i$). Sebaliknya, untuk meminimalkan jumlah tersebut, kita harus mengalikan elemen-elemen yang berlawanan urutan (yaitu $a_i$ dengan $b_{n-i+1}$).
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{akibat}[Ketaksamaan Chebyshev]
+    Untuk setiap bilangan real $a_1 \leq a_2 \leq \cdots \leq a_n$ dan $b_1 \leq b_2 \leq \cdots \leq b_n$, berlaku
+    \[n\sum_{i=1}^n a_i b_i \leq \left(\sum_{i=1}^n a_i\right)\left(\sum_{i=1}^n b_i\right)\]
+  \end{akibat}
+\end{frame}
+\subsection{Ketaksamaan Jensen}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{definisi}
+    Fungsi $f: I \to \mathbb{R}$, dengan $I$ adalah interval pada garis bilangan real, disebut \textbf{konveks} (cembung) jika untuk setiap $x, y \in I$ dan setiap $t \in [0, 1]$, berlaku
+    \[
+      f(tx + (1-t)y) \leq t f(x) + (1-t) f(y).
+    \]
+    Jika ketaksamaan di atas dibalik, maka fungsi tersebut disebut \textbf{konkaf} (cekung).
+  \end{definisi}
+  \begin{center}
+    \begin{tikzpicture}[
+        thick, >=stealth,
+        dot/.style={circle, fill=black, inner sep=1.5pt},
+        guide/.style={dashed, draw=gray},
+        scale=0.5,
+        every node/.style={font=\tiny},
+        xscale=2
+      ]
+
+      % ================= CONVEX =================
+      \begin{scope}
+        % Axes
+        \draw[->] (-0.5, 0) -- (5, 0) node[right] {$x$};
+        \draw[->] (0, -0.5) -- (0, 5) node[above] {$y$};
+
+        % Points and functions (f(x) = 0.25x^2 + 0.5)
+        \def\xa{1} \def\ya{0.75}
+        \def\xb{4} \def\yb{4.5}
+
+        % Combination point (t=0.5)
+        \def\xt{2.5}
+        \def\yt{2.625}  % Secant line y-value: (0.75 + 4.5)/2
+        \def\ft{2.0625} % Function y-value: 0.25*(2.5)^2 + 0.5
+
+        % Curve
+        \draw[blue, thick, domain=0:4.2, samples=50] plot (\x, {0.25*\x*\x + 0.5});
+
+        % Secant
+        \draw[red, thick] (\xa, \ya) -- (\xb, \yb);
+
+        % Guides for x1, x2
+        \draw[guide] (\xa, \ya) -- (\xa, 0) node[below, text=black] {$x_1$};
+        \draw[guide] (\xa, \ya) -- (0, \ya) node[left, text=black] {$f(x_1)$};
+
+        \draw[guide] (\xb, \yb) -- (\xb, 0) node[below, text=black] {$x_2$};
+        \draw[guide] (\xb, \yb) -- (0, \yb) node[left, text=black] {$f(x_2)$};
+
+        % Guides for combination point
+        \draw[guide] (\xt, \yt) -- (\xt, 0) node[below, text=black] {$x_t$};
+        \draw[guide, blue] (\xt, \ft) -- (0, \ft) node[left, text=blue] {$f(x_t)$};
+        \draw[guide, red] (\xt, \yt) -- (0, \yt) node[left, text=red] {$y_t$};
+
+        % Dots
+        \node[dot] at (\xa, \ya) {};
+        \node[dot] at (\xb, \yb) {};
+        \node[dot, blue] at (\xt, \ft) {};
+        \node[dot, red] at (\xt, \yt) {};
+      \end{scope}
+
+      % ================= CONCAVE =================
+      \begin{scope}[shift={(8, 0)}]
+        % Axes
+        \draw[->] (-0.5, 0) -- (5, 0) node[right] {$x$};
+        \draw[->] (0, -0.5) -- (0, 5) node[above] {$y$};
+
+        % Points and functions (g(x) = -0.2x^2 + 1.2x + 1)
+        \def\xa{1} \def\ya{2}
+        \def\xb{4} \def\yb{2.6}
+
+        % Combination point (t=0.5)
+        \def\xt{2.5}
+        \def\yt{2.3}   % Secant line y-value: (2 + 2.6)/2
+        \def\ft{2.75}  % Function y-value: -0.2*(6.25) + 1.2(2.5) + 1
+
+        % Curve
+        \draw[blue, thick, domain=0:4.8, samples=50] plot (\x, {-0.2*\x*\x + 1.2*\x + 1});
+
+        % Secant
+        \draw[red, thick] (\xa, \ya) -- (\xb, \yb);
+
+        % Guides for x1, x2
+        \draw[guide] (\xa, \ya) -- (\xa, 0) node[below, text=black] {$x_1$};
+        \draw[guide] (\xa, \ya) -- (0, \ya) node[left, text=black] {$f(x_1)$};
+
+        \draw[guide] (\xb, \yb) -- (\xb, 0) node[below, text=black] {$x_2$};
+        \draw[guide] (\xb, \yb) -- (0, \yb) node[left, text=black] {$f(x_2)$};
+
+        % Guides for combination point
+        \draw[guide] (\xt, \ft) -- (\xt, 0) node[below, text=black] {$x_t$};
+        \draw[guide, blue] (\xt, \ft) -- (0, \ft) node[left, text=blue] {$f(x_t)$};
+        \draw[guide, red] (\xt, \yt) -- (0, \yt) node[left, text=red] {$y_t$};
+
+        % Dots
+        \node[dot] at (\xa, \ya) {};
+        \node[dot] at (\xb, \yb) {};
+        \node[dot, blue] at (\xt, \ft) {};
+        \node[dot, red] at (\xt, \yt) {};
+      \end{scope}
+
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}[Ketaksamaan Jensen]
+    Jika $f$ adalah fungsi konveks dan $x_1, x_2, \ldots, x_n$ adalah bilangan real dalam domain $f$, maka untuk setiap himpunan bobot $w_1, w_2, \ldots, w_n$ yang memenuhi $w_i \geq 0$ dan $\sum_{i=1}^n w_i = 1$, berlaku
+    \[
+      f\left(\sum_{i=1}^n w_i x_i\right) \leq \sum_{i=1}^n w_i f(x_i).
+    \]
+    Jika $f$ adalah fungsi konkaf, maka ketaksamaan di atas dibalik.
+  \end{teorema}
+
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+
+\end{frame}
+
+\section{Polinomial}
+\subsection{Algoritma Pembagian Polinomial}
+
+
+\section*{\textit{Problems}}
+\begin{frame}{\insertsection}
+  \begin{latihan}[AIME II 2006]
+    Panjang sisi-sisi suatu segitiga yang memiliki luas positif adalah
+    $
+      \log_{10} 12,\; \log_{10} 75,\; \log_{10} n,
+    $
+    dengan \(n\) adalah bilangan bulat positif. Tentukan banyaknya nilai \(n\) yang mungkin.
+  \end{latihan}
+  \begin{latihan}[OSK 2022]
+    Diberikan segitiga siku-siku sama kaki $ABC$ dengan
+    $
+      BC = AB.
+    $
+    Misalkan $L$ adalah titik tengah $BC$ dan $P$ adalah titik
+    pada sisi $AC$ sehingga
+    $
+      BP \perp AL.
+    $
+    Jika
+    $
+      CP = 20\sqrt{2},
+    $
+    maka panjang
+    $
+      AB
+    $
+    adalah \ldots
+  \end{latihan}
+  \begin{latihan}[AOPS]
+    Diberikan sebarang segitiga $\triangle ABC$, tentukan nilai maksimum dari $\cos A \cos B \cos C$.
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}[OSK 2024]
+    Diberikan segiempat $ABCD$ dengan luas segitiga $AED$ sama dengan luas segitiga $BEC$. Jika $AB = 50$, $AE = 45$, dan $AC = 108$, maka $CD$ adalah \dots
+    \begin{center}
+      \begin{tikzpicture}[scale=0.8, every node/.style={font=\footnotesize}]
+        % 1. Definisi koordinat titik-titik segiempat
+        % Koordinat diatur manual agar bentuknya semirip mungkin dengan soal
+        \coordinate (A) at (0, 0);
+        \coordinate (B) at (-0.2, 2.2);
+        \coordinate (C) at (3.8, 4.2);
+        \coordinate (D) at (4, 0.2);
+
+        % 2. Mencari titik potong diagonal E
+        \coordinate (E) at (intersection of A--C and B--D);
+
+        % 3. Menggambar garis luar segiempat
+        \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
+
+        % 4. Menggambar garis diagonal
+        \draw[thick] (A) -- (C);
+        \draw[thick] (B) -- (D);
+
+        % 5. Menambahkan label titik
+        \node[below left=-2pt] at (A) {$A$};
+        \node[left] at (B) {$B$};
+        \node[above] at (C) {$C$};
+        \node[below right=-2pt] at (D) {$D$};
+
+        % Label E digeser sedikit ke kanan seperti pada gambar asli
+        \node[right, xshift=2pt, yshift=1pt] at (E) {$E$};
+        \fill (E) circle (1.5pt);
+      \end{tikzpicture}
+    \end{center}
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}[OSK 2024]
+    Suatu segienam beraturan disisipkan ke dalam sebuah persegi panjang
+    seperti terlihat pada gambar di bawah ini. Jika luas $A$ dan $B$
+    berturut-turut adalah $24$ dan $23$, maka luas segienam beraturan
+    adalah \ldots
+
+    \begin{center}
+      \begin{tikzpicture}[scale=1]
+        \draw[thick] (-1.95,-1.95) rectangle (1.95,1.95);
+        \draw[blue,fill=blue!10,thick] (-1.95,0.5) -- (-1.95,1.95) -- (-0.5,1.95) -- cycle;
+        \draw[red,fill=red!10,thick] (-1.95,0.5) -- (-1.95,-1.95) -- (0.5,-1.95) -- (-1.42,-1.42) -- cycle;
+        \node[blue] at (-1.5,1.5) {\small$A$};
+        \node[red] at (-1.6,-1.6) {\small$B$};
+        \foreach \x in {-15,45,...,285} {
+            \draw[thick] (\x:2 cm) -- (\x + 60:2 cm);
+          }
+      \end{tikzpicture}
+    \end{center}
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}[OSK 2024]
+    Diberikan sebuah segitiga $ABC$ yang siku-siku pada sudut $B$.
+    Lingkaran $\omega$ merupakan lingkaran dalam segitiga $ABC$ yang
+    menyinggung sisi $BC$ pada titik $D$. Titik $E$ terletak pada
+    $\omega$ sehingga $PE$ merupakan diameter dari $\omega$.
+    Perpanjangan garis $AE$ memotong $\omega$ kedua kalinya pada titik
+    $F$, dan memotong sisi $BC$ pada titik $G$. Apabila $EF=3$ dan $FG=4$, maka panjang $AE$ dapat dinyatakan dalam bentuk
+    $
+      \frac{p\sqrt{q}}{r},
+    $
+    dengan $p,q,r$ merupakan bilangan bulat positif, satu-satunya faktor
+    kuadrat dari $q$ adalah $1$, dan $\gcd(p,r)=1$. Nilai dari $p+q+r$ adalah \ldots
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{Referensi}
+  \begin{thebibliography}{9}
+
+    \bibitem{eddy}
+    Eddy Hermanto,
+    \emph{Diktat Pembinaan Olimpiade Matematika}.
+
+    \bibitem{alijadallah}
+    Alijadallah Belabess,
+    \emph{Advanced Olympiad Inequalities}.
+
+    \bibitem{steele}
+    J. Michael Steele,
+    \emph{The Cauchy-Schwarz Master Class: An Introduction to the Art of Mathematical Inequalities}.
+
+  \end{thebibliography}
+\end{frame}
+
+
+
+
+\end{document}
