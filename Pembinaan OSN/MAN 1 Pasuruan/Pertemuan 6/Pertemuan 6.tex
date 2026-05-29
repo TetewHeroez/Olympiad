@@ -158,10 +158,10 @@
       x+y \geq 2\sqrt{xy}.
     \]
     \onslide<2->{\textbf{Jawab}: Menggunakan \myref{prop:trivial}, kita dapat menulis
-        \[
-          (\sqrt{x} - \sqrt{y})^2 \geq 0 \implies x + y - 2\sqrt{xy} \geq 0 \implies x+y \geq 2\sqrt{xy}.
-        \]
-        Kesamaan terjadi jika dan hanya jika $x = y$.}
+      \[
+        (\sqrt{x} - \sqrt{y})^2 \geq 0 \implies x + y - 2\sqrt{xy} \geq 0 \implies x+y \geq 2\sqrt{xy}.
+      \]
+      Kesamaan terjadi jika dan hanya jika $x = y$.}
   \end{contoh}
   \onslide<2->{\myref{prop:trivial} adalah sebuah ide dasar untuk membuktikan banyak ketaksamaan lainnya, dalam hal ini adalah contoh ketaksamaan AM-GM yang akan kita bahas nanti.  }
 \end{frame}
@@ -201,14 +201,14 @@
   \begin{contoh}[AMC 10B 2006]
     Dalam sebuah segitiga dengan panjang sisi bilangan bulat, panjang sisi pertama adalah tiga kali panjang sisi kedua, dan panjang sisi ketiga adalah $15$. Berapakah keliling maksimum yang mungkin dari segitiga tersebut?\\
     \onslide<2->{\textbf{Solusi:} Misalkan panjang sisi kedua adalah $x$, maka panjang sisi pertama adalah $3x$. Karena panjang sisi ketiga adalah $15$, kita dapat menggunakan ketaksamaan segitiga untuk menentukan nilai $x$:
-        \begin{align*}
-          3x + x > 15  \implies x > \frac{15}{4} = 3.75\quad\text{dan}\quad x + 15 > 3x \implies x < 7.5.
-        \end{align*}
-        Karena $x$ harus berupa bilangan bulat, maka nilai $x$ yang memenuhi adalah $4$, $5$, $6$, atau $7$. Sehingga keliling maksimum adalah
-        $
-          3x + x + 15 = 3(7) + 7 + 15 = \boxed{43}.
-        $
-      }
+      \begin{align*}
+        3x + x > 15  \implies x > \frac{15}{4} = 3.75\quad\text{dan}\quad x + 15 > 3x \implies x < 7.5.
+      \end{align*}
+      Karena $x$ harus berupa bilangan bulat, maka nilai $x$ yang memenuhi adalah $4$, $5$, $6$, atau $7$. Sehingga keliling maksimum adalah
+      $
+        3x + x + 15 = 3(7) + 7 + 15 = \boxed{43}.
+      $
+    }
   \end{contoh}
 \end{frame}
 
@@ -235,15 +235,15 @@
     $$|x^2 - 4x + 3| + |x^2 - 9| = |2x^2 - 4x - 6|$$
 
     \onslide<2->{\textbf{Solusi:}
-        Misalkan ekspresi di dalam nilai mutlak pada ruas kiri sebagai
-        \begin{align*}
-          a  = x^2 - 4x + 3\quad\text{dan} \quad
-          b  = x^2 - 9
-        \end{align*}
-        Perhatikan hasil penjumlahan dari $a$ dan $b$
-        \begin{align*}
-          a + b & = (x^2 - 4x + 3) + (x^2 - 9) = 2x^2 - 4x - 6
-        \end{align*}}
+      Misalkan ekspresi di dalam nilai mutlak pada ruas kiri sebagai
+      \begin{align*}
+        a  = x^2 - 4x + 3\quad\text{dan} \quad
+        b  = x^2 - 9
+      \end{align*}
+      Perhatikan hasil penjumlahan dari $a$ dan $b$
+      \begin{align*}
+        a + b & = (x^2 - 4x + 3) + (x^2 - 9) = 2x^2 - 4x - 6
+      \end{align*}}
   \end{contoh}
 \end{frame}
 
@@ -278,17 +278,18 @@
     \]
     Kesamaan terjadi jika dan hanya jika $x_1 = x_2 = \cdots = x_n$.
   \end{teorema}
+  Pada soal nantinya kita hanya perlu menerapkan salah satu dari ketaksamaan di atas (AM-GM, AM-HM, QM-AM, dll)
 \end{frame}
 \begin{frame}{\insertsection}{\insertsubsection}
   \begin{contoh}
     Tentukan nilai minimum dari fungsi $f(x) = x + \dfrac{1}{x^2}$ untuk $x > 0$.\label{cth:AM-GM}
 
     \onslide<2->{\textbf{Solusi:}
-        Jika kita langsung menerapkan Ketaksamaan AM-GM pada dua suku $x$ dan $\frac{1}{x^2}$, kita akan mendapatkan:
-        $$f(x) = x + \frac{1}{x^2} \ge 2\sqrt{x \cdot \frac{1}{x^2}} = 2\sqrt{\frac{1}{x}}$$
-        Perhatikan bahwa variabel $x$ tidak saling menghilangkan di ruas kanan. Ini berarti kita tidak mendapatkan batasan nilai berupa angka konstan (tetap).
+      Jika kita langsung menerapkan Ketaksamaan AM-GM pada dua suku $x$ dan $\frac{1}{x^2}$, kita akan mendapatkan:
+      $$f(x) = x + \frac{1}{x^2} \ge 2\sqrt{x \cdot \frac{1}{x^2}} = 2\sqrt{\frac{1}{x}}$$
+      Perhatikan bahwa variabel $x$ tidak saling menghilangkan di ruas kanan. Ini berarti kita tidak mendapatkan batasan nilai berupa angka konstan (tetap).
 
-        Untuk mengakalinya, kita harus menyamakan pangkat $x$ di pembilang dan penyebut saat dikalikan nanti. Karena di penyebut ada $x^2$, kita butuh $x^2$ di pembilang. Caranya adalah dengan memecah suku $x$ menjadi dua bagian yang sama, yaitu $\frac{x}{2} + \frac{x}{2}$.}
+      Untuk mengakalinya, kita harus menyamakan pangkat $x$ di pembilang dan penyebut saat dikalikan nanti. Karena di penyebut ada $x^2$, kita butuh $x^2$ di pembilang. Caranya adalah dengan memecah suku $x$ menjadi dua bagian yang sama, yaitu $\frac{x}{2} + \frac{x}{2}$.}
   \end{contoh}
 \end{frame}
 
@@ -422,6 +423,51 @@
   \end{lema}
   \myref{lem:titu} diperoleh dengan menerapkan \myref{thm:cauchy-schwarz} pada dua barisan yaitu $a_i/\sqrt{b_i}$ dan $\sqrt{b_i}$.
 \end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Diberikan bilangan real positif $x$ dan $y$ yang memenuhi $x + y = 2$. Tentukan nilai minimum
+    \[
+      \frac{x^4}{y} + \frac{y^4}{x} + \frac{2}{xy}\label{cth:CS}
+    \]
+
+    \onslide<2->{\textbf{Jawab:}
+
+      Tinjau sebagai penjumlahan dua bagian $E_1 = \frac{x^4}{y} + \frac{y^4}{x}$ dan $E_2 = \frac{2}{xy}$. Terapkan Lema Titu (\myref{lem:titu})  pada $E_1$:
+      \[
+        E_1 = \frac{(x^2)^2}{y} + \frac{(y^2)^2}{x} \ge \frac{(x^2+y^2)^2}{x+y} = \frac{(x^2+y^2)^2}{2}
+      \]}
+  \end{contoh}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{exampleblock}{\myref{cth:CS}}
+    Terapkan Ketaksamaan QM-AM (\myref{thm:AM-GM}) untuk menemukan batas dari $(x^2+y^2)$:
+    \[
+      \sqrt{\frac{x^2+y^2}{2}} \ge \frac{x+y}{2}=\frac{2}{2} = 1\implies x^2+y^2 \ge 2
+    \]
+    Substitusikan batas ini ke hasil evaluasi $E_1$:
+    \[
+      E_1 \ge \frac{(2)^2}{2} = 2
+    \]
+    Terapkan Ketaksamaan AM-GM (\myref{thm:AM-GM}) pada bagian penyebut $E_2$:
+    \[
+      \frac{x+y}{2} \ge \sqrt{xy} \implies\frac{2}{2} \ge \sqrt{xy} \implies 1 \ge \sqrt{xy} \implies xy \le 1
+    \]
+  \end{exampleblock}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{exampleblock}{\myref{cth:CS}}
+    Karena $xy \le 1$ dan variabel bernilai positif, maka $\frac{1}{xy} \ge 1$. Sehingga
+    \[
+      E_2 = \frac{2}{xy} \ge \frac{2}{1} = 2
+    \]
+    Jumlahkan batas minimum dari masing-masing bagian untuk mendapatkan batas total:
+    \[
+      E_1 + E_2= \frac{x^4}{y} + \frac{y^4}{x} + \frac{2}{xy} \ge 2 + 2 = 4
+    \]
+    Kesamaan terpenuhi jika dan hanya jika $x = y = 1$. Jadi, nilai minimum dari ekspresi tersebut adalah $4$.
+  \end{exampleblock}
+\end{frame}
+
 \subsection{Ketaksamaan Renata}
 \begin{frame}{\insertsection}{\insertsubsection}
   \begin{catatan}
@@ -452,8 +498,33 @@
 \begin{frame}{\insertsection}{\insertsubsection}
   \begin{akibat}[Ketaksamaan Chebyshev]
     Untuk setiap bilangan real $a_1 \leq a_2 \leq \cdots \leq a_n$ dan $b_1 \leq b_2 \leq \cdots \leq b_n$, berlaku
-    \[n\sum_{i=1}^n a_i b_i \leq \left(\sum_{i=1}^n a_i\right)\left(\sum_{i=1}^n b_i\right)\]
+    \[n\sum_{i=1}^n a_i b_i \geq \left(\sum_{i=1}^n a_i\right)\left(\sum_{i=1}^n b_i\right)\]
   \end{akibat}
+  Ketaksamaan Chebyshev diperoleh dengan menjumlahkan ketaksamaan renata dengan mengambil permutasi-permutasi siklik pada $b_i$.
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Tentukan nilai minimum dari\label{cth:renata}
+    \[
+      \frac{x^3}{y} + \frac{y^3}{z} + \frac{z^3}{x}
+    \]
+    jika $x, y,$ dan $z$ adalah bilangan real positif yang memenuhi $x^2 + y^2 + z^2 = 12$.
+
+    \onslide<2->{\textbf{Jawab:}
+      Misalkan terdapat himpunan yang terdiri dari bilangan $x, y,$ dan $z$. Kita dapat mengurutkan elemen-elemen tersebut dari yang terbesar hingga terkecil. Sebut urutan ini sebagai $p \ge q \ge r$
+
+      Dari urutan tersebut dapat diperoleh dua urutan yang lain yaitu
+      \[ \frac{1}{p} \le \frac{1}{q} \le \frac{1}{r} \quad\text{dan}\quad p^3 \ge q^3 \ge r^3\]}
+  \end{contoh}
+\end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{exampleblock}{\myref{cth:renata}}
+    Menurut ketaksamaan renata (\myref{thm:renata}), Nilai minimumnya terjadi ketika
+    \[ p^3\left(\frac{1}{p}\right) + q^3\left(\frac{1}{q}\right) + r^3\left(\frac{1}{r}\right) = p^2 + q^2 + r^2 \]
+    Mengingat $p, q, r$ hanyalah susunan ulang dari $x, y, z$, maka secara otomatis
+    \[p^2 + q^2 + r^2 = x^2 + y^2 + z^2 =12.\]
+    Batas bawah ini valid dan kesamaan terjadi apabila $x = y = z$. Mengingat persyaratannya adalah $3x^2 = 12 \implies x^2 = 4$, maka nilai minimum tersebut secara mutlak dicapai pada titik koordinat $(2, 2, 2)$. Jadi, nilai minimum dari ekspresi tersebut adalah 12.
+  \end{exampleblock}
 \end{frame}
 \subsection{Ketaksamaan Jensen}
 \begin{frame}{\insertsection}{\insertsubsection}
@@ -477,8 +548,8 @@
       % ================= CONVEX =================
       \begin{scope}
         % Axes
-        \draw[->] (-0.5, 0) -- (5, 0) node[right] {$x$};
-        \draw[->] (0, -0.5) -- (0, 5) node[above] {$y$};
+        \draw[->] (-0.5, 0) -- (5, 0) node[right] {$\cdot$};
+        \draw[->] (0, -0.5) -- (0, 5) node[above] {$f(\cdot)$};
 
         % Points and functions (f(x) = 0.25x^2 + 0.5)
         \def\xa{1} \def\ya{0.75}
@@ -496,80 +567,118 @@
         \draw[red, thick] (\xa, \ya) -- (\xb, \yb);
 
         % Guides for x1, x2
-        \draw[guide] (\xa, \ya) -- (\xa, 0) node[below, text=black] {$x_1$};
-        \draw[guide] (\xa, \ya) -- (0, \ya) node[left, text=black] {$f(x_1)$};
+        \draw[guide] (\xa, \ya) -- (\xa, 0) node[below, text=black] {$x$};
+        \draw[guide] (\xa, \ya) -- (0, \ya) node[left, text=black] {$f(x)$};
 
-        \draw[guide] (\xb, \yb) -- (\xb, 0) node[below, text=black] {$x_2$};
-        \draw[guide] (\xb, \yb) -- (0, \yb) node[left, text=black] {$f(x_2)$};
+        \draw[guide] (\xb, \yb) -- (\xb, 0) node[below, text=black] {$y$};
+        \draw[guide] (\xb, \yb) -- (0, \yb) node[left, text=black] {$f(y)$};
 
-        % Guides for combination point
-        \draw[guide] (\xt, \yt) -- (\xt, 0) node[below, text=black] {$x_t$};
-        \draw[guide, blue] (\xt, \ft) -- (0, \ft) node[left, text=blue] {$f(x_t)$};
-        \draw[guide, red] (\xt, \yt) -- (0, \yt) node[left, text=red] {$y_t$};
+        % % Guides for combination point
+        \draw[guide,purple] (\xt, \yt) -- (\xt, 0) node[below, text=purple] {\scalebox{.6}{ $tx + (1-t)y$ }};
+        \draw[guide, blue] (\xt, \ft) -- (0, \ft) node[left, text=blue] {\scalebox{.6}{ $f(tx + (1-t)y)$ }};
+        \draw[guide, red] (\xt, \yt) -- (0, \yt) node[left, text=red] {\scalebox{.6}{ $tf(x) + (1-t)f(y)$ }};
 
         % Dots
         \node[dot] at (\xa, \ya) {};
         \node[dot] at (\xb, \yb) {};
         \node[dot, blue] at (\xt, \ft) {};
         \node[dot, red] at (\xt, \yt) {};
+
+        % Label
+        \node[above] at (2, 4.5) {\textbf{Konveks}};
       \end{scope}
 
       % ================= CONCAVE =================
-      \begin{scope}[shift={(8, 0)}]
+      \begin{scope}[shift={(7, 0)}]
         % Axes
-        \draw[->] (-0.5, 0) -- (5, 0) node[right] {$x$};
-        \draw[->] (0, -0.5) -- (0, 5) node[above] {$y$};
+        \draw[->] (-0.5, 0) -- (5, 0) node[right] {$\cdot$};
+        \draw[->] (0, -0.5) -- (0, 5) node[above] {$f(\cdot)$};
 
-        % Points and functions (g(x) = -0.2x^2 + 1.2x + 1)
-        \def\xa{1} \def\ya{2}
-        \def\xb{4} \def\yb{2.6}
+        % Points and functions (f(x) = -0.5x^2 + 2x + 2)
+        \def\xa{1} \def\ya{3.5}
+        \def\xb{4} \def\yb{2}
 
         % Combination point (t=0.5)
         \def\xt{2.5}
-        \def\yt{2.3}   % Secant line y-value: (2 + 2.6)/2
-        \def\ft{2.75}  % Function y-value: -0.2*(6.25) + 1.2(2.5) + 1
+        \def\yt{2.75}  % Secant line y-value: (3.5 + 2)/2
+        \def\ft{-0.5*2.5*2.5 + 2*2.5 + 2} % Function y-value: -0.5*(2.5)^2 + 2*(2.5) + 2
 
         % Curve
-        \draw[blue, thick, domain=0:4.8, samples=50] plot (\x, {-0.2*\x*\x + 1.2*\x + 1});
+        \draw[blue, thick, domain=0:4.8, samples=50] plot (\x, {-0.5*\x*\x + 2*\x + 2});
 
         % Secant
         \draw[red, thick] (\xa, \ya) -- (\xb, \yb);
 
         % Guides for x1, x2
-        \draw[guide] (\xa, \ya) -- (\xa, 0) node[below, text=black] {$x_1$};
-        \draw[guide] (\xa, \ya) -- (0, \ya) node[left, text=black] {$f(x_1)$};
+        \draw[guide] (\xa, \ya) -- (\xa, 0) node[below, text=black] {$x$};
+        \draw[guide] (\xa, \ya) -- (0, \ya) node[left, text=black] {$f(x)$};
 
-        \draw[guide] (\xb, \yb) -- (\xb, 0) node[below, text=black] {$x_2$};
-        \draw[guide] (\xb, \yb) -- (0, \yb) node[left, text=black] {$f(x_2)$};
+        \draw[guide] (\xb, \yb) -- (\xb, 0) node[below, text=black] {$y$};
+        \draw[guide] (\xb, \yb) -- (0, \yb) node[left, text=black] {$f(y)$};
 
         % Guides for combination point
-        \draw[guide] (\xt, \ft) -- (\xt, 0) node[below, text=black] {$x_t$};
-        \draw[guide, blue] (\xt, \ft) -- (0, \ft) node[left, text=blue] {$f(x_t)$};
-        \draw[guide, red] (\xt, \yt) -- (0, \yt) node[left, text=red] {$y_t$};
+        \draw[guide,purple] (\xt, \ft) -- (\xt, 0) node[below, text=purple] {\scalebox{.6}{ $tx + (1-t)y$ }};
+        \draw[guide, blue] (\xt, \ft) -- (0, \ft) node[left, text=blue] {\scalebox{.6}{ $f(tx + (1-t)y)$ }};
+        \draw[guide, red] (\xt, \yt) -- (0, \yt) node[left, text=red] {\scalebox{.6}{ $tf(x) + (1-t)f(y)$ }};
 
         % Dots
         \node[dot] at (\xa, \ya) {};
         \node[dot] at (\xb, \yb) {};
         \node[dot, blue] at (\xt, \ft) {};
         \node[dot, red] at (\xt, \yt) {};
+
+        % Label
+        \node[above] at (2, 4.5) {\textbf{Konkaf}};
       \end{scope}
 
     \end{tikzpicture}
   \end{center}
 \end{frame}
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}[Ketaksamaan Jensen]
+  \begin{teorema}[Ketaksamaan Jensen\label{thm:jensen}]
     Jika $f$ adalah fungsi konveks dan $x_1, x_2, \ldots, x_n$ adalah bilangan real dalam domain $f$, maka untuk setiap himpunan bobot $w_1, w_2, \ldots, w_n$ yang memenuhi $w_i \geq 0$ dan $\sum_{i=1}^n w_i = 1$, berlaku
     \[
       f\left(\sum_{i=1}^n w_i x_i\right) \leq \sum_{i=1}^n w_i f(x_i).
     \]
     Jika $f$ adalah fungsi konkaf, maka ketaksamaan di atas dibalik.
   \end{teorema}
-
+  Biasanya bobot $w_i$ dinyatakan dalam bentuk $\frac{1}{n}$ untuk setiap $i$, sehingga ketaksamaan Jensen dapat ditulis sebagai
+  \[
+    f\left(\frac{x_1 + x_2 + \cdots + x_n}{n}\right) \leq \frac{f(x_1) + f(x_2) + \cdots + f(x_n)}{n}.
+  \]
 \end{frame}
 \begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Buktikan bahwa untuk sebarang $\triangle ABC$, berlaku $\sin A + \sin B + \sin C \le \frac{3\sqrt{3}}{2}$.\label{cth:jensen}
 
+    \textbf{Bukti:}
+
+    Definisikan fungsi $f(x) = \sin x$. Karena $A, B$, dan $C$ adalah sudut-sudut dalam sebuah segitiga, maka domain yang kita tinjau adalah $x \in (0, \pi)$.
+    Fakta bahwa grafik fungsi $f(x) = \sin x$ bersifat konkaf pada interval tersebut.
+    \begin{center}
+      \begin{tikzpicture}[scale=0.8, every node/.style={font=\footnotesize}]
+        \draw[-Latex] (-0.5, 0) -- (7, 0) node[right] {$x$};
+        \draw[-Latex] (0, -1.5) -- (0, 1.5) node[above] {$f(x)$};
+        \draw[blue, thick, domain=0:2*pi, samples=100] plot (\x, {sin(deg(\x))}) node[above] {$f(x) = \sin x$};
+        \foreach \x/\xtext in {0/0, {pi/2}/\frac{\pi}{2}, pi/\pi} {
+            \draw[red, dashed] ({\x}, 0) -- ({\x}, {sin(deg(\x))}) node[above] {$\xtext$};
+            \draw[fill=red] ({\x}, {sin(deg(\x))}) circle (2pt);
+          }
+      \end{tikzpicture}
+    \end{center}
+  \end{contoh}
 \end{frame}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{exampleblock}{\myref{cth:jensen}}
+    Berdasarkan Ketaksamaan Jensen (\myref{thm:jensen}) untuk fungsi konkaf, berlaku
+    $$\frac{f(A) + f(B) + f(C)}{3} \le f\left(\frac{A + B + C}{3}\right)$$
+    Substitusikan $f(x) = \sin x$ dan ingat kembali bahwa jumlah sudut segitiga adalah $A + B + C = \pi$:
+    $$\frac{\sin A + \sin B + \sin C}{3} \le \sin\left(\frac{\pi}{3}\right)\implies\frac{\sin A + \sin B + \sin C}{3} \le \frac{\sqrt{3}}{2}$$
+    Jadi diperoleh $\sin A + \sin B + \sin C \le \frac{3\sqrt{3}}{2}$.
+    Tanda kesamaan terjadi jika dan hanya jika $A = B = C = \frac{\pi}{3}$, yaitu pada segitiga sama sisi.
+  \end{exampleblock}
+\end{frame}
+
 
 \section{Polinomial}
 \subsection{Algoritma Pembagian Polinomial}
@@ -584,64 +693,25 @@
     $
     dengan \(n\) adalah bilangan bulat positif. Tentukan banyaknya nilai \(n\) yang mungkin.
   \end{latihan}
-  \begin{latihan}[OSK 2022]
-    Diberikan segitiga siku-siku sama kaki $ABC$ dengan
-    $
-      BC = AB.
-    $
-    Misalkan $L$ adalah titik tengah $BC$ dan $P$ adalah titik
-    pada sisi $AC$ sehingga
-    $
-      BP \perp AL.
-    $
-    Jika
-    $
-      CP = 20\sqrt{2},
-    $
-    maka panjang
-    $
-      AB
-    $
-    adalah \ldots
-  \end{latihan}
-  \begin{latihan}[AOPS]
-    Diberikan sebarang segitiga $\triangle ABC$, tentukan nilai maksimum dari $\cos A \cos B \cos C$.
+  \begin{latihan}[OSK 2025]
+    Misalkan \(x\), \(y\) dan \(z\) bilangan real positif dengan
+    \[
+      \frac{1}{1+x+y}+\frac{1}{1+y+z}+\frac{1}{1+z+x}=\frac14
+    \]
+    Jika nilai minimum dari \(3x+5y+6z\) adalah \(A\sqrt2+B\) dengan \(A\) dan \(B\) bilangan asli, maka nilai dari \(A+B\) adalah \(\ldots\)
   \end{latihan}
 \end{frame}
 
 \begin{frame}{\insertsection}
-  \begin{latihan}[OSK 2024]
-    Diberikan segiempat $ABCD$ dengan luas segitiga $AED$ sama dengan luas segitiga $BEC$. Jika $AB = 50$, $AE = 45$, dan $AC = 108$, maka $CD$ adalah \dots
-    \begin{center}
-      \begin{tikzpicture}[scale=0.8, every node/.style={font=\footnotesize}]
-        % 1. Definisi koordinat titik-titik segiempat
-        % Koordinat diatur manual agar bentuknya semirip mungkin dengan soal
-        \coordinate (A) at (0, 0);
-        \coordinate (B) at (-0.2, 2.2);
-        \coordinate (C) at (3.8, 4.2);
-        \coordinate (D) at (4, 0.2);
+  \begin{latihan}[AOPS Intermediate Problems]
+    Diberikan sebarang segitiga $\triangle ABC$, tentukan nilai maksimum dari $\cos A \cos B \cos C$.
+  \end{latihan}
+  \begin{latihan}[OSK 2023]
+    Tentukan nilai minimum dari
+    \[
+      \frac{(x + y)^2}{\sqrt{x^2 - 16} + \sqrt{y^2 - 25}}
+    \]
 
-        % 2. Mencari titik potong diagonal E
-        \coordinate (E) at (intersection of A--C and B--D);
-
-        % 3. Menggambar garis luar segiempat
-        \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
-
-        % 4. Menggambar garis diagonal
-        \draw[thick] (A) -- (C);
-        \draw[thick] (B) -- (D);
-
-        % 5. Menambahkan label titik
-        \node[below left=-2pt] at (A) {$A$};
-        \node[left] at (B) {$B$};
-        \node[above] at (C) {$C$};
-        \node[below right=-2pt] at (D) {$D$};
-
-        % Label E digeser sedikit ke kanan seperti pada gambar asli
-        \node[right, xshift=2pt, yshift=1pt] at (E) {$E$};
-        \fill (E) circle (1.5pt);
-      \end{tikzpicture}
-    \end{center}
   \end{latihan}
 \end{frame}
 
