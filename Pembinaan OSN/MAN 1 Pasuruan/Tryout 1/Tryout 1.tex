@@ -6,21 +6,18 @@
 \makeatother
 
 \usepackage[sexy]{evan}
-% \usepackage[sexy]{../../../evan}
 
-% Override environment "problem" agar hanya menampilkan angka
 \makeatletter
 \newtheoremstyle{problemstyle}
-  {8pt} % space above
-  {8pt} % space below
-  {\normalfont} % body font
-  {} % indent amount
-  {\color{blue!40!black}\bfseries} % head font
-  {} % punctuation after head
-  {0.5em} % space after head
-  {\thmnumber{#2}.\thmnote{ (\small #3)}} % head spec (hanya angka dan note)
+  {8pt} 
+  {8pt} 
+  {\normalfont} 
+  {} 
+  {\color{blue!40!black}\bfseries} 
+  {} 
+  {0.5em} 
+  {\thmnumber{#2}.\thmnote{ (\small #3)}} 
 
-% Hapus definisi problem lama di dalam makeatletter agar @ terbaca
 \let\problem\@undefined
 \let\endproblem\@undefined
 \let\c@problem\@undefined
@@ -29,16 +26,15 @@
 
 \makeatletter
 \newtheoremstyle{answerstyle}
-  {8pt} % space above
-  {8pt} % space below
-  {\normalfont} % body font
-  {} % indent amount
-  {\color{blue!40!black}\bfseries} % head font
-  {} % punctuation after head
-  {\newline} % space after head <- INI UNTUK NEWLINE / ENTER
-  {\thmnumber{#2}. \thmnote{\fbox{\bfseries #3}}} % head spec (hanya angka dan note)
+  {8pt} 
+  {8pt} 
+  {\normalfont} 
+  {}
+  {\color{blue!40!black}\bfseries} 
+  {} 
+  {\newline} 
+  {\thmnumber{#2}. \thmnote{\fbox{\bfseries #3}}} 
 
-% Hapus definisi answer lama di dalam makeatletter agar @ terbaca
 \let\answer\@undefined
 \let\endanswer\@undefined
 \let\c@answer\@undefined
