@@ -31,17 +31,12 @@
 \setbeamercolor{palette secondary}{bg=HIMAmuda,fg=black}
 \setbeamercolor{palette tertiary}{bg=HIMAabu,fg=black}
 \setbeamercolor{palette quaternary}{bg=HIMAmuda,fg=white}
-\setbeamercolor{structure}{fg=HIMAmuda} % itemize, enumerate, etc
-\setbeamercolor{section in toc}{fg=HIMAtua} % TOC sections
+\setbeamercolor{structure}{fg=HIMAmuda}
+\setbeamercolor{section in toc}{fg=HIMAtua}
 \setbeamercolor{bibliography item}{parent=palette secondary}
 \setbeamercolor*{bibliography entry author}{parent=section in toc}
 
-\usetikzlibrary{shapes.geometric, arrows, calc, intersections}
-
-\tikzstyle{startstop} = [ellipse, minimum width=1cm, minimum height=1cm,text centered, draw=black, fill=red!30]
-\tikzstyle{process} = [rectangle, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
-\tikzstyle{decision} = [diamond, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=blue!50]
-\tikzstyle{arrow} = [thick,->,>=stealth]
+\usetikzlibrary{shapes.geometric, arrows, calc, intersections, angles, quotes}
 
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -60,27 +55,6 @@
 \newtheorem{contoh}{Contoh}
 \newtheorem{latihan}{Latihan}
 \newtheorem{catatan}{Catatan}
-
-\usepackage[nameinlink]{cleveref}
-\crefname{teorema}{Teorema}{Teorema}
-\crefname{proposisi}{Proposisi}{Proposisi}
-\crefname{definisi}{Definisi}{Definisi}
-\crefname{lema}{Lema}{Lema}
-\crefname{akibat}{Akibat}{Akibat}
-\crefname{contoh}{Contoh}{Contoh}
-\crefname{latihan}{Latihan}{Latihan}
-\crefname{catatan}{Catatan}{Catatan}
-
-\newcommand{\myref}[1]{\hyperref[#1]{\nameCref{#1} \ref*{#1}}}
-
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\C}{\mathbb{C}}
-
-\usepackage{scalerel}
-\usepackage{polynom}
-\newcommand{\longdiv}{\smash{\mkern-0.43mu\vstretch{1.31}{\hstretch{.7}{)}}\mkern-5.2mu\vstretch{1.31}{\hstretch{.7}{)}}}}
 
 \AtBeginEnvironment{contoh}{%
 \setbeamercolor{block title}{use=example text,fg=white,bg=example text.fg!75!black}
@@ -123,8 +97,8 @@
     \setbeamercolor{item}{fg=alerted text.fg}
 }
 
-\date{30 Mei 2026}
-\title[OSK Matematika - Aljabar]{Pembinaan OSN-K Matematika\\(Pertemuan 6: Ketaksamaan dan Pembagian Polinomial)}
+\date{Pertemuan 8}
+\title[OSN-K Matematika - Geometri]{Pembinaan OSN-K Matematika\\(Pertemuan 8: Geometri Lingkaran)}
 \author[Tetew]{Teosofi Hidayah Agung}
 \institute[MAN 1 Pasuruan]{MAN 1 Pasuruan}
 \titlegraphic{\includegraphics[width=0.15\textwidth]{../../man1pasuruan.png}}
@@ -135,7 +109,6 @@
   \titlepage
 \end{frame}
 
-
 \AtBeginSection{
   {
     \begin{frame}{\textit{Outline}}
@@ -143,2129 +116,405 @@
     \end{frame}}
 }
 
-\section{\textit{Angle Chasing}}
+\section{\textit{Lingkaran Dalam dan Lingkaran Luar}}
 \begin{frame}{\insertsection}
-  \textbf{\textit{Angle chasing}} adalah sebuah teknik dalam geometri yang digunakan untuk menentukan besar sudut-sudut dalam suatu gambar atau diagram dengan menggunakan hubungan antar sudut yang sudah diketahui.
-
-  \begin{definisi}[Garis, Sinar, dan Segmen]
-    \begin{enumerate}
-      \item \textbf{Garis} adalah sebuah bentuk satu dimensi yang lurus dan \textbf{tidak mempunyai ujung}, atau tak terhingga.
-      \item \textbf{Sinar} adalah sebuah bentuk satu dimensi yang lurus yang \textbf{dimulai dari satu pangkal} dan \textbf{memanjang tak hingga} dari titik tersebut.
-      \item \textbf{Segmen} atau \textbf{Ruas Garis} adalah bagian dari garis yang dibatasi oleh dua titik di garis tersebut, sehingga panjangnya berhingga dan positif.
-      \item Dua garis $\ell_1$ dan $\ell_2$ dikatakan \textbf{sejajar} apabila kedua garis \textbf{tidak berpotongan di titik manapun}. Dua sinar atau segmen dikatakan sejajar jika ketika keduanya diperpanjang menjadi garis, kedua garis tersebut sejajar.
-    \end{enumerate}
-  \end{definisi}
-\end{frame}
-
-\subsection{Sudut}
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{proposisi}[Sudut Dasar\label{prop:sudut_dasar}]
-    Sudut dinyatakan dalam satuan derajat, yang dilambangkan dengan tanda $^\circ$. Ukuran $360^\circ$ melambangkan satu putaran penuh.
-
-    \vspace{0.5em}
-    \begin{center}
-      \begin{tikzpicture}
-        \filldraw (0,0) circle (1pt) node[above] {$A$};
-        \draw (0,0) -- (3,0);
-        \filldraw (3,0) circle (1pt) node[above] {$B$};
-
-        \draw[blue, thick, -stealth] (3.5,0) arc (0:360:0.5);
-        \node[blue, right] at (3.5,0) {$360^\circ$};
-      \end{tikzpicture}
-    \end{center}
-    \vspace{0.5em}
-
-    Jika $C$ terletak pada garis $AB$, dan berada di antara $A$ dan $B$, maka $\angle ACB = 180^\circ$.
-
-    \vspace{0.5em}
-    \begin{center}
-      \begin{tikzpicture}
-        \filldraw (0,0) circle (1pt) node[left] {$A$};
-        \draw (0,0) -- (4,0);
-        \filldraw (4,0) circle (1pt) node[right] {$B$};
-
-        \filldraw (2,0) circle (1pt) node[below] {$C$};
-
-        \draw[blue, thick, stealth-stealth] (1.6,0) arc (180:0:0.4);
-        \node[blue, above] at (2,0.4) {$180^\circ$};
-      \end{tikzpicture}
-    \end{center}
-  \end{proposisi}
-\end{frame}
-
-\subsection{Tranversal}
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{definisi}
-    \textbf{Transversal} adalah sebuah garis yang memotong dua atau lebih garis lainnya pada titik yang berbeda.
-  \end{definisi}
-  \begin{center}
-    \begin{tikzpicture}[scale=1]
-      \draw[thick] (-1,0) -- (5,0.8) node[right] {$l_1$};
-      \draw[thick] (-1,3) -- (5,1.8) node[right] {$l_2$};
-      % Garis transversal
-      \draw[blue,thick] (2,-1) -- (2.8,3) node[above] {$L$};
-      % Titik potong
-      \fill (2.3,0.45) circle (2pt);
-      \fill (2.65,2.25) circle (2pt);
-      \node[blue] at (0.5,1.5) {Transversal $L$};
-    \end{tikzpicture}
-  \end{center}
-\end{frame}
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{proposisi}[Ekivalensi Sudut Transversal\label{prop:transversal_dua_garis_sejajar}]
-    Misal garis $AB$ dan $CD$ sejajar, $P$ dan $Q$ adalah titik perpotongan garis transversal $XY$ dengan $AB$ dan $CD$ berturut-turut.
-    \begin{center}
-      \begin{tikzpicture}[scale=1, every node/.style={font=\footnotesize}]
-        \def\ang{30}
-        \def\radPQ{0.5} % Radius lingkaran P dan Q
-        \def\radPt{1pt} % Radius titik (dot)
-
-        \coordinate (C) at (0,0);
-        \coordinate (D) at (6,0);
-        \coordinate (A) at (0,1);
-        \coordinate (B) at (6,1);
-
-        \coordinate (Q) at (2.5,0);
-
-
-        \path[name path=lineAB] (A) -- (B);
-        \path[name path=lineQ] (Q) -- ++(\ang:4);
-        \path [name intersections={of=lineAB and lineQ, by=P}];
-
-        \coordinate (X) at ($(P) + (\ang:1.5)$);
-        \coordinate (Y) at ($(Q) + ({180+\ang}:1.5)$);
-
-          \begin{scope}
-            \clip (P) circle (\radPQ);
-            \fill[blue!30] (P) -- ++(0:1) arc (0:\ang:1) -- cycle;
-            \fill[orange!40] (P) -- ++(\ang:1) arc (\ang:180:1) -- cycle;
-            \fill[blue!30] (P) -- ++(180:1) arc (180:{180+\ang}:1) -- cycle;
-            \fill[orange!40] (P) -- ++({180+\ang}:1) arc ({180+\ang}:360:1) -- cycle;
-          \end{scope}
-          \draw (P) circle (\radPQ);
-
-          \begin{scope}
-            \clip (Q) circle (\radPQ);
-            \fill[blue!30] (Q) -- ++(0:1) arc (0:\ang:1) -- cycle;
-            \fill[orange!40] (Q) -- ++(\ang:1) arc (\ang:180:1) -- cycle;
-            \fill[blue!30] (Q) -- ++(180:1) arc (180:{180+\ang}:1) -- cycle;
-            \fill[orange!40] (Q) -- ++({180+\ang}:1) arc ({180+\ang}:360:1) -- cycle;
-          \end{scope}
-          \draw (Q) circle (\radPQ);
-
-          \draw (A) -- (B);
-          \draw (C) -- (D);
-          \draw (Y) -- (X);
-
-          \filldraw (A) circle (\radPt) node[left] {$A$};
-          \filldraw (B) circle (\radPt) node[right] {$B$};
-          \filldraw (C) circle (\radPt) node[left] {$C$};
-          \filldraw (D) circle (\radPt) node[right] {$D$};
-          \filldraw (X) circle (\radPt) node[right] {$X$};
-          \filldraw (Y) circle (\radPt) node[left] {$Y$};
-          \filldraw (P) circle (\radPt);
-          \filldraw (Q) circle (\radPt);
-
-          \node at ($(P) + ({90+(\ang/2)}:{0.25})$) {$P$};
-          \node at ($(Q) + ({90+(\ang/2)}:{0.25})$) {$Q$};
-
-      \end{tikzpicture}
-    \end{center}
-    Maka, berlaku persamaan sudut sebagai berikut:
-    \[
-      \angle APX = \angle BPY = \angle CQX = \angle DQY \quad \text{dan} \quad \angle BPX = \angle APY = \angle DQX = \angle CQY.
-    \]
-  \end{proposisi}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  Beberapa sebutan lain terkait hubungan antar sudut pada \myref{prop:transversal_dua_garis_sejajar}:
+  Pada topik ini kita ingin mengenali dua lingkaran penting pada segitiga:
   \begin{itemize}
-    \item \textbf{Sudut Sehadap}
-          \[\angle APX = \angle CQX, \quad \angle BPY = \angle DQY, \quad \angle BPX = \angle DQX, \quad \angle APY = \angle CQY\]
-    \item \textbf{Sudut Dalam Berseberangan}
-          \[\angle BPY = \angle CQX, \quad \angle APY = \angle DQX\]
-    \item \textbf{Sudut Luar Berseberangan}
-          \[\angle APX = \angle DQY, \quad \angle BPX = \angle CQY\]
-    \item \textbf{Sudut Bertolak Belakang}
-          \[\angle APX = \angle BPY, \quad \angle CQX = \angle DQY, \quad \angle BPX = \angle APY, \quad \angle DQX = \angle CQY\]
+    \item \textbf{Lingkaran dalam}, yang menyinggung ketiga sisi segitiga.
+    \item \textbf{Lingkaran luar}, yang melalui ketiga titik sudut segitiga.
+  \end{itemize}
+
+  \vspace{0.4em}
+  Dua pusat yang muncul pun berbeda:
+  \begin{itemize}
+    \item titik bagi sudut $\rightarrow$ \textbf{titik pusat lingkaran dalam} $I$;
+    \item garis sumbu sisi $\rightarrow$ \textbf{titik pusat lingkaran luar} $O$.
   \end{itemize}
 \end{frame}
 
+\subsection{Lingkaran Dalam}
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{contoh}
-    Tentukan besar sudut yang belum diketahui (ditandai dengan $x$).\label{cth:transversal}
-    \begin{center}
-      \begin{tikzpicture}[scale=0.9, every node/.style={font=\footnotesize}]
-        \coordinate (A) at (0,5);
-        \coordinate (AR) at (6.5,5);
-        \coordinate (B) at ($(A) + (-25:3)$);
-        \coordinate (C) at ($(B) + (215:2)$);
-        \coordinate (D) at ($(C) + (-47:2.5)$);
-        \coordinate (E) at ($(D) + (208:2.5)$);
-        \coordinate (ER) at ($(E) + (6,0)$);
-
-        \draw (A) -- (AR);
-        \draw (A) -- (B) -- (C) -- (D) -- (E);
-        \draw (E) -- (ER);
-
-        \pic [draw, <->, angle radius=0.8cm, angle eccentricity=1.6, "$25^\circ$"] {angle = B--A--AR};
-        \pic [draw, <->, angle radius=0.3cm, angle eccentricity=2.4, "$300^\circ$"] {angle = C--B--A};
-        \pic [draw, <->, angle radius=0.6cm, angle eccentricity=1.6, "$x$"] {angle = D--C--B};
-        \pic [draw, <->, angle radius=0.3cm, angle eccentricity=2.4, "$285^\circ$"] {angle = E--D--C};
-        \pic [draw, <->, angle radius=0.8cm, angle eccentricity=1.6, "$28^\circ$"] {angle = ER--E--D};
-      \end{tikzpicture}
-    \end{center}
-  \end{contoh}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{exampleblock}{\myref{cth:transversal}}
-    \begin{columns}
-      \begin{column}{0.6\textwidth}
-        \begin{center}
-          \begin{tikzpicture}[scale=1, every node/.style={font=\footnotesize}]
-            \coordinate (A) at (0,5);
-            \coordinate (AR) at (6.5,5);
-            \coordinate (B) at ($(A) + (-25:3)$);
-            \coordinate (C) at ($(B) + (215:2)$);
-            \coordinate (D) at ($(C) + (-47:2.5)$);
-            \coordinate (E) at ($(D) + (208:2.5)$);
-            \coordinate (ER) at ($(E) + (6,0)$);
-
-            \foreach \P/\Loff/\Roff in {
-                B/-3/4,
-                C/-1.5/5.5,
-                D/-3/4
-              } {
-                \coordinate (\P L) at ($(\P) + (\Loff,0)$);
-                \coordinate (\P R) at ($(\P) + (\Roff,0)$);
-                \draw[dashed, darkgray, thick] (\P L) -- (\P R);
-              }
-
-            \draw[thick] (A) -- (AR);
-            \draw[thick] (A) -- (B) -- (C) -- (D) -- (E);
-            \draw[thick] (E) -- (ER);
-
-            \foreach \slide/\pA/\pB/\pC/\pText/\pColor/\pRad/\pEcc in {
-                2/B/A/AR/25^\circ/red/0.8cm/1.4,
-                5/ER/E/D/28^\circ/orange/1cm/1.4%
-              } {
-                \pic [draw=\pColor, fill=\pColor!30, angle radius=\pRad, "\color{\pColor}$\pText$", angle eccentricity=\pEcc] {angle = \pA--\pB--\pC};
-
-              }
-
-            \pic [draw=darkgray, fill=gray!20, angle radius=0.6cm, "$300^\circ$", angle eccentricity=1.6] {angle = C--B--A};
-
-            \pic [draw=darkgray, fill=gray!20, angle radius=0.6cm, "$285^\circ$", angle eccentricity=1.6] {angle = E--D--C};
-
-            \foreach \slide/\pA/\pB/\pC/\pText/\pColor/\pRad/\pEcc in {
-                2/A/B/BL/25^\circ/red/0.6cm/1.6,
-                3/BL/B/C/35^\circ/blue/0.6cm/1.4,
-                4/CR/C/B/35^\circ/blue/0.7cm/1.5,
-                4/D/C/CR/47^\circ/green!60!black/0.7cm/1.4,
-                3/C/D/DL/47^\circ/green!60!black/0.6cm/1.5,
-                2/DL/D/E/28^\circ/orange/0.6cm/1.6
-              } {
-                \onslide<\slide->{
-                    \pic [draw=\pColor, fill=\pColor!30, angle radius=\pRad, "\color{\pColor}$\pText$", angle eccentricity=\pEcc] {angle = \pA--\pB--\pC};
-                  }
-              }
-          \end{tikzpicture}
-        \end{center}
-      \end{column}
-      \begin{column}{0.4\textwidth}
-        \begin{itemize}
-          \item Buat garis bantu untuk memanfaatkan \myref{prop:transversal_dua_garis_sejajar}.
-                \onslide<2->{\item Perhatikan bahwa sudut-sudut yang bersebrangan.}
-                \onslide<3->{\item Gunakan \myref{prop:sudut_dasar} untuk menentukan besar sudut sisanya.}
-                \onslide<4->{\item Gunakan \myref{prop:transversal_dua_garis_sejajar} lagi.}
-        \end{itemize}
-        \onslide<5->{$\therefore x = 35^\circ + 47^\circ=82^\circ$.}
-      \end{column}
-    \end{columns}
-  \end{exampleblock}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}[Jumlah Sudut Segitiga\label{thm:jumlah_sudut_segitiga}]
-    Jumlah ketiga sudut dalam segitiga adalah $180^\circ$.
-  \end{teorema}
-  \begin{center}
-    \begin{tikzpicture}[scale=1, every node/.style={font=\small}]
-      \coordinate (B) at (0,0);
-      \coordinate (C) at (5,0);
-      \coordinate (A) at (1,3.2);
-      \coordinate (D) at (7.5,0);
-      \coordinate (E) at ($(C) + (A) - (B)$);
-
-      \pic[draw, fill=blue!30, angle radius=0.55cm] {angle = C--B--A};
-      \pic[draw, fill=orange!30, angle radius=0.55cm] {angle = B--A--C};
-
-      \pic[draw, fill=orange!30, angle radius=0.55cm] {angle = E--C--A};
-      \pic[draw, fill=blue!30, angle radius=0.55cm] {angle = D--C--E};
-      \draw (A) -- (B) -- (D);
-      \draw (A) -- (C);
-      \draw (C) -- (E);
-
-      \fill (A) circle (1.5pt) node[above] {$A$};
-      \fill (B) circle (1.5pt) node[left] {$B$};
-      \fill (C) circle (1.5pt) node[below] {$C$};
-      \fill (D) circle (1.5pt) node[below] {$D$};
-      \fill (E) circle (1.5pt) node[right] {$E$};
-    \end{tikzpicture}
-  \end{center}
-  Dari \myref{prop:transversal_dua_garis_sejajar}, diperoleh $\angle ABC + \angle BCA + \angle CAB = \angle ECD + \angle BCA + \angle ACE = 180^\circ$.
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}[Segitiga Sama Kaki\label{thm:segitiga_sama_kaki}]
-    Dalam sebuah segitiga $\Delta ABC$, dua sisi akan sama panjang jika dan hanya jika sudut yang berhadapan dengan sisi-sisi tersebut sama besar. Dengan kata lain, $\overline{AB} = \overline{AC}$ jika dan hanya jika $\angle ABC = \angle ACB$.
-  \end{teorema}
-  \begin{center}
-    \begin{tikzpicture}[scale=1, every node/.style={font=\small}]
-
-      % 1. Definisi Koordinat
-      \coordinate (M) at (0,0);
-      \coordinate (B) at (-2,0);
-      \coordinate (C) at (2,0);
-      \coordinate (A) at (0, 3.5);
-
-      % 2. Mewarnai dan Menggambar Sudut
-      % Sudut B dan C (Biru)
-      \pic[draw, fill=blue!30, angle radius=0.6cm] {angle = C--B--A};
-      \pic[draw, fill=blue!30, angle radius=0.6cm] {angle = A--C--B};
-
-      % Sudut A yang terbagi dua (Oranye)
-      \pic[draw, fill=orange!30, angle radius=0.6cm] {angle = B--A--M};
-      \pic[draw, fill=orange!30, angle radius=0.6cm] {angle = M--A--C};
-
-      % 3. Menggambar Garis Segitiga & Garis Berat/Tinggi
-      % Menambahkan tanda sama kaki (||) di tengah garis AB dan AC
-      \draw[thick] (A) -- node[sloped] {$||$} (B);
-      \draw[thick] (A) -- node[sloped] {$||$} (C);
-      \draw[thick] (B) -- (C);
-      \draw[thick] (A) -- (M);
-
-      % 4. Menambahkan Titik dan Label
-      \fill (A) circle (1.5pt) node[above] {$A$};
-      \fill (B) circle (1.5pt) node[left] {$B$};
-      \fill (C) circle (1.5pt) node[right] {$C$};
-      \fill (M) circle (1.5pt) node[below] {$M$};
-
-    \end{tikzpicture}
-  \end{center}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{akibat}[Segitiga Sama Sisi]
-    Ketiga sudut dalam segitiga sama sisi adalah sama besar, yaitu $60^\circ$.
-  \end{akibat}
-  \begin{teorema}
-    Dalam sebuah segitiga $\Delta ABC$, $\overline{AB} > \overline{BC} > \overline{AC}$ jika dan hanya jika $\angle C > \angle A > \angle B$.
-    \begin{center}
-      \begin{tikzpicture}[scale=1, every node/.style={font=\small}, >=stealth]
-        \coordinate (B) at (0,0);
-        \coordinate (C) at (4,0);
-        \coordinate (A) at (5, 2.5);
-        \draw[thick] (B) -- node[sloped] {$|||$} (A) -- node[sloped] {$|$} (C) -- node[sloped] {$||$} cycle;
-
-        \pic[draw, fill=purple, ultra thick, angle radius=0.5cm] {angle = A--C--B};
-        \pic[draw, fill=cyan, thick, angle radius=0.5cm] {angle = B--A--C};   % 
-        \pic[draw, fill=red, thin, angle radius=0.5cm] {angle = C--B--A};    % 
-
-        \fill[black] (A) circle (1.2pt) node[above=2pt] {$A$};
-        \fill[black] (B) circle (1.2pt) node[left=2pt] {$B$};
-        \fill[black] (C) circle (1.2pt) node[right=2pt] {$C$};
-
-      \end{tikzpicture}
-    \end{center}
-  \end{teorema}
-
-\end{frame}
-
-\subsection{Sudut Poligon}
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{definisi}[Sudut Interior dan Eksterior Poligon]
-    Diberikan sebuah poligon tertutup dengan $n$ sisi. Pada setiap titik sudut $p_k$ (untuk $k = 1, 2, \dots, n$), didefinisikan:
-    \begin{itemize}
-      \item \textbf{Sudut Interior} ($\alpha_k$): Sudut yang dibentuk oleh dua sisi poligon yang saling bertemu di titik $p_k$, dan diukur pada bagian dalam area poligon tertutup tersebut.
-      \item \textbf{Sudut Eksterior} ($\beta_k$): Sudut yang dibentuk oleh salah satu sisi poligon dengan perpanjangan garis lurus dari sisi yang bersebelahan dengannya di titik $p_k$.
-    \end{itemize}
-    Pada setiap titik sudut poligon, pasangan sudut interior dan eksterior ini saling berpelurus, sehingga selalu memenuhi persamaan $\alpha_k + \beta_k = 180^\circ$
-  \end{definisi}
-  \begin{alertblock}{Catatan}
-    Pada poligon cekung (non-konveks), sudut eksterior pada titik sudut yang merefleks ke dalam dapat bernilai negatif agar masih memenuhi hubungan $\alpha_k + \beta_k = 180^\circ$.
-  \end{alertblock}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{center}
-    \begin{tikzpicture}[scale=1, every node/.style={font=\scriptsize}, >=stealth]
-      \coordinate (P1) at (0, 2);
-      \coordinate (P2) at (3.2, 2.3);
-      \coordinate (P3) at (7.5, -0.5);
-      \coordinate (P4) at (5.8, 1.3);
-      \coordinate (P5) at (8.5, 3.8);
-      \coordinate (Pn) at (1.5, 4.8);
-
-      \coordinate (E1) at ($(Pn)!1.3!(P1)$);
-      \coordinate (E2) at ($(P1)!1.4!(P2)$);
-      \coordinate (E3) at ($(P2)!1.3!(P3)$);
-      \coordinate (E4) at ($(P3)!1.4!(P4)$);
-      \coordinate (E5) at ($(P4)!1.3!(P5)$);
-      \coordinate (En) at ($(P5)!1.3!(Pn)$);
-
-      \filldraw[fill=blue!10, draw=darkgray, thick]
-      (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (Pn) -- cycle;
-
-      % 5. Menggambar Garis Putus-putus Ekstensi
-      \draw[thick, densely dotted] (P1) -- (E1);
-      \draw[thick, densely dotted] (P2) -- (E2);
-      \draw[thick, densely dotted] (P3) -- (E3);
-      \draw[thick, densely dotted] (P4) -- (E4);
-      \draw[thick, densely dotted] (P5) -- (E5);
-      \draw[thick, densely dotted] (Pn) -- (En);
-
-      % 6. Menggambar Titik Sudut dan Label
-      \fill (P1) circle (1.2pt) node[left=2pt] {$p_1$};
-      \fill (P2) circle (1.2pt) node[below=2pt] {$p_2$};
-      \fill (P3) circle (1.2pt) node[below=2pt] {$p_3$};
-      \fill (P4) circle (1.2pt) node[right=2pt] {$p_4$};
-      \fill (P5) circle (1.2pt) node[right=2pt] {$p_5$};
-      \fill (Pn) circle (1.2pt) node[above=2pt] {$p_6$};
-
-      % 7. Pengaturan Gaya Sudut (Sudut Dalam & Luar)
-      \tikzset{
-        intangle/.style={draw=teal, thick, <-, angle radius=0.45cm},
-        intangle reflex/.style={draw=teal, thick, <-, angle radius=0.35cm},
-        extangle/.style={draw=purple, thick, ->, angle radius=0.45cm}
-      }
-
-      % P1
-      \pic [intangle] {angle=P2--P1--Pn};
-      \pic [extangle] {angle=E1--P1--P2};
-      \node[teal] at ($(P1) + (0.55, 0.25)$) {$56.9^\circ$};
-      \node[purple] at ($(P1) + (0.1, -0.6)$) {$123.1^\circ$};
-
-      % P2 (Titik Refleks ke Dalam)
-      \pic [intangle reflex] {angle=P3--P2--P1};
-      \pic [extangle] {angle=P3--P2--E2};
-      \node[teal] at ($(P2) + (-0.2, 0.55)$) {$210.7^\circ$};
-      \node[purple] at ($(P2) + (1.0, -0.15)$) {$-30.7^\circ$};
-
-      % P3
-      \pic [intangle] {angle=P4--P3--P2};
-      \pic [extangle] {angle=E3--P3--P4};
-      \node[teal] at ($(P3) + (-0.6, 0.25)$) {$29.4^\circ$};
-      \node[purple] at ($(P3) + (0.8, 0.45)$) {$150.6^\circ$};
-
-      % P4 (Titik Refleks ke Dalam)
-      \pic [intangle reflex] {angle=P5--P4--P3};
-      \pic [extangle] {angle=P5--P4--E4};
-      \node[teal] at ($(P4) + (-0.8, -0.2)$) {$262.3^\circ$};
-      \node[purple] at ($(P4) + (0.1, 0.6)$) {$-82.3^\circ$};
-
-      % P5
-      \pic [intangle] {angle=Pn--P5--P4};
-      \pic [extangle] {angle=E5--P5--Pn};
-      \node[teal] at ($(P5) + (-0.5, -0.3)$) {$56.2^\circ$};
-      \node[purple] at ($(P5) + (-0.3, 0.65)$) {$123.8^\circ$};
-
-      % Pn
-      \pic [intangle] {angle=P1--Pn--P5};
-      \pic [extangle] {angle=En--Pn--P1};
-      \node[teal] at ($(Pn) + (0.6, -0.3)$) {$104.5^\circ$};
-      \node[purple] at ($(Pn) + (-0.6, -0.2)$) {$75.5^\circ$};
-
-      %Legenda
-      \draw[fill=teal] (0,0) rectangle (0.3,0.3) node[right,yshift=-4pt] {Sudut Interior};
-      \draw[fill=purple] (0, -0.5) rectangle (0.3, -0.2) node[right,yshift=-4pt] {Sudut Eksterior};
-    \end{tikzpicture}
-  \end{center}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}
-    Hasil penjumlahan sudut-sudut dalam (interior) pada segibanyak $n$ sisi (poligon) adalah $(n-2) \times 180^\circ$.
-  \end{teorema}
-  \begin{center}
-    \scalebox{0.7}{
-      \begin{tikzpicture}[scale=1.5, thick, line join=round, line cap=round]
-        \coordinate (A1) at (210:3);
-        \coordinate (A2) at (150:2);
-        \coordinate (A3) at (90:0.8);
-        \coordinate (A4) at (30:2);
-        \coordinate (A5) at (-20:3);
-        \coordinate (An1) at (-80:3);
-        \coordinate (An) at (-110:3);
-
-        \tikzset{
-          myangle/.style={draw, fill=teal!40, fill opacity=0.6, angle radius=0.6cm}
-        }
-
-        \draw (A1) -- (A2);
-
-        \foreach \i/\j in {2/3, 3/4, 4/5} {
-            \pic [myangle] {angle = A1--A\i--A\j};
-            \pic [myangle] {angle = A\j--A1--A\i};
-            \pic [myangle] {angle = A1--A\i--A\j};
-            \draw (A\i) -- (A\j);
-
-            \pic [myangle] {angle = A\i--A\j--A1};
-            \ifnum\j<5
-              \draw (A1) -- (A\j);
-            \fi
-          }
-
-        \pic [myangle] {angle = A1--An1--An};
-        \pic [myangle] {angle = An1--An--A1};
-        \pic [myangle] {angle = An--A1--An1};
-        \pic [myangle] {angle = An1--A1--A5};
-
-        \draw[dashed] (A1) -- (A5);
-        \draw[dashed] (A1) -- (An1);
-        \draw (A1) -- (An) -- (An1);
-
-        \draw[loosely dotted, very thick] (A5) arc (-20:-80:3);
-        \path (A5) arc (-20:-80:3) node[midway, sloped] {$\dots$};
-
-        \fill (A1) circle (1.5pt) node[left] {$A_1$};
-        \fill (An1) circle (1.5pt) node[below right] {$A_{n-1}$};
-        \fill (An) circle (1.5pt) node[below] {$A_n$};
-
-        \foreach \i/\pos in {2/left, 3/above, 4/right, 5/right} {
-            \fill (A\i) circle (1.5pt) node[\pos] {$A_\i$};
-          }
-
-      \end{tikzpicture}
-    }
-  \end{center}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}
-    Hasil penjumlahan sudut-sudut luar (eksterior) pada segibanyak $n$ sisi (poligon) adalah $360^\circ$.
-  \end{teorema}
-  \begin{center}
-    \scalebox{0.7}{
-      \begin{tikzpicture}[scale=1.5, thick, line join=round, line cap=round]
-        \coordinate (A1) at (210:3);
-        \coordinate (A2) at (150:2);
-        \coordinate (A3) at (90:0.6);
-        \coordinate (A4) at (30:2);
-        \coordinate (A5) at (-20:3);
-        \coordinate (Ak) at (-40:3);
-        \coordinate (An1) at (-80:2.5);
-        \coordinate (An) at (-110:2.5);
-
-        \draw (A1) -- (A2) -- (A3) -- (A4) -- (A5);
-        \draw (An1) -- (An) -- (A1);
-
-        \draw[loosely dotted, very thick] (A5) arc (-20:-100:2.2);
-        \path (A5) arc (-20:-100:2.3) node[midway, sloped] {$\dots$};
-
-        \coordinate (E2) at ($(A1)!1.4!(A2)$);
-        \coordinate (E3) at ($(A2)!1.5!(A3)$);
-        \coordinate (E4) at ($(A3)!1.4!(A4)$);
-        \coordinate (E5) at ($(A4)!1.3!(A5)$);
-        \coordinate (E1) at ($(An)!1.4!(A1)$);
-        \coordinate (En) at ($(An1)!1.4!(An)$);
-        \coordinate (En1) at ($(Ak)!1.4!(An1)$);
-
-        \draw[->, dashed] (A2) -- (E2);
-        \draw[->, dashed] (A3) -- (E3);
-        \draw[->, dashed] (A4) -- (E4);
-        \draw[->, dashed] (A5) -- (E5);
-        \draw[->, dashed] (A1) -- (E1);
-        \draw[->, dashed] (An) -- (En);
-        \draw[->, dashed] (An1) -- (En1);
-
-        \tikzset{
-          myangle/.style={draw, fill=teal!20, fill opacity=0.6, angle radius=0.6cm}
-        }
-
-        \foreach \i/\j in {2/3, 3/4, 4/5} {
-            \pic [myangle] {angle = A1--A\i--A\j};
-            \pic [myangle] {angle = A\j--A1--A\i};
-            \pic [myangle] {angle = A1--A\i--A\j};
-            \pic [myangle] {angle = A\i--A\j--A1};
-          }
-
-        \pic [myangle] {angle = A1--An1--An};
-        \pic [myangle] {angle = An1--An--A1};
-        \pic [myangle] {angle = An--A1--An1};
-        \pic [myangle] {angle = An1--A1--A5};
-        \pic [myangle] {angle = A1--A5--Ak};
-        \pic [myangle] {angle = Ak--An1--An};
-
-        \tikzset{
-          extangle/.style={draw, fill=purple!60, fill opacity=0.6, angle radius=0.6cm}
-        }
-
-        \pic [extangle] {angle = A3--A2--E2};
-        \pic [extangle] {angle = E3--A3--A4};
-        \pic [extangle] {angle = A5--A4--E4};
-        \pic [extangle] {angle = Ak--A5--E5};
-        \pic [extangle] {angle = A2--A1--E1};
-        \pic [extangle] {angle = A1--An--En};
-        \pic [extangle] {angle = An--An1--En1};
-
-        \fill (A1) circle (1.5pt) node[left] {$A_1$};
-        \fill (An1) circle (1.5pt) node[below right] {$A_{n-1}$};
-        \fill (An) circle (1.5pt) node[below] {$A_n$};
-
-        \foreach \i/\pos in {2/left, 3/above, 4/above, 5/right} {
-            \fill (A\i) circle (1.5pt) node[\pos] {$A_\i$};
-          }
-      \end{tikzpicture}
-    }
-  \end{center}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{contoh}
-    Perhatikan gambar bangun datar segi lima (pentagon) dibawah ini. Tentukanlah nilai $y$!
-    \begin{center}
-      \begin{tikzpicture}[scale=1, every node/.style={font=\scriptsize}, >=stealth]
-        % 1. Definisi Koordinat Titik
-        \coordinate (A) at (0,0.5);
-        \coordinate (B) at (4,0.5);
-        \coordinate (C) at (4,3.25);
-        \coordinate (D) at (2,1.5);
-        \coordinate (E) at (0,2.5);
-        \coordinate (F) at (0,3.5); % Ujung panah atas
-
-        % 2. Menggambar Garis Segi Lima dan Panah
-        \draw (A) -- (B) -- (C) -- (D) -- (E) -- cycle;
-        \draw[->] (E) -- (F); % Tambahan panah agar sesuai dengan gambar aslinya
-
-        % 3. Menggunakan \pic untuk semua sudut
-        % Sudut Siku-Siku
-        \pic[draw=teal, angle radius=0.3cm] {right angle = B--A--E};
-        \pic[draw=teal, angle radius=0.3cm] {right angle = C--B--A};
-
-        \pic[draw=teal, "$\color{teal}3x$", angle radius=0.6cm, angle eccentricity=0.6] {angle = A--E--D};
-        \pic[draw=teal, "$\color{teal}2x$", angle radius=0.6cm, angle eccentricity=0.6] {angle = D--C--B};
-
-        % Sudut Refleks (260 derajat)
-        \pic[draw=teal, "$\color{teal}260^\circ$", angle radius=0.5cm, angle eccentricity=0.5] {angle = E--D--C};
-
-        % Sudut Eksterior (y)
-        \pic[draw=purple, "$\color{purple}y$", angle radius=0.6cm, angle eccentricity=0.5] {angle = D--E--F};
-      \end{tikzpicture}
-    \end{center}
-    \onslide<2->{\textbf{Jawab}:
-        \begin{itemize}
-          \item Sudut Interior: $90^\circ + 90^\circ + 2x + 3x + 260^\circ = 540^\circ \implies x = 20^\circ \implies y =120$.
-          \item Sudut Eksterior: $y -80^\circ + (180^\circ - 2x) + 90^\circ + 90^\circ  = 360^\circ \implies y = 120^\circ$.
-        \end{itemize}}
-  \end{contoh}
-\end{frame}
-
-\subsection{Sudut Pusat \& Keliling}
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{definisi}[Sudut Pusat]
-    Sudut pusat adalah sudut yang dibentuk oleh dua jari-jari lingkaran yang bertemu di pusat lingkaran.
-  \end{definisi}
-
-  \begin{definisi}[Sudut Keliling]
-    Sudut keliling adalah sudut yang dibentuk oleh dua tali busur yang bertemu di titik pada keliling lingkaran.
-  \end{definisi}
-  \vspace*{-0.2cm}
-  \begin{columns}
-    \begin{column}{0.4\textwidth}
-      \begin{center}
-        \begin{tikzpicture}[scale=0.7, every node/.style={font=\tiny}, >=stealth]
-          \coordinate (O) at (0,0);
-          \draw[thick] (O) circle (2);
-
-          \coordinate (A) at (150:2);
-          \coordinate (B) at (220:2);
-          \coordinate (C) at (10:2);
-
-          \draw[thick, blue] (A) -- (O) -- (B);
-
-          \draw[thick, purple] (A) -- (C) -- (B);
-
-          \pic[draw=blue, fill=blue!15, "$\alpha$", angle radius=0.5cm, angle eccentricity=0.5] {angle = A--O--B};
-
-          \pic[draw=purple, fill=purple!15, "$\beta$", angle radius=0.7cm, angle eccentricity=0.6] {angle = A--C--B};
-
-          \fill (O) circle (1.5pt) node[above] {$O$};
-          \fill (A) circle (1.5pt) node[left] {$A$};
-          \fill (B) circle (1.5pt) node[below left] {$B$};
-          \fill (C) circle (1.5pt) node[right] {$C$};
-
-        \end{tikzpicture}
-      \end{center}
+  \begin{columns}[T]
+    \begin{column}{0.56\textwidth}
+      \begin{definisi}[Lingkaran Dalam dan Titik Dalam]
+        Pada segitiga $ABC$, \textbf{lingkaran dalam} adalah lingkaran yang menyinggung ketiga sisi segitiga. Pusatnya disebut \textbf{titik dalam} dan biasanya dinotasikan dengan $I$.
+      \end{definisi}
+      \begin{definisi}
+        Titik dalam $I$ adalah titik yang berjarak sama terhadap ketiga sisi segitiga.
+      \end{definisi}
     \end{column}
-    \begin{column}{0.6\textwidth}
-      \begin{itemize}
-        \item $\alpha$ adalah sudut pusat.
-        \item $\beta$ adalah sudut keliling.
-        \item $AC$ dan $BC$ adalah tali busur.
-        \item $OA$ dan $OB$ adalah jari-jari lingkaran.
-      \end{itemize}
+    \begin{column}{0.44\textwidth}
+      \centering
+      \begin{tikzpicture}[scale=0.95, every node/.style={font=\footnotesize}]
+        \coordinate (A) at (0,3.2);
+        \coordinate (B) at (-2.6,0);
+        \coordinate (C) at (3,0);
+        \coordinate (I) at (0.05,1.05);
+        \coordinate (D) at ($(B)!(I)!(C)$);
+        \coordinate (E) at ($(C)!(I)!(A)$);
+        \coordinate (F) at ($(A)!(I)!(B)$);
+
+        \draw[thick] (A)--(B)--(C)--cycle;
+        \draw[blue, thick] (I) circle (1.05);
+        \draw[dashed] (A)--(I);
+        \draw[dashed] (B)--(I);
+        \draw[dashed] (C)--(I);
+        \draw[dashed] (I)--(D);
+
+        \pic [draw, fill=green!20, angle radius=2.5mm] {right angle = I--D--C};
+
+        \fill (A) circle (1.2pt) node[above] {$A$};
+        \fill (B) circle (1.2pt) node[below left] {$B$};
+        \fill (C) circle (1.2pt) node[below right] {$C$};
+        \fill[red] (I) circle (1.6pt) node[right] {$I$};
+        \fill (D) circle (1.1pt) node[below] {$D$};
+        \fill (E) circle (1.1pt);
+        \fill (F) circle (1.1pt);
+      \end{tikzpicture}
     \end{column}
   \end{columns}
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}[Perbandingan Sudut Pusat dan Keliling\label{thm:sudut_pusat_keliling}]
-    Besar sudut pusat adalah dua kali besar sudut keliling yang menghadap busur yang sama. Dengan kata lain,jika $M, N, A$ merupakan titik pada lingkaran yang berpusat $O$, maka $\angle MON = 2 \times \angle MAN$.
+  \begin{teorema}
+    Tiga garis bagi sudut dalam segitiga berpotongan di satu titik, yaitu titik dalam $I$.
   \end{teorema}
-  \begin{center}
-    \begin{tikzpicture}[scale=1, every node/.style={font=\small}]
-      \coordinate (O) at (0,0);
-      \draw[thick] (O) circle (2);
-      \fill (O) circle (1.5pt) node[right] {$O$};
 
-      % Titik-titik
-      \coordinate (A) at (60:2);
-      \coordinate (N) at (240:2); % A, O, N segaris
-      \coordinate (M) at (160:2);
+  \begin{teorema}
+    Jika $r$ adalah jari-jari lingkaran dalam, $L$ luas segitiga, dan
+    \[
+      s = \frac{a+b+c}{2}
+    \]
+    adalah semikeliling segitiga, maka
+    \[
+      L = r s.
+    \]
+  \end{teorema}
 
-      \draw[thick] (M) -- (A) -- (N);
-      \draw[thick] (M) -- (O);
-
-      \fill (A) circle (1.5pt) node[above right] {$A$};
-      \fill (M) circle (1.5pt) node[left] {$M$};
-      \fill (N) circle (1.5pt) node[below left] {$N$};
-
-      % Tanda sama kaki
-      \path (O) -- (M) node[midway, sloped] {$||$};
-      \path (O) -- (A) node[midway, sloped] {$||$};
-
-      % Sudut
-      \pic[draw, fill=orange!30, angle radius=0.6cm, "$x$"] {angle = O--M--A};
-      \pic[draw, fill=orange!30, angle radius=0.6cm, "$x$"] {angle = M--A--O};
-      \pic[draw, fill=orange!30, angle radius=0.4cm, "$2x$", angle eccentricity=1.5] {angle = M--O--N};
-    \end{tikzpicture}
-    \begin{tikzpicture}[scale=1, every node/.style={font=\small}]
-      \coordinate (O) at (0,0);
-
-      \coordinate (A) at (60:2);
-      \coordinate (P) at (240:2); % Garis bantu diameter
-      \coordinate (M) at (150:2);
-      \coordinate (N) at (-20:2);
-
-      \draw[thick] (M) -- (A) -- (N);
-      \draw[thick] (M) -- (O);
-      \draw[thick] (N) -- (O);
-      \draw[thick, dashed] (A) -- (P);
-
-      \fill (A) circle (1.5pt) node[above right] {$A$};
-      \fill (M) circle (1.5pt) node[left] {$M$};
-      \fill (N) circle (1.5pt) node[right] {$N$};
-
-      % Sudut Bagian Kiri
-      \pic[draw, fill=orange!30, angle radius=0.6cm, "$x$"] {angle = O--M--A};
-      \pic[draw, fill=orange!30, angle radius=0.6cm, "$x$"] {angle = M--A--O};
-      \pic[draw, fill=orange!30, angle radius=0.4cm, "$2x$", angle eccentricity=1.6] {angle = M--O--P};
-
-      % Sudut Bagian Kanan
-      \pic[draw, fill=blue!30, angle radius=0.6cm, "$y$"] {angle = O--A--N};
-      \pic[draw, fill=blue!30, angle radius=0.6cm, "$y$"] {angle = A--N--O};
-      \pic[draw, fill=blue!30, angle radius=0.4cm, "$2y$", angle eccentricity=1.5] {angle = P--O--N};
-
-      \draw[thick] (O) circle (2);
-      \fill (O) circle (1.5pt) node[right] {$O$};
-    \end{tikzpicture}
-    \begin{tikzpicture}[scale=1, every node/.style={font=\small}]
-      \coordinate (O) at (0,0);
-
-      \coordinate (A) at (110:2);
-      \coordinate (P) at (290:2); % Garis bantu diameter
-      \coordinate (M) at (180:2);
-      \coordinate (N) at (240:2);
-
-      \draw[thick] (M) -- (A) -- (N);
-      \draw[thick] (M) -- (O);
-      \draw[thick] (N) -- (O);
-      \draw[thick, dashed] (A) -- (P);
-      \draw[thick] (O) -- (A);
-
-      \fill (A) circle (1.5pt) node[above left] {$A$};
-      \fill (M) circle (1.5pt) node[left] {$M$};
-      \fill (N) circle (1.5pt) node[below left] {$N$};
-
-      % Tanda Sama Kaki
-      \path (O) -- (A) node[midway, sloped] {$||$};
-      \path (O) -- (N) node[midway, sloped] {$||$};
-
-      % Sudut Segitiga Besar (AON)
-      \pic[draw, fill=blue!30, angle radius=0.8cm, "$y$"] {angle = N--A--O};
-      \pic[draw, fill=blue!30, angle radius=0.8cm, "$y$"] {angle = O--N--A};
-
-      % Sudut Segitiga Kecil (AOM)
-      \pic[draw, fill=orange!30, angle radius=0.5cm, "$x$"] {angle = M--A--O};
-      \pic[draw, fill=orange!30, angle radius=0.5cm, "$x$"] {angle = O--M--A};
-
-      \draw[thick] (O) circle (2);
-      \fill (O) circle (1.5pt) node[right] {$O$};
-    \end{tikzpicture}
-  \end{center}
+  \begin{catatan}
+    Rumus $L=rs$ sangat berguna saat panjang sisi segitiga diketahui, karena kita cukup mencari luas segitiga dan semikelilingnya untuk memperoleh jari-jari lingkaran dalam.
+  \end{catatan}
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Diketahui segitiga dengan panjang sisi $13$, $14$, dan $15$.
+    Tentukan jari-jari lingkaran dalamnya.
+
+    \vspace{0.6em}
+    \textbf{Penyelesaian.}
+    \[
+      s=\frac{13+14+15}{2}=21.
+    \]
+    Dengan rumus Heron,
+    \[
+      L=\sqrt{21(21-13)(21-14)(21-15)}=\sqrt{21\cdot 8\cdot 7\cdot 6}=84.
+    \]
+    Maka
+    \[
+      r=\frac{L}{s}=\frac{84}{21}=4.
+    \]
+    Jadi jari-jari lingkaran dalam segitiga tersebut adalah
+    \[
+      \boxed{4}.
+    \]
+  \end{contoh}
+\end{frame}
+
+\subsection{Lingkaran Luar}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{columns}[T]
+    \begin{column}{0.56\textwidth}
+      \begin{definisi}[Lingkaran Luar dan Titik Sumbu]
+        \textbf{Lingkaran luar} adalah lingkaran yang melalui ketiga titik sudut segitiga.
+        Pusatnya disebut \textbf{titik sumbu} atau \textit{circumcenter}, dan biasanya dinotasikan dengan $O$.
+      \end{definisi}
+      \begin{definisi}
+        Titik sumbu $O$ adalah titik yang berjarak sama ke ketiga titik sudut segitiga:
+        \[
+          OA = OB = OC.
+        \]
+      \end{definisi}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \centering
+      \begin{tikzpicture}[scale=0.95, every node/.style={font=\footnotesize}]
+        \coordinate (A) at (0,3.2);
+        \coordinate (B) at (-2.2,0.2);
+        \coordinate (C) at (3,0);
+        \coordinate (O) at (0.42,0.92);
+        \coordinate (M) at ($(B)!0.5!(C)$);
+        \coordinate (N) at ($(A)!0.5!(B)$);
+
+        \draw[thick] (A)--(B)--(C)--cycle;
+        \draw[blue, thick] (O) circle (2.28);
+        \draw[dashed] (O)--(A);
+        \draw[dashed] (O)--(B);
+        \draw[dashed] (O)--(C);
+        \draw[dashed] ($(M)!-1.2!(O)$)--($(M)!1.2!(O)$);
+        \draw[dashed] ($(N)!-1.15!(O)$)--($(N)!1.15!(O)$);
+
+        \fill (A) circle (1.2pt) node[above] {$A$};
+        \fill (B) circle (1.2pt) node[below left] {$B$};
+        \fill (C) circle (1.2pt) node[below right] {$C$};
+        \fill[red] (O) circle (1.6pt) node[right] {$O$};
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}
+    Tiga garis sumbu sisi segitiga berpotongan di satu titik, yaitu titik sumbu $O$.
+  \end{teorema}
+
+  \begin{teorema}
+    Jika $R$ adalah jari-jari lingkaran luar segitiga $ABC$, maka berlaku
+    \[
+      \frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} = 2R.
+    \]
+    Selain itu,
+    \[
+      R = \frac{abc}{4L},
+    \]
+    dengan $L$ adalah luas segitiga.
+  \end{teorema}
+
   \begin{akibat}
-    Setiap sudut keliling yang menghadap busur yang sama memiliki besar yang sama.
-  \end{akibat}
-  \begin{akibat}
-    Setiap sudut keliling yang menghadap diameter lingkaran adalah sudut siku-siku ($90^\circ$).
-  \end{akibat}
-  \begin{akibat}
-    Jika sebuah segitiga memiliki salah satu sisinya sebagai diameter lingkaran, maka segitiga tersebut adalah segitiga siku-siku ($90^\circ$).
+    Pada segitiga siku-siku, titik sumbu terletak di titik tengah sisi miring. Karena itu jari-jari lingkaran luarnya sama dengan setengah panjang sisi miring.
   \end{akibat}
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
   \begin{contoh}
-    Perhatikan bangun datar setengah lingkaran dengan diameter $AD$ dan pusat lingkaran $M$ berikut. Misalkan $B$ dan $C$ adalah titik-titik pada lingkaran sedemikian sehingga $AC$ tegak lurus $BM$ dan $BD$ memotong $AC$ di $P$. Jika besar $\angle CAD = 24^\circ$, maka tentukan $\angle CPD + \angle MBD$.\label{cth:sudut_pusat_keliling}
-    \begin{center}
-      \begin{tikzpicture}[scale=1, every node/.style={font=\small}]
-        \def\R{3}
-        \coordinate (M) at (0,0);
-        \coordinate (D) at (\R,0);
-        \coordinate (A) at (-\R,0);
+    Segitiga siku-siku $ABC$ memiliki kaki-kaki $6$ dan $8$, sehingga sisi miringnya $10$.
+    Tentukan jari-jari lingkaran luarnya.
 
-        \coordinate (C) at ({48}:\R);
-
-        \coordinate (B) at ({114}:\R);
-
-        \coordinate (P) at (intersection of A--C and B--D);
-
-        \draw[thick] (D) arc (0:180:\R);
-
-        \draw[thick] (A) -- (D);
-        \draw[thick] (A) -- (C);
-        \draw[thick] (B) -- (M);
-        \draw[thick] (B) -- (D);
-
-        \fill (A) circle (1.5pt) node[below] {$A$};
-        \fill (M) circle (1.5pt) node[below] {$M$};
-        \fill (D) circle (1.5pt) node[below] {$D$};
-        \fill (B) circle (1.5pt) node[above left] {$B$};
-        \fill (C) circle (1.5pt) node[above right=-2pt] {$C$};
-        \fill (P) circle (1.5pt) node[above, yshift=2pt] {$P$};
-      \end{tikzpicture}
-    \end{center}
+    \vspace{0.6em}
+    \textbf{Penyelesaian.}
+    Karena segitiga siku-siku, pusat lingkaran luar terletak di titik tengah sisi miring.
+    Maka
+    \[
+      R = \frac{10}{2}=5.
+    \]
+    Jadi jari-jari lingkaran luarnya adalah
+    \[
+      \boxed{5}.
+    \]
   \end{contoh}
 \end{frame}
 
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{exampleblock}{\myref{cth:sudut_pusat_keliling}}
-    \begin{columns}
-      \begin{column}{0.55\textwidth}
-        \small
-        \begin{itemize}
-          \item<1-> $\angle CAD = 24^\circ$, $BM \perp AC$, dan $\triangle MBD$ sama kaki.
-          \item<2-> $\angle AMB = 66^\circ$ dan $\angle BMD = 114^\circ$ (\myref{thm:jumlah_sudut_segitiga})
-          \item<3-> $\angle MBD= \angle BDA = \frac{1}{2} \times 66^\circ = 33^\circ$. (\myref{thm:segitiga_sama_kaki},\myref{thm:sudut_pusat_keliling})
-          \item<4-> $\angle CPD = \angle CAD + \angle ADP = 24^\circ + 33^\circ = 57^\circ$. (\myref{thm:jumlah_sudut_segitiga})
-        \end{itemize}
-        \onslide<5->{$\quad \therefore\angle CPD + \angle MBD = 57^\circ + 33^\circ = \mathbf{90^\circ}$}
-      \end{column}
-      \begin{column}{0.45\textwidth}
-        \begin{center}
-          \begin{tikzpicture}[scale=1, every node/.style={font=\scriptsize}]
-            \def\R{3} % Jari-jari lingkaran
+\section{\textit{Segi Empat Tali Busur}}
+\begin{frame}{\insertsection}
+  Segi empat tali busur adalah salah satu objek geometri lingkaran yang paling sering muncul pada soal olimpiade.
 
-            % Titik Dasar
-            \coordinate (M) at (0,0);
-            \coordinate (D) at (\R,0);
-            \coordinate (A) at (-\R,0);
-
-            % Titik C dan B 
-            \coordinate (C) at (48:\R);
-            \coordinate (B) at (114:\R);
-            \coordinate (P) at (intersection of A--C and B--D);
-            \coordinate (K) at (intersection of A--C and B--M);
-
-            \pic[draw, angle radius=0.2cm] {right angle = A--K--M};
-            \pic[draw, "$24^\circ$", angle radius=0.8cm, angle eccentricity=1.3, font=\tiny] {angle = D--A--C};
-
-            \onslide<2->{\pic[draw=green!70!black, fill=green!40, "\tiny$66^\circ$", angle radius=0.55cm, angle eccentricity=0.6, font=\tiny] {angle = B--M--A};
-                \pic[draw=orange, fill=orange!40, "\tiny $114^\circ$", angle radius=0.55cm, angle eccentricity=0.6, font=\tiny] {angle = D--M--B};}
-
-            \onslide<3->{\pic[draw=blue, fill=blue!20, "\tiny$33^\circ$", angle radius=0.5cm, angle eccentricity=1.6, font=\tiny] {angle = M--B--D};
-                \pic[draw=blue, fill=blue!20, "\tiny$33^\circ$", angle radius=0.6cm, angle eccentricity=1.4, font=\tiny] {angle = B--D--A};
-              }
-
-            \onslide<4->{\pic[draw=purple, fill=purple!20, "\tiny$57^\circ$", angle radius=0.35cm, angle eccentricity=1.7, font=\tiny] {angle = D--P--C};}
-
-            \draw[thick] (D) arc (0:180:\R);
-            \draw[thick] (A) -- (D);
-            \draw[thick] (A) -- (C);
-            \draw[very thick,purple] (B) -- (M);
-            \draw[very thick,purple] (M) -- (D);
-            \draw[thick] (B) -- (D);
-            \fill (A) circle (1pt) node[below] {$A$};
-            \fill (M) circle (1pt) node[below] {$M$};
-            \fill (D) circle (1pt) node[below] {$D$};
-            \fill (B) circle (1pt) node[above left] {$B$};
-            \fill (C) circle (1pt) node[above right] {$C$};
-            \fill (P) circle (1pt) node[above, yshift=2pt] {$P$};
-
-          \end{tikzpicture}
-        \end{center}
-      \end{column}
-    \end{columns}
-  \end{exampleblock}
+  \vspace{0.5em}
+  Ide yang paling sering dipakai:
+  \begin{itemize}
+    \item jumlah sudut berhadapan adalah $180^\circ$;
+    \item sudut luar sama dengan sudut dalam berhadapan;
+    \item kriteria kebalikannya juga sering dipakai untuk membuktikan empat titik sebidang lingkaran.
+  \end{itemize}
 \end{frame}
 
-
-
-\section{Garis Segitiga}
-\subsection{Kongruen dan Sebangun}
+\subsection{Definisi dan Sifat Dasar}
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{definisi}[Kekongruenan]
-    Dua bangun geometri dikatakan \textbf{kongruen} apabila keduanya
-    memiliki \textbf{bentuk dan ukuran yang sama}, sehingga salah satu bangun
-    dapat diperoleh dari bangun lainnya melalui translasi, rotasi,
-    atau refleksi.
-  \end{definisi}
-  \begin{center}
-    \begin{tikzpicture}[scale=1.1, every node/.style={font=\small}]
+  \begin{columns}[T]
+    \begin{column}{0.55\textwidth}
+      \begin{definisi}[Segi Empat Tali Busur]
+        Segi empat $ABCD$ disebut \textbf{segi empat tali busur} atau \textbf{segi empat siklik} jika keempat titik $A,B,C,D$ terletak pada satu lingkaran yang sama.
+      \end{definisi}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \centering
+      \begin{tikzpicture}[scale=1, every node/.style={font=\footnotesize}]
+        \coordinate (O) at (0,0);
+        \coordinate (A) at (110:2);
+        \coordinate (B) at (20:2);
+        \coordinate (C) at (-45:2);
+        \coordinate (D) at (-150:2);
 
-      % --- SEGITIGA PERTAMA (KIRI) ---
-      \coordinate (A) at (0,0);
-      \coordinate (B) at (3,0.3);
-      \coordinate (C) at (0.8,2);
+        \draw[blue, thick] (O) circle (2);
+        \draw[thick] (A)--(B)--(C)--(D)--cycle;
 
-      % Menggambar garis dan label sisi
-      \draw[thick] (A) -- (B) node[midway, below=2pt] {$c$}
-      -- (C) node[midway, above right=-2pt] {$a$}
-      -- (A) node[midway, left=2pt] {$b$};
-
-      % Menggambar sudut menggunakan \pic
-      \pic[draw=blue, fill=blue!15, "$\alpha$", angle radius=0.6cm, angle eccentricity=0.6] {angle = B--A--C};
-      \pic[draw=red, fill=red!15, "$\beta$", angle radius=0.6cm, angle eccentricity=0.6] {angle = C--B--A};
-      \pic[draw=green!60!black, fill=green!15, "$\gamma$", angle radius=0.5cm, angle eccentricity=0.6] {angle = A--C--B};
-
-
-      % Menggambar titik sudut
-      \fill (A) circle (1.5pt) node[below left] {$A$};
-      \fill (B) circle (1.5pt) node[below right] {$B$};
-      \fill (C) circle (1.5pt) node[above] {$C$};
-
-      \begin{scope}[shift={(4.5,0.5)}, rotate=-20]
-        \coordinate (A1) at (0,0);
-        \coordinate (B1) at (3,0.3);
-        \coordinate (C1) at (0.8,2);
-
-        % Menggambar garis dan label sisi
-        \draw[thick] (A1) -- (B1) node[midway, below=2pt] {$c_1$}
-        -- (C1) node[midway, above right=-2pt] {$a_1$}
-        -- (A1) node[midway, left=2pt] {$b_1$};
-
-        % Menggambar sudut menggunakan \pic
-        \pic[draw=blue, fill=blue!15, "$\alpha_1$", angle radius=0.6cm, angle eccentricity=0.6] {angle = B1--A1--C1};
-        \pic[draw=red, fill=red!15, "$\beta_1$", angle radius=0.6cm, angle eccentricity=0.6] {angle = C1--B1--A1};
-        \pic[draw=green!60!black, fill=green!15, "$\gamma_1$", angle radius=0.5cm, angle eccentricity=0.6] {angle = A1--C1--B1};
-
-        % Menggambar titik sudut
-        \fill (A1) circle (1.5pt) node[below left] {$A_1$};
-        \fill (B1) circle (1.5pt) node[below right] {$B_1$};
-        \fill (C1) circle (1.5pt) node[above] {$C_1$};
-      \end{scope}
-    \end{tikzpicture}
-  \end{center}
-  \vspace*{-0.4cm}
-  \[\boxed{\Delta ABC \cong \Delta A_1B_1C_1 \iff a = a_1, b = b_1, c = c_1, \alpha = \alpha_1, \beta = \beta_1, \gamma = \gamma_1}\]
-\end{frame}
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{alertblock}{Catatan}
-    Pada sebagian besar soal, kesamaan dari keenam pasang elemen ini tidak akan diberikan semuanya. Oleh karena itu, kita perlu menggunakan beberapa kriteria kekongruenan.
-  \end{alertblock}
-  \begin{block}{Kriteria Kongruen Segitiga}
-    \begin{itemize}
-      \item \textbf{SSS (Side-Side-Side / Sisi-Sisi-Sisi)} \\
-            Jika ketiga pasang sisi yang bersesuaian dari dua segitiga sama panjang.
-
-      \item \textbf{SAS (Side-Angle-Side / Sisi-Sudut-Sisi)} \\
-            Jika dua pasang sisi yang bersesuaian sama panjang dan sudut yang diapit oleh kedua sisi tersebut sama besar.
-
-      \item \textbf{ASA (Angle-Side-Angle / Sudut-Sisi-Sudut)} \\
-            Jika dua pasang sudut yang bersesuaian sama besar dan sisi yang menghubungkan kedua sudut tersebut sama panjang.
-    \end{itemize}
-  \end{block}
+        \fill (A) circle (1.2pt) node[above left] {$A$};
+        \fill (B) circle (1.2pt) node[above right] {$B$};
+        \fill (C) circle (1.2pt) node[below right] {$C$};
+        \fill (D) circle (1.2pt) node[below left] {$D$};
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{definisi}[Kesebangunan]
-    Dua bangun geometri dikatakan \textbf{sebangun} apabila keduanya memiliki bentuk yang sama, tetapi ukuran yang berbeda. Dengan kata lain, salah satu bangun dapat diperoleh dari bangun lainnya melalui \textbf{dilatasi} dan mungkin juga disertai dengan \textbf{translasi}, \textbf{rotasi}, atau \textbf{refleksi}.
-  \end{definisi}
-  \begin{center}
-    \begin{tikzpicture}[scale=1.1, every node/.style={font=\small}]
+  \begin{teorema}[Sudut Berhadapan]
+    Jika $ABCD$ adalah segi empat tali busur, maka
+    \[
+      \angle A + \angle C = 180^\circ
+      \qquad \text{dan} \qquad
+      \angle B + \angle D = 180^\circ.
+    \]
+  \end{teorema}
 
-      % --- SEGITIGA PERTAMA (KIRI) ---
-      \coordinate (A) at (0,0);
-      \coordinate (B) at (3,0.3);
-      \coordinate (C) at (0.8,2);
+  \begin{teorema}[Kriteria Kebalikan]
+    Jika pada segi empat $ABCD$ berlaku
+    \[
+      \angle A + \angle C = 180^\circ,
+    \]
+    maka keempat titik $A,B,C,D$ terletak pada satu lingkaran. Artinya, $ABCD$ adalah segi empat tali busur.
+  \end{teorema}
+\end{frame}
 
-      % Menggambar garis dan label sisi
-      \draw[thick] (A) -- (B) node[midway, below=2pt] {$c$}
-      -- (C) node[midway, above right=-2pt] {$a$}
-      -- (A) node[midway, left=2pt] {$b$};
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}[Sudut Luar]
+    Pada segi empat tali busur, sudut luar di suatu titik sama dengan sudut dalam yang berhadapan.
+  \end{teorema}
 
-      % Menggambar sudut menggunakan \pic
-      \pic[draw=blue, fill=blue!15, "$\alpha$", angle radius=0.6cm, angle eccentricity=0.6] {angle = B--A--C};
-      \pic[draw=red, fill=red!15, "$\beta$", angle radius=0.6cm, angle eccentricity=0.6] {angle = C--B--A};
-      \pic[draw=green!60!black, fill=green!15, "$\gamma$", angle radius=0.5cm, angle eccentricity=0.6] {angle = A--C--B};
-
-      % Menggambar titik sudut
-      \fill (A) circle (1.5pt) node[below left] {$A$};
-      \fill (B) circle (1.5pt) node[below right] {$B$};
-      \fill (C) circle (1.5pt) node[above] {$C$};
-      \begin{scope}[shift={(7,2)}, rotate=-180, scale=1]
-        \coordinate (A1) at (0,0);
-        \coordinate (B1) at (3,0.3);
-        \coordinate (C1) at (0.8,2);
-
-        % Menggambar garis dan label sisi
-        \draw[thick] (A1) -- (B1) node[midway, above=2pt] {$c_1$}
-        -- (C1) node[midway, below left=-2pt] {$a_1$}
-        -- (A1) node[midway, right=2pt] {$b_1$};
-
-        % Menggambar sudut menggunakan \pic
-        \pic[draw=blue, fill=blue!15, "$\alpha_1$", angle radius=0.6cm, angle eccentricity=0.6] {angle = B1--A1--C1};
-        \pic[draw=red, fill=red!15, "$\beta_1$", angle radius=0.6cm, angle eccentricity=0.6] {angle = C1--B1--A1};
-        \pic[draw=green!60!black, fill=green!15, "$\gamma_1$", angle radius=0.5cm, angle eccentricity=0.6] {angle = A1--C1--B1};
-
-        % Menggambar titik sudut
-        \fill (A1) circle (1.5pt) node[above right] {$A_1$};
-        \fill (B1) circle (1.5pt) node[above left] {$B_1$};
-        \fill (C1) circle (1.5pt) node[below] {$C_1$};
-      \end{scope}
-    \end{tikzpicture}
-  \end{center}
-  \vspace*{-0.3cm}
+  \vspace{0.3em}
+  Misalnya, jika sisi $BC$ diperpanjang ke titik $E$, maka
   \[
-    \boxed{\Delta ABC \sim \Delta A_1B_1C_1\iff\frac{a_1}{a}=\frac{b_1}{b}=\frac{c_1}{c}=k,\alpha = \alpha_1,\;\beta = \beta_1,\;\gamma = \gamma_1}
+    \angle ACE = \angle ABD
   \]
-\end{frame}
+  dan hubungan-hubungan serupa lainnya juga berlaku.
 
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{block}{Kriteria Sebangun Segitiga}
-    \begin{itemize}
-      \item \textbf{AA (Angle-Angle / Sudut-Sudut)} \\
-            Jika dua pasang sudut yang bersesuaian dari dua segitiga sama besar, maka kedua segitiga tersebut sebangun.
-
-      \item \textbf{SSS (Side-Side-Side / Sisi-Sisi-Sisi)} \\
-            Jika ketiga pasang sisi yang bersesuaian dari dua segitiga memiliki perbandingan yang sama, maka kedua segitiga tersebut sebangun.
-
-      \item \textbf{SAS (Side-Angle-Side / Sisi-Sudut-Sisi)} \\
-            Jika dua pasang sisi yang bersesuaian memiliki perbandingan yang sama dan sudut yang diapit oleh kedua sisi tersebut sama besar, maka kedua segitiga tersebut sebangun.
-    \end{itemize}
-  \end{block}
+  \begin{catatan}
+    Dalam banyak soal, cara tercepat membuktikan suatu segi empat siklik adalah menunjukkan satu pasang sudut berhadapan saling suplementer atau satu sudut luar sama dengan sudut dalam berhadapan.
+  \end{catatan}
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
   \begin{contoh}
-    Pada segitiga siku-siku \(ABC\) dengan \(\angle A=90^\circ\), diketahui
-    $
-      \overline{AB}=8$, $ \overline{AC}=6.
-    $
-    Titik \(D\) terletak pada sisi \(BC\) sehingga
-    $
-      \angle BAD=\angle ACB.
-    $
-    Tentukan panjang \(BD\).\\
-    \onslide<2->{\textbf{Jawab}:
-        \begin{columns}
-          \begin{column}{0.6\textwidth}
-            \small
-            \begin{itemize}
-              \item $\angle BAD = \angle ACB$ dan $\angle BAC = 90^\circ$.
-              \item<3-> $\angle CAD = 90^\circ - \alpha = \angle ABC$ (Misalkan $\beta$).
-              \item<4-> $\triangle ABD \sim \triangle ACB$ (Kriteria AA).
-              \item<5-> $\overline{BC}=\sqrt{\overline{AB}^2 + \overline{AC}^2} = \sqrt{8^2 + 6^2} = 10$.
-              \item<6-> $\displaystyle\frac{\overline{BD}}{\overline{AB}}=\frac{\overline{AB}}{\overline{BC}}\implies \overline{BD}=\frac{\overline{AB}^2}{\overline{BC}}=\frac{8^2}{10}=\frac{64}{10}=\boxed{\frac{32}{5}}$.
-            \end{itemize}
-          \end{column}
-          \begin{column}{0.4\textwidth}
-            \begin{center}
-              \begin{tikzpicture}[scale=0.5,every node/.style={font=\footnotesize}]
-                \coordinate (A) at (0,0);
-                \coordinate (B) at (8,0);
-                \coordinate (C) at (0,6);
-                \coordinate (D) at ($(B)!(A)!(C)$);
+    Misalkan $ABCD$ adalah segi empat tali busur. Jika $\angle BAD = 72^\circ$, tentukan $\angle BCD$.
 
-                \draw (A)--(B)--(C)--cycle;
-                \draw (A)--(D);
-
-                \node[right] at (B) {$B$};
-                \node[below left] at (A) {$A$};
-                \node[above] at (C) {$C$};
-                \node[above right] at (D) {$D$};
-
-                \node[below] at ($(A)!0.5!(B)$) {$8$};
-                \node[left] at ($(A)!0.5!(C)$) {$6$};
-
-                \draw (0.35,0)--(0.35,0.35)--(0,0.35);
-
-                \draw[red,thick] pic["$\alpha$",draw=red,angle radius=15,angle eccentricity=0.5]
-                  {angle=B--A--D};
-                \draw[red,thick] pic["$\alpha$",draw=red,angle radius=15,angle eccentricity=0.5]
-                  {angle=A--C--B};
-                \onslide<3->{\draw[purple,thick] pic["\tiny$\beta$",draw=purple,angle radius=20,angle eccentricity=0.6]
-                      {angle=D--A--C};
-                    \draw[purple,thick] pic["\tiny$\beta$",draw=purple,angle radius=20,angle eccentricity=0.6]
-                      {angle=D--B--A};}
-
-                \onslide<4->{
-                    \draw[blue,thick] (B)--(A)--(D);
-                    \draw[blue,thick] (A)--(C)--(B);
-                    \pic[draw, angle radius=0.2cm] {right angle = C--D--A};
-                    \pic[draw, angle radius=0.2cm] {right angle = A--D--B};
-                  }
-
-                \onslide<5->{
-                    \draw [decorate,decoration={brace,amplitude=5pt,mirror,raise=3ex}]
-                    (B) -- (C) node[midway,yshift=5ex,xshift=3ex]{$10$};
-                  }
-              \end{tikzpicture}
-            \end{center}
-          \end{column}
-        \end{columns}}
+    \vspace{0.6em}
+    \textbf{Penyelesaian.}
+    Karena $ABCD$ segi empat tali busur, sudut-sudut yang berhadapan jumlahnya $180^\circ$. Maka
+    \[
+      \angle BAD + \angle BCD = 180^\circ.
+    \]
+    Jadi
+    \[
+      \angle BCD = 180^\circ - 72^\circ = 108^\circ.
+    \]
+    Dengan demikian,
+    \[
+      \boxed{\angle BCD = 108^\circ}.
+    \]
   \end{contoh}
 \end{frame}
 
-\subsection{Garis Berat}
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{definisi}[Garis Berat / \textit{Median}]
-    Diberikan sebuah $\triangle ABC$. Misalkan $D$, $E$, dan $F$ berturut-turut adalah titik tengah dari sisi $BC$, $CA$, dan $AB$. Ruas garis $AD$, $BE$, dan $CF$ didefinisikan sebagai \textbf{garis berat} dari $\triangle ABC$.
-  \end{definisi}
-  \begin{center}
-    \begin{tikzpicture}[scale=0.9, every node/.style={font=\small}]
-      \coordinate (A) at (2, 3.5);
-      \coordinate (B) at (0, 0);
-      \coordinate (C) at (6, 0);
-      \coordinate (D) at ($(B)!0.5!(C)$);
-      \coordinate (E) at ($(A)!0.5!(C)$);
-      \coordinate (F) at ($(A)!0.5!(B)$);
-      \coordinate (G) at ($(A)!2/3!(D)$);
-
-      \draw[thick, red] (A) -- (D);
-      \draw[thick, green!60!black] (B) -- (E);
-      \draw[thick, cyan] (C) -- (F);
-
-      \draw[thick] (B) -- node[sloped] {$|$} (D) -- node[sloped] {$|$} (C);
-      \draw[thick] (C) -- node[sloped] {$|||$} (E) -- node[sloped] {$|||$} (A);
-      \draw[thick] (A) -- node[sloped] {$||$} (F) -- node[sloped] {$||$} (B);
-
-      \fill[red] (A) circle (1.5pt) node[above, text=black] {$A$};
-      \fill[red] (D) circle (1.5pt) node[below, text=black] {$D$};
-      \fill[green!60!black] (B) circle (1.5pt) node[left, text=black] {$B$};
-      \fill[green!60!black] (E) circle (1.5pt) node[above right, text=black] {$E$};
-      \fill[cyan] (C) circle (1.5pt) node[right, text=black] {$C$};
-      \fill[cyan] (F) circle (1.5pt) node[above left, text=black] {$F$};
-      \fill[black] (G) circle (2pt) node[above right=1pt, text=black] {$G$};
-    \end{tikzpicture}
-  \end{center}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}[Perbandingan Titik Berat\label{thm:perbandingan_titik_berat}]
-    Ketiga garis berat pada suatu segitiga berpotongan tepat pada satu titik tunggal yang disebut \textbf{titik berat} (centroid), dinotasikan dengan $G$. Titik ini membagi masing-masing garis berat dengan perbandingan $2:1$.
-  \end{teorema}
-
-  \vspace{0.2em}
-  \begin{center}
-    \begin{tikzpicture}[scale=0.9, every node/.style={font=\small}]
-      \coordinate (A) at (2, 3.5);
-      \coordinate (B) at (0, 0);
-      \coordinate (C) at (6, 0);
-      \coordinate (D) at ($(B)!0.5!(C)$);
-      \coordinate (E) at ($(A)!0.5!(C)$);
-      \coordinate (F) at ($(A)!0.5!(B)$);
-      \coordinate (G) at ($(A)!2/3!(D)$);
-
-      \draw[thick, red] (A) -- node[left] {$2$} (G) -- node[left] {$1$} (D);
-      \draw[thick, green!60!black] (B) -- node[below] {$2$} (G) -- node[below] {$1$} (E);
-      \draw[thick, cyan] (C) -- node[above] {$2$} (G) -- node[above] {$1$} (F);
-
-      \draw[thick] (B) -- node[sloped] {$|$} (D) -- node[sloped] {$|$} (C);
-      \draw[thick] (C) -- node[sloped] {$|||$} (E) -- node[sloped] {$|||$} (A);
-      \draw[thick] (A) -- node[sloped] {$||$} (F) -- node[sloped] {$||$} (B);
-
-      \draw[thick] (B) -- (D) -- (C);
-      \draw[thick] (C) -- (E) -- (A);
-      \draw[thick] (A) -- (F) -- (B);
-
-      \fill[red] (A) circle (1.5pt) node[above, text=black] {$A$};
-      \fill[red] (D) circle (1.5pt) node[below, text=black] {$D$};
-      \fill[green!60!black] (B) circle (1.5pt) node[left, text=black] {$B$};
-      \fill[green!60!black] (E) circle (1.5pt) node[above right, text=black] {$E$};
-      \fill[cyan] (C) circle (1.5pt) node[right, text=black] {$C$};
-      \fill[cyan] (F) circle (1.5pt) node[above left, text=black] {$F$};
-      \fill[black] (G) circle (2.5pt) node[above right=1pt, text=black] {$G$};
-    \end{tikzpicture}
-  \end{center}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}[Teorema Apollonius]
-    Pada $\triangle ABC$, jika $\overline{AD}$ adalah panjang garis berat yang ditarik dari titik $A$ ke sisi $BC$, berlaku
-    \[\overline{AB}^2 + \overline{AC}^2 = 2\overline{AD}^2 + \frac{1}{2}\overline{BC}^2 \quad \text{atau} \quad \overline{AD} = \frac{1}{2} \sqrt{2\overline{AB}^2 + 2\overline{AC}^2 - \overline{BC}^2}\]
-  \end{teorema}
-  \begin{center}
-    \begin{tikzpicture}[scale=0.8, every node/.style={font=\footnotesize}]
-      % Koordinat Utama (Sama seperti sebelumnya)
-      \coordinate (A) at (2, 3.5);
-      \coordinate (B) at (0, 1.5);
-      \coordinate (C) at (6, 1.5);
-      \coordinate (D) at ($(B)!0.5!(C)$);
-
-      % Titik A' (Refleksi A terhadap D untuk membentuk jajaran genjang)
-      % Coords: A' = D + (D-A) = 2*D - A
-      \coordinate (Aprime) at (4, -0.5);
-
-      % Menggambar Jajaran Genjang ABA'C
-      % Segitiga asli (Merah untuk AD)
-      \draw[thick] (B) -- (A) -- (C);
-      \draw[thick, red] (A) -- (D);
-
-      % Bagian refleksi (Dashed untuk DA', Magenta untuk sisi baru)
-      \draw[thick, red, dashed] (D) -- (Aprime);
-      \draw[thick, magenta] (B) -- (Aprime) -- (C);
-
-      % Diagonal BC (Satu garis utuh)
-      \draw[thick] (B) -- (C);
-      \draw[thick] (B) -- node[sloped] {$|$} (D) -- node[sloped] {$|$} (C);
-
-      % Titik Sudut & Tengah (Tetap gunakan warna garis aslinya)
-      \fill[red] (A) circle (1.5pt) node[above, text=black] {$A$};
-      \fill (B) circle (1.5pt) node[left, text=black] {$B$};
-      \fill (C) circle (1.5pt) node[right, text=black] {$C$};
-      \fill[red] (D) circle (1.5pt) node[above right, text=black] {$D$};
-      \fill[red] (Aprime) circle (1.5pt) node[below, text=black] {$A'$};
-    \end{tikzpicture}
-  \end{center}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{contoh}
-    Pada segitiga \(ABC\), garis berat \(AD\) dan \(BE\) berpotongan di \(G\).
-    Melalui \(G\) dibuat garis yang sejajar dengan \(BC\), memotong \(AB\) di \(P\)
-    dan memotong \(AC\) di \(Q\).
-    Jika
-    $
-      \overline{BC}=18,
-    $
-    tentukan panjang \(PQ\).\\
-    \onslide<2->{\textbf{Jawab}:}
-    \begin{columns}
-      \begin{column}{0.58\textwidth}
-        \begin{itemize}
-          \item<2-> $AG:GD=2:1\implies\frac{AG}{AD}=\frac{2}{3}.$ (\myref{thm:perbandingan_titik_berat})
-          \item<3-> $\triangle AGP\sim\triangle ADB$ dan $\triangle AGQ\sim\triangle ADC$ (\myref{prop:transversal_dua_garis_sejajar}, Kriteria AA).
-          \item<4-> $\displaystyle\frac{\overline{AP}}{{\overline{AB}}}=\frac{AG}{AD}=\frac{2}{3}$ dan $\displaystyle\frac{\overline{AQ}}{\overline{AC}}=\frac{AG}{AD}=\frac{2}{3}$.
-          \item<5-> $\displaystyle\frac{\overline{PQ}}{\overline{BC}}=\frac{\overline{AP}}{\overline{AB}}=\frac{2}{3}\implies \overline{PQ}=\frac{2}{3}\cdot 18=\boxed{12}$.
-        \end{itemize}
-      \end{column}
-      \begin{column}{0.42\textwidth}
-        \centering
-        \begin{tikzpicture}[scale=0.65,every node/.style={font=\footnotesize}]
-          \coordinate (A) at (3,4.5);
-          \coordinate (B) at (0,0);
-          \coordinate (C) at (8,0);
-          \coordinate (D) at ($(B)!0.5!(C)$);
-          \coordinate (E) at ($(A)!0.5!(C)$);
-          \coordinate (G) at ($(A)!2/3!(D)$);
-          \coordinate (P) at ($(A)!2/3!(B)$);
-          \coordinate (Q) at ($(A)!2/3!(C)$);
-
-          \onslide<2->{
-              \node[above] at (A) {$A$};
-              \node[left] at (B) {$B$};
-              \node[right] at (C) {$C$};
-              \node[below] at (D) {$D$};
-              \node[right] at (E) {$E$};
-              \node[above left] at (G) {$G$};
-              \node[left] at (P) {$P$};
-              \node[right] at (Q) {$Q$};
-              \draw (A)--(B)--(C)--cycle;
-              \draw (A)--(D);
-              % \draw (B)--(E);
-              \draw (P)--(Q);
-              \fill (D) circle (1.2pt);
-              \fill (E) circle (1.2pt);
-              \fill (G) circle (1.2pt);
-              \fill (P) circle (1.2pt);
-              \fill (Q) circle (1.2pt);
-              \draw[red,thick] (A)--(D);
-              \node[right,red] at ($(A)!0.32!(D)$) {$2k$};
-              \node[right,red] at ($(A)!0.83!(D)$) {$k$};
-            }
-
-          \onslide<3->{
-              \draw[blue,thick] (A)--(P)--(G);
-              \draw[blue,thick] (A)--(B)--(D);
-              \draw[orange,thick] (A)--(Q)--(G);
-              \draw[orange,thick] (A)--(C)--(D);
-            }
-
-          \onslide<4->{
-              \draw[green!50!black,thick] (P)--node[midway,below left] {$2l$} (Q);
-              \draw[green!50!black,thick] (B)--node[midway,below left] {$3l$} (C);
-            }
-        \end{tikzpicture}
-      \end{column}
-    \end{columns}
-  \end{contoh}
-
-\end{frame}
-
-\subsection{Garis Bagi}
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{definisi}[Garis Bagi / \textit{Angle Bisector}]
-    Diberikan sebuah $\triangle ABC$. Misalkan $D$, $E$, dan $F$ berturut-turut adalah titik potong garis bagi sudut dalam dari sudut $A$, $B$, dan $C$ dengan sisi yang berhadapan. Ruas garis $AD$, $BE$, dan $CF$ didefinisikan sebagai \textbf{garis bagi} dari $\triangle ABC$.
-  \end{definisi}
-  \begin{center}
-    \begin{tikzpicture}[scale=0.7, every node/.style={font=\footnotesize}]
-      \coordinate (B) at (0, 0);
-      \coordinate (C) at (7, 0);
-      \coordinate (A) at (2.5, 5);
-
-      \coordinate (BdirA) at ($(B)!1cm!(A)$);
-      \coordinate (BdirC) at ($(B)!1cm!(C)$);
-      \coordinate (Bbisect) at ($(BdirA)+(BdirC)-(B)$);
-      \path[name path=lineB] (B) -- ($(B)!10cm!(Bbisect)$);
-
-      \coordinate (CdirA) at ($(C)!1cm!(A)$);
-      \coordinate (CdirB) at ($(C)!1cm!(B)$);
-      \coordinate (Cbisect) at ($(CdirA)+(CdirB)-(C)$);
-      \path[name path=lineC] (C) -- ($(C)!10cm!(Cbisect)$);
-
-      \path [name intersections={of=lineB and lineC, by=O}];
-
-
-      \coordinate (T_A) at ($(B)!(O)!(C)$);
-      \coordinate (T_B) at ($(A)!(O)!(C)$);
-      \coordinate (T_C) at ($(A)!(O)!(B)$);
-
-      \path[name path=sideBC] (B) -- (C);
-      \path[name path=sideAC] (A) -- (C);
-      \path[name path=sideAB] (A) -- (B);
-
-      \path[name path=bisectA_line] (A) -- ($(A)!10cm!(O)$);
-      \path[name path=bisectB_line] (B) -- ($(B)!10cm!(O)$);
-      \path[name path=bisectC_line] (C) -- ($(C)!10cm!(O)$);
-      \path[name intersections={of=bisectA_line and sideBC, by=D}];
-      \path[name intersections={of=bisectB_line and sideAC, by=E}];
-      \path[name intersections={of=bisectC_line and sideAB, by=F}];
-
-      \pic [draw, fill=cyan!20, angle radius=10mm, "$\alpha$", angle eccentricity=0.6] {angle = B--A--D};
-      \pic [draw, fill=cyan!40, angle radius=10mm, "$\alpha$" , angle eccentricity=0.6] {angle = D--A--C};
-
-      \pic [draw, fill=orange!20, angle radius=10mm, "$\beta$" , angle eccentricity=0.6] {angle = C--B--E};
-      \pic [draw, fill=orange!40, angle radius=10mm, "$\beta$" , angle eccentricity=0.6] {angle = E--B--A};
-
-      \pic [draw, fill=green!20, angle radius=10mm, "$\gamma$" , angle eccentricity=0.6] {angle = A--C--F};
-      \pic [draw, fill=green!40, angle radius=10mm, "$\gamma$" , angle eccentricity=0.6] {angle = F--C--B};
-
-      \draw[dashed, black!70] (A) -- (D);
-      \draw[dashed, black!70] (B) -- (E);
-      \draw[dashed, black!70] (C) -- (F);
-
-      \draw[thick] (A) -- (B) -- (C) -- cycle;
-
-      \draw[loosely dashed] let \p1 = ($(O)-(D)$) in (O) circle ({veclen(\x1,\y1)});
-
-
-      \node[above] at (A) {$A$};
-      \node[right] at (E) {$E$};
-      \node[left] at (F) {$F$};
-      \node[above right] at (O) {$O$};
-      \node[below] at (D) {$D$};
-      \node[below left] at (B) {$B$};
-      \node[below right] at (C) {$C$};
-
-      \fill (F) circle (1.5pt);
-      \fill (E) circle (1.5pt);
-      \fill (D) circle (1.5pt);
-      \fill (O) circle (2pt);
-    \end{tikzpicture}
-  \end{center}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{definisi}[Lingkaran Dalam / \textit{Incircle}]
-    Lingkaran yang berpusat di titik tersebut dan menyinggung ketiga sisi $\triangle ABC$ disebut \textbf{lingkaran dalam} (incircle).
-  \end{definisi}
-  \begin{definisi}[Titik Pusat Lingkaran Dalam / \textit{Incenter}]
-    Titik potong ketiga garis bagi pada $\triangle ABC$ (biasanya dinotasikan dengan $O$ atau $I$) disebut sebagai \textbf{titik pusat lingkaran dalam} (incenter).
-  \end{definisi}
-  \begin{lema}
-    Setiap titik yang terletak pada sebuah garis bagi sudut memiliki jarak tegak lurus yang sama terhadap kedua lengan sudut tersebut.
-  \end{lema}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}[Perbandingan Garis Bagi\label{thm:perbandingan_garis_bagi}]
-    Pada $\triangle ABC$, jika $AD$ adalah garis bagi sudut $A$ yang ditarik dari titik $A$ ke sisi $BC$, maka berlaku
-    \[
-      \frac{\overline{BD}}{\overline{DC}}=\frac{\overline{AB}}{\overline{AC}}.
-    \]
-    Selain itu, berlaku pula
-    \[
-      \frac{\overline{BD}}{\overline{BC}}=\frac{\overline{AB}}{\overline{AB}+\overline{AC}},
-      \qquad
-      \frac{\overline{DC}}{\overline{BC}}=\frac{\overline{AC}}{\overline{AB}+\overline{AC}}.
-    \]
-  \end{teorema}
-  \begin{teorema}[Jari-jari Lingkaran Dalam\label{thm:jari_jari_lingkaran_dalam}]
-    Misalkan $r$ adalah jari-jari lingkaran dalam pada $\triangle ABC$, $L$ adalah luas $\triangle ABC$, dan $s$ adalah setengah keliling segitiga yaitu $s = \frac{a+b+c}{2}$. Maka berlaku hubungan
-    $ r = \frac{L}{s} $
-  \end{teorema}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}
-    Pada $\triangle ABC$, jika $AD$ adalah garis bagi sudut $A$ yang memotong sisi $BC$ di titik $D$, maka panjang garis bagi $AD$ dapat dihitung dengan:
-    \[
-      \overline{AD}^2 = \overline{AB} \cdot \overline{AC} - \overline{BD} \cdot \overline{DC}, \quad \text{atau} \quad \overline{AD}^2 = \overline{AB} \cdot \overline{AC} \left(1 - \frac{\overline{BC}^2}{(\overline{AB} + \overline{AC})^2}\right).
-    \]
-    Atau jika menggunakan sudut, panjang $\overline{AD}$ dapat dicari dengan:
-    \[
-      \overline{AD}=\frac{2\cdot \overline{AB}\cdot \overline{AC}\cdot \cos\left(\frac{\angle A}{2}\right)}{\overline{AB}+\overline{AC}}.
-    \]
-  \end{teorema}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{contoh}
-    Pada segitiga \(ABC\), \(AD\) adalah garis bagi sudut \(A\) yang memotong \(BC\) di \(D\).
-    Melalui \(D\) dibuat garis \(DE\parallel AB\) yang memotong \(AC\) di \(E\).
-    Diketahui
-    $
-      \overline{AB}=6,$ $\overline{AC}=10,$ $\overline{BC}=8.
-    $
-    Tentukan panjang \(CE\).\\
-    \onslide<2->{\textbf{Jawab}:}
-    \begin{columns}
-      \begin{column}{0.56\textwidth}
-        \begin{itemize}
-          \item<2-> $\triangle DEC \sim \triangle BAC$ (\myref{prop:transversal_dua_garis_sejajar}, Kriteria AA).
-          \item<3-> $\dfrac{x}{8-x}=\dfrac{6}{10}\implies x=3$. (\myref{thm:perbandingan_garis_bagi})
-          \item<4-> $\displaystyle\frac{\overline{CE}}{\overline{AC}}=\frac{\overline{DC}}{\overline{BC}}\implies \overline{CE}=\frac{5}{8}\cdot 10=\boxed{\frac{25}{4}}$.
-        \end{itemize}
-      \end{column}
-      \begin{column}{0.44\textwidth}
-        \centering
-        \begin{tikzpicture}[scale=0.7,every node/.style={font=\footnotesize}]
-          \coordinate (B) at (0,0);
-          \coordinate (C) at (8,0);
-          \coordinate (A) at (2,4);
-          \coordinate (D) at (3,0);
-          \coordinate (E) at (4.25,2.5);
-
-          \onslide<2-3>{
-              \node[below,blue] at ($(B)!0.5!(D)$) {$x$};
-              \node[below,blue] at ($(D)!0.5!(C)$) {$8-x$};
-            }
-          \onslide<2-4>{
-              \node[above right,blue] at ($(A)!0.5!(E)$) {$y$};
-              \node[above right,blue] at ($(E)!0.5!(C)$) {$10-y$};
-            }
-
-          \onslide<2->{
-              \node[above] at (A) {$A$};
-              \node[left] at (B) {$B$};
-              \node[right] at (C) {$C$};
-              \node[below] at (D) {$D$};
-              \node[above right] at (E) {$E$};
-              \fill (D) circle (1.2pt);
-              \fill (E) circle (1.2pt);
-              \pic[draw,angle radius=10,angle eccentricity=0.6, fill=cyan!20]
-              {angle=B--A--D};
-              \pic[draw,angle radius=10,angle eccentricity=0.6,fill=cyan!20]
-              {angle=D--A--C};
-              \pic[draw,angle radius=10,angle eccentricity=0.6, fill=cyan!20]
-              {angle=D--E--C};
-              \pic[draw,angle radius=10,angle eccentricity=0.6, fill=magenta!20]
-              {angle=C--B--A};
-              \pic[draw,angle radius=10,angle eccentricity=0.6, fill=magenta!20]
-              {angle=C--D--E};
-              \draw[purple] (A)--(B)--(C)--cycle;
-              \draw (A)--(D);
-              \draw[purple] (D)--(E);
-              \node[above left,blue] at ($(A)!0.5!(B)$) {$6$};
-            }
-
-          \onslide<4->{
-              \node[below,blue] at ($(B)!0.5!(D)$) {$3$};
-              \node[below,blue] at ($(D)!0.5!(C)$) {$5$};
-            }
-        \end{tikzpicture}
-      \end{column}
-    \end{columns}
-  \end{contoh}
-\end{frame}
-
-\subsection{Garis Sumbu}
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{definisi}[Garis Sumbu / \textit{Perpendicular Bisector}]
-    Garis sumbu adalah sebuah garis lurus yang membagi sebuah segmen garis menjadi dua bagian yang sama panjang dan tegak lurus terhadap segmen garis tersebut.
-  \end{definisi}
-  \begin{center}
-    \begin{tikzpicture}[scale=0.7, thick, every node/.style={font=\scriptsize}]
-      \coordinate (B) at (0, 0);
-      \coordinate (C) at (6, 0);
-      \coordinate (A) at (2.5, 4.5);
-
-      \coordinate (D) at ($(B)!0.5!(C)$);
-      \coordinate (E) at ($(A)!0.5!(C)$);
-      \coordinate (F) at ($(A)!0.5!(B)$);
-
-      \path[name path=perpBC] (D) -- ($(D)!5cm!90:(C)$);
-      \path[name path=perpAB] (F) -- ($(F)!5cm!-90:(A)$);
-      \path [name intersections={of=perpBC and perpAB, by=O}];
-
-      \draw let \p1 = ($(O)-(A)$) in (O) circle ({veclen(\x1,\y1)});
-
-      \draw[fill=orange!5] (A) -- (B) -- (C) -- cycle;
-
-      \draw[dashed] ($(D)!-1.5cm!(O)$) -- ($(D)!4.5cm!(O)$);
-      \draw[dashed] ($(E)!-2.5cm!(O)$) -- ($(E)!4cm!(O)$);
-      \draw[dashed] ($(F)!-2cm!(O)$) -- ($(F)!5cm!(O)$);
-
-      \draw[red, thick] (O) -- (A);
-      \draw[red, thick] (O) -- (B);
-      \draw[red, thick] (O) -- (C);
-
-      \pic [draw, fill=green!20, angle radius=3mm] {right angle = O--D--C};
-      \pic [draw, fill=green!20, angle radius=3mm] {right angle = O--E--A};
-      \pic [draw, fill=green!20, angle radius=3mm] {right angle = O--F--B};
-
-      \coordinate (tB1) at ($(B)!0.5!(D)$);
-      \coordinate (tC1) at ($(D)!0.5!(C)$);
-      \draw[line width=1pt] ($(tB1)!2mm!90:(C)$) -- ($(tB1)!2mm!-90:(C)$);
-      \draw[line width=1pt] ($(tC1)!2mm!90:(C)$) -- ($(tC1)!2mm!-90:(C)$);
-
-      \coordinate (tA1) at ($(A)!0.5!(E)$);
-      \coordinate (tC2) at ($(E)!0.5!(C)$);
-      \draw[line width=1pt] ($(tA1)!1.5mm!90:(C)$) -- ($(tA1)!1.5mm!-90:(C)$);
-      \draw[line width=1pt] ($(tA1)!1mm!(A) + ($(tA1)!1.5mm!90:(C)$) - (tA1)$) -- ($(tA1)!1mm!(A) + ($(tA1)!1.5mm!-90:(C)$) - (tA1)$);
-      \draw[line width=1pt] ($(tC2)!1.5mm!90:(C)$) -- ($(tC2)!1.5mm!-90:(C)$);
-      \draw[line width=1pt] ($(tC2)!1mm!(E) + ($(tC2)!1.5mm!90:(C)$) - (tC2)$) -- ($(tC2)!1mm!(E) + ($(tC2)!1.5mm!-90:(C)$) - (tC2)$);
-
-      \coordinate (tA2) at ($(A)!0.5!(F)$);
-      \coordinate (tB2) at ($(F)!0.5!(B)$);
-      \draw[line width=1pt] ($(tA2)!1.5mm!90:(B)$) -- ($(tA2)!1.5mm!-90:(B)$);
-      \draw[line width=1pt] ($(tA2)!1mm!(A) + ($(tA2)!1.5mm!90:(B)$) - (tA2)$) -- ($(tA2)!1mm!(A) + ($(tA2)!1.5mm!-90:(B)$) - (tA2)$);
-      \draw[line width=1pt] ($(tA2)!-1mm!(A) + ($(tA2)!1.5mm!90:(B)$) - (tA2)$) -- ($(tA2)!-1mm!(A) + ($(tA2)!1.5mm!-90:(B)$) - (tA2)$);
-      \draw[line width=1pt] ($(tB2)!1.5mm!90:(B)$) -- ($(tB2)!1.5mm!-90:(B)$);
-      \draw[line width=1pt] ($(tB2)!1mm!(F) + ($(tB2)!1.5mm!90:(B)$) - (tB2)$) -- ($(tB2)!1mm!(F) + ($(tB2)!1.5mm!-90:(B)$) - (tB2)$);
-      \draw[line width=1pt] ($(tB2)!-1mm!(F) + ($(tB2)!1.5mm!90:(B)$) - (tB2)$) -- ($(tB2)!-1mm!(F) + ($(tB2)!1.5mm!-90:(B)$) - (tB2)$);
-
-      \fill (F) circle (1.5pt);
-      \fill (E) circle (1.5pt);
-      \fill (D) circle (1.5pt);
-      \fill[red] (O) circle (2pt);
-
-      \node[above, blue] at (A) {$A$};
-      \node[below left, blue] at (B) {$B$};
-      \node[below right, blue] at (C) {$C$};
-      \node[below right, blue] at (D) {$D$};
-      \node[above, blue] at (E) {$E$};
-      \node[left, blue] at (F) {$F$};
-      \node[above left, red] at (O) {$O$};
-
-    \end{tikzpicture}
-  \end{center}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{lema}[Sifat Garis Sumbu\label{lem:garis_sumbu_sama_jarak}]
-    Misalkan $l$ adalah garis sumbu dari segmen $AB$ dan $P$ adalah sebuah titik pada $l$. Maka $P$ memiliki jarak yang sama ke titik $A$ dan $B$, yaitu $\overline{PA} = \overline{PB}$.
-  \end{lema}
-  \begin{center}
-    \begin{tikzpicture}[scale=0.7, thick, every node/.style={font=\scriptsize}]
-      \coordinate (B) at (0, 0);
-      \coordinate (C) at (6, 0);
-      \coordinate (A) at (2.5, 4.5);
-
-      \coordinate (D) at ($(B)!0.5!(C)$);
-      \coordinate (E) at ($(A)!0.5!(C)$);
-      \coordinate (F) at ($(A)!0.5!(B)$);
-
-      \path[name path=perpBC] (D) -- ($(D)!5cm!90:(C)$);
-      \path[name path=perpAB] (F) -- ($(F)!5cm!-90:(A)$);
-      \path [name intersections={of=perpBC and perpAB, by=O}];
-
-      \coordinate (P) at ($(O)+(0,2)$);
-
-      % \draw let \p1 = ($(O)-(A)$) in (O) circle ({veclen(\x1,\y1)});
-
-      \draw[fill=orange!5] (A) -- (B) -- (C) -- cycle;
-
-      % \draw[red, thick] (O) -- (A);
-      \draw[red, thick] (O) -- (B);
-      \draw[red, thick] (O) -- (C);
-
-      \pic [draw, fill=green!20, angle radius=3mm] {right angle = O--D--C};
-      \pic [draw, fill=green!20, angle radius=3mm] {right angle = B--D--O};
-
-      \draw[dashed] ($(D)!-0.5cm!(O)$) -- ($(D)!5cm!(O)$) node[right] {$l$};
-      % \pic [draw, fill=green!20, angle radius=3mm] {right angle = O--E--A};
-      % \pic [draw, fill=green!20, angle radius=3mm] {right angle = O--F--B};
-
-      \coordinate (tB1) at ($(B)!0.5!(D)$);
-      \coordinate (tC1) at ($(D)!0.5!(C)$);
-      \draw[line width=1pt] ($(tB1)!2mm!90:(C)$) -- ($(tB1)!2mm!-90:(C)$);
-      \draw[line width=1pt] ($(tC1)!2mm!90:(C)$) -- ($(tC1)!2mm!-90:(C)$);
-
-      \draw[brown] (B) -- node[sloped] {$||$} (P) -- node[sloped] {$||$} (C);
-
-      % \coordinate (tA1) at ($(A)!0.5!(E)$);
-      % \coordinate (tC2) at ($(E)!0.5!(C)$);
-      % \draw[line width=1pt] ($(tA1)!1.5mm!90:(C)$) -- ($(tA1)!1.5mm!-90:(C)$);
-      % \draw[line width=1pt] ($(tA1)!1mm!(A) + ($(tA1)!1.5mm!90:(C)$) - (tA1)$) -- ($(tA1)!1mm!(A) + ($(tA1)!1.5mm!-90:(C)$) - (tA1)$);
-      % \draw[line width=1pt] ($(tC2)!1.5mm!90:(C)$) -- ($(tC2)!1.5mm!-90:(C)$);
-      % \draw[line width=1pt] ($(tC2)!1mm!(E) + ($(tC2)!1.5mm!90:(C)$) - (tC2)$) -- ($(tC2)!1mm!(E) + ($(tC2)!1.5mm!-90:(C)$) - (tC2)$);
-
-      % \coordinate (tA2) at ($(A)!0.5!(F)$);
-      % \coordinate (tB2) at ($(F)!0.5!(B)$);
-      % \draw[line width=1pt] ($(tA2)!1.5mm!90:(B)$) -- ($(tA2)!1.5mm!-90:(B)$);
-      % \draw[line width=1pt] ($(tA2)!1mm!(A) + ($(tA2)!1.5mm!90:(B)$) - (tA2)$) -- ($(tA2)!1mm!(A) + ($(tA2)!1.5mm!-90:(B)$) - (tA2)$);
-      % \draw[line width=1pt] ($(tA2)!-1mm!(A) + ($(tA2)!1.5mm!90:(B)$) - (tA2)$) -- ($(tA2)!-1mm!(A) + ($(tA2)!1.5mm!-90:(B)$) - (tA2)$);
-      % \draw[line width=1pt] ($(tB2)!1.5mm!90:(B)$) -- ($(tB2)!1.5mm!-90:(B)$);
-      % \draw[line width=1pt] ($(tB2)!1mm!(F) + ($(tB2)!1.5mm!90:(B)$) - (tB2)$) -- ($(tB2)!1mm!(F) + ($(tB2)!1.5mm!-90:(B)$) - (tB2)$);
-      % \draw[line width=1pt] ($(tB2)!-1mm!(F) + ($(tB2)!1.5mm!90:(B)$) - (tB2)$) -- ($(tB2)!-1mm!(F) + ($(tB2)!1.5mm!-90:(B)$) - (tB2)$);
-
-      % \fill (F) circle (1.5pt);
-      % \fill (E) circle (1.5pt);
-      \fill (D) circle (1.5pt);
-      \fill[red] (O) circle (2pt);
-      \fill[brown] (P) circle (2pt);
-
-      \node[above, blue] at (A) {$A$};
-      \node[below left, blue] at (B) {$B$};
-      \node[below right, blue] at (C) {$C$};
-      \node[below right, blue] at (D) {$D$};
-      % \node[above, blue] at (E) {$E$};
-      % \node[left, blue] at (F) {$F$};
-      \node[above left, red] at (O) {$O$};
-      \node[left, brown] at (P) {$P$};
-    \end{tikzpicture}
-    \begin{tikzpicture}[scale=0.7, thick, every node/.style={font=\scriptsize}]
-      \coordinate (B) at (0, 0);
-      \coordinate (C) at (6, 0);
-      \coordinate (A) at (2.5, 4.5);
-
-      \coordinate (D) at ($(B)!0.5!(C)$);
-      \coordinate (E) at ($(A)!0.5!(C)$);
-      \coordinate (F) at ($(A)!0.5!(B)$);
-
-      \path[name path=perpBC] (D) -- ($(D)!5cm!90:(C)$);
-      \path[name path=perpAB] (F) -- ($(F)!5cm!-90:(A)$);
-      \path [name intersections={of=perpBC and perpAB, by=O}];
-
-      \coordinate (P) at ($(F)!4cm!(O)$);
-
-      % \draw let \p1 = ($(O)-(A)$) in (O) circle ({veclen(\x1,\y1)});
-
-      \draw[fill=orange!5] (A) -- (B) -- (C) -- cycle;
-
-      \draw[red, thick] (O) -- (A);
-      \draw[red, thick] (O) -- (B);
-      % \draw[red, thick] (O) -- (C);
-
-      \pic [draw, fill=green!20, angle radius=3mm] {right angle = O--F--B};
-      \pic [draw, fill=green!20, angle radius=3mm] {right angle = O--F--A};
-      \draw[dashed] ($(F)!-1cm!(O)$) -- ($(F)!5cm!(O)$) node[right] {$l$};
-
-
-      % \coordinate (tB1) at ($(B)!0.5!(D)$);
-      % \coordinate (tC1) at ($(D)!0.5!(C)$);
-      % \draw[line width=1pt] ($(tB1)!2mm!90:(C)$) -- ($(tB1)!2mm!-90:(C)$);
-      % \draw[line width=1pt] ($(tC1)!2mm!90:(C)$) -- ($(tC1)!2mm!-90:(C)$);
-
-      \draw[brown] (A) -- node[sloped] {$||$} (P) -- node[sloped] {$||$} (B);
-
-      \coordinate (tA1) at ($(A)!0.5!(E)$);
-      \coordinate (tC2) at ($(E)!0.5!(C)$);
-      \draw[line width=1pt] ($(tA1)!1.5mm!90:(C)$) -- ($(tA1)!1.5mm!-90:(C)$);
-      \draw[line width=1pt] ($(tA1)!1mm!(A) + ($(tA1)!1.5mm!90:(C)$) - (tA1)$) -- ($(tA1)!1mm!(A) + ($(tA1)!1.5mm!-90:(C)$) - (tA1)$);
-      \draw[line width=1pt] ($(tC2)!1.5mm!90:(C)$) -- ($(tC2)!1.5mm!-90:(C)$);
-      \draw[line width=1pt] ($(tC2)!1mm!(E) + ($(tC2)!1.5mm!90:(C)$) - (tC2)$) -- ($(tC2)!1mm!(E) + ($(tC2)!1.5mm!-90:(C)$) - (tC2)$);
-
-      % \coordinate (tA2) at ($(A)!0.5!(F)$);
-      % \coordinate (tB2) at ($(F)!0.5!(B)$);
-      % \draw[line width=1pt] ($(tA2)!1.5mm!90:(B)$) -- ($(tA2)!1.5mm!-90:(B)$);
-      % \draw[line width=1pt] ($(tA2)!1mm!(A) + ($(tA2)!1.5mm!90:(B)$) - (tA2)$) -- ($(tA2)!1mm!(A) + ($(tA2)!1.5mm!-90:(B)$) - (tA2)$);
-      % \draw[line width=1pt] ($(tA2)!-1mm!(A) + ($(tA2)!1.5mm!90:(B)$) - (tA2)$) -- ($(tA2)!-1mm!(A) + ($(tA2)!1.5mm!-90:(B)$) - (tA2)$);
-      % \draw[line width=1pt] ($(tB2)!1.5mm!90:(B)$) -- ($(tB2)!1.5mm!-90:(B)$);
-      % \draw[line width=1pt] ($(tB2)!1mm!(F) + ($(tB2)!1.5mm!90:(B)$) - (tB2)$) -- ($(tB2)!1mm!(F) + ($(tB2)!1.5mm!-90:(B)$) - (tB2)$);
-      % \draw[line width=1pt] ($(tB2)!-1mm!(F) + ($(tB2)!1.5mm!90:(B)$) - (tB2)$) -- ($(tB2)!-1mm!(F) + ($(tB2)!1.5mm!-90:(B)$) - (tB2)$);
-
-      \fill (F) circle (1.5pt);
-      % \fill (E) circle (1.5pt);
-      % \fill (D) circle (1.5pt);
-      \fill[red] (O) circle (2pt);
-      \fill[brown] (P) circle (2pt);
-
-      \node[above, blue] at (A) {$A$};
-      \node[below left, blue] at (B) {$B$};
-      \node[below right, blue] at (C) {$C$};
-      % \node[below right, blue] at (D) {$D$};
-      % \node[above, blue] at (E) {$E$};
-      \node[left, blue] at (F) {$F$};
-      \node[above left, red] at (O) {$O$};
-      \node[left, brown,above] at (P) {$P$};
-    \end{tikzpicture}
-  \end{center}
-
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{definisi}[Titik Sumbu / \textit{Circumcenter}]
-    Titik perpotongan tunggal dari ketiga garis sumbu sisi-sisi suatu segitiga. Titik ini umumnya dinotasikan dengan $O$ dan merupakan titik pusat dari lingkaran luar segitiga.
-  \end{definisi}
-
-  \begin{definisi}[Lingkaran Luar / \textit{Circumcircle}]
-    Lingkaran yang kelilingnya melalui ketiga titik sudut sebuah segitiga. Pusat dari lingkaran ini adalah titik sumbu.
-  \end{definisi}
-
-  \begin{lema}
-    Pada sebuah segitiga, hanya ada satu (tunggal) titik sumbu yang merupakan perpotongan dari ketiga garis sumbu sisi-sisi segitiga tersebut.
-  \end{lema}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}
-    Jarak dari titik sumbu $O$ ke masing-masing titik sudut segitiga ($A$, $B$, dan $C$) adalah sama panjang dan merupakan jari-jari ($R$) dari lingkaran luar segitiga. Jika panjang sisi-sisi segitiga adalah $a$, $b$, dan $c$, serta luas segitiga adalah $L$, maka panjang jari-jari lingkaran luar memenuhi persamaan:
-    \[
-      R = \frac{a \cdot b \cdot c}{4L}
-    \]
-  \end{teorema}
-
-  \begin{teorema}
-    Jari-jari lingkaran luar $R$ juga memiliki hubungan langsung dengan Hukum Sinus pada trigonometri segitiga, yaitu:
-    \[
-      \frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} = 2R
-    \]
-  \end{teorema}
-
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{contoh}
-    Pada segitiga \(ABC\), diketahui
-    $
-      \angle B=70^\circ,$ $\angle C=50^\circ.
-    $
-    Garis sumbu ruas garis \(AB\) memotong perpanjangan\(AC\) melewati $C$ di titik \(P\).
-    Tentukan besar sudut
-    $
-      \angle BPC.
-    $\\
-    \onslide<2->{\textbf{Jawab}:}
-    \begin{columns}
-      \begin{column}{0.58\textwidth}
-        \begin{itemize}
-          \item<2-> $\angle A=180^\circ-(50^\circ+70^\circ)=60^\circ$.
-          \item<3-> $AP=PB$ (\myref{lem:garis_sumbu_sama_jarak}).
-          \item<4-> $\triangle AMP\cong \triangle BMP$ (Kriteria SAS).
-          \item<5-> $\angle BPC = \angle ABP + \angle PBA = 60^\circ + 60^\circ = \boxed{120^\circ}$.
-        \end{itemize}
-      \end{column}
-      \begin{column}{0.42\textwidth}
-        \centering
-        \begin{tikzpicture}[scale=0.85,every node/.style={font=\footnotesize}]
-          \coordinate (A) at (0,0);
-          \coordinate (C) at (6,0);
-          \coordinate (B) at (1.5,3);
-          \coordinate (M) at ($(A)!0.5!(B)$);
-          \coordinate (P) at (3.75,0);
-
-          \onslide<2-3>{
-              \pic["\tiny$70^\circ$",draw,fill=red!20,angle radius=15,angle eccentricity=0.6]
-              {angle=A--B--C};
-            }
-          \onslide<3->{
-              \pic["\tiny$60^\circ$",draw,fill=blue!20,angle radius=18,angle eccentricity=0.7]
-              {angle=C--A--B};
-              \draw (B) -- node[sloped] {$||$} (P);
-              \draw (A) -- node[sloped] {$||$} (P);
-            }
-
-          \onslide<4->{
-              \pic["\tiny$60^\circ$",draw,fill=blue!20,angle radius=18,angle eccentricity=0.6]
-              {angle=A--B--P};
-            }
-
-          \onslide<5->{
-              \pic["\tiny$120^\circ$",draw,fill=purple!20,angle radius=15,angle eccentricity=0.6]
-              {angle=C--P--B};
-            }
-          \onslide<2->{
-              \pic["\tiny$50^\circ$",draw,fill=yellow!20,angle radius=25,angle eccentricity=0.7]
-              {angle=B--C--A};
-              \pic [draw, fill=green!20, angle radius=3mm] {right angle = A--M--P};
-              \pic [draw, fill=green!20, angle radius=3mm] {right angle = B--M--P};
-
-              \node[below left] at (A) {$A$};
-              \node[above] at (B) {$B$};
-              \node[below] at (C) {$C$};
-              \node[below] at (P) {$P$};
-              \node[above left] at (M) {$M$};
-
-              \draw (A)-- node[sloped] {$|$} (M)-- node[sloped] {$|$} (B)--(C)--cycle;
-              \draw (M) -- (P);
-
-              \fill (P) circle (1.2pt);
-              \fill (M) circle (1.2pt);
-            }
-        \end{tikzpicture}
-      \end{column}
-    \end{columns}
-  \end{contoh}
-\end{frame}
-
-\subsection{Garis Tinggi}
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{definisi}[Garis Tinggi / \textit{Altitudo}]
-    Garis tinggi pada sebuah segitiga adalah segmen garis lurus yang ditarik dari sebuah titik sudut dan tegak lurus terhadap sisi di hadapannya (atau perpanjangan dari sisi tersebut).
-  \end{definisi}
-  \begin{center}
-    \begin{tikzpicture}[scale=0.5, thick, every node/.style={font=\tiny}]
-      \coordinate (B) at (0,0);
-      \coordinate (C) at (6,0);
-      \coordinate (A) at (2,5);
-
-      \coordinate (D) at ($(B)!(A)!(C)$);
-      \coordinate (E) at ($(A)!(B)!(C)$);
-      \coordinate (F) at ($(A)!(C)!(B)$);
-
-      \draw[fill=orange!10] (A) -- (B) -- (C) -- cycle;
-
-      \draw[dashed, thick] (A) -- (D);
-      \draw[dashed, thick] (B) -- (E);
-      \draw[dashed, thick] (C) -- (F);
-
-      \pic [draw, fill=green!20, angle radius=3mm] {right angle = A--D--C};
-      \pic [draw, fill=green!20, angle radius=3mm] {right angle = B--E--A};
-      \pic [draw, fill=green!20, angle radius=3mm] {right angle = C--F--B};
-
-      \node[above, blue] at (A) {$A$};
-      \node[below left, blue] at (B) {$B$};
-      \node[below right, blue] at (C) {$C$};
-      \node[below, blue] at (D) {$D$};
-      \node[above right, blue] at (E) {$E$};
-      \node[left, blue] at (F) {$F$};
-    \end{tikzpicture}
-    \hspace{0.5cm}
-    \begin{tikzpicture}[scale=0.5, thick, every node/.style={font=\tiny}]
-      \coordinate (A) at (0,5);
-      \coordinate (B) at (2.5,1);
-      \coordinate (C) at (7,1);
-
-      \coordinate (D) at ($(B)!(A)!(C)$);
-      \coordinate (E) at ($(A)!(B)!(C)$);
-      \coordinate (F) at ($(A)!(C)!(B)$);
-
-
-      \draw[fill=orange!10] (A) -- (B) -- (C) -- cycle;
-
-      \draw[dashed, thick] (A) -- (D);
-      \draw[dashed, thick] (D) -- (B);
-      \draw[dashed, thick] (C) -- (F);
-      \draw[dashed, thick] (F) -- (B);
-      \draw[dashed, thick] (B) -- (E);
-
-      \pic [draw, fill=green!20, angle radius=3mm] {right angle = A--D--C};
-      \pic [draw, fill=green!20, angle radius=3mm] {right angle = B--E--C};
-      \pic [draw, fill=green!20, angle radius=3mm] {right angle = C--F--A};
-
-      \node[above, blue] at (A) {$A$};
-      \node[below, blue] at (B) {$B$};
-      \node[below right, blue] at (C) {$C$};
-      \node[below, blue] at (D) {$D$};
-      \node[above right, blue] at (E) {$E$};
-      \node[left, blue] at (F) {$F$};
-    \end{tikzpicture}
-    \hspace{0.5cm}
-    \begin{tikzpicture}[scale=0.5, thick, every node/.style={font=\tiny}]
-      \coordinate (B) at (0,0);
-      \coordinate (C) at (5,0);
-      \coordinate (A) at (0,5);
-
-      \coordinate (D) at ($(A)!(B)!(C)$);
-
-      \draw[fill=orange!10] (A) -- (B) -- (C) -- cycle;
-
-      \draw[dashed, thick] (B) -- (D);
-
-      \pic [draw, fill=green!20, angle radius=4mm] {right angle = A--B--C};
-      \pic [draw, fill=green!20, angle radius=3mm] {right angle = B--D--C};
-
-      \node[above, blue] at (A) { $A$};
-      \node[below left, blue] at (B) { $B$};
-      \node[below right, blue] at (C) { $C$};
-      \node[above right, blue] at (D) { $D$};
-
-    \end{tikzpicture}
-  \end{center}
-
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{definisi}[Titik Tinggi / \textit{Orthocenter}]
-    Titik perpotongan tunggal dari ketiga garis tinggi (atau perpanjangannya) di dalam sebuah segitiga.
-  \end{definisi}
-  \begin{teorema}
-    Jika panjang suatu sisi alas adalah $a$ dan panjang garis tinggi yang bersesuaian dengan alas tersebut adalah $t_a$, maka luas segitiga ($L$) adalah:
-    \[
-      L = \frac{1}{2} \cdot a \cdot t_a
-    \]
-  \end{teorema}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{lema}
-    Jika suatu median pada segitiga juga merupakan garis tinggi,
-    maka segitiga tersebut sama kaki.
-  \end{lema}
-  \begin{akibat}
-    Pada sebarang segitiga, jika $t_a$, $t_b$, dan $t_c$ masing-masing adalah panjang garis tinggi yang bersesuaian dengan sisi $a$, $b$, dan $c$, maka berlaku hubungan:
-    \[
-      a \cdot t_a = b \cdot t_b = c \cdot t_c = 2L
-    \]
-  \end{akibat}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{contoh}
-    Diberikan sebuah segitiga lancip $ABC$ dengan titik tinggi $H$. Garis tinggi dari titik $A$ memotong sisi $BC$ di titik $D$, dan garis tinggi dari titik $B$ memotong sisi $AC$ di titik $E$. Jika diketahui besar $\angle BAC = 45^\circ$ dan $\overline{BC} = 10$, maka tentukanlah panjang dari ruas garis $AH$!\\
-    \onslide<2->{\textbf{Jawab}:}
-    \begin{columns}[T]
-      \begin{column}{0.45\textwidth}
-        \begin{tikzpicture}[scale=0.8,every node/.style={font=\footnotesize}]
-          % 1. Gambar Dasar (Muncul di semua slide)
-          \coordinate (A) at (-4, 0);
-          \coordinate (E) at (0, 0);
-          \coordinate (C) at (3, 0);
-          \coordinate (B) at (0, 4);
-          \coordinate (H) at (0, 3);
-          \coordinate (D) at ($(B)!(A)!(C)$);
-
-          \onslide<3->{
-              \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=green!30] {angle = E--B--C};
-              \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=green!30] {angle = C--A--D};
-            }
-
-          \only<2>{
-              \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=blue!30] {angle = E--A--B};
-              \pic [draw, angle radius=5mm, angle eccentricity=0.5,fill=blue!30] {angle = A--B--E};
-            }
-
-
-          \onslide<2->{
-              \pic [draw, fill=blue!15, angle radius=3mm] {right angle = A--E--B};
-              \pic [draw, fill=blue!15, angle radius=3mm] {right angle = A--D--C};
-              \pic [draw, fill=blue!15, angle radius=3mm] {right angle = B--E--C};
-
-              \draw[thick] (A) -- (B) -- (C) -- cycle;
-              \draw[thick] (A) -- (D);
-              \draw[thick] (B) -- (E);
-
-              \node[left] at (A) {$A$};
-              \node[above] at (B) {$B$};
-              \node[right] at (C) {$C$};
-              \node[below] at (E) {$E$};
-              \node[above right, xshift=1mm] at (D) {$D$};
-              \node[left, yshift=2mm] at (H) {$H$};
-              \draw[very thick, red] (-2, -0.1) -- (-2, 0.1);
-              \draw[very thick, red] (-0.1, 2) -- (0.1, 2);
-
-              \fill (H) circle (1.5pt);
-            }
-
-          \onslide<4->{
-              \fill[yellow, opacity=0.4] (A) -- (H) -- (E) -- cycle;
-              \fill[magenta, opacity=0.3] (B) -- (C) -- (E) -- cycle;
-            }
-        \end{tikzpicture}
-      \end{column}
-      \begin{column}{0.55\textwidth}
-        \begin{itemize}
-          \item<2-> $\triangle ABE$ siku-siku di $E$. $\angle ABE = 45^\circ$ dan $\color{red}{AE = BE}$.
-
-          \item<3-> $\angle C$ penyiku $\angle DAC$, sehingga $\angle DAC = \angle CBE$.
-
-          \item<4-> $\triangle AHE \cong \triangle BCE$. (Kriteria ASA)
-          \item <5-> $AH = BC = \boxed{10}$.
-        \end{itemize}
-      \end{column}
-    \end{columns}
-  \end{contoh}
-\end{frame}
-
-% \subsection{Teorema Umum}
-% \begin{frame}{\insertsection}{\insertsubsection}
-%   \begin{teorema}[Dalil Stewart]
-%     Misalkan titik $D$ membagi sisi $BC$ (sisi $a$) pada $\triangle ABC$ menjadi ruas dengan panjang $m$ dan $n$ ($a = m + n$). Jika $d$ adalah panjang garis \textit{cevian} $AD$, maka berlaku:
-%     $$b^2m + c^2n = a(d^2 + mn)$$
-%   \end{teorema}
-%   \begin{center}
-%     \begin{tikzpicture}[scale=1, every node/.style={font=\small}]
-%       % 1. Definisi Titik Sudut
-%       \coordinate (A) at (1.5, 3);
-%       \coordinate (B) at (-1, 0);
-%       \coordinate (C) at (6, 0);
-
-%       \coordinate (D) at ($(B)!0.25!(C)$);
-
-%       % 3. Menggambar Segitiga dan Garis Cevian
-%       \draw[thick] (A) -- (B) node[midway, above left] {$c$};
-%       \draw[thick] (A) -- (C) node[midway, above right] {$b$};
-%       \draw[thick] (B) -- (C);
-
-%       \draw[thick, red] (A) -- (D) node[midway, right] {$d$};
-
-%       \draw[<->] ($(B)+(0,-0.3)$) -- ($(D)+(0,-0.3)$) node[midway, below] {$m$};
-%       \draw[<->] ($(D)+(0,-0.3)$) -- ($(C)+(0,-0.3)$) node[midway, below] {$n$};
-
-%       % Garis batas vertikal kecil untuk segmen
-%       \draw ($(B)+(0,-0.2)$) -- ($(B)+(0,-0.4)$);
-%       \draw ($(D)+(0,-0.2)$) -- ($(D)+(0,-0.4)$);
-%       \draw ($(C)+(0,-0.2)$) -- ($(C)+(0,-0.4)$);
-
-%       % 5. Label Titik Sudut
-%       \fill (A) circle (1.5pt) node[above] {$A$};
-%       \fill (B) circle (1.5pt) node[left] {$B$};
-%       \fill (C) circle (1.5pt) node[right] {$C$};
-%       \fill[red] (D) circle (1.5pt) node[above right, text=black] {$D$};
-%     \end{tikzpicture}
-%   \end{center}
-% \end{frame}
-
-\section*{\textit{Problems}}
+\section{\textit{Titik Kuasa}}
 \begin{frame}{\insertsection}
-  \begin{latihan}[AMC 12A 2012]
-    Segitiga $ABC$ memiliki panjang sisi $\overline{AB}=27,\,\overline{BC}=25,\, \overline{CA}=26$. Misalkan $I$ adalah titik perpotongan garis-garis bagi sudut dalam segitiga $ABC$. Tentukan panjang $BI$.
-  \end{latihan}
-  \begin{latihan}[OSK 2022]
-    Diberikan segitiga siku-siku sama kaki $ABC$ dengan
-    $
-      BC = AB.
-    $
-    Misalkan $L$ adalah titik tengah $BC$ dan $P$ adalah titik
-    pada sisi $AC$ sehingga
-    $
-      BP \perp AL.
-    $
-    Jika
-    $
-      CP = 20\sqrt{2},
-    $
-    maka panjang
-    $
-      AB
-    $
-    adalah \ldots
-  \end{latihan}
-  \begin{latihan}[OSK 2023]
-    Diberikan segitiga $ABC$. Misalkan $D$, $E$, dan $F$
-    masing-masing adalah titik pada sisi $BC$, $CA$, dan $AB$
-    sehingga $AD$, $BE$, dan $CF$ berpotongan di satu titik.
-    Diketahui bahwa
-    $
-      \angle EDF = 54^\circ.
-    $
-    Jika
-    $
-      \angle ADB = 90^\circ
-    $
-    dan
-    $
-      AF = FB,
-    $
-    maka besar sudut
-    $
-      \angle ABC
-    $
-    adalah \ldots
-  \end{latihan}
+  Titik kuasa menghubungkan panjang-panjang ruas garis yang berkaitan dengan sebuah lingkaran.
+
+  \vspace{0.5em}
+  Tiga bentuk yang paling sering dipakai adalah:
+  \begin{itemize}
+    \item dua tali busur yang berpotongan di dalam lingkaran;
+    \item dua secan dari satu titik luar;
+    \item sebuah garis singgung dan sebuah secan dari titik luar yang sama.
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsection}
-  \begin{latihan}[OSK 2024]
-    Diberikan segiempat $ABCD$ dengan luas segitiga $AED$ sama dengan luas segitiga $BEC$. Jika $AB = 50$, $AE = 45$, dan $AC = 108$, maka $CD$ adalah \dots
-    \begin{center}
-      \begin{tikzpicture}[scale=0.8, every node/.style={font=\footnotesize}]
-        % 1. Definisi koordinat titik-titik segiempat
-        % Koordinat diatur manual agar bentuknya semirip mungkin dengan soal
-        \coordinate (A) at (0, 0);
-        \coordinate (B) at (-0.2, 2.2);
-        \coordinate (C) at (3.8, 4.2);
-        \coordinate (D) at (4, 0.2);
+\subsection{Definisi}
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{columns}[T]
+    \begin{column}{0.58\textwidth}
+      \begin{definisi}[Titik Kuasa]
+        Misalkan $P$ adalah sebuah titik dan $\omega$ adalah lingkaran.
+        Jika suatu garis melalui $P$ memotong lingkaran di $A$ dan $B$, maka \textbf{kuasa titik $P$ terhadap $\omega$} didefinisikan sebagai
+        \[
+          \operatorname{Pow}_{\omega}(P)=PA \cdot PB.
+        \]
+      \end{definisi}
 
-        % 2. Mencari titik potong diagonal E
-        \coordinate (E) at (intersection of A--C and B--D);
+      Nilai ini tidak bergantung pada garis secan yang dipilih.
+    \end{column}
+    \begin{column}{0.42\textwidth}
+      \centering
+      \begin{tikzpicture}[scale=0.95, every node/.style={font=\footnotesize}]
+        \coordinate (O) at (0,0);
+        \coordinate (P) at (3,1.7);
+        \coordinate (A) at (18:2);
+        \coordinate (B) at (155:2);
 
-        % 3. Menggambar garis luar segiempat
-        \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
+        \draw[blue, thick] (O) circle (2);
+        \draw[thick] (P)--($(P)!1.2!(B)$);
 
-        % 4. Menggambar garis diagonal
-        \draw[thick] (A) -- (C);
-        \draw[thick] (B) -- (D);
-
-        % 5. Menambahkan label titik
-        \node[below left=-2pt] at (A) {$A$};
-        \node[left] at (B) {$B$};
-        \node[above] at (C) {$C$};
-        \node[below right=-2pt] at (D) {$D$};
-
-        % Label E digeser sedikit ke kanan seperti pada gambar asli
-        \node[right, xshift=2pt, yshift=1pt] at (E) {$E$};
-        \fill (E) circle (1.5pt);
+        \fill[red] (P) circle (1.4pt) node[right] {$P$};
+        \fill (A) circle (1.2pt) node[right] {$A$};
+        \fill (B) circle (1.2pt) node[left] {$B$};
       \end{tikzpicture}
-    \end{center}
-  \end{latihan}
+    \end{column}
+  \end{columns}
 \end{frame}
 
-\begin{frame}{\insertsection}
-  \begin{latihan}[OSK 2024]
-    Suatu segienam beraturan disisipkan ke dalam sebuah persegi panjang
-    seperti terlihat pada gambar di bawah ini. Jika luas $A$ dan $B$
-    berturut-turut adalah $24$ dan $23$, maka luas segienam beraturan
-    adalah \ldots
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}[Dua Tali Busur Berpotongan]
+    Jika dua tali busur $AB$ dan $CD$ berpotongan di titik $P$ di dalam lingkaran, maka
+    \[
+      PA \cdot PB = PC \cdot PD.
+    \]
+  \end{teorema}
 
-    \begin{center}
-      \begin{tikzpicture}[scale=1]
-        \draw[thick] (-1.95,-1.95) rectangle (1.95,1.95);
-        \draw[blue,fill=blue!10,thick] (-1.95,0.5) -- (-1.95,1.95) -- (-0.5,1.95) -- cycle;
-        \draw[red,fill=red!10,thick] (-1.95,0.5) -- (-1.95,-1.95) -- (0.5,-1.95) -- (-1.42,-1.42) -- cycle;
-        \node[blue] at (-1.5,1.5) {\small$A$};
-        \node[red] at (-1.6,-1.6) {\small$B$};
-        \foreach \x in {-15,45,...,285} {
-            \draw[thick] (\x:2 cm) -- (\x + 60:2 cm);
-          }
-      \end{tikzpicture}
-    \end{center}
-  \end{latihan}
+  \begin{teorema}[Dua Secan dari Titik Luar]
+    Jika dari titik luar $P$ ditarik dua secan yang memotong lingkaran di
+    $A,B$ dan $C,D$, maka
+    \[
+      PA \cdot PB = PC \cdot PD.
+    \]
+  \end{teorema}
 \end{frame}
 
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}[Garis Singgung dan Secan]
+    Jika dari titik luar $P$ ditarik garis singgung $PT$ dan secan yang memotong lingkaran di $A$ dan $B$, maka
+    \[
+      PT^2 = PA \cdot PB.
+    \]
+  \end{teorema}
+
+  \begin{catatan}
+    Dalam praktik, teorema titik kuasa hampir selalu dipakai untuk menukar informasi geometri lingkaran menjadi persamaan aljabar yang sederhana.
+  \end{catatan}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{contoh}
+    Dari titik luar $P$ ditarik sebuah garis singgung $PT$ dan sebuah secan yang memotong lingkaran di $A$ dan $B$.
+    Diketahui $PA=4$ dan $PB=9$. Tentukan panjang $PT$.
+
+    \vspace{0.6em}
+    \textbf{Penyelesaian.}
+    Dengan teorema garis singgung-secan,
+    \[
+      PT^2 = PA \cdot PB = 4 \cdot 9 = 36.
+    \]
+    Karena panjang ruas garis bernilai positif, maka
+    \[
+      PT = \sqrt{36} = 6.
+    \]
+    Jadi,
+    \[
+      \boxed{PT = 6}.
+    \]
+  \end{contoh}
+\end{frame}
+
+\section*{\textit{Ringkasan}}
 \begin{frame}{\insertsection}
-  \begin{latihan}[OSK 2024]
-    Diberikan sebuah segitiga $ABC$ yang siku-siku pada sudut $B$.
-    Lingkaran $\omega$ merupakan lingkaran dalam segitiga $ABC$ yang
-    menyinggung sisi $BC$ pada titik $D$. Titik $E$ terletak pada
-    $\omega$ sehingga $PE$ merupakan diameter dari $\omega$.
-    Perpanjangan garis $AE$ memotong $\omega$ kedua kalinya pada titik
-    $F$, dan memotong sisi $BC$ pada titik $G$. Apabila $EF=3$ dan $FG=4$, maka panjang $AE$ dapat dinyatakan dalam bentuk
-    $
-      \frac{p\sqrt{q}}{r},
-    $
-    dengan $p,q,r$ merupakan bilangan bulat positif, satu-satunya faktor
-    kuadrat dari $q$ adalah $1$, dan $\gcd(p,r)=1$. Nilai dari $p+q+r$ adalah \ldots
-  \end{latihan}
+  \begin{itemize}
+    \item \textbf{Lingkaran dalam}: pusatnya titik potong garis bagi sudut, dan luas segitiga memenuhi $L=rs$.
+    \item \textbf{Lingkaran luar}: pusatnya titik potong garis sumbu sisi, dan
+          \[
+            \frac{a}{\sin A}=\frac{b}{\sin B}=\frac{c}{\sin C}=2R.
+          \]
+    \item \textbf{Segi empat tali busur}: sudut-sudut berhadapan berjumlah $180^\circ$.
+    \item \textbf{Titik kuasa}: produk panjang ruas pada konfigurasi secan/tangen bernilai sama.
+  \end{itemize}
+
+  \vspace{0.6em}
+  Semua topik ini sangat sering muncul dalam \textit{angle chasing}, pembuktian siklik, dan pengolahan panjang ruas pada geometri olimpiade.
 \end{frame}
 
 \begin{frame}{Referensi}
@@ -2285,6 +534,5 @@
 
   \end{thebibliography}
 \end{frame}
-
 
 \end{document}
