@@ -56,6 +56,17 @@
 \newtheorem{latihan}{Latihan}
 \newtheorem{catatan}{Catatan}
 
+\usepackage[nameinlink]{cleveref}
+\crefname{teorema}{Teorema}{Teorema}
+\crefname{proposisi}{Proposisi}{Proposisi}
+\crefname{definisi}{Definisi}{Definisi}
+\crefname{lema}{Lema}{Lema}
+\crefname{akibat}{Akibat}{Akibat}
+\crefname{contoh}{Contoh}{Contoh}
+\crefname{latihan}{Latihan}{Latihan}
+
+\newcommand{\myref}[1]{\hyperref[#1]{\nameCref{#1} \ref*{#1}}}
+
 \AtBeginEnvironment{contoh}{%
 \setbeamercolor{block title}{use=example text,fg=white,bg=example text.fg!75!black}
 \setbeamercolor{block body}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
@@ -98,7 +109,7 @@
 }
 
 \date{Pertemuan 8}
-\title[OSN-K Matematika - Geometri]{Pembinaan OSN-K Matematika\\(Pertemuan 8: Geometri Lingkaran)}
+\title[OSN-K Matematika - Geometri]{Pembinaan OSN-K Matematika\\(Pertemuan 8: Lingkaran)}
 \author[Tetew]{Teosofi Hidayah Agung}
 \institute[MAN 1 Pasuruan]{MAN 1 Pasuruan}
 \titlegraphic{\includegraphics[width=0.15\textwidth]{../../man1pasuruan.png}}
@@ -116,91 +127,110 @@
     \end{frame}}
 }
 
-\section{\textit{Lingkaran Dalam dan Lingkaran Luar}}
-\begin{frame}{\insertsection}
-  Pada topik ini kita ingin mengenali dua lingkaran penting pada segitiga:
-  \begin{itemize}
-    \item \textbf{Lingkaran dalam}, yang menyinggung ketiga sisi segitiga.
-    \item \textbf{Lingkaran luar}, yang melalui ketiga titik sudut segitiga.
-  \end{itemize}
-
-  \vspace{0.4em}
-  Dua pusat yang muncul pun berbeda:
-  \begin{itemize}
-    \item titik bagi sudut $\rightarrow$ \textbf{titik pusat lingkaran dalam} $I$;
-    \item garis sumbu sisi $\rightarrow$ \textbf{titik pusat lingkaran luar} $O$.
-  \end{itemize}
-\end{frame}
-
+\section{Lingkaran}
 \subsection{Lingkaran Dalam}
 \begin{frame}{\insertsection}{\insertsubsection}
   \begin{columns}[T]
-    \begin{column}{0.56\textwidth}
-      \begin{definisi}[Lingkaran Dalam dan Titik Dalam]
+    \begin{column}{0.6\textwidth}
+      \begin{definisi}[Lingkaran Dalam]
         Pada segitiga $ABC$, \textbf{lingkaran dalam} adalah lingkaran yang menyinggung ketiga sisi segitiga. Pusatnya disebut \textbf{titik dalam} dan biasanya dinotasikan dengan $I$.
       \end{definisi}
-      \begin{definisi}
-        Titik dalam $I$ adalah titik yang berjarak sama terhadap ketiga sisi segitiga.
-      \end{definisi}
+      \begin{catatan}[Titik Dalam]
+        Titik dalam $I$ adalah titik yang berjarak sama terhadap ketiga sisi segitiga. Biasanya diperoleh dari titik perpotongan dari ketiga garis bagi sudut segitiga.
+      \end{catatan}
     \end{column}
-    \begin{column}{0.44\textwidth}
-      \centering
-      \begin{tikzpicture}[scale=0.95, every node/.style={font=\footnotesize}]
-        \coordinate (A) at (0,3.2);
-        \coordinate (B) at (-2.6,0);
-        \coordinate (C) at (3,0);
-        \coordinate (I) at (0.05,1.05);
-        \coordinate (D) at ($(B)!(I)!(C)$);
-        \coordinate (E) at ($(C)!(I)!(A)$);
-        \coordinate (F) at ($(A)!(I)!(B)$);
+    \begin{column}{0.4\textwidth}
+      \begin{center}
+        \begin{tikzpicture}[scale=0.7, every node/.style={font=\footnotesize}]
+          \coordinate (B) at (0, 0);
+          \coordinate (C) at (7, 0);
+          \coordinate (A) at (2.5, 5);
 
-        \draw[thick] (A)--(B)--(C)--cycle;
-        \draw[blue, thick] (I) circle (1.05);
-        \draw[dashed] (A)--(I);
-        \draw[dashed] (B)--(I);
-        \draw[dashed] (C)--(I);
-        \draw[dashed] (I)--(D);
+          \coordinate (BdirA) at ($(B)!1cm!(A)$);
+          \coordinate (BdirC) at ($(B)!1cm!(C)$);
+          \coordinate (Bbisect) at ($(BdirA)+(BdirC)-(B)$);
+          \path[name path=lineB] (B) -- ($(B)!10cm!(Bbisect)$);
 
-        \pic [draw, fill=green!20, angle radius=2.5mm] {right angle = I--D--C};
+          \coordinate (CdirA) at ($(C)!1cm!(A)$);
+          \coordinate (CdirB) at ($(C)!1cm!(B)$);
+          \coordinate (Cbisect) at ($(CdirA)+(CdirB)-(C)$);
+          \path[name path=lineC] (C) -- ($(C)!10cm!(Cbisect)$);
 
-        \fill (A) circle (1.2pt) node[above] {$A$};
-        \fill (B) circle (1.2pt) node[below left] {$B$};
-        \fill (C) circle (1.2pt) node[below right] {$C$};
-        \fill[red] (I) circle (1.6pt) node[right] {$I$};
-        \fill (D) circle (1.1pt) node[below] {$D$};
-        \fill (E) circle (1.1pt);
-        \fill (F) circle (1.1pt);
-      \end{tikzpicture}
+          \path [name intersections={of=lineB and lineC, by=O}];
+
+          \coordinate (T_A) at ($(B)!(O)!(C)$);
+          \coordinate (T_B) at ($(A)!(O)!(C)$);
+          \coordinate (T_C) at ($(A)!(O)!(B)$);
+
+          \path[name path=sideBC] (B) -- (C);
+          \path[name path=sideAC] (A) -- (C);
+          \path[name path=sideAB] (A) -- (B);
+
+          \path[name path=bisectA_line] (A) -- ($(A)!10cm!(O)$);
+          \path[name path=bisectB_line] (B) -- ($(B)!10cm!(O)$);
+          \path[name path=bisectC_line] (C) -- ($(C)!10cm!(O)$);
+          \path[name intersections={of=bisectA_line and sideBC, by=D}];
+          \path[name intersections={of=bisectB_line and sideAC, by=E}];
+          \path[name intersections={of=bisectC_line and sideAB, by=F}];
+
+          \draw[blue, fill=cyan!30] let \p1 = ($(O)-(D)$) in (O) circle ({veclen(\x1,\y1)});
+
+          \draw[dashed, red] (O) -- (D) node[red, midway, right] {$r$};
+          \draw[dashed, red] (O) -- (E) node[red, midway, above] {$r$};
+          \draw[dashed, red] (O) -- (F) node[red, midway, above] {$r$};
+
+          \pic[draw,brown, angle radius=0.2cm] {right angle = A--F--O};
+          \pic[draw,brown, angle radius=0.2cm] {right angle = O--D--B};
+          \pic[draw,brown, angle radius=0.2cm] {right angle = O--E--C};
+
+          \draw[thick] (A) -- (B) -- (C) -- cycle;
+
+
+          \node[above] at (A) {$A$};
+          \node[right] at (E) {$E$};
+          \node[left] at (F) {$F$};
+          \node[above] at (O) {$I$};
+          \node[below] at (D) {$D$};
+          \node[below left] at (B) {$B$};
+          \node[below right] at (C) {$C$};
+
+          \fill (F) circle (1.5pt);
+          \fill (E) circle (1.5pt);
+          \fill (D) circle (1.5pt);
+          \fill (O) circle (2pt);
+        \end{tikzpicture}
+      \end{center}
     \end{column}
   \end{columns}
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}
-    Tiga garis bagi sudut dalam segitiga berpotongan di satu titik, yaitu titik dalam $I$.
-  \end{teorema}
 
   \begin{teorema}
     Jika $r$ adalah jari-jari lingkaran dalam, $L$ luas segitiga, dan
-    \[
+    $
       s = \frac{a+b+c}{2}
-    \]
+    $
     adalah semikeliling segitiga, maka
-    \[
+    $
       L = r s.
-    \]
+    $
   \end{teorema}
 
-  \begin{catatan}
-    Rumus $L=rs$ sangat berguna saat panjang sisi segitiga diketahui, karena kita cukup mencari luas segitiga dan semikelilingnya untuk memperoleh jari-jari lingkaran dalam.
-  \end{catatan}
+  \begin{teorema}
+    Misalkan $I$ adalah titik pusat lingkaran dalam segitiga $ABC$ dan $r$ adalah jari-jari lingkaran dalamnya. Maka
+    \[
+      AI=\frac{r}{\sin\frac{A}{2}},\quad
+      BI=\frac{r}{\sin\frac{B}{2}},\quad
+      CI=\frac{r}{\sin\frac{C}{2}}.
+    \]
+  \end{teorema}
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
   \begin{contoh}
     Diketahui segitiga dengan panjang sisi $13$, $14$, dan $15$.
     Tentukan jari-jari lingkaran dalamnya.
-
     \vspace{0.6em}
     \textbf{Penyelesaian.}
     \[
@@ -211,311 +241,669 @@
       L=\sqrt{21(21-13)(21-14)(21-15)}=\sqrt{21\cdot 8\cdot 7\cdot 6}=84.
     \]
     Maka
-    \[
+    $
       r=\frac{L}{s}=\frac{84}{21}=4.
-    \]
-    Jadi jari-jari lingkaran dalam segitiga tersebut adalah
-    \[
-      \boxed{4}.
-    \]
+    $
   \end{contoh}
 \end{frame}
 
-\subsection{Lingkaran Luar}
+\subsection{Lingkaran Singgung Luar}
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{columns}[T]
-    \begin{column}{0.56\textwidth}
-      \begin{definisi}[Lingkaran Luar dan Titik Sumbu]
-        \textbf{Lingkaran luar} adalah lingkaran yang melalui ketiga titik sudut segitiga.
-        Pusatnya disebut \textbf{titik sumbu} atau \textit{circumcenter}, dan biasanya dinotasikan dengan $O$.
-      \end{definisi}
-      \begin{definisi}
-        Titik sumbu $O$ adalah titik yang berjarak sama ke ketiga titik sudut segitiga:
-        \[
-          OA = OB = OC.
-        \]
-      \end{definisi}
-    \end{column}
-    \begin{column}{0.44\textwidth}
-      \centering
-      \begin{tikzpicture}[scale=0.95, every node/.style={font=\footnotesize}]
-        \coordinate (A) at (0,3.2);
-        \coordinate (B) at (-2.2,0.2);
-        \coordinate (C) at (3,0);
-        \coordinate (O) at (0.42,0.92);
-        \coordinate (M) at ($(B)!0.5!(C)$);
-        \coordinate (N) at ($(A)!0.5!(B)$);
+  \begin{definisi}[Lingkaran Singgung Luar / \textit{Excircle}]
+    Pada segitiga $ABC$, \textbf{lingkaran singgung luar} adalah lingkaran yang menyinggung salah satu sisi segitiga dan perpanjangan kedua sisi lainnya. Pusatnya disebut \textbf{titik luar} atau \textbf{excenter} dan biasanya dinotasikan dengan $I_1, I_2, I_3$ untuk masing-masing sisi.
+  \end{definisi}
+  \begin{center}
+    \centering
+    \begin{tikzpicture}[scale=0.3, every node/.style={font=\scriptsize}]
+      \clip (-7, -4) rectangle (16, 10);
 
-        \draw[thick] (A)--(B)--(C)--cycle;
-        \draw[blue, thick] (O) circle (2.28);
-        \draw[dashed] (O)--(A);
-        \draw[dashed] (O)--(B);
-        \draw[dashed] (O)--(C);
-        \draw[dashed] ($(M)!-1.2!(O)$)--($(M)!1.2!(O)$);
-        \draw[dashed] ($(N)!-1.15!(O)$)--($(N)!1.15!(O)$);
+      \coordinate (B) at (0, 0);
+      \coordinate (C) at (7, 0);
+      \coordinate (A) at (2.5, 5);
 
-        \fill (A) circle (1.2pt) node[above] {$A$};
-        \fill (B) circle (1.2pt) node[below left] {$B$};
-        \fill (C) circle (1.2pt) node[below right] {$C$};
-        \fill[red] (O) circle (1.6pt) node[right] {$O$};
-      \end{tikzpicture}
-    \end{column}
-  \end{columns}
+      \draw[dashed, thin, cyan] ($(A)!-4cm!(B)$) -- ($(B)!-4cm!(A)$);
+      \draw[dashed, thin, cyan] ($(B)!-4cm!(C)$) -- ($(C)!-4cm!(B)$);
+      \draw[dashed, thin, cyan] ($(A)!-4cm!(C)$) -- ($(C)!-4cm!(A)$);
+
+      \coordinate (Adir) at ($(A)!1cm!(B) + (A)!1cm!(C) - (A)$);
+      \coordinate (Bdir) at ($(B)!1cm!(A) + (B)!1cm!(C) - (B)$);
+      \coordinate (Cdir) at ($(C)!1cm!(A) + (C)!1cm!(B) - (C)$);
+
+      \coordinate (Bextdir) at ($(B)!1cm!(A) + (B)!-1cm!(C) - (B)$);
+      \coordinate (Cextdir) at ($(C)!1cm!(A) + (C)!-1cm!(B) - (C)$);
+      \coordinate (Aextdir) at ($(A)!1cm!(B) + (A)!-1cm!(C) - (A)$);
+
+      \coordinate (O)  at (intersection cs:first line={(A)--(Adir)}, second line={(B)--(Bdir)});
+      \coordinate (I1) at (intersection cs:first line={(A)--(Adir)}, second line={(B)--(Bextdir)});
+      \coordinate (I2) at (intersection cs:first line={(B)--(Bdir)}, second line={(C)--(Cextdir)});
+      \coordinate (I3) at (intersection cs:first line={(C)--(Cdir)}, second line={(A)--(Aextdir)});
+
+      \coordinate (D) at ($(B)!(O)!(C)$);
+      \coordinate (E) at ($(A)!(O)!(C)$);
+      \coordinate (F) at ($(A)!(O)!(B)$);
+
+      \coordinate (T1_BC) at ($(B)!(I1)!(C)$);
+      \coordinate (T2_AC) at ($(A)!(I2)!(C)$);
+      \coordinate (T3_AB) at ($(A)!(I3)!(B)$);
+
+      \draw[thin, blue, fill=brown!15] let \p1 = ($(I1)-(T1_BC)$) in (I1) circle ({veclen(\x1,\y1)});
+      \draw[thin, blue, fill=brown!15] let \p1 = ($(I2)-(T2_AC)$) in (I2) circle ({veclen(\x1,\y1)});
+      \draw[thin, blue, fill=brown!15] let \p1 = ($(I3)-(T3_AB)$) in (I3) circle ({veclen(\x1,\y1)});
+
+      % \draw[thick, blue, fill=cyan!30] let \p1 = ($(O)-(D)$) in (O) circle ({veclen(\x1,\y1)});
+
+      \draw[green, dashed, thin] (B) -- (I1);
+      \draw[green, dashed, thin] (C) -- (I1);
+      \draw[green, dashed, thin] (A) -- (I1);
+      \draw[green, dashed, thin] (B) -- (I2);
+      \draw[green, dashed, thin] (C) -- (I2);
+      \draw[green, dashed, thin] (A) -- (I2);
+      \draw[green, dashed, thin] (B) -- (I3);
+      \draw[green, dashed, thin] (C) -- (I3);
+      \draw[green, dashed, thin] (A) -- (I3);
+
+      % \draw[dashed, red] (O) -- (D) node[red, midway, right] {$r$};
+      % \draw[dashed, red] (O) -- (E) node[red, midway, above] {$r$};
+      % \draw[dashed, red] (O) -- (F) node[red, midway, above] {$r$};
+
+      \draw[dashed, red] (I1) -- (T1_BC) node[red, midway, right] {$r_1$};
+      \draw[dashed, red] (I2) -- (T2_AC) node[red, midway, right] {$r_2$};
+      \draw[dashed, red] (I3) -- (T3_AB) node[red, midway, right] {$r_3$};
+
+      % \pic[draw,brown, angle radius=0.15cm] {right angle = A--F--O};
+      % \pic[draw,brown, angle radius=0.15cm] {right angle = O--D--B};
+      % \pic[draw,brown, angle radius=0.15cm] {right angle = O--E--C};
+
+      \pic[draw,brown, angle radius=0.15cm] {right angle = I1--T1_BC--B};
+      \pic[draw,brown, angle radius=0.15cm] {right angle = I2--T2_AC--C};
+      \pic[draw,brown, angle radius=0.15cm] {right angle = I3--T3_AB--B};
+
+      \draw[thick] (A) -- (B) -- (C) -- cycle;
+
+      \node[above] at (A) {$A$};
+      \node[below left] at (B) {$B$};
+      \node[below right] at (C) {$C$};
+      % \node[above left] at (F) {$F$};
+      % \node[right] at (E) {$E$};
+      % \node[below] at (D) {$D$};
+
+      \node[text=blue, yshift=-3pt] at (O) {$I$};
+      \node[below, text=red, yshift=-3pt] at (I1) {$I_1$};
+      \node[above right, text=red] at (I2) {$I_2$};
+      \node[above left, text=red] at (I3) {$I_3$};
+
+      \fill (F) circle (1.5pt);
+      \fill (E) circle (1.5pt);
+      \fill (D) circle (1.5pt);
+      \fill (O) circle (2pt);
+      \fill (A) circle (1.5pt);
+      \fill (B) circle (1.5pt);
+      \fill (C) circle (1.5pt);
+      \fill (I1) circle (2pt);
+      \fill (I2) circle (2pt);
+      \fill (I3) circle (2pt);
+
+    \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}
-    Tiga garis sumbu sisi segitiga berpotongan di satu titik, yaitu titik sumbu $O$.
+  \begin{teorema}[Hubungan Luas dan Semiperimeter]
+    Misalkan $L$ adalah luas segitiga, $s$ adalah setengah keliling segitiga, dan $r_1, r_2, r_3$ berturut-turut adalah jari-jari lingkaran singgung luar yang menyinggung sisi $a, b, c$. Maka berlaku:
+    \begin{align*}
+      r_1  = \frac{L}{s - a}, \quad
+      r_2  = \frac{L}{s - b}, \quad
+      r_3  = \frac{L}{s - c}
+    \end{align*}
   \end{teorema}
 
-  \begin{teorema}
-    Jika $R$ adalah jari-jari lingkaran luar segitiga $ABC$, maka berlaku
-    \[
-      \frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} = 2R.
-    \]
-    Selain itu,
-    \[
-      R = \frac{abc}{4L},
-    \]
-    dengan $L$ adalah luas segitiga.
+  \begin{lema}[Hubungan Jari-jari dengan Sudut]
+    \begin{align*}
+      r_1  = s \cdot \tan\frac{A}{2}, \quad
+      r_2  = s \cdot \tan\frac{B}{2}, \quad
+      r_3  = s \cdot \tan\frac{C}{2}
+    \end{align*}
+  \end{lema}
+\end{frame}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+  \begin{teorema}[Jarak Titik Sudut ke Excenter]
+    Misalkan $I_1, I_2, I_3$ adalah pusat lingkaran singgung luar pada masing-masing sisi. Jarak dari titik sudut segitiga ke excenter yang bersesuaian adalah:
+    \begin{align*}
+      AI_1  = 4R \cdot \cos\frac{B}{2} \cdot \cos\frac{C}{2}, \quad
+      BI_2  = 4R \cdot \cos\frac{C}{2} \cdot \cos\frac{A}{2}, \quad
+      CI_3  = 4R \cdot \cos\frac{A}{2} \cdot \cos\frac{B}{2}
+    \end{align*}
   \end{teorema}
 
-  \begin{akibat}
-    Pada segitiga siku-siku, titik sumbu terletak di titik tengah sisi miring. Karena itu jari-jari lingkaran luarnya sama dengan setengah panjang sisi miring.
-  \end{akibat}
+  \begin{lema}[Jarak Incenter ke Excenter]
+    Misalkan $I$ adalah pusat lingkaran dalam (Incenter) segitiga. Jarak dari $I$ ke masing-masing excenter adalah:
+    \begin{align*}
+      II_1  = 4R \sin\frac{A}{2}, \quad
+      II_2  = 4R \sin\frac{B}{2}, \quad
+      II_3  = 4R \sin\frac{C}{2}
+    \end{align*}
+  \end{lema}
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
   \begin{contoh}
-    Segitiga siku-siku $ABC$ memiliki kaki-kaki $6$ dan $8$, sehingga sisi miringnya $10$.
-    Tentukan jari-jari lingkaran luarnya.
-
-    \vspace{0.6em}
-    \textbf{Penyelesaian.}
-    Karena segitiga siku-siku, pusat lingkaran luar terletak di titik tengah sisi miring.
-    Maka
-    \[
-      R = \frac{10}{2}=5.
-    \]
-    Jadi jari-jari lingkaran luarnya adalah
-    \[
-      \boxed{5}.
-    \]
+    Diberikan segitiga siku-siku $ABC$ dengan sudut siku-siku di $A$. Diketahui jari-jari lingkaran dalam segitiga tersebut adalah $r = 2$, sedangkan jari-jari lingkaran singgung luar yang menyinggung sisi miring $BC$ adalah $r_a = 15$. Jika $K$ adalah keliling segitiga $ABC$ dan $L$ adalah luasnya, tentukan nilai $K^2 - 16L$.
   \end{contoh}
 \end{frame}
 
-\section{\textit{Segi Empat Tali Busur}}
-\begin{frame}{\insertsection}
-  Segi empat tali busur adalah salah satu objek geometri lingkaran yang paling sering muncul pada soal olimpiade.
-
-  \vspace{0.5em}
-  Ide yang paling sering dipakai:
-  \begin{itemize}
-    \item jumlah sudut berhadapan adalah $180^\circ$;
-    \item sudut luar sama dengan sudut dalam berhadapan;
-    \item kriteria kebalikannya juga sering dipakai untuk membuktikan empat titik sebidang lingkaran.
-  \end{itemize}
-\end{frame}
-
-\subsection{Definisi dan Sifat Dasar}
+\subsection{Garis Tangen dan Sekan}
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{columns}[T]
-    \begin{column}{0.55\textwidth}
-      \begin{definisi}[Segi Empat Tali Busur]
-        Segi empat $ABCD$ disebut \textbf{segi empat tali busur} atau \textbf{segi empat siklik} jika keempat titik $A,B,C,D$ terletak pada satu lingkaran yang sama.
-      \end{definisi}
-    \end{column}
-    \begin{column}{0.45\textwidth}
-      \centering
-      \begin{tikzpicture}[scale=1, every node/.style={font=\footnotesize}]
-        \coordinate (O) at (0,0);
-        \coordinate (A) at (110:2);
-        \coordinate (B) at (20:2);
-        \coordinate (C) at (-45:2);
-        \coordinate (D) at (-150:2);
+  \begin{definisi}[Garis Tangen]
+    Garis tangen pada lingkaran adalah garis yang menyentuh lingkaran pada tepat satu titik. Titik tersebut disebut titik tangen.
+  \end{definisi}
 
-        \draw[blue, thick] (O) circle (2);
-        \draw[thick] (A)--(B)--(C)--(D)--cycle;
+  \begin{definisi}[Garis Sekan]
+    Garis sekan pada lingkaran adalah garis yang memotong lingkaran pada dua titik yang berbeda.
+  \end{definisi}
+  \begin{center}
+    \begin{tikzpicture}[scale=0.8, every node/.style={font=\footnotesize}]
 
-        \fill (A) circle (1.2pt) node[above left] {$A$};
-        \fill (B) circle (1.2pt) node[above right] {$B$};
-        \fill (C) circle (1.2pt) node[below right] {$C$};
-        \fill (D) circle (1.2pt) node[below left] {$D$};
-      \end{tikzpicture}
-    \end{column}
-  \end{columns}
+      \coordinate (O) at (0,0);
+
+      \draw[thick] (O) circle (2);
+      \fill (O) circle (1.5pt) node[below left] {$O$};
+
+      \coordinate (T) at (-90:2);
+
+      \draw[thick, blue] (-2.5,-2) -- (2.5,-2) node[right, text=blue] {\textit{Tangent Line}};
+      \fill (T) circle (1.5pt) node[below right] {$T$};
+
+      \draw[dashed] (O) -- (T);
+
+      \draw (-0.2,-2) -- (-0.2,-1.8) -- (0,-1.8);
+
+      \coordinate (A) at (150:2);
+      \coordinate (B) at (30:2);
+
+      \draw[thick, red] ($(A)!-0.5!(B)$) -- ($(B)!-0.5!(A)$) node[right, text=red] {\textit{Secant Line}};
+      \fill (A) circle (1.5pt) node[above left] {$A$};
+      \fill (B) circle (1.5pt) node[above right] {$B$};
+    \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}[Sudut Berhadapan]
-    Jika $ABCD$ adalah segi empat tali busur, maka
+  \begin{proposisi}
+    Misalkan $\omega$ adalah lingkaran berpusat di $O$, dan misalkan $T$ adalah titik pada $\omega$. Suatu garis $\ell$ yang melalui $T$ merupakan garis singgung lingkaran $\omega$ di titik $T$ jika dan hanya jika
+    $
+      OT \perp \ell.
+    $
+  \end{proposisi}
+  \begin{teorema}[Alternate Segment Theorem]
+    Misalkan $\omega$ adalah lingkaran dan garis $\ell$ menyinggung $\omega$ di titik $A$. Jika $B$ dan $C$ adalah titik-titik pada $\omega$, maka sudut antara garis singgung $\ell$ dan tali busur $AC$ sama dengan sudut keliling yang menghadap tali busur $AC$, yaitu
     \[
-      \angle A + \angle C = 180^\circ
-      \qquad \text{dan} \qquad
-      \angle B + \angle D = 180^\circ.
+      \angle(\ell,AC)=\angle ABC.
     \]
   \end{teorema}
-
-  \begin{teorema}[Kriteria Kebalikan]
-    Jika pada segi empat $ABCD$ berlaku
-    \[
-      \angle A + \angle C = 180^\circ,
-    \]
-    maka keempat titik $A,B,C,D$ terletak pada satu lingkaran. Artinya, $ABCD$ adalah segi empat tali busur.
-  \end{teorema}
 \end{frame}
 
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}[Sudut Luar]
-    Pada segi empat tali busur, sudut luar di suatu titik sama dengan sudut dalam yang berhadapan.
-  \end{teorema}
+\subsection{Titik Kuasa}
 
-  \vspace{0.3em}
-  Misalnya, jika sisi $BC$ diperpanjang ke titik $E$, maka
-  \[
-    \angle ACE = \angle ABD
-  \]
-  dan hubungan-hubungan serupa lainnya juga berlaku.
+\begin{frame}{\insertsection}{\insertsubsection}
+
+  \begin{definisi}[Titik Kuasa]
+    Misalkan $P$ adalah sebuah titik dan $\omega$ adalah lingkaran.
+    Jika $O$ adalah pusat lingkaran $\omega$ dan $r$ adalah jari-jarinya, maka \textbf{titik kuasa} $P$ terhadap $\omega$ didefinisikan sebagai
+    \[
+      \text{Pow}_{\omega}(P) = PO^2 - r^2 = (OP-r)(OP+r).
+    \]
+  \end{definisi}
 
   \begin{catatan}
-    Dalam banyak soal, cara tercepat membuktikan suatu segi empat siklik adalah menunjukkan satu pasang sudut berhadapan saling suplementer atau satu sudut luar sama dengan sudut dalam berhadapan.
+    Tanda titik kuasa menunjukkan posisi relatif titik $P$ terhadap lingkaran $\omega$:
+    \begin{itemize}
+      \item Jika $\text{Pow}_{\omega}(P) > 0$, maka $P$ berada di luar lingkaran.
+      \item Jika $\text{Pow}_{\omega}(P) = 0$, maka $P$ berada pada lingkaran.
+      \item Jika $\text{Pow}_{\omega}(P) < 0$, maka $P$ berada di dalam lingkaran.
+    \end{itemize}
   \end{catatan}
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{contoh}
-    Misalkan $ABCD$ adalah segi empat tali busur. Jika $\angle BAD = 72^\circ$, tentukan $\angle BCD$.
+  \begin{center}
+    \begin{tikzpicture}[
+        line red/.style={thick, red!60!black},
+        dashed red/.style={dashed, thin, red!60!black},
+        font=\tiny
+      ]
+      \begin{scope}[xshift=0cm]
+        \draw (0,0) circle (1.5);
+        \fill[gray] (0,0) circle (1.5pt) node[below] {$O$};
+        \coordinate (A) at (140:1.5);
+        \coordinate (B) at (-60:1.5);
+        \coordinate (C) at (220:1.5);
+        \coordinate (D) at (50:1.5);
 
-    \vspace{0.6em}
-    \textbf{Penyelesaian.}
-    Karena $ABCD$ segi empat tali busur, sudut-sudut yang berhadapan jumlahnya $180^\circ$. Maka
-    \[
-      \angle BAD + \angle BCD = 180^\circ.
-    \]
-    Jadi
-    \[
-      \angle BCD = 180^\circ - 72^\circ = 108^\circ.
-    \]
-    Dengan demikian,
-    \[
-      \boxed{\angle BCD = 108^\circ}.
-    \]
-  \end{contoh}
-\end{frame}
+        \path[name path=AB] (A) -- (B);
+        \path[name path=CD] (C) -- (D);
+        \path[name intersections={of=AB and CD, by=P}];
 
-\section{\textit{Titik Kuasa}}
-\begin{frame}{\insertsection}
-  Titik kuasa menghubungkan panjang-panjang ruas garis yang berkaitan dengan sebuah lingkaran.
+        \draw[line red] (A) -- (B);
+        \draw[line red] (C) -- (D);
+        \draw[dashed red] (A) -- (D);
+        \draw[dashed red] (C) -- (B);
 
-  \vspace{0.5em}
-  Tiga bentuk yang paling sering dipakai adalah:
-  \begin{itemize}
-    \item dua tali busur yang berpotongan di dalam lingkaran;
-    \item dua secan dari satu titik luar;
-    \item sebuah garis singgung dan sebuah secan dari titik luar yang sama.
-  \end{itemize}
-\end{frame}
+        \fill (P) circle (1.5pt);
+        \node[left, xshift=-1mm] at (A) {$A$};
+        \node[below right] at (B) {$B$};
+        \node[below left] at (C) {$C$};
+        \node[above right] at (D) {$D$};
+        \node[left, xshift=-1mm] at (P) {$P$};
 
-\subsection{Definisi}
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{columns}[T]
-    \begin{column}{0.58\textwidth}
-      \begin{definisi}[Titik Kuasa]
-        Misalkan $P$ adalah sebuah titik dan $\omega$ adalah lingkaran.
-        Jika suatu garis melalui $P$ memotong lingkaran di $A$ dan $B$, maka \textbf{kuasa titik $P$ terhadap $\omega$} didefinisikan sebagai
-        \[
-          \operatorname{Pow}_{\omega}(P)=PA \cdot PB.
-        \]
-      \end{definisi}
+        \foreach \i in {A,B,C,D} {
+            \fill[blue] (\i) circle (1pt);
+          }
+      \end{scope}
 
-      Nilai ini tidak bergantung pada garis secan yang dipilih.
-    \end{column}
-    \begin{column}{0.42\textwidth}
-      \centering
-      \begin{tikzpicture}[scale=0.95, every node/.style={font=\footnotesize}]
+      \begin{scope}[xshift=3.7cm,rotate=-90]
+        \draw (0,0) circle (1.5);
+        \fill[gray] (0,0) circle (1.5pt) node[below] {$O$};
+        \coordinate (P) at (-2.6, 0.2);
+
+        \path[name path=sec1] (P) -- (15:3);
+        \path[name path=sec2] (P) -- (-25:3);
+        \path[name path=circ] (0,0) circle (1.5);
+
+        \path[name intersections={of=sec1 and circ, by={A,B}}];
+        \path[name intersections={of=sec2 and circ, by={C,D}}];
+
+        \draw[line red] (P) -- (A);
+        \draw[line red] (P) -- (D);
+        \draw[dashed red] (A) -- (D);
+        \draw[dashed red] (B) -- (C);
+
+        \fill (P) circle (1.5pt);
+        \node[below right] at (A) {$A$};
+        \node[above right] at (B) {$B$};
+        \node[above left] at (C) {$C$};
+        \node[below left] at (D) {$D$};
+        \node[above] at (P) {$P$};
+
+        \foreach \i in {A,B,C,D} {
+            \fill[blue] (\i) circle (1pt);
+          }
+      \end{scope}
+
+      \begin{scope}[xshift=7.4cm,rotate=-45]
         \coordinate (O) at (0,0);
-        \coordinate (P) at (3,1.7);
-        \coordinate (A) at (18:2);
-        \coordinate (B) at (155:2);
+        \draw (0,0) circle (1.5);
+        \fill[gray] (0,0) circle (1.5pt) node[below] {$O$};
+        \coordinate (A) at (105:1.5);
+        \coordinate (P) at ($(A) + (195:2.5)$);
 
-        \draw[blue, thick] (O) circle (2);
-        \draw[thick] (P)--($(P)!1.2!(B)$);
+        \path[name path=sec] (P) -- (-40:4);
+        \path[name path=circ] (0,0) circle (1.5);
+        \path[name intersections={of=sec and circ, by={C,D}}];
 
-        \fill[red] (P) circle (1.4pt) node[right] {$P$};
-        \fill (A) circle (1.2pt) node[right] {$A$};
-        \fill (B) circle (1.2pt) node[left] {$B$};
-      \end{tikzpicture}
-    \end{column}
-  \end{columns}
+        \draw[line red] (P) -- ($(P)!1.3!(A)$);
+        \draw[line red] (P) -- (D);
+        \draw[dashed red] (A) -- (D);
+        \draw[dashed red] (A) -- (C);
+        \draw[dashed, gray] (O) -- (A);
+        \pic [draw,blue, angle radius=2.5mm] {right angle = P--A--O};
+
+        \fill (P) circle (1.5pt);
+        \node[above right] at (A) {$T$};
+        \node[above left] at (C) {$A$};
+        \node[below left] at (D) {$B$};
+        \node[above left] at (P) {$P$};
+
+        \foreach \i in {A,B,C,D} {
+            \fill[blue] (\i) circle (1pt);
+          }
+      \end{scope}
+
+      \begin{scope}[xshift=11.1cm,rotate=-90]
+        \coordinate (O) at (0,0);
+        \draw (O) circle (1.5);
+        \fill[gray] (O) circle (1.5pt) node[below] {$O$};
+        \coordinate (A) at (105:1.5);
+        \coordinate (C) at (210:1.5);
+
+        \path[name path=tanA] ($(A)!-2cm!90:(O)$) -- ($(A)!3cm!90:(O)$);
+        \path[name path=tanC] ($(C)!-3cm!90:(O)$) -- ($(C)!2cm!90:(O)$);
+        \path[name intersections={of=tanA and tanC, by=P}];
+
+        \draw[line red] (P) -- ($(P)!1.2!(A)$);
+        \draw[line red] (P) -- ($(P)!1.2!(C)$);
+        \draw[dashed red] (P) -- (O);
+        \draw[dashed, gray] (A) -- (O);
+        \draw[dashed, gray] (C) -- (O);
+        \draw[dashed red] (A) -- (C);
+        \pic [draw,blue, angle radius=2.5mm] {right angle = P--A--O};
+        \pic [draw,blue, angle radius=2.5mm] {right angle = P--C--O};
+
+        \fill (P) circle (1.5pt);
+        \node[above right] at (A) {$T_1$};
+        \node[above left] at (C) {$T_2$};
+        \node[above right] at (P) {$P$};
+
+        \foreach \i in {A,B,C,D} {
+            \fill[blue] (\i) circle (1pt);
+          }
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+  \vspace*{-2cm}
+  Beberapa kasus titik kuasa dan hubungannya dengan garis singgung dan secan pada lingkaran.
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}[Dua Tali Busur Berpotongan]
-    Jika dua tali busur $AB$ dan $CD$ berpotongan di titik $P$ di dalam lingkaran, maka
+  \begin{teorema}[Dua Tali Busur Berpotongan \label{thm:power_of_point}]
+    Jika dua tali busur $AB$ dan $CD$ (atau perpanjangannya) berpotongan di titik $P$ di dalam (atau di luar) lingkaran, maka
     \[
       PA \cdot PB = PC \cdot PD.
     \]
   \end{teorema}
 
-  \begin{teorema}[Dua Secan dari Titik Luar]
-    Jika dari titik luar $P$ ditarik dua secan yang memotong lingkaran di
-    $A,B$ dan $C,D$, maka
-    \[
-      PA \cdot PB = PC \cdot PD.
-    \]
-  \end{teorema}
-\end{frame}
-
-\begin{frame}{\insertsection}{\insertsubsection}
-  \begin{teorema}[Garis Singgung dan Secan]
+  \begin{teorema}[Garis Singgung dan Secan \label{thm:tangent_secant}]
     Jika dari titik luar $P$ ditarik garis singgung $PT$ dan secan yang memotong lingkaran di $A$ dan $B$, maka
     \[
       PT^2 = PA \cdot PB.
     \]
   \end{teorema}
 
-  \begin{catatan}
-    Dalam praktik, teorema titik kuasa hampir selalu dipakai untuk menukar informasi geometri lingkaran menjadi persamaan aljabar yang sederhana.
-  \end{catatan}
+  \begin{teorema}[Dua Garis Singgung \label{thm:tangent_tangent}]
+    Jika dari titik luar $P$ ditarik dua garis singgung yang menyinggung lingkaran di $T_1$ dan $T_2$, maka
+    $
+      PT_1 = PT_2.
+    $
+  \end{teorema}
 \end{frame}
 
 \begin{frame}{\insertsection}{\insertsubsection}
   \begin{contoh}
-    Dari titik luar $P$ ditarik sebuah garis singgung $PT$ dan sebuah secan yang memotong lingkaran di $A$ dan $B$.
-    Diketahui $PA=4$ dan $PB=9$. Tentukan panjang $PT$.
+    \vspace*{0.25cm}
+    \begin{columns}[T]
+      \begin{column}{0.6\textwidth}
+        Perhatikan gambar lingkaran disamping.
+        Panjang tali busur $SR$ adalah \ldots
 
-    \vspace{0.6em}
-    \textbf{Penyelesaian.}
-    Dengan teorema garis singgung-secan,
-    \[
-      PT^2 = PA \cdot PB = 4 \cdot 9 = 36.
-    \]
-    Karena panjang ruas garis bernilai positif, maka
-    \[
-      PT = \sqrt{36} = 6.
-    \]
-    Jadi,
-    \[
-      \boxed{PT = 6}.
-    \]
+        \onslide<2->{\textbf{Solusi.}\\
+            Berdasarkan \myref{thm:power_of_point} pada perpotongan tali busur di titik $P$ dan $Q$, diperoleh
+            \begin{align*}
+              x(14 + x)        & = 240 \\
+              x^2 + 14x - 240  & = 0   \\
+              (x + 24)(x - 10) & = 0
+            \end{align*}
+            Sehingga, panjang tali busur $SR$ adalah:
+            $$SR = RP + PQ + SQ = 10 + 14 + 10 = 34$$}
+      \end{column}
+      \begin{column}{0.35\textwidth}
+        \begin{center}
+          \begin{tikzpicture}[scale=0.12, every node/.style={font=\footnotesize}]
+
+            \draw[thick] (0,0) circle (20);
+
+            \coordinate (A) at (-17.3, 10);
+            \coordinate (B) at (19.5, 4.4);
+            \draw[name path=AB] (A) -- (B);
+
+            \coordinate (C) at (-18.5, -7.6);
+            \coordinate (D) at (19.8, -2.8);
+            \draw[name path=CD] (C) -- (D);
+
+            \coordinate (R) at (6, 19);
+            \coordinate (S) at (-11, -16.7);
+            \draw[thick, name path=SR] (R) -- (S);
+
+            \path [name intersections={of=AB and SR, by=P}];
+            \path [name intersections={of=CD and SR, by=Q}];
+            \draw[thick, blue] (P) -- (Q);
+            \draw[thick, red] (A) -- (P);
+            \draw[thick, red] (Q) -- (D);
+            \draw[thick, orange] (C) -- (Q);
+            \draw[thick, orange] (P) -- (B);
+
+            \node[above left] at (A) {$A$};
+            \node[right] at (B) {$B$};
+            \node[left] at (C) {$C$};
+            \node[right] at (D) {$D$};
+            \node[above] at (R) {$R$};
+            \node[below] at (S) {$S$};
+            \node[below right] at (P) {$P$};
+            \node[below right] at (Q) {$Q$};
+
+            \node[above,red] at ($(A)!0.5!(P)$) {$12$};
+            \node[above,orange] at ($(P)!0.5!(B)$) {$20$};
+            \node[above,orange] at ($(C)!0.5!(Q)$) {$10$};
+            \node[above,red] at ($(Q)!0.5!(D)$) {$24$};
+            \node[right,blue] at ($(P)!0.5!(Q)$) {$14$};
+
+            \foreach \i in {A,B,C,D,R,S,P,Q} {
+                \fill (\i) circle (10pt);
+              }
+          \end{tikzpicture}
+        \end{center}
+      \end{column}
+    \end{columns}
   \end{contoh}
 \end{frame}
 
-\section*{\textit{Ringkasan}}
-\begin{frame}{\insertsection}
-  \begin{itemize}
-    \item \textbf{Lingkaran dalam}: pusatnya titik potong garis bagi sudut, dan luas segitiga memenuhi $L=rs$.
-    \item \textbf{Lingkaran luar}: pusatnya titik potong garis sumbu sisi, dan
-          \[
-            \frac{a}{\sin A}=\frac{b}{\sin B}=\frac{c}{\sin C}=2R.
-          \]
-    \item \textbf{Segi empat tali busur}: sudut-sudut berhadapan berjumlah $180^\circ$.
-    \item \textbf{Titik kuasa}: produk panjang ruas pada konfigurasi secan/tangen bernilai sama.
-  \end{itemize}
 
-  \vspace{0.6em}
-  Semua topik ini sangat sering muncul dalam \textit{angle chasing}, pembuktian siklik, dan pengolahan panjang ruas pada geometri olimpiade.
+\section{Segi Empat Tali Busur}
+\begin{frame}{\insertsection}
+  \begin{columns}[T]
+    \begin{column}{0.55\textwidth}
+      \begin{definisi}[Segi Empat Tali Busur]
+        Segi empat $ABCD$ disebut \textbf{segi empat tali busur} atau \textbf{segi empat siklik} jika keempat titik $A,B,C,D$ terletak pada satu lingkaran yang sama.
+      \end{definisi}
+      \begin{catatan}
+        Segi empat tali busur juga sering disebut sebagai segi empat siklis.
+      \end{catatan}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \centering
+      \begin{tikzpicture}[scale=0.7]
+
+        \coordinate (O) at (0,0);
+
+        \draw[color=blue!70!black, line width=1.5pt] (O) circle (4);
+
+        \coordinate (C) at (160:4);
+        \coordinate (B) at (210:4);
+        \coordinate (A) at (-50:4);
+        \coordinate (D) at (70:4);
+
+        \pic[draw, fill=cyan!30, angle radius=0.5cm] {angle = D--B--C};
+        \pic[draw, fill=cyan!30, angle radius=0.5cm] {angle = D--A--C};
+        \pic[draw, fill=red!30, angle radius=0.7cm] {angle = B--D--A};
+        \pic[draw, fill=red!30, angle radius=0.7cm] {angle = B--C--A};
+
+        \draw (A) -- (B) -- (C) -- (D) -- cycle;
+        \draw (A) -- (C);
+        \draw (B) -- (D);
+        \draw[dashed,gray] (O) -- (A);
+        \draw[dashed,gray] (O) -- (B);
+        \draw[dashed,gray] (O) -- (C);
+        \draw[dashed,gray] (O) -- (D);
+
+        \foreach \p/\pos in {A/below right, B/below left, C/left, D/above right, O/right} {
+            \fill[red] (\p) circle (2.5pt);
+            \node[\pos, inner sep=6pt] at (\p) {$\p$};
+          }
+
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
 \end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{teorema}[Sudut Berhadapan]
+    Jika $ABCD$ adalah segi empat tali busur, maka
+    \[
+      \angle A + \angle C = 180^\circ
+      \quad \text{dan} \quad
+      \angle ADB = \angle BCA
+    \]
+  \end{teorema}
+
+  \begin{teorema}[Kriteria Segi Empat Tali Busur]
+    Misal $ABCD$ merupakan sebuah segi empat. Ketiga pernyataan berikut ekuivalen:
+    \begin{enumerate}
+      \item $ABCD$ adalah segi empat tali busur.
+      \item $\angle ABC + \angle CDA = 180^\circ$.
+      \item $\angle ABD = \angle ACD$.
+    \end{enumerate}
+  \end{teorema}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{teorema}[Teorema Ptolemy]
+    Hasil kali panjang kedua diagonal segiempat tali busur sama dengan jumlah hasil kali panjang sisi-sisi yang saling berhadapan.
+    \begin{align*}
+      p \cdot q & = a \cdot c + b \cdot d
+    \end{align*}
+  \end{teorema}
+
+  \begin{teorema}[Teorema Kedua Ptolemy / Rasio Diagonal]
+    Jika $p$ dan $q$ adalah panjang diagonal $AC$ dan $BD$ pada segi empat tali busur $ABCD$, maka
+    \begin{align*}
+      p & = \sqrt{\frac{(ac + bd)(ad + bc)}{ab + cd}} \\
+      q & = \sqrt{\frac{(ac + bd)(ab + cd)}{ad + bc}}
+    \end{align*}
+  \end{teorema}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{teorema}[Formula Brahmagupta]
+    Luas ($K$) dari sebuah segiempat tali busur dapat dihitung menggunakan panjang keempat sisinya dengan rumus:
+    \begin{align*}
+      K & = \sqrt{(s - a)(s - b)(s - c)(s - d)}
+    \end{align*}
+  \end{teorema}
+
+  \begin{teorema}[Formula Jari-jari Luar Parameshvara]
+    Jika $R$ adalah jari-jari lingkaran luar (circumradius) yang mengelilingi segiempat tali busur tersebut, maka panjang $R$ dapat dirumuskan sebagai:
+    \begin{align*}
+      R & = \frac{1}{4} \sqrt{\frac{(ab + cd)(ac + bd)(ad + bc)}{(s - a)(s - b)(s - c)(s - d)}}
+    \end{align*}
+  \end{teorema}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{contoh}
+    Diberikan segiempat konveks $ABCD$ di mana diagonalnya berpotongan tegak lurus. Jika $\angle BAC = 30^\circ$, $\angle DAC = 15^\circ$, dan $\angle BCA = 75^\circ$, tentukan besar $\angle DCA$.\label{cth:segi4_siklik}
+
+    \begin{center}
+      \begin{tikzpicture}[scale=1,rotate=90]
+
+        \coordinate (A) at (0,3.5);
+        \coordinate (P) at (0,0);
+        \coordinate (B) at (2,0);
+        \coordinate (D) at (-1,0);
+        \coordinate (C) at (0,-1.5);
+
+        \draw[thick] (A) -- (B) -- (C) -- (D) -- cycle;
+        \draw[thick] (A) -- (C);
+        \draw[thick] (B) -- (D);
+
+        \node[left] at (A) {$A$};
+        \node[above] at (B) {$B$};
+        \node[right] at (C) {$C$};
+        \node[below] at (D) {$D$};
+
+        \draw[thick, blue] (0.2,0) -- (0.2,0.2) -- (0,0.2);
+        \draw[thick, blue] (-0.2,0) -- (-0.2,0.2) -- (0,0.2);
+      \end{tikzpicture}
+    \end{center}
+  \end{contoh}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{exampleblock}{\myref{cth:segi4_siklik}}
+    \textbf{Solusi:}\\
+    Perhatikan bahwa
+    $
+      \angle ADB=\angle ACB=75^\circ.
+    $
+    Karena dua sudut tersebut menghadap tali busur yang sama, yaitu $AB$, maka $A,B,C,D$ terletak pada satu lingkaran ($ABCD$ siklik).Sehingga
+    \[
+      \angle DCA=\angle DBA.
+    \]
+    Karena $\angle DBA=90^\circ-\angle BAC=90^\circ-30^\circ=60^\circ$, maka
+    \[
+      \angle DCA=60^\circ.
+    \]
+  \end{exampleblock}
+\end{frame}
+
+\section*{\textit{Problem}}
+\begin{frame}{\insertsection}
+  \begin{latihan}[OSK 2023]
+    Diberikan lingkaran $\Omega$ dan $AB$ suatu tali busur dari $\Omega$.
+    Lingkaran $\omega_1$ menyinggung $\Omega$ secara internal dan menyinggung
+    $AB$ pada titik tengahnya. Lingkaran $\omega_2$ menyinggung $\Omega$
+    secara internal, menyinggung $\omega_1$ secara eksternal, dan juga
+    menyinggung $AB$.
+
+    \begin{center}
+      \begin{tikzpicture}[scale=0.6, every node/.style={font=\small}]
+        % Lingkaran besar
+        \coordinate (O) at (0,0);
+        \def\R{3}
+        \draw[thick] (O) circle (\R);
+
+        % Titik A dan B pada tali busur
+        \coordinate (A) at (-2.828,-1);
+        \coordinate (B) at ( 2.828,-1);
+
+        % Tali busur AB
+        \draw[thick] (A) -- (B);
+
+        % Lingkaran omega_1
+        \coordinate (Oone) at (0,1);
+        \def\rone{2}
+        \draw[thick] (Oone) circle (\rone);
+
+        % Lingkaran omega_2
+        \coordinate (Otwo) at (-2.309,-0.333);
+        \def\rtwo{0.667}
+        \draw[thick] (Otwo) circle (\rtwo);
+
+        % Label titik
+        \node[below left] at (A) {$A$};
+        \node[below right] at (B) {$B$};
+
+        % Label lingkaran
+        \node at (-0.6,1.95) {$\omega_1$};
+        \node at (-2.55,-0.25) {$\omega_2$};
+        \node at (2.1,-2.7) {$\Omega$};
+      \end{tikzpicture}
+    \end{center}
+    Jika jari-jari $\omega_1$ adalah $35$ dan jari-jari $\omega_2$
+    adalah $7$, maka panjang $AB$ adalah \ldots.
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}[OSK 2022]
+    Pada suatu lingkaran dengan jari-jari $r$, terdapat segiempat tali busur $ABCD$ dengan $AB=8$ dan $CD=5$. Sisi $AB$ dan $DC$ diperpanjang di luar lingkaran dan berpotongan di luar lingkaran di titik $P$. Jika $\angle APD=60^\circ$ dan $BP=6$, maka nilai $r^2$ adalah \ldots.
+  \end{latihan}
+  \begin{latihan}[OSK 2018]
+    Diberikan segitiga $ABC$ dan lingkaran $\Gamma$ yang berdiameter $AB$. Lingkaran $\Omega$ memotong sisi $AC$ dan $BC$ berturut-turut di $D$ dan $E$. Jika $AB = 30$, $AD = \frac{1}{3}AC$, dan $BE = \frac{1}{4}BC$, maka luas segitiga $ABC$ adalah ...
+  \end{latihan}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{latihan}[OSK 2018]
+    Pada segitiga $ABC$, panjang sisi $BC$ adalah 1 satuan. Ada tepat satu titik $D$ pada sisi $BC$ yang memenuhi $|DA|^2 = |DB| \cdot |DC|$. Jika $k$ menyatakan keliling $ABC$, jumlah semua $k$ yang mungkin adalah \dots
+  \end{latihan}
+  \begin{latihan}[OSK 2016]
+    Diberikan empat titik pada satu lingkaran $\Gamma$ dalam urutan $A,B,C,D$.
+    Sinar garis $AB$ dan $DC$ berpotongan di $E$, dan sinar garis $AD$ dan $BC$
+    berpotongan di $F$. Misalkan $EP$ dan $FQ$ menyinggung lingkaran $\Gamma$
+    berturut-turut di $P$ dan $Q$. Misalkan pula bahwa $EP=60$ dan $FQ=63$,
+    maka panjang $EF$ adalah ....
+  \end{latihan}
+\end{frame}
+
 
 \begin{frame}{Referensi}
   \begin{thebibliography}{9}
@@ -534,5 +922,6 @@
 
   \end{thebibliography}
 \end{frame}
+
 
 \end{document}
