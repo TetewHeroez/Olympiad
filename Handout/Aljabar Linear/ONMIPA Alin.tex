@@ -1,0 +1,199 @@
+% !TeX program = pdflatex
+% beautybook — decorative book class with coloured theorem boxes and a
+% two-tone chapter-heading treatment, adapted from the CTAN/GitHub
+% BeautyLaTeX/latex-template package.
+%
+% Simplified from upstream: the upstream ships four cover styles (cn/en/
+% enfig/birkar) and a 36MB set of photographic chapter-corner decorations
+% (bookstyle/titleimages/, Pixabay-style stock photos with no separate
+% licence grant of their own). This starter uses ONLY the text-only "en"
+% cover (no background photo). This handout uses the supplied Klinik AA
+% logo (bookstyle/LogoAA.png), with a soft white glow on the cover.
+% Local modification (2026-10-29): Indonesian labels and a unified Klinik AA
+% palette; see beautybook.cls for template attribution and licensing.
+\documentclass[lang=id,12pt]{beautybook}
+\RequirePackage[utf8]{inputenc}
+% Arial untuk judul materi; times sesudahnya menjaga font sans desain sampul.
+\RequirePackage[scaled]{uarial}
+\RequirePackage{times}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{microtype}
+\RequirePackage[round]{natbib}
+
+% Font isi: Computer Modern (cmr), sama dengan Tugas 1 Analisis Fungsional.
+% Paket times tetap menyediakan font desain lama (Times/Helvetica/Courier).
+% OT1 memakai Computer Modern vektor yang tersedia di MiKTeX ini;
+% versi T1/EC di instalasi ini berupa bitmap dan tidak mendukung font expansion.
+\renewcommand{\encodingdefault}{OT1}
+\renewcommand{\rmdefault}{cmr}
+\newcommand{\handoutdesignfont}{%
+    \renewcommand{\encodingdefault}{T1}% Pertahankan encoding desain lama.
+    \renewcommand{\rmdefault}{ptm}% Lokal pada kelompok judul/sampul.
+    \fontencoding{T1}\fontfamily{ptm}\selectfont}
+
+% Arial seperti Karakterisasi Dual.tex, khusus judul subbab dan label teorema.
+% Pengaturan lokal menjaga paragraf isi tetap memakai Computer Modern.
+\newcommand{\handoutheadingfont}{%
+    \renewcommand{\encodingdefault}{T1}%
+    \renewcommand{\rmdefault}{ua1}% Untuk normalfont pada nama teorema.
+    \renewcommand{\sfdefault}{ua1}% Untuk label pita Subbab.
+    \fontencoding{T1}\fontfamily{ua1}\selectfont}
+\newcommand{\handouttitlefont}[1]{%
+    \ifboolexpr{test {\ifstrequal{#1}{part}} or test {\ifstrequal{#1}{chapter}}}
+        {\handoutdesignfont}{\handoutheadingfont\bfseries}}
+
+% Pertahankan tata letak judul bawaan, termasuk judul tanpa nomor.
+\makeatletter
+\patchcmd{\ttl@select}{\begingroup}{\begingroup\handouttitlefont{#1}}{}%
+    {\PackageError{handout}{Gagal mengatur font judul}{Periksa versi titlesec.}}
+% Label/nama teorema, contoh, latihan, bukti, dan solusi memakai Arial.
+\patchcmd{\@begintheorem}{\the\thm@headfont}%
+    {\the\thm@headfont\handoutheadingfont}{}%
+    {\PackageError{handout}{Gagal mengatur font label teorema}{Periksa versi amsthm.}}
+\makeatother
+% Judul paragraf dicetak tertunda oleh titlesec, jadi simpan font di formatnya.
+% Kelas memakai opsi explicit: judul harus ditulis sebagai #1, tanpa varian *.
+\titleformat{\paragraph}[runin]
+    {\normalfont\handoutheadingfont\normalsize\bfseries}{\theparagraph}{1em}{#1}
+\titleformat{\subparagraph}[runin]
+    {\normalfont\handoutheadingfont\normalsize\bfseries}{\thesubparagraph}{1em}{#1}
+\AddToHook{cmd/outermarginpagemark/before}{\begingroup\handoutdesignfont}
+\AddToHook{cmd/outermarginpagemark/after}{\endgroup}
+
+% Readability adjustments for the A4 handout: the class default is too
+% compressed for sustained reading.
+\geometry{left=2.2cm,right=2.2cm,top=1.5cm,bottom=2.2cm}
+\AtBeginDocument{\fontsize{13}{18}\selectfont}
+\linespread{1.06}
+\setlength{\parskip}{0.35em}
+% Pertahankan jarak vertikal alami saat kotak/rumus berpindah halaman.
+\raggedbottom
+
+% Klinik AA: exact HEX values from Logo Guideline.pdf, page 1.
+\definecolor{AAIndigo}{HTML}{383277}
+\definecolor{AASky}{HTML}{96D2F3}
+\definecolor{AARed}{HTML}{E21E34}
+\definecolor{AADarkRed}{HTML}{AB1F23}
+% Shared palette for the cover, page decorations, theorem boxes, and links.
+\colorlet{AAInk}{AAIndigo!65!black}
+\colorlet{AABlue}{AAIndigo!55!AASky}
+\colorlet{coverbgcolor}{white}
+\colorlet{coverfgcolor}{AAInk}
+\colorlet{coverbar}{AASky}
+\colorlet{bottomcolor}{AAIndigo}
+\colorlet{nuanbai}{AASky!6!white}
+\colorlet{bg}{AASky!28!white}
+\colorlet{fg}{AAIndigo}
+\colorlet{outermarginbgcolor}{bg}
+\colorlet{outermarginfgcolor}{fg}
+% Gradasi latar judul subbab: abu-abu kebiruan menuju biru langit.
+\colorlet{sectiontitlebgstart}{AAIndigo!12!gray!26!white}
+\colorlet{sectiontitlebgend}{AASky!35!white}
+\colorlet{captioncolor}{fg}
+\colorlet{framegolden}{fg}
+\colorlet{framegray}{AASky!12!white}
+\hypersetup{linkcolor=AAIndigo,anchorcolor=AAIndigo,urlcolor=AABlue,citecolor=AAIndigo}
+\coverstyle={
+    cover-choose=en,
+}
+% Muat simbol AMS melalui preset yang dipakai pada versi stabil sebelumnya.
+% newtxmath tidak dimuat dalam proyek ini; jangan memuat kedua preset sekaligus.
+\mathstyle={
+    math-font=plain,
+}
+
+\mynewtheorem{
+    defi={\textbf{Definisi}}[section]{interior style={left color=ReD!8,right color=ReD!5!CyaN!50}, borderline west={1.5mm}{0mm}{ReD}},
+    thm={\textbf{Teorema}}[section]{interior style={left color=CyaN!80!black!20,right color=CyaN!80!black!15!CyaN!50}, borderline west={1.5mm}{0mm}{CyaN!80!black}},
+    lem={\textbf{Lema}}[section]{interior style={left color=BluE!8,right color=BluE!5!CyaN!50}, borderline west={1.5mm}{0mm}{BluE}},
+    prop={\textbf{Proposisi}}[section]{interior style={left color=OrangE!8,right color=OrangE!5!CyaN!50}, borderline west={1.5mm}{0mm}{OrangE}},
+    exam={\textbf{Contoh}}[chapter]{interior style={left color=DarkGreen!8,right color=DarkGreen!5!CyaN!50}, borderline west={1.5mm}{0mm}{DarkGreen}},
+}
+\newtheorem*{remark}{\textbf{Catatan}}
+% Names used by \autoref for the custom theorem counters.
+\renewcommand{\defiautorefname}{Definisi}
+\renewcommand{\thmautorefname}{Teorema}
+\renewcommand{\lemautorefname}{Lema}
+\renewcommand{\propautorefname}{Proposisi}
+\renewcommand{\examautorefname}{Contoh}
+% Hyperref perlu nomor subbab/bab dalam tujuan tautan penghitung yang direset.
+\def\theHdefi{\theHsection.\arabic{defi}}
+\def\theHthm{\theHsection.\arabic{thm}}
+\def\theHlem{\theHsection.\arabic{lem}}
+\def\theHprop{\theHsection.\arabic{prop}}
+\def\theHexam{\theHchapter.\arabic{exam}}
+
+
+% Materi lokal (2026-10-31): Determinan, mengikuti Bab 2 Fuzhen Zhang.
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Mat}{\mathrm{M}}
+\newcommand{\sumber}[1]{\par\smallskip{\normalfont\small\color{AABlue}Sumber: #1.}\par}
+\newcommand{\ide}[1]{\par\smallskip\noindent\textbf{Ide utama.} #1\par\smallskip}
+\theoremstyle{definition}
+\newtheorem{latihan}{Latihan}[chapter]
+\theoremstyle{plain}
+\providecommand{\latihanautorefname}{Latihan}
+\def\theHlatihan{\theHchapter.\arabic{latihan}}
+\renewcommand{\bibsection}{\chapter*{\bibname}\addcontentsline{toc}{chapter}{\bibname}}
+% Ganti menjadi \pembahasanfalse untuk membagikan soal tanpa solusi.
+\newif\ifpembahasan
+\pembahasantrue
+\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{2}
+\hypersetup{pdftitle={Handout ONMIPA-PT: Aljabar Linear -- Determinan},
+    pdfauthor={Teosofi Hidayah Agung}}
+\begin{document}
+\thispagestyle{empty}
+\title{Handout ONMIPA-PT Bidang Matematika}
+\subtitle{Aljabar Linear}
+\edition{Edisi 2026}
+\bookseries{}
+\author{Teosofi Hidayah Agung}
+\pressname{Klinik AA}
+\presslogo{bookstyle/LogoAA.png}
+\hypersetup{pageanchor=false}
+{\handoutdesignfont\makecover}
+
+\makeatletter
+\oddoutermargin{\sffamily \leftmark}
+\evenoutermargin{\sffamily\@title}
+\chapimage{bookstyle/LogoAA.png}
+\makeatother
+
+
+\frontmatter
+\pagenumbering{Roman}
+\hypersetup{pageanchor=true}
+
+{\thispagestyle{empty}
+    \chapter*{Kata Pengantar}
+    \addcontentsline{toc}{chapter}{Kata Pengantar}
+    \input{Bab/00-kata-pengantar.tex}
+
+    \hfill
+    \begin{tabular}{lr}
+         & Teosofi Hidayah Agung \\
+         & 2026
+    \end{tabular}
+    \clearpage}
+
+\thispagestyle{empty}
+{\normalfont\tableofcontents}\let\cleardoublepage\clearpage
+
+\mainmatter
+\pagenumbering{arabic}
+\partabstract{\hspace*{2em} Identitas dan teknik determinan untuk
+    persiapan ONMIPA, mengikuti pembahasan dan soal-soal Bab 2
+    \emph{Linear Algebra: Challenging Problems for Students}
+    karya Fuzhen Zhang.}
+\part{Matriks}
+\input{Bab/01-Matriks/01-Determinan}
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}
