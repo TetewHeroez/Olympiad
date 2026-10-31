@@ -210,6 +210,7 @@
 \newcommand\pressname[1]{\def\@pressname{#1}}
 \newcommand\coverimage[1]{\def\@coverimage{#1}}
 \newcommand\chapimage[1]{\def\@chapimage{#1}}
+\chapimage{} % Empty means no illustration in chapter headers.
 
 \makeatother
 % /* -------------------------------------------------------------------------- */
@@ -364,7 +365,8 @@ fuzzy shadow={0.4mm}{-0.4mm}{0mm}{0.2mm}{fill=white!40!gray},%下
         \node[above left,text=outermarginfgcolor,font=\sc\fontsize{22pt}{22pt}\selectfont,align=center] (contents name) at ([shift={(0cm,-4.45cm)}]current page.north east) {\begin{varwidth}{.7\linewidth}\baselineskip=2ex  #1\end{varwidth}};
         \end{pgfonlayer}
         \begin{pgfonlayer}{bottom}
-        \node[right] (image) at ([shift={(4cm,-1.6cm)}]current page.north west) {\includegraphics[width=3cm]{\@chapimage}};
+        \ifdefempty{\@chapimage}{}{%
+        \node[right] (image) at ([shift={(4cm,-1.6cm)}]current page.north west) {\includegraphics[width=3cm]{\@chapimage}};}
         \end{pgfonlayer}
         \else
         \begin{pgfonlayer}{top}
@@ -378,7 +380,8 @@ fuzzy shadow={0.4mm}{-0.4mm}{0mm}{0.2mm}{fill=white!40!gray},%下
           \node[above right,text=outermarginfgcolor,font=\sc\fontsize{22pt}{22pt}\selectfont,align=center] (contents name) at ([shift={(0cm,-4.45cm)}]current page.north west) {\begin{varwidth}{.7\linewidth}\baselineskip=2ex  #1\end{varwidth}};
           \end{pgfonlayer}
       \begin{pgfonlayer}{background}
-      \node[left] (image) at ([shift={(-4cm,-1.6cm)}]current page.north east) {\includegraphics[width=3cm]{\@chapimage}};
+      \ifdefempty{\@chapimage}{}{%
+      \node[left] (image) at ([shift={(-4cm,-1.6cm)}]current page.north east) {\includegraphics[width=3cm]{\@chapimage}};}
       \end{pgfonlayer}
         \fi
         \path[fill=outermarginbgcolor]node[append after command={
@@ -402,14 +405,16 @@ fuzzy shadow={0.4mm}{-0.4mm}{0mm}{0.2mm}{fill=white!40!gray},%下
         \node[above left,text=outermarginfgcolor,font=\sc\fontsize{25pt}{25pt}\selectfont,align=center] (contents name) at ([shift={(0cm,-4.45cm)}]current page.north east) {\begin{varwidth}{.7\linewidth}\baselineskip=25pt  #1\end{varwidth}};
         \end{pgfonlayer}
         \begin{pgfonlayer}{bottom}
-        \node[right] (image) at ([shift={(1.5cm,-1.8cm)}]current page.north west) {\includegraphics[width=3cm]{\@chapimage}};
+        \ifdefempty{\@chapimage}{}{%
+        \node[right] (image) at ([shift={(1.5cm,-1.8cm)}]current page.north west) {\includegraphics[width=3cm]{\@chapimage}};}
         \end{pgfonlayer}
         \else
         \begin{pgfonlayer}{top}
           \node[above right,text=outermarginfgcolor,font=\sc\fontsize{25pt}{25pt}\selectfont,align=center] (contents name) at ([shift={(0cm,-4.45cm)}]current page.north west) {\begin{varwidth}{.7\linewidth}\baselineskip=25pt  #1\end{varwidth}};
           \end{pgfonlayer}
       \begin{pgfonlayer}{background}
-      \node[left] (image) at ([shift={(-1.5cm,-1.8cm)}]current page.north east) {\includegraphics[width=3cm]{\@chapimage}};
+      \ifdefempty{\@chapimage}{}{%
+      \node[left] (image) at ([shift={(-1.5cm,-1.8cm)}]current page.north east) {\includegraphics[width=3cm]{\@chapimage}};}
       \end{pgfonlayer}
         \fi
         \path[fill=outermarginbgcolor]node[append after command={
@@ -1271,6 +1276,19 @@ anchor=west,rounded corners=3pt,font=\bfseries\normalsize] at ([xshift=0cm,yshif
       \fill[color=#1,opacity=0.5] ([xshift=-1.35*\tlen+\Rad,yshift=-5pt]frame.south east) to[out=180,in=90,looseness=0.7] ([xshift=-1.35*\tlen-0.5*\Rad]frame.south east) coordinate (NWl)--([xshift=2*\rad]NWl) to[out=-90,in=-180,looseness=0.7] ([xshift=-1.35*\tlen+\Rad,yshift=-5pt]frame.south east)--cycle;
     \end{pgfonlayer}
 	}
+% Ribbon style arguments: displayed name, colour, existing counter.
+\tcbset{handout ribbon/.style n args={3}{
+    enhanced,breakable,detach title,frame hidden,boxrule=0pt,arc=1mm,
+    colback=#2!5!white,drop fuzzy shadow,
+    top=8mm,bottom=7mm,left=4mm,right=4mm,
+    before skip=12pt,after skip=12pt,fontupper=\normalfont,step={#3},
+    overlay unbroken={\begingroup\handoutheadingfont
+        \my@lemma@overlay@unbroken{#1~\csname the#3\endcsname}{#2}\endgroup},
+    overlay first={\begingroup\handoutheadingfont
+        \my@lemma@overlay@first{#1~\csname the#3\endcsname}{#2}\endgroup},
+    overlay middle={},
+    overlay last={\my@lemma@overlay@last{#2}},
+}}
 \makeatother
 %%
 

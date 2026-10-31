@@ -1,0 +1,937 @@
+% !TeX root = ../../ONMIPA Alin.tex
+% Sumber utama: Zhang (2009), Bab 4, Definitions and Facts serta soal-soal terpilih.
+\chapter{Matriks Khusus}
+\label{ch:matriks-khusus}
+
+Syarat seperti $A^*=A$, $A^2=A$, atau $A^*A=I$ membatasi bentuk
+spektrum, kernel, dan hasil kali suatu matriks. Dalam soal ONMIPA,
+mengenali struktur tersebut sering menghindarkan perhitungan
+determinan atau eliminasi yang panjang.
+Pembahasan memanfaatkan dekomposisi pada
+\autoref{ch:dekomposisi} sebagai alat pembuktian.
+
+Kecuali disebutkan lain, matriks persegi berukuran $n$ dan berentri
+kompleks. Notasi $A^*=\overline A^{\,T}$ berarti transpose konjugat,
+sedangkan $\|x\|^2=x^*x$. Untuk matriks real, $A^*=A^T$.
+
+\section{Hermitian, Skew-Hermitian, dan Normal}
+\label{khusus:hermitian}
+
+\begin{definisi}[][Tiga struktur terhadap transpose konjugat][khusus:def-hermitian]
+    Matriks $A$ disebut \emph{Hermitian} jika $A^*=A$,
+    \emph{skew-Hermitian} jika $A^*=-A$, dan \emph{normal} jika
+    $A^*A=AA^*$. Matriks Hermitian real adalah matriks simetris.
+\end{definisi}
+
+Matriks Hermitian dan skew-Hermitian selalu normal.
+Teorema spektral (\autoref{eigen:teorema-spektral}) menjamin bahwa
+matriks normal dapat didiagonalkan dengan perubahan basis uniter.
+Jika $Av=\lambda v$ dan $v\ne0$, maka
+$v^*Av=\lambda\|v\|^2$. Karena $v^*Av$ real untuk $A$ Hermitian,
+nilai eigennya real. Untuk $A$ skew-Hermitian, $iA$ Hermitian,
+sehingga nilai eigen $A$ murni imajiner, termasuk kemungkinan nol.
+
+\begin{prop}[Bagian Hermitian dari suatu matriks]
+    \label{khusus:bagian-hermitian}
+    Setiap matriks kompleks mempunyai representasi unik
+    \[
+        A=H+iK,\qquad H=\frac{A+A^*}{2},\qquad
+        K=\frac{A-A^*}{2i},
+    \]
+    dengan $H,K$ Hermitian. Matriks $A$ normal jika dan hanya jika
+    $HK=KH$.
+\end{prop}
+\begin{proof}
+    Rumus langsung memberi $H^*=H$, $K^*=K$, dan $A=H+iK$.
+    Jika representasi demikian ada, $A^*=H-iK$ menentukan $H,K$
+    secara unik. Selanjutnya,
+    \[
+        A^*A-AA^*=2i(HK-KH),
+    \]
+    sehingga normalitas ekuivalen dengan komutativitas kedua bagian.
+\end{proof}
+
+\begin{prop}[Kernel dan bayangan matriks normal]
+    \label{khusus:kernel-normal}
+    Jika $A$ normal, maka
+    \[
+        \ker A=\ker A^*,\qquad
+        \operatorname{Im}A=(\ker A)^\perp,\qquad
+        \C^n=\ker A\oplus\operatorname{Im}A.
+    \]
+    Jumlah langsung terakhir bersifat ortogonal.
+\end{prop}
+\begin{proof}
+    Normalitas memberi
+    $\|Ax\|^2=x^*A^*Ax=x^*AA^*x=\|A^*x\|^2$.
+    Jadi kedua kernel sama. Untuk matriks apa pun,
+    $y\perp\operatorname{Im}A$ ekuivalen dengan $A^*y=0$;
+    akibatnya $\operatorname{Im}A=(\ker A^*)^\perp$.
+\end{proof}
+
+Perlu dibedakan: $A^T=A$ pada matriks kompleks tidak menjamin
+$A^*=A$. Contohnya,
+$A=\begin{pmatrix}1&i\\i&-1\end{pmatrix}$ simetris dan memenuhi
+$A^2=0$, tetapi $A\ne0$. Matriks normal dengan semua nilai eigen nol
+justru harus nol, sebab diagonal pada dekomposisi uniternya nol.
+
+\section{Matriks Semidefinit dan Definit Positif}
+\label{khusus:positif}
+
+\begin{definisi}[][Positivitas dan urutan Loewner][khusus:def-positif]
+    Matriks Hermitian $A$ disebut \emph{semidefinit positif}, ditulis
+    $A\succeq0$, jika $x^*Ax\ge0$ untuk setiap $x$.
+    Matriks ini disebut \emph{definit positif}, ditulis $A\succ0$,
+    jika $x^*Ax>0$ untuk setiap $x\ne0$.
+    Untuk $A,B$ Hermitian, $A\succeq B$ berarti $A-B\succeq0$.
+\end{definisi}
+
+Urutan ini ditentukan oleh bentuk kuadrat, bukan oleh perbandingan
+tiap entri. Matriks $\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$
+semidefinit positif walaupun mempunyai entri negatif. Sebaliknya,
+$\begin{pmatrix}1&2\\2&1\end{pmatrix}$ berentri positif tetapi
+mempunyai nilai eigen $-1$.
+
+\begin{teorema}[][Kriteria spektral dan representasi Gram][khusus:gram]
+    Untuk $A$ Hermitian, pernyataan berikut ekuivalen:
+    \begin{enumerate}[label=(\roman*),nosep]
+        \item $A\succeq0$;
+        \item semua nilai eigen $A$ tak negatif;
+        \item $A=B^*B$ untuk suatu matriks $B$.
+    \end{enumerate}
+    Selain itu, $A\succ0$ jika dan hanya jika semua nilai eigennya
+    positif. Jika $A=B^*B$, maka $\ker A=\ker B$ dan
+    $\rank A=\rank B$.
+\end{teorema}
+\begin{proof}
+    Tuliskan $A=UDU^*$ dengan $U$ uniter dan $D$ diagonal real.
+    Dengan $y=U^*x$, bentuk kuadratnya menjadi
+    $x^*Ax=\sum_i d_i|y_i|^2$. Ini memberi kriteria spektral.
+    Jika $d_i\ge0$, pilih
+    $B=\diag(\sqrt{d_1},\ldots,\sqrt{d_n})U^*$.
+    Sebaliknya, $A=B^*B$ memberi $x^*Ax=\|Bx\|^2\ge0$.
+    Kesamaan kernel mengikuti identitas yang sama; kesamaan rank
+    mengikuti teorema rank--nulitas.
+\end{proof}
+
+Untuk setiap $X$, kongruensi mempertahankan semidefinit positif:
+$A\succeq0$ mengakibatkan $X^*AX\succeq0$.
+Jika $X$ persegi dan invertibel, implikasinya dua arah, juga untuk
+definit positif. Ini berbeda dari keserupaan $X^{-1}AX$:
+kongruensi mengubah koordinat suatu bentuk kuadrat.
+
+\begin{teorema}[][Kriteria minor utama][khusus:sylvester]
+    Misalkan $A$ Hermitian.
+    \begin{enumerate}[label=(\roman*),nosep]
+        \item $A\succ0$ jika dan hanya jika semua minor utama
+            terdepan $\det A[1\!:\!k,1\!:\!k]$ positif,
+            untuk $k=1,\ldots,n$.
+        \item $A\succeq0$ jika dan hanya jika semua minor utama
+            $\det A[S,S]$ tak negatif, untuk setiap himpunan indeks
+            tak kosong $S\subseteq\{1,\ldots,n\}$.
+    \end{enumerate}
+\end{teorema}
+\begin{proof}
+    Setiap submatriks utama dari matriks definit positif juga
+    definit positif, sehingga determinannya positif. Untuk arah
+    sebaliknya pada (i), gunakan induksi pada ukuran. Tulis
+    \[
+        A=\begin{pmatrix}B&b\\b^*&c\end{pmatrix}.
+    \]
+    Hipotesis induksi memberi $B\succ0$. Karena
+    $\det A=\det B\,(c-b^*B^{-1}b)>0$, komplemen Schurnya positif.
+    Melengkapi kuadrat memberi
+    \[
+        \begin{pmatrix}x\\t\end{pmatrix}^{\!*}
+        A\begin{pmatrix}x\\t\end{pmatrix}
+        =(x+B^{-1}bt)^*B(x+B^{-1}bt)
+          +(c-b^*B^{-1}b)|t|^2,
+    \]
+    yang positif untuk $(x,t)\ne0$.
+
+    Untuk (ii), arah perlu kembali mengikuti positivitas submatriks
+    utama dan kriteria spektral. Sebaliknya, ambil $\varepsilon>0$.
+    Setiap minor utama terdepan dari $A+\varepsilon I$ adalah
+    \[
+        \det\bigl(A[1\!:\!k,1\!:\!k]+\varepsilon I_k\bigr)
+        =\sum_{S\subseteq\{1,\ldots,k\}}
+           \varepsilon^{k-|S|}\det A[S,S],
+    \]
+    dengan determinan kosong bernilai $1$; lihat
+    \autoref{det:principal}. Semua suku tak negatif dan suku
+    $\varepsilon^k$ positif. Bagian (i) memberi $A+\varepsilon I\succ0$.
+    Untuk setiap $x$, lewatkan $\varepsilon\to0$ pada
+    $x^*(A+\varepsilon I)x\ge0$ untuk memperoleh $x^*Ax\ge0$.
+\end{proof}
+
+Pada kasus semidefinit, memeriksa minor utama terdepan saja
+\emph{tidak cukup}. Matriks $\diag(0,-1)$ mempunyai kedua minor
+terdepan nol, tetapi tidak semidefinit positif.
+Minor utama berukuran dua juga memberi batas yang sering berguna:
+\[
+    A\succeq0\quad\Longrightarrow\quad
+    a_{ii}\ge0,\qquad |a_{ij}|^2\le a_{ii}a_{jj}.
+\]
+Jadi, jika $a_{ii}=0$, seluruh baris dan kolom ke-$i$ bernilai nol.
+
+\begin{prop}[Positivitas matriks blok]
+    \label{khusus:schur}
+    Misalkan $A\succ0$, $C=C^*$, dan
+    $M=\begin{pmatrix}A&B\\B^*&C\end{pmatrix}$. Maka
+    \[
+        M\succeq0\iff C-B^*A^{-1}B\succeq0,
+        \qquad
+        M\succ0\iff C-B^*A^{-1}B\succ0.
+    \]
+\end{prop}
+\begin{proof}
+    Untuk $T=\begin{pmatrix}I&-A^{-1}B\\0&I\end{pmatrix}$,
+    perkalian langsung memberi
+    $T^*MT=\diag(A,C-B^*A^{-1}B)$.
+    Gunakan invariansi positivitas di bawah kongruensi invertibel.
+\end{proof}
+
+\begin{exam}[Parameter pada matriks simetris]
+    Tentukan semua $\lambda\in\R$ agar
+    \[
+        A_\lambda=\begin{pmatrix}
+            1&\lambda&-1\\\lambda&4&2\\-1&2&4
+        \end{pmatrix}
+    \]
+    definit positif atau semidefinit positif. Tentukan pula ranknya
+    pada batas interval semidefinit positif.
+\end{exam}
+\begin{solution}
+    Minor utama terdepan berturut-turut adalah
+    $1$, $4-\lambda^2$, dan $4(1-\lambda)(\lambda+2)$.
+    Ketiganya positif tepat ketika $-2<\lambda<1$.
+    Untuk semidefinit positif, minor utama berukuran dua yang lain
+    adalah $3$ dan $12$; minor berukuran satu semuanya positif.
+    Jadi syarat lengkapnya
+    $4-\lambda^2\ge0$ dan $(1-\lambda)(\lambda+2)\ge0$,
+    yaitu $-2\le\lambda\le1$.
+    Pada kedua ujung interval, determinan nol tetapi minor utama
+    pada indeks $\{1,3\}$ bernilai $3$; ranknya tepat dua.
+    Di bagian dalam interval, ranknya tiga.
+\end{solution}
+
+\section{Akar Kuadrat, Hasil Kali, dan Urutan Matriks}
+\label{khusus:akar}
+
+\begin{teorema}[][Akar kuadrat semidefinit positif][khusus:akar-unik]
+    Setiap $A\succeq0$ mempunyai tepat satu akar kuadrat
+    semidefinit positif, ditulis $A^{1/2}$. Jika
+    $A=U\diag(\lambda_1,\ldots,\lambda_n)U^*$, maka
+    \[
+        A^{1/2}=U\diag(\sqrt{\lambda_1},\ldots,\sqrt{\lambda_n})U^*.
+    \]
+    Jika $A\succ0$, akar tersebut invertibel; inversnya ditulis $A^{-1/2}$.
+\end{teorema}
+\begin{proof}
+    Rumus spektral membuktikan keberadaan. Jika $X\succeq0$ dan
+    $X^2=A$, maka $XA=AX$. Jadi setiap ruang eigen $E_\lambda(A)$
+    invarian terhadap $X$. Pembatasan $X$ pada ruang ini Hermitian
+    semidefinit positif dan kuadratnya $\lambda I$.
+    Semua nilai eigennya harus $\sqrt\lambda$, sehingga pembatasan
+    tersebut tepat $\sqrt\lambda I$. Ini menentukan $X$ secara unik.
+\end{proof}
+
+Syarat semidefinit positif diperlukan untuk keunikan: $I$ dan $-I$
+keduanya mempunyai kuadrat $I$, tetapi hanya $I$ yang semidefinit positif.
+
+\begin{exam}[Akar kuadrat tanpa menghitung vektor eigen satu per satu]
+    Misalkan $J_n$ matriks yang seluruh entrinya $1$, dan
+    $A=\alpha I+\beta J_n$, dengan $\alpha,\beta\in\R$.
+    Tentukan syarat $A\succeq0$ dan rumus $A^{1/2}$.
+\end{exam}
+\begin{solution}
+    Proyektor ortogonal $P=J_n/n$ dan $Q=I-P$ memenuhi
+    $PQ=0$. Untuk $n\ge2$,
+    $A=\alpha Q+(\alpha+n\beta)P$, sehingga syaratnya
+    $\alpha\ge0$ dan $\alpha+n\beta\ge0$. Pada kondisi itu,
+    \[
+        A^{1/2}=\sqrt\alpha\left(I-\frac{J_n}{n}\right)
+           +\sqrt{\alpha+n\beta}\,\frac{J_n}{n}.
+    \]
+    Untuk $n=1$, cukup $\alpha+\beta\ge0$ dan akar skalarnya.
+\end{solution}
+
+\begin{prop}[Kapan hasil kali tetap positif?]
+    \label{khusus:produk-positif}
+    Jika $A,B\succeq0$, maka
+    \[
+        AB\succeq0\iff AB=BA.
+    \]
+    Jika $A\succ0$ dan $B$ Hermitian, $AB$ dapat didiagonalkan
+    dan seluruh nilai eigennya real.
+\end{prop}
+\begin{proof}
+    Jika $AB\succeq0$, matriks itu Hermitian, maka
+    $AB=(AB)^*=BA$. Sebaliknya, dua matriks Hermitian yang komutatif
+    mempunyai basis eigen ortonormal bersama: diagonalkan $B$
+    pada tiap ruang eigen $A$ yang invarian terhadap $B$.
+    Diagonal $AB$ dalam basis itu berupa hasil kali bilangan tak negatif.
+
+    Jika $A\succ0$, gunakan keserupaan
+    \[
+        A^{-1/2}(AB)A^{1/2}=A^{1/2}BA^{1/2},
+    \]
+    yang ruas kanannya Hermitian. Terapkan teorema spektral.
+\end{proof}
+
+Jika hanya $A\succeq0$ dan $B$ Hermitian, nilai eigen $AB$ masih real:
+$AB$ dan $A^{1/2}BA^{1/2}$ mempunyai polinom karakteristik sama,
+melalui identitas hasil kali pada \autoref{eigen:abba}.
+Namun, diagonalisasi dapat gagal. Ambil
+$A=\diag(1,0)$ dan $B=\begin{pmatrix}0&1\\1&0\end{pmatrix}$;
+hasil kalinya $\begin{pmatrix}0&1\\0&0\end{pmatrix}$ tidak dapat didiagonalkan.
+
+\begin{teorema}[][Invers membalik urutan][khusus:invers-order]
+    Jika $A\succeq B\succ0$, maka $B^{-1}\succeq A^{-1}$.
+\end{teorema}
+\begin{proof}
+    Matriks $C=B^{-1/2}AB^{-1/2}$ memenuhi $C\succeq I$.
+    Nilai eigennya minimal $1$, sehingga $C^{-1}\preceq I$.
+    Karena $C^{-1}=B^{1/2}A^{-1}B^{1/2}$, kongruensi dengan
+    $B^{-1/2}$ menghasilkan $A^{-1}\preceq B^{-1}$.
+\end{proof}
+
+\section{Ketaksamaan Trace}
+\label{khusus:trace}
+
+Identitas $\tr(XY)=\tr(YX)$ membolehkan pergeseran siklik pada
+trace suatu hasil kali, tetapi tidak membolehkan pertukaran faktor
+secara sembarang. Sebagai contoh, $\tr(ABAB)$ tidak selalu sama
+dengan $\tr(A^2B^2)$.
+
+\begin{teorema}[][Cauchy--Schwarz untuk matriks][khusus:cs]
+    Untuk $A,B\in\Mat_{m\times n}(\C)$, berlaku
+    \[
+        |\tr(A^*B)|^2\le \tr(A^*A)\tr(B^*B).
+    \]
+    Kesamaan berlaku tepat ketika $A,B$ bergantung linear.
+    Khusus untuk $H$ Hermitian dengan rank $r>0$,
+    \[
+        (\tr H)^2\le r\tr(H^2).
+    \]
+    Pada ketaksamaan terakhir, kesamaan berlaku tepat ketika semua
+    nilai eigen tak nol $H$ sama.
+\end{teorema}
+\begin{proof}
+    Karena $\tr(A^*B)=\sum_{i,j}\overline{a_{ij}}b_{ij}$,
+    ketaksamaan pertama beserta kasus kesamaannya adalah
+    Cauchy--Schwarz untuk vektor seluruh entri kedua matriks.
+    Untuk yang kedua, terapkan Cauchy--Schwarz pada $r$ nilai eigen
+    real tak nol $\lambda_1,\ldots,\lambda_r$:
+    $(\sum_i\lambda_i)^2\le r\sum_i\lambda_i^2$.
+\end{proof}
+
+\begin{teorema}[][Trace mendeteksi komutativitas][khusus:trace-komutator]
+    Untuk $A,B$ Hermitian,
+    \[
+        \tr(A^2B^2)-\tr\bigl((AB)^2\bigr)
+        =\tfrac12\tr\bigl((AB-BA)^*(AB-BA)\bigr)\ge0.
+    \]
+    Kesamaan berlaku jika dan hanya jika $AB=BA$.
+\end{teorema}
+\begin{proof}
+    Tuliskan $C=AB-BA$ sehingga $C^*=BA-AB$.
+    Ekspansi $C^*C$ diikuti pergeseran siklik dalam trace memberi
+    \[
+        \tr(C^*C)=2\tr(A^2B^2)-2\tr(ABAB).
+    \]
+    Karena $\tr(C^*C)=\sum_{i,j}|c_{ij}|^2$, ruas kanan real
+    tak negatif dan nol tepat ketika $C=0$.
+\end{proof}
+
+\begin{prop}[Trace hasil kali matriks semidefinit positif]
+    \label{khusus:trace-positif}
+    Jika $A,B\succeq0$, maka $\tr(AB)\ge0$, dengan kesamaan
+    jika dan hanya jika $AB=0$.
+\end{prop}
+\begin{proof}
+    Ambil $C=B^{1/2}A^{1/2}$. Pergeseran siklik memberi
+    $\tr(AB)=\tr(C^*C)\ge0$. Jika trace nol, $C=0$ dan
+    $BA=B^{1/2}CA^{1/2}=0$, sehingga $AB=(BA)^*=0$.
+    Arah sebaliknya langsung.
+\end{proof}
+
+\begin{exam}[Hasil kali Hermitian tidak harus berspektrum real]
+    Ambil $A=\diag(1,-1)$ dan
+    $B=\begin{pmatrix}0&1\\1&0\end{pmatrix}$.
+    Keduanya Hermitian, tetapi
+    $AB=\begin{pmatrix}0&1\\-1&0\end{pmatrix}$ mempunyai nilai eigen
+    $i,-i$. Di sini
+    \[
+        \tr\bigl((AB)^2\bigr)=-2,\qquad \tr(A^2B^2)=2.
+    \]
+    Jadi hipotesis semidefinit positif pada salah satu faktor
+    dalam hasil tentang spektrum real tidak boleh dihilangkan.
+\end{exam}
+
+\section{Determinan dan Hasil Kali Hadamard}
+\label{khusus:hadamard}
+
+\begin{teorema}[][Ketaksamaan determinan Hadamard][khusus:det-hadamard]
+    Jika $A=(a_{ij})\succeq0$, maka
+    \[
+        0\le\det A\le\prod_{i=1}^n a_{ii}.
+    \]
+    Kesamaan pada batas atas berlaku tepat ketika $A$ diagonal
+    atau sedikitnya satu entri diagonalnya nol.
+\end{teorema}
+\begin{proof}
+    Jika $a_{ii}=0$, baris dan kolom ke-$i$ nol, sehingga
+    determinan dan hasil kali diagonal sama-sama nol.
+    Sekarang anggap semua entri diagonal positif dan gunakan induksi.
+    Tulis $A=\begin{pmatrix}a&b^*\\b&C\end{pmatrix}$.
+    Komplemen Schur $S=C-bb^*/a$ semidefinit positif; maka
+    \[
+        \det A=a\det S
+        \le a\prod_j\left(c_{jj}-\frac{|b_j|^2}{a}\right)
+        \le a\prod_j c_{jj}.
+    \]
+    Semua faktor di tengah tak negatif. Jika batas atas tercapai,
+    nilainya positif, sehingga $b_j=0$ untuk setiap $j$.
+    Selanjutnya hipotesis induksi memaksa $C$ diagonal.
+    Sebaliknya, matriks diagonal jelas mencapai kesamaan.
+\end{proof}
+
+Untuk matriks persegi $B$ dengan kolom $b_1,\ldots,b_n$, terapkan
+teorema ini pada $B^*B$ untuk memperoleh
+\[
+    |\det B|\le\prod_{j=1}^n\|b_j\|.
+\]
+Jika semua kolom tak nol, kesamaan berlaku tepat ketika
+kolom-kolomnya saling ortogonal. Jika ada kolom nol, kedua ruas nol.
+Sementara itu, rata-rata aritmetika--geometri pada nilai eigen
+$A\succeq0$ menghasilkan
+\[
+    \det A\le\left(\frac{\tr A}{n}\right)^n,
+\]
+dengan kesamaan tepat ketika $A$ kelipatan skalar dari $I$.
+
+\begin{definisi}[][Hasil kali Hadamard][khusus:def-hadamard]
+    Untuk dua matriks berukuran sama, hasil kali Hadamard adalah
+    $A\circ B=(a_{ij}b_{ij})$, yaitu perkalian entri yang seletak.
+    Operasi ini berbeda dari perkalian matriks biasa $AB$.
+\end{definisi}
+
+\begin{teorema}[][Teorema hasil kali Schur][khusus:schur-product]
+    Jika $A,B\succeq0$, maka $A\circ B\succeq0$.
+    Jika keduanya definit positif, $A\circ B$ juga definit positif.
+\end{teorema}
+\begin{proof}
+    Dari dekomposisi spektral, tulis $A=\sum_k u_ku_k^*$,
+    dengan akar nilai eigen dimasukkan ke dalam $u_k$.
+    Jika $D_k=\diag(u_k)$, perkalian entri memberi
+    \[
+        A\circ B=\sum_k D_kBD_k^*\succeq0.
+    \]
+    Untuk kasus definit positif, pilih $\alpha>0$ sehingga
+    $A\succeq\alpha I$. Bagian pertama memberi
+    \[
+        A\circ B\succeq\alpha(I\circ B)
+           =\alpha\diag(b_{11},\ldots,b_{nn})\succ0.
+    \]
+\end{proof}
+
+\begin{exam}[Dua faktor singular, hasil kali Hadamard invertibel]
+    Matriks
+    \[
+        A=\begin{pmatrix}1&1&0\\1&1&0\\0&0&1\end{pmatrix},\qquad
+        B=\begin{pmatrix}1&0&1\\0&1&0\\1&0&1\end{pmatrix}
+    \]
+    keduanya semidefinit positif dan mempunyai rank dua. Hal ini
+    terlihat dari
+    $x^*Ax=|x_1+x_2|^2+|x_3|^2$ dan
+    $x^*Bx=|x_1+x_3|^2+|x_2|^2$.
+    Namun, $A\circ B=I_3$. Jadi singularitas kedua faktor tidak
+    memaksa singularitas hasil kali Hadamard.
+\end{exam}
+
+\section{Matriks Uniter dan Ortogonal}
+\label{khusus:uniter}
+
+\begin{definisi}[][Uniter dan ortogonal][khusus:def-uniter]
+    Matriks kompleks $U$ disebut \emph{uniter} jika $U^*U=I$.
+    Matriks real $Q$ disebut \emph{ortogonal} jika $Q^TQ=I$.
+    Kolom-kolom matriks ini membentuk basis ortonormal.
+\end{definisi}
+
+Untuk matriks persegi, $U^*U=I$ ekuivalen dengan $U^{-1}=U^*$
+dan $UU^*=I$. Jadi $U$ normal, mempertahankan hasil kali dalam,
+dan $\|Ux\|=\|x\|$. Jika $Uv=\lambda v$, persamaan norma memberi
+$|\lambda|=1$.
+Sebaliknya, matriks \emph{normal} yang seluruh nilai eigennya
+bermodulus satu pasti uniter, melalui dekomposisi spektral.
+Tanpa normalitas, kesimpulan ini gagal: $\begin{pmatrix}1&1\\0&1\end{pmatrix}$
+mempunyai nilai eigen $1,1$ tetapi tidak uniter.
+
+\begin{prop}[Spektrum matriks ortogonal real]
+    \label{khusus:ortogonal-real}
+    Nilai eigen matriks ortogonal real terdiri atas $1$, $-1$,
+    dan pasangan kompleks konjugat bermodulus satu.
+    Determinannya $1$ atau $-1$. Untuk ukuran ganjil, $Q$
+    mempunyai nilai eigen yang sama dengan $\det Q$.
+\end{prop}
+\begin{proof}
+    Polinom karakteristik real memasangkan setiap nilai eigen
+    tak real dengan konjugatnya. Hasil kali setiap pasangan adalah
+    $|\lambda|^2=1$; nilai eigen real yang bermodulus satu hanya
+    $1$ dan $-1$. Pada ukuran ganjil, banyaknya nilai eigen real
+    ganjil. Jika determinan $-1$, ada sejumlah ganjil nilai eigen
+    $-1$. Jika determinan $1$, banyaknya $-1$ genap, sehingga
+    sedikitnya ada satu nilai eigen $1$.
+\end{proof}
+
+\begin{exam}[Refleksi terhadap komplemen ortogonal suatu vektor]
+    Untuk $0\ne u\in\C^n$, definisikan
+    \[
+        P=\frac{uu^*}{u^*u},\qquad H=I-2P.
+    \]
+    Karena $P^*=P$ dan $P^2=P$, diperoleh $H^*=H$ serta $H^2=I$.
+    Jadi $H$ Hermitian sekaligus uniter. Pada $\operatorname{span}\{u\}$
+    matriks $H$ bekerja sebagai $-I$, sedangkan pada $u^\perp$
+    sebagai $I$. Akibatnya $\det H=-1$ dan $\tr H=n-2$.
+    Untuk $u$ real, ini merupakan matriks refleksi ortogonal.
+\end{exam}
+
+\section{Idempoten, Involusi, dan Nilpoten}
+\label{khusus:polinomial}
+
+\begin{teorema}[][Struktur idempoten dan involusi][khusus:idempoten-involusi]
+    Untuk matriks di atas $\R$ atau $\C$:
+    \begin{enumerate}[label=(\roman*),nosep]
+        \item Jika $E^2=E$, maka $E$ serupa dengan $\diag(I_r,0)$,
+            dengan $r=\rank E=\tr E$.
+        \item Jika $Q^2=I$, maka $Q$ serupa dengan $\diag(I_p,-I_q)$,
+            dengan $p+q=n$. Akibatnya
+            \[
+                \tr Q=p-q,\quad\det Q=(-1)^q,\quad
+                \rank(Q-I)=q,\quad\rank(Q+I)=p.
+            \]
+        \item Hubungan $Q=2E-I$ merupakan korespondensi antara
+            idempoten dan involusi.
+    \end{enumerate}
+\end{teorema}
+\begin{proof}
+    Polinom $t(t-1)$ dan $(t-1)(t+1)$ mempunyai akar-akar berbeda.
+    Kriteria polinom minimal pada \autoref{eigen:squarefree}
+    menjamin diagonalisasi, dengan nilai eigen masing-masing
+    di dalam $\{0,1\}$ dan $\{-1,1\}$. Rumus-rumus mengikuti
+    bentuk diagonalnya. Terakhir,
+    $(2E-I)^2=I$ ekuivalen dengan $E^2=E$.
+\end{proof}
+
+Secara geometris, idempoten memproyeksikan ruang pada
+$\operatorname{Im}E$ sepanjang $\ker E$, seperti dalam
+\autoref{rank:idempoten}. Proyeksi ini ortogonal tepat ketika
+$E$ Hermitian. Jika Hermitian, eigenspace untuk $0$ dan $1$
+ortogonal. Sebaliknya, proyeksi ortogonal mempunyai matriks
+$\diag(I_r,0)$ dalam suatu basis ortonormal, sehingga Hermitian.
+
+\begin{prop}[Faktorisasi rank penuh suatu idempoten]
+    \label{khusus:faktor-idempoten}
+    Misalkan $E=UV$, dengan $U\in\Mat_{n\times r}(\F)$
+    berank kolom penuh dan $V\in\Mat_{r\times n}(\F)$ berank
+    baris penuh, $r>0$. Maka $E^2=E$ jika dan hanya jika $VU=I_r$.
+\end{prop}
+\begin{proof}
+    Persamaan $E^2=E$ berarti $U(VU-I_r)V=0$.
+    Kalikan dengan invers kiri $U$ dan invers kanan $V$ untuk
+    memperoleh $VU=I_r$. Arah sebaliknya langsung dari perkalian.
+\end{proof}
+
+\begin{definisi}[][Matriks nilpoten][khusus:def-nilpoten]
+    Matriks $N$ disebut \emph{nilpoten} jika $N^k=0$ untuk suatu
+    $k\ge1$. Bilangan terkecil demikian disebut indeks nilpotensi.
+\end{definisi}
+
+Matriks kompleks nilpoten tepat ketika seluruh nilai eigennya nol.
+Arah perlu mengikuti pemetaan spektral; arah cukup mengikuti
+Cayley--Hamilton, sebab $\chi_N(t)=t^n$ mengakibatkan $N^n=0$.
+Jadi indeks nilpotensi paling besar $n$.
+Jika $N^k=0$, identitas geometri hingga memberi
+\[
+    (I-N)^{-1}=I+N+\cdots+N^{k-1}.
+\]
+Matriks normal yang nilpoten harus nol. Matriks nilpoten tak nol
+karena itu selalu gagal menjadi normal dan gagal didiagonalkan.
+
+\begin{prop}[Jumlah nilpoten yang komutatif]
+    \label{khusus:nilpoten-komutatif}
+    Jika $A^p=0$, $B^q=0$, dan $AB=BA$, maka
+    $(A+B)^{p+q-1}=0$ dan $AB$ nilpoten.
+\end{prop}
+\begin{proof}
+    Pada ekspansi binomial, setiap suku $A^jB^{p+q-1-j}$ nol:
+    jika $j<p$, pangkat $B$ sedikitnya $q$.
+    Selain itu, $(AB)^p=A^pB^p=0$.
+\end{proof}
+
+Tanpa komutativitas, keduanya dapat gagal. Untuk matriks satuan
+$A=E_{12}$ dan $B=E_{21}$ berukuran dua, $A^2=B^2=0$,
+tetapi $(A+B)^2=I$ dan $AB=\diag(1,0)$.
+
+\section{Matriks Permutasi}
+\label{khusus:permutasi}
+
+\begin{definisi}[][Matriks suatu permutasi][khusus:def-permutasi]
+    Untuk permutasi $\pi$ pada $\{1,\ldots,n\}$, matriks permutasi
+    $P_\pi$ ditentukan oleh $P_\pi e_j=e_{\pi(j)}$.
+    Dengan konvensi ini, kolom ke-$j$ adalah $e_{\pi(j)}$.
+\end{definisi}
+
+Matriks ini mempunyai tepat satu entri $1$ di tiap baris dan kolom;
+entri lainnya nol. Selain itu,
+$P_\pi P_\sigma=P_{\pi\circ\sigma}$ dan
+$P_\pi^{-1}=P_{\pi^{-1}}=P_\pi^T$, sehingga matriks permutasi ortogonal.
+
+\begin{teorema}[][Siklus menentukan spektrum dan rank][khusus:siklus]
+    Misalkan siklus-siklus saling lepas dari $\pi$ mempunyai panjang
+    $\ell_1,\ldots,\ell_c$, termasuk siklus panjang satu. Maka
+    \begin{align*}
+        \chi_{P_\pi}(t)&=\prod_{j=1}^c(t^{\ell_j}-1),&
+        \det P_\pi&=(-1)^{n-c},\\
+        \nul(P_\pi-I)&=c,&\rank(P_\pi-I)&=n-c.
+    \end{align*}
+    Untuk setiap bilangan bulat $k\ge1$,
+    \[
+        \nul(P_\pi^k-I)=\sum_{j=1}^c\gcd(\ell_j,k),
+        \qquad
+        \tr(P_\pi^k)=\sum_{\ell_j\mid k}\ell_j.
+    \]
+    Pangkat positif terkecil yang menghasilkan $I$ adalah
+    $\operatorname{KPK}(\ell_1,\ldots,\ell_c)$.
+\end{teorema}
+\begin{proof}
+    Susun basis standar mengikuti urutan siklus. Matriksnya menjadi
+    diagonal blok, dengan satu blok per siklus. Pada siklus panjang
+    $\ell$, vektor $e,P e,\ldots,P^{\ell-1}e$ membentuk basis dan
+    $P^\ell e=e$. Jadi polinom minimal blok itu berderajat $\ell$
+    dan sama dengan $t^\ell-1$, sekaligus polinom karakteristiknya.
+    Determinan blok adalah $(-1)^{\ell-1}$.
+
+    Persamaan $Px=x$ memaksa koordinat konstan pada setiap siklus,
+    sehingga kernel $P-I$ berdimensi banyaknya siklus.
+    Pangkat ke-$k$ dari satu siklus panjang $\ell$ terpecah menjadi
+    $\gcd(\ell,k)$ siklus; ini memberi rumus nulitas untuk $P^k-I$.
+    Trace menghitung titik tetap: satu siklus menyumbang seluruh
+    $\ell$ titiknya tepat ketika $\ell\mid k$, dan tidak menyumbang
+    titik tetap pada kasus lainnya. Rumus orde mengikuti syarat
+    bahwa setiap panjang siklus harus membagi pangkat tersebut.
+\end{proof}
+
+Semua matriks permutasi dapat didiagonalkan di atas $\C$ karena
+normal. Di atas $\R$, diagonalisasi mungkin tepat ketika setiap
+siklus mempunyai panjang satu atau dua. Siklus dengan panjang
+lebih dari dua menyumbang akar satuan yang tak real.
+
+\begin{exam}[Spektrum dari siklus permutasi]
+    Misalkan $P=P_\pi$ untuk permutasi
+    \[
+        \pi=(1\ 2\ 3\ 4)(5\ 6\ 7)(8\ 9).
+    \]
+    Tentukan orde dan determinan $P$, serta rank $P-I$ dan $P^6-I$.
+\end{exam}
+\begin{solution}
+    Panjang siklusnya adalah $4,3,2$. Jadi orde $P$ adalah
+    $\operatorname{KPK}(4,3,2)=12$. Selain itu,
+    \[
+        \det P=(-1)^{9-3}=1,\qquad \rank(P-I)=9-3=6.
+    \]
+    Selanjutnya
+    \[
+        \nul(P^6-I)=\gcd(4,6)+\gcd(3,6)+\gcd(2,6)=7,
+    \]
+    sehingga $\rank(P^6-I)=2$.
+    Polinom karakteristiknya $(t^4-1)(t^3-1)(t^2-1)$:
+    multiplisitas $1$ adalah tiga, sedangkan multiplisitas $-1$
+    adalah dua. Semua titik pada siklus panjang tiga dan dua
+    tetap di bawah $\pi^6$, sehingga $\tr(P^6)=5$.
+\end{solution}
+
+\section{Latihan Pilihan}
+\label{khusus:latihan}
+
+Pada soal-soal kompleks, tanda $*$ selalu berarti transpose
+konjugat. Gunakan struktur matriks sebelum mencoba menghitung
+polinom karakteristiknya secara langsung.
+
+\begin{latihan}\label{khusus:lat-trace-hermitian}
+    Buktikan bahwa untuk $A\in\Mat_n(\C)$,
+    \[
+        A=A^*\iff\tr(A^2)=\tr(A^*A).
+    \]
+    Apakah cukup mengganti syarat di kanan dengan
+    $\tr(A^2)\ge0$?
+\end{latihan}
+
+\begin{latihan}\label{khusus:lat-nonhermitian}
+    Berikan matriks real $2\times2$ yang semua nilai eigennya
+    positif dan semua minor utamanya positif, tetapi bentuk
+    kuadrat $x^TAx$ bernilai negatif untuk suatu $x\ne0$.
+    Jelaskan hipotesis mana pada kriteria minor utama yang gagal.
+\end{latihan}
+
+\begin{latihan}\label{khusus:lat-komutan-kuadrat}
+    Misalkan $A\succeq0$ dan $B$ matriks berukuran sama.
+    Buktikan $A^2B=BA^2$ jika dan hanya jika $AB=BA$.
+    Apakah kesimpulan masih berlaku jika $A$ hanya Hermitian?
+\end{latihan}
+
+\begin{latihan}\label{khusus:lat-order-kuadrat}
+    Tentukan apakah $A\succeq B\succeq0$ selalu mengakibatkan
+    $A^2\succeq B^2$. Jika tidak, berikan contoh $2\times2$ dan
+    buktikan bahwa implikasinya benar apabila $AB=BA$.
+\end{latihan}
+
+\begin{latihan}\label{khusus:lat-variasi}
+    Jika $A\succ0$ dan $x\in\C^n$, buktikan
+    \[
+        x^*A^{-1}x=
+        \max_{y\in\C^n}\bigl(2\operatorname{Re}(x^*y)-y^*Ay\bigr).
+    \]
+    Tentukan vektor yang mencapai maksimum dan gunakan hasilnya
+    untuk membuktikan kembali bahwa invers membalik urutan.
+\end{latihan}
+
+\begin{latihan}\label{khusus:lat-blok}
+    Untuk $A,B$ Hermitian, buktikan
+    \[
+        \begin{pmatrix}A&B\\B&A\end{pmatrix}\succeq0
+        \iff A+B\succeq0\ \text{dan}\ A-B\succeq0.
+    \]
+    Apakah $AB=BA$ diperlukan? Tentukan pula rank matriks blok
+    tersebut dalam bentuk rank $A+B$ dan $A-B$.
+\end{latihan}
+
+\begin{latihan}\label{khusus:lat-rank-hadamard}
+    Untuk $A,B\in\Mat_{m\times n}(\C)$, buktikan
+    \[
+        \rank(A\circ B)\le\rank A\,\rank B.
+    \]
+    Perlihatkan bahwa batas ini dapat tercapai dengan
+    $\rank A=\rank B=2$ pada matriks berukuran $4\times4$.
+\end{latihan}
+
+\begin{latihan}\label{khusus:lat-lyapunov}
+    Misalkan $A\succ0$ dan $B\succeq0$.
+    Buktikan bahwa $AX+XA=B$ mempunyai tepat satu solusi $X$,
+    dan solusi itu semidefinit positif.
+    Jika $B\succ0$, buktikan $X\succ0$.
+\end{latihan}
+
+\begin{latihan}\label{khusus:lat-involusi}
+    Misalkan $Q^2=I$. Buktikan bahwa pernyataan berikut ekuivalen:
+    $Q$ normal, $Q$ Hermitian, dan $Q$ uniter.
+    Berikan contoh involusi real $2\times2$ yang tidak normal.
+\end{latihan}
+
+\begin{latihan}\label{khusus:lat-idempoten}
+    Misalkan $E^2=E$, $F^2=F$, dan $EF=FE$. Buktikan bahwa
+    $EF$ dan $G=E+F-EF$ idempoten, dengan
+    \[
+        \operatorname{Im}(EF)=\operatorname{Im}E\cap\operatorname{Im}F,
+        \qquad
+        \operatorname{Im}G=\operatorname{Im}E+\operatorname{Im}F.
+    \]
+    Turunkan kedua identitas
+    \begin{align*}
+        \rank E+\rank F&=\rank(EF)+\rank G,\\
+        \rank(E-F)&=\rank E+\rank F-2\rank(EF).
+    \end{align*}
+\end{latihan}
+
+\begin{latihan}\label{khusus:lat-siklik}
+    Misalkan $P$ matriks permutasi untuk siklus $(1\ 2\ \cdots\ n)$,
+    dengan $n\ge2$, dan $J_n$ matriks yang seluruh entrinya $1$.
+    Buktikan
+    \[
+        I+P+\cdots+P^{n-1}=J_n.
+    \]
+    Tentukan rank jumlah tersebut, rank $I-P$, dan buktikan
+    bahwa $I,P,\ldots,P^{n-1}$ bebas linear dalam ruang matriks.
+\end{latihan}
+
+\begin{latihan}\label{khusus:lat-determinan-trace}
+    Misalkan $A\succeq0$ dan $\tr A=s$, dengan $s\ge0$ tetap.
+    Tentukan nilai maksimum $\det A$ beserta semua kasus kesamaannya.
+    Selanjutnya, jika seluruh entri diagonal $A$ adalah $1$,
+    buktikan $\det A\le1$ dan tentukan kapan kesamaan terjadi.
+\end{latihan}
+
+\ifpembahasan
+\section{Pembahasan Latihan}
+\label{khusus:pembahasan}
+
+\subsection*{Latihan \ref{khusus:lat-trace-hermitian}: pisahkan bagian Hermitian}
+Tuliskan $A=H+iK$ dengan $H,K$ Hermitian.
+Karena $\tr(HK)=\tr(KH)$ real, diperoleh
+\[
+    \tr(A^2)=\tr(H^2)-\tr(K^2)+2i\tr(HK),\qquad
+    \tr(A^*A)=\tr(H^2)+\tr(K^2).
+\]
+Kesamaan bagian real memaksa $\tr(K^2)=0$.
+Karena $K=K^*$, ini sama dengan $\sum_{i,j}|k_{ij}|^2=0$,
+sehingga $K=0$ dan $A$ Hermitian. Arah sebaliknya langsung.
+Syarat $\tr(A^2)\ge0$ saja tidak cukup: matriks
+$A=\begin{pmatrix}1&1\\0&1\end{pmatrix}$ mempunyai
+$\tr(A^2)=2$ tetapi tidak Hermitian.
+
+\subsection*{Latihan \ref{khusus:lat-nonhermitian}: spektrum positif belum cukup}
+Ambil $A=\begin{pmatrix}1&3\\0&1\end{pmatrix}$.
+Kedua nilai eigennya $1$, kedua minor utama berukuran satu
+bernilai $1$, dan determinannya $1$.
+Namun, untuk $x=(1,-1)^T$, diperoleh $x^TAx=-1$.
+Hipotesis simetris, atau Hermitian pada kasus kompleks, tidak
+terpenuhi. Kriteria minor utama tidak dapat dipakai tanpa hipotesis itu.
+
+\subsection*{Latihan \ref{khusus:lat-komutan-kuadrat}: kuadrat injektif pada spektrum positif}
+Diagonalkan $A=UDU^*$ dengan $D=\diag(\lambda_1,\ldots,\lambda_n)$,
+$\lambda_i\ge0$, dan tuliskan $C=U^*BU$.
+Persamaan $D^2C=CD^2$ berarti
+$(\lambda_i^2-\lambda_j^2)c_{ij}=0$ untuk semua $i,j$.
+Karena kedua nilai eigen tak negatif, $\lambda_i^2=\lambda_j^2$
+ekuivalen dengan $\lambda_i=\lambda_j$.
+Jadi $DC=CD$, yang memberikan $AB=BA$.
+Arah sebaliknya berlaku untuk sembarang $A$.
+Jika hanya Hermitian, ambil $A=\diag(1,-1)$ dan
+$B=\begin{pmatrix}0&1\\1&0\end{pmatrix}$.
+Matriks $A^2=I$ komutatif dengan $B$, tetapi $AB\ne BA$.
+
+\subsection*{Latihan \ref{khusus:lat-order-kuadrat}: urutan tidak otomatis bertahan}
+Ambil
+\[
+    B=\begin{pmatrix}1&0\\0&0\end{pmatrix},\qquad
+    A=\begin{pmatrix}2&1\\1&1\end{pmatrix}.
+\]
+Matriks $B$ semidefinit positif dan
+$A-B=\begin{pmatrix}1&1\\1&1\end{pmatrix}\succeq0$.
+Namun,
+\[
+    A^2-B^2=\begin{pmatrix}4&3\\3&2\end{pmatrix}
+\]
+mempunyai determinan $-1$, sehingga tidak semidefinit positif.
+Jika $AB=BA$, matriks $A-B$ dan $A+B$ komutatif dan keduanya
+semidefinit positif. Oleh \autoref{khusus:produk-positif},
+$A^2-B^2=(A-B)(A+B)\succeq0$.
+
+\subsection*{Latihan \ref{khusus:lat-variasi}: melengkapi kuadrat}
+Untuk $z=y-A^{-1}x$, ekspansi langsung memberi
+\[
+    2\operatorname{Re}(x^*y)-y^*Ay=x^*A^{-1}x-z^*Az.
+\]
+Karena $A\succ0$, maksimum dicapai tepat saat $z=0$, yaitu
+$y=A^{-1}x$. Jika $A\succeq B\succ0$, untuk setiap $y$ berlaku
+\[
+    2\operatorname{Re}(x^*y)-y^*Ay
+    \le 2\operatorname{Re}(x^*y)-y^*By.
+\]
+Mengambil maksimum memberi $x^*A^{-1}x\le x^*B^{-1}x$ untuk
+setiap $x$, yakni $A^{-1}\preceq B^{-1}$.
+
+\subsection*{Latihan \ref{khusus:lat-blok}: jumlah dan selisih dalam basis ortonormal}
+Matriks
+\[
+    U=\frac1{\sqrt2}\begin{pmatrix}I&I\\I&-I\end{pmatrix}
+\]
+uniter dan memenuhi
+\[
+    U^*\begin{pmatrix}A&B\\B&A\end{pmatrix}U
+       =\begin{pmatrix}A+B&0\\0&A-B\end{pmatrix}.
+\]
+Kongruensi ini membuktikan ekuivalensi positivitas tanpa
+memerlukan $AB=BA$. Karena $U$ invertibel, rank matriks blok
+adalah $\rank(A+B)+\rank(A-B)$.
+
+\subsection*{Latihan \ref{khusus:lat-rank-hadamard}: uraikan menjadi matriks rank satu}
+Jika salah satu faktor nol, hasilnya langsung. Untuk
+$r=\rank A>0$ dan $s=\rank B>0$, gunakan faktorisasi rank penuh
+untuk menulis
+$A=\sum_{i=1}^r u_iv_i^T$ dan $B=\sum_{j=1}^s x_jy_j^T$.
+Dengan perkalian entri,
+\[
+    A\circ B=\sum_{i=1}^r\sum_{j=1}^s
+       (u_i\circ x_j)(v_i\circ y_j)^T.
+\]
+Setiap suku berank paling besar satu, sehingga rank jumlahnya
+paling besar $rs$. Untuk ketajaman, ambil
+\[
+    A=\begin{pmatrix}1&1&0&0\\1&1&0&0\\0&0&1&1\\0&0&1&1\end{pmatrix},
+    \qquad
+    B=\begin{pmatrix}1&0&1&0\\0&1&0&1\\1&0&1&0\\0&1&0&1\end{pmatrix}.
+\]
+Kedua matriks berank dua, tetapi $A\circ B=I_4$ berank empat.
+
+\subsection*{Latihan \ref{khusus:lat-lyapunov}: uji pada vektor eigen solusi}
+Nilai eigen $A$ positif, sedangkan nilai eigen $-A$ negatif.
+Teorema persamaan Sylvester (\autoref{eigen:sylvester}) memberi
+tepat satu solusi untuk $AX-X(-A)=B$.
+Mengambil transpose konjugat menunjukkan $X^*$ juga solusi;
+keunikan memaksa $X=X^*$.
+Untuk vektor eigen $Xv=\mu v$, $v\ne0$, diperoleh
+\[
+    v^*Bv=v^*(AX+XA)v=2\mu\,v^*Av.
+\]
+Karena $v^*Av>0$ dan $v^*Bv\ge0$, setiap $\mu\ge0$.
+Jadi $X\succeq0$. Jika $B\succ0$, ruas kiri positif untuk
+setiap vektor eigen, sehingga setiap $\mu>0$ dan $X\succ0$.
+
+\subsection*{Latihan \ref{khusus:lat-involusi}: spektrum hanya pada dua titik}
+Nilai eigen involusi ada di $\{-1,1\}$.
+Jika $Q$ normal, teorema spektral memberi $Q=UDU^*$ dengan
+$D$ diagonal real; maka $Q$ Hermitian.
+Jika $Q$ Hermitian, $Q^*Q=Q^2=I$, sehingga uniter.
+Matriks uniter selalu normal, menutup rangkaian implikasi.
+Contoh involusi yang tidak normal adalah
+$Q=\begin{pmatrix}1&1\\0&-1\end{pmatrix}$:
+$Q^2=I$, tetapi $Q^T\ne Q$, sehingga ekuivalensi di atas
+menjamin $Q$ tidak normal.
+
+\subsection*{Latihan \ref{khusus:lat-idempoten}: empat ruang eigen bersama}
+Idempoten dapat didiagonalkan, dan $E,F$ komutatif.
+Diagonalisasi simultan (\autoref{eigen:simultan}) memecah ruang
+menjadi empat ruang $V_{ab}$, $a,b\in\{0,1\}$, tempat $E$
+bekerja sebagai $aI$ dan $F$ sebagai $bI$.
+Pada $V_{ab}$, matriks $EF$ bekerja sebagai $abI$,
+sedangkan $G$ sebagai $(a+b-ab)I$.
+Kedua skalar terakhir bernilai $0$ atau $1$, sehingga kedua
+matriks idempoten. Bayangan $EF$ adalah $V_{11}$, sedangkan
+bayangan $G$ adalah $V_{10}\oplus V_{01}\oplus V_{11}$.
+Ini sekaligus membuktikan pernyataan tentang irisan dan jumlah.
+Dengan $d_{ab}=\dim V_{ab}$,
+\begin{align*}
+    \rank E&=d_{10}+d_{11},&\rank F&=d_{01}+d_{11},\\
+    \rank(EF)&=d_{11},&\rank G&=d_{10}+d_{01}+d_{11}.
+\end{align*}
+Selain itu, $E-F$ bernilai $1$ pada $V_{10}$, $-1$ pada
+$V_{01}$, dan nol pada dua ruang lainnya.
+Jadi $\rank(E-F)=d_{10}+d_{01}$, yang memberi kedua identitas rank.
+
+\subsection*{Latihan \ref{khusus:lat-siklik}: orbit satu vektor standar}
+Untuk setiap $e_j$, vektor $e_j,Pe_j,\ldots,P^{n-1}e_j$
+menelusuri semua vektor basis standar tepat satu kali.
+Jadi $(I+P+\cdots+P^{n-1})e_j=(1,\ldots,1)^T$ dan jumlah
+matriksnya $J_n$, dengan rank satu.
+Persamaan $Px=x$ mengharuskan semua koordinat $x$ sama,
+sehingga $\rank(I-P)=n-1$.
+Jika $\sum_{k=0}^{n-1}a_kP^k=0$, terapkan pada $e_1$.
+Karena $e_1,Pe_1,\ldots,P^{n-1}e_1$ merupakan basis,
+semua $a_k=0$. Maka pangkat-pangkat tersebut bebas linear.
+
+\subsection*{Latihan \ref{khusus:lat-determinan-trace}: dua cara membatasi determinan}
+Tuliskan nilai eigen $A$ sebagai $\lambda_i\ge0$ dengan
+$\sum_i\lambda_i=s$. Rata-rata aritmetika--geometri memberi
+\[
+    \det A=\prod_i\lambda_i\le(s/n)^n.
+\]
+Jika $s>0$, kesamaan terjadi tepat ketika semua
+$\lambda_i=s/n$, yakni $A=(s/n)I$.
+Jika $s=0$, semua nilai eigen nol dan $A=0$, sehingga rumus
+serta karakterisasi yang sama tetap berlaku.
+Jika entri diagonal semuanya $1$, ketaksamaan Hadamard memberi
+$\det A\le1$. Karena tidak ada entri diagonal nol, kesamaan
+memaksa $A$ diagonal, yaitu $A=I$.
+\fi

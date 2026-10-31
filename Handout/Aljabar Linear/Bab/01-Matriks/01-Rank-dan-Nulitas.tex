@@ -1,0 +1,1335 @@
+% !TeX root = ../../ONMIPA Alin.tex
+% Rujukan: Zhang (2011), bagian 1.2, 2.1, 2.3; Zhang (2009),
+% soal-soal tentang ruang kolom, kernel, rank, nulitas, dan matriks khusus.
+\chapter{Rank dan Nulitas}
+\label{ch:rank}
+
+Rank mengukur dimensi ruang hasil suatu matriks, sedangkan nulitas
+mengukur dimensi ruang masukan yang dipetakan ke nol. Keduanya
+menghubungkan kebebasan kolom, banyaknya parameter bebas dalam solusi,
+dan perilaku hasil kali matriks. Bab ini mengembangkan hubungan tersebut
+melalui ruang kolom, kernel, faktorisasi, dan eliminasi blok, kemudian
+menerapkannya pada persamaan serta pangkat matriks.
+
+Semua matriks berentri dalam $\F=\R$ atau $\C$.
+Notasi $\Mat_{m\times n}(\F)$ menyatakan himpunan matriks berukuran
+$m\times n$; $\Mat_n(\F)$ digunakan untuk matriks persegi.
+Operasi matriks, kebebasan linear, basis, dan dimensi dianggap sudah dikenal.
+Determinan belum diperlukan dalam pembuktian-pembuktian bab ini.
+
+\section{Ruang Kolom, Ruang Baris, dan Kernel}
+\label{rank:dasar}
+
+\begin{definisi}[][Rank dan nulitas][rank:definisi]
+    Untuk $A\in\Mat_{m\times n}(\F)$, definisikan
+    \[
+        \begin{aligned}
+            \mathcal C(A)&=\{Ax:x\in\F^n\}=\operatorname{Im}A,\\
+            \mathcal R(A)&=\text{ruang yang direntang oleh baris-baris }A,\\
+            \ker A&=\{x\in\F^n:Ax=0\}.
+        \end{aligned}
+    \]
+    \emph{Rank} dan \emph{nulitas} $A$ berturut-turut adalah
+    $\rank A=\dim\mathcal C(A)$ dan $\nul A=\dim\ker A$.
+    Matriks mempunyai rank kolom penuh jika $\rank A=n$, dan rank baris
+    penuh jika $\rank A=m$.
+\end{definisi}
+
+Jadi $0\le\rank A\le\min\{m,n\}$, dan $\rank A=0$ tepat ketika $A=0$.
+Rank bukan banyaknya kolom tak nol: beberapa kolom tak nol dapat
+menghasilkan arah yang sama.
+
+\begin{teorema}[][Kesamaan rank baris dan kolom][rank:baris-kolom]
+    Untuk setiap matriks $A$,
+    \[
+        \dim\mathcal R(A)=\dim\mathcal C(A),\qquad
+        \rank A^T=\rank A.
+    \]
+\end{teorema}
+\begin{proof}
+    Misalkan $c=\dim\mathcal C(A)>0$. Pilih $c$ kolom bebas dari $A$
+    dan tempatkan sebagai kolom-kolom matriks $U$. Setiap kolom $A$
+    merupakan kombinasi kolom $U$, sehingga $A=UV$ untuk suatu matriks
+    $V$ dengan $c$ baris. Setiap baris $A$ merupakan kombinasi baris $V$;
+    akibatnya $\dim\mathcal R(A)\le c$.
+    Terapkan argumen yang sama pada $A^T$ untuk memperoleh ketaksamaan
+    sebaliknya. Untuk $A=0$, kedua dimensi sama dengan nol.
+\end{proof}
+
+\begin{teorema}[][Rank--nulitas][rank:nulitas]
+    Jika $A$ mempunyai $n$ kolom, maka
+    \[
+        \rank A+\nul A=n.
+    \]
+\end{teorema}
+\begin{proof}
+    Pilih basis $u_1,\ldots,u_k$ untuk $\ker A$.
+    Lengkapi dengan $v_1,\ldots,v_{n-k}$ hingga menjadi basis $\F^n$.
+    Vektor $Av_1,\ldots,Av_{n-k}$ merentang $\mathcal C(A)$.
+    Jika $\sum_j c_jAv_j=0$, maka $\sum_j c_jv_j\in\ker A$.
+    Kebebasan basis yang diperluas memaksa semua $c_j=0$.
+    Jadi $\rank A=n-k$ dan $\nul A=k$.
+\end{proof}
+
+Dalam rumus ini, $n$ adalah banyaknya \emph{kolom}, yaitu dimensi
+domain pemetaan $x\mapsto Ax$. Kernel adalah himpunan vektor, sedangkan
+nulitas adalah dimensinya. Secara khusus, $\nul A=0$ ekuivalen dengan
+$\ker A=\{0\}$ dan kebebasan semua kolom $A$.
+Jika $n>m$, selalu ada solusi tak nol untuk $Ax=0$, sebab
+$\nul A=n-\rank A\ge n-m>0$.
+
+\begin{prop}[Operasi yang mempertahankan rank]
+    \label{rank:invarian}
+    Jika $P\in\Mat_m(\F)$ dan $Q\in\Mat_n(\F)$ invertibel, maka
+    \[
+        \rank(PAQ)=\rank A.
+    \]
+    Khususnya, operasi baris dan kolom elementer mempertahankan rank.
+\end{prop}
+\begin{proof}
+    Karena $Q$ memetakan $\F^n$ secara bijektif ke dirinya sendiri,
+    $\mathcal C(AQ)=\mathcal C(A)$. Sementara itu,
+    $\mathcal C(PA)=P\mathcal C(A)$ mempunyai dimensi yang sama dengan
+    $\mathcal C(A)$ karena $P$ invertibel.
+\end{proof}
+
+Pada bentuk eselon baris, banyaknya pivot sama dengan rank. Jika yang
+dicari adalah basis ruang kolom matriks \emph{asal}, ambil kolom asal
+yang indeksnya bersesuaian dengan pivot. Operasi baris mempertahankan
+hubungan ketergantungan antarkolom, tetapi dapat mengubah ruang kolomnya.
+
+\begin{exam}[Parameter yang mengubah rank dan nulitas]
+    Tentukan rank, nulitas, dan kernel dari
+    \[
+        A(t)=\begin{pmatrix}1&1&5\\1&3&3\\0&-1&t\end{pmatrix},\qquad t\in\R.
+    \]
+\end{exam}
+\begin{solution}
+    Lakukan $R_2\leftarrow R_2-R_1$, kemudian
+    $R_3\leftarrow R_3+\tfrac12R_2$:
+    \[
+        A(t)\sim
+        \begin{pmatrix}1&1&5\\0&2&-2\\0&0&t-1\end{pmatrix}.
+    \]
+    Jika $t\ne1$, terdapat tiga pivot: $\rank A(t)=3$ dan
+    $\nul A(t)=0$. Jika $t=1$, ranknya $2$, nulitasnya $1$, dan
+    \[
+        \ker A(1)=\operatorname{span}\{(-6,1,1)^T\}.
+    \]
+    Dua kolom pertama matriks asal menjadi basis ruang kolom pada $t=1$.
+    Jangan membagi baris dengan $t-1$ sebelum memisahkan kasus $t=1$.
+\end{solution}
+
+\subsection{Basis kernel dan variabel bebas}
+\label{rank:basis-kernel}
+
+\begin{prop}[Membaca kernel dari bentuk eselon tereduksi]
+    Misalkan $A$ mempunyai $n$ kolom dan rank $r$.
+    Setelah operasi baris dan pengurutan ulang kolom, tuliskan
+    \[
+        EA\Pi=\begin{pmatrix}I_r&H\\0&0\end{pmatrix},
+    \]
+    dengan $E$ invertibel dan $\Pi$ matriks permutasi.
+    Maka
+    \[
+        \ker A=\left\{\Pi\begin{pmatrix}-Hz\\z\end{pmatrix}:
+            z\in\F^{n-r}\right\}.
+    \]
+    Kolom-kolom $\Pi\binom{-H}{I_{n-r}}$ membentuk basis kernel.
+\end{prop}
+\begin{proof}
+    Gunakan perubahan peubah $x=\Pi y$, lalu pisahkan $y$ menjadi
+    variabel pivot $y_1$ dan variabel bebas $y_2$.
+    Persamaan $Ax=0$ ekuivalen dengan $y_1+Hy_2=0$.
+    Jadi $y_2=z$ bebas dan $y_1=-Hz$.
+    Pemetaan $z\mapsto\Pi(-Hz,z)^T$ injektif karena $\Pi$ invertibel
+    dan komponen terakhir sebelum permutasi adalah $z$ sendiri.
+    Bayangan basis standar $\F^{n-r}$ karenanya menjadi basis kernel.
+\end{proof}
+
+Jika hanya operasi baris yang dilakukan, $\ker(EA)=\ker A$.
+Jika kolom diubah, koordinat solusi harus dikembalikan:
+$\ker(AQ)=Q^{-1}\ker A$ untuk $Q$ invertibel.
+Jumlah variabel bebas tetap sama, tetapi vektor basis kernelnya
+dapat berubah dalam koordinat semula.
+
+\subsection{Nulitas kanan dan nulitas kiri}
+
+Nulitas $A$ biasanya berarti dimensi kernel kanan $\ker A$.
+Relasi linear di antara baris-baris $A$ dicatat oleh kernel kiri,
+yaitu $\ker A^T$. Untuk $A$ berukuran $m\times n$ dan rank $r$,
+\[
+    \nul A=n-r,\qquad \nul A^T=m-r,\qquad
+    \nul A-\nul A^T=n-m.
+\]
+Jadi kesamaan rank $A$ dan $A^T$ tidak menjamin kesamaan nulitas
+jika matriksnya persegi panjang. Di atas $\C$, kernel kiri juga
+sering dinyatakan memakai $A^*=\overline A^{\,T}$ dan pasangan $y^*A=0$;
+dimensinya tetap $m-r$.
+
+\begin{exam}[Tiga variabel bebas dan satu relasi baris]
+    Tentukan rank, nulitas, dan basis kernel matriks
+    \[
+        A=\begin{pmatrix}
+            1&2&0&-1&3\\0&0&1&2&-1\\2&4&1&0&5
+        \end{pmatrix}.
+    \]
+    Tentukan juga syarat agar $Ax=b$ konsisten.
+\end{exam}
+\begin{solution}
+    Baris ketiga adalah dua kali baris pertama ditambah baris kedua.
+    Dua baris pertama bebas, sehingga $\rank A=2$, $\nul A=5-2=3$,
+    dan $\nul A^T=3-2=1$.
+    Untuk $Ax=0$, ambil $x_2=s$, $x_4=t$, dan $x_5=u$.
+    Maka $x_1=-2s+t-3u$ dan $x_3=-2t+u$, sehingga basis kernelnya
+    \[
+        \begin{pmatrix}-2\\1\\0\\0\\0\end{pmatrix},\quad
+        \begin{pmatrix}1\\0\\-2\\1\\0\end{pmatrix},\quad
+        \begin{pmatrix}-3\\0\\1\\0\\1\end{pmatrix}.
+    \]
+    Relasi baris memberi $\ker A^T=\operatorname{span}\{(-2,-1,1)^T\}$.
+    Karena dua persamaan pertama dapat diselesaikan untuk setiap
+    $b_1,b_2$, syarat konsistensi tepat $b_3=2b_1+b_2$.
+    Jika syarat ini dipenuhi, seluruh solusi adalah
+    \[
+        x=\begin{pmatrix}b_1-2s+t-3u\\s\\b_2-2t+u\\t\\u\end{pmatrix},
+        \qquad s,t,u\in\F.
+    \]
+    Tiga parameter bebas sesuai dengan nulitas $A$.
+\end{solution}
+
+Contoh ini memperlihatkan hubungan antara kernel, kebebasan kolom,
+dan teorema rank--nulitas.
+
+\section{Bentuk Normal dan Faktorisasi Rank}
+\label{rank:faktorisasi}
+
+\begin{teorema}[][Bentuk normal terhadap operasi baris dan kolom][rank:normal]
+    Jika $A\in\Mat_{m\times n}(\F)$ mempunyai rank $r$, terdapat matriks
+    invertibel $P,Q$ sehingga
+    \[
+        PAQ=\begin{pmatrix}I_r&0\\0&0\end{pmatrix}=:D_r.
+    \]
+    Dua matriks dengan ukuran sama mempunyai rank sama jika dan hanya
+    jika dapat dihubungkan oleh perkalian matriks invertibel di kiri dan kanan.
+\end{teorema}
+\begin{proof}
+    Reduksi baris dan permutasi kolom mengubah $A$ menjadi
+    $\begin{pmatrix}I_r&H\\0&0\end{pmatrix}$.
+    Kurangkan kombinasi kolom-kolom pivot dari kolom-kolom sisanya untuk
+    meniadakan $H$. Semua operasi tersebut invertibel dan menghasilkan
+    $D_r$. Pernyataan terakhir mengikuti bentuk normal ini dan
+    \autoref{rank:invarian}.
+\end{proof}
+
+Di sini $P$ dan $Q$ boleh dipilih secara independen. Hubungan ini disebut
+\emph{ekuivalensi matriks}; syaratnya berbeda dari keserupaan
+$B=S^{-1}AS$, yang mewajibkan kedua faktor saling invers.
+
+\begin{teorema}[][Faktorisasi rank penuh][rank:full-factor]
+    Jika $\rank A=r>0$, maka $A$ dapat ditulis sebagai
+    \[
+        A=UV,\qquad U\in\Mat_{m\times r}(\F),\quad
+        V\in\Mat_{r\times n}(\F),
+    \]
+    dengan $\rank U=\rank V=r$.
+\end{teorema}
+\begin{proof}
+    Ambil $U$ dari $r$ kolom bebas milik $A$, lalu isi kolom ke-$j$ dari
+    $V$ dengan koefisien kolom ke-$j$ dari $A$ terhadap basis tersebut.
+    Pada indeks kolom yang dipilih, $V$ memuat kolom-kolom $I_r$.
+    Maka $V$ mempunyai rank baris penuh dan $A=UV$.
+\end{proof}
+
+\begin{prop}[Invers satu sisi dan pencoretan faktor]
+    \label{rank:inverse-sisi}
+    Matriks $U$ dengan rank kolom penuh mempunyai invers kiri $L$, yaitu
+    $LU=I$. Matriks $V$ dengan rank baris penuh mempunyai invers kanan
+    $R$, yaitu $VR=I$. Akibatnya, untuk ukuran yang sesuai,
+    \[
+        \rank(UAV)=\rank A.
+    \]
+\end{prop}
+\begin{proof}
+    Dari $PUQ=\binom{I}{0}$, diperoleh
+    $L=Q\begin{pmatrix}I&0\end{pmatrix}P$ dengan $LU=I$.
+    Transpose memberikan pernyataan untuk invers kanan.
+    Pemetaan $x\mapsto Ux$ injektif, sehingga
+    $\dim U\mathcal C(A)=\dim\mathcal C(A)$.
+    Karena $V$ surjektif, $\mathcal C(AV)=\mathcal C(A)$.
+    Gabungkan keduanya.
+\end{proof}
+
+\begin{prop}[Submatriks invertibel terbesar]
+    Rank $A$ adalah ukuran terbesar submatriks persegi invertibel
+    yang dapat dipilih dari $A$, dengan nilai $0$ jika $A=0$.
+\end{prop}
+\begin{proof}
+    Menghapus kolom tidak menambah dimensi ruang kolom; menghapus baris
+    juga tidak menaikkan rank, dengan argumen yang sama pada transpose.
+    Jadi submatriks persegi invertibel berukuran $s$ memaksa $s\le\rank A$.
+    Sebaliknya, pilih $r=\rank A>0$ kolom bebas dan bentuk matriks $U$.
+    Rank baris $U$ juga $r$, sehingga dapat dipilih $r$ baris bebasnya.
+    Irisan baris dan kolom yang terpilih adalah matriks persegi dengan
+    rank penuh, sehingga invertibel oleh rank--nulitas.
+\end{proof}
+
+\subsection{Membaca rank dari pola entri}
+
+Jika $U=[u_1\ \cdots\ u_r]$ dan baris-baris $V$ adalah
+$v_1^T,\ldots,v_r^T$, maka
+\[
+    A=\sum_{j=1}^r u_jv_j^T.
+\]
+Setiap $u_jv_j^T$ mempunyai rank satu jika kedua vektornya tak nol.
+Sebaliknya, jika $A$ merupakan jumlah $s$ matriks rank satu, ruang kolomnya
+direntang oleh paling banyak $s$ vektor. Jadi rank $A$ adalah banyaknya
+suku rank satu paling sedikit yang diperlukan untuk menyatakan $A$.
+
+\begin{exam}[Matriks besar dengan rank dua]
+    Untuk $n\ge2$, tentukan rank matriks $A=(i+j-1)_{i,j=1}^n$.
+\end{exam}
+\begin{solution}
+    Definisikan $u=(1,2,\ldots,n)^T$ dan $e=(1,\ldots,1)^T$.
+    Kolom ke-$j$ dari $A$ adalah $u+(j-1)e$, sehingga
+    $\mathcal C(A)\subseteq\operatorname{span}\{u,e\}$.
+    Dua kolom pertama bebas karena $u$ dan $e$ bebas.
+    Maka $\rank A=2$, berapa pun besarnya $n$.
+\end{solution}
+
+\begin{exam}[Pola kuadratik tanpa menghitung determinan]
+    Untuk $n\ge3$, matriks $B=(i^2+ij+j^2)_{i,j=1}^n$ mempunyai rank $3$.
+\end{exam}
+\begin{solution}
+    Faktorkan
+    \[
+        B=\begin{pmatrix}
+            1&1&1\\1&2&2^2\\\vdots&\vdots&\vdots\\1&n&n^2
+        \end{pmatrix}
+        \begin{pmatrix}
+            1^2&2^2&\cdots&n^2\\1&2&\cdots&n\\1&1&\cdots&1
+        \end{pmatrix}=UV.
+    \]
+    Kolom $U$ bebas: polinom berderajat paling tinggi dua yang nol di
+    $1,2,3$ harus identik nol. Alasan sama membuktikan baris $V$ bebas.
+    Dengan \autoref{rank:inverse-sisi}, $\rank(UV)=3$.
+    Faktorisasi memberi batas atas; kebebasan kedua faktor memastikan
+    bahwa batas tersebut benar-benar tercapai.
+\end{solution}
+
+\section{Rank dan Nulitas Hasil Kali}
+\label{rank:produk}
+
+\begin{teorema}[][Kehilangan dimensi pada hasil kali][rank:produk-tepat]
+    Untuk $A\in\Mat_{m\times n}(\F)$ dan $B\in\Mat_{n\times p}(\F)$,
+    \[
+        \rank(AB)=\rank B-\dim\bigl(\mathcal C(B)\cap\ker A\bigr).
+    \]
+\end{teorema}
+\begin{proof}
+    Batasi pemetaan $x\mapsto Ax$ pada domain $\mathcal C(B)$.
+    Citranya adalah $\mathcal C(AB)$, sedangkan kernelnya
+    $\mathcal C(B)\cap\ker A$. Terapkan rank--nulitas pada pemetaan ini.
+\end{proof}
+
+\begin{prop}[Nulitas hasil kali]
+    \label{rank:nulitas-produk}
+    Untuk $A$ berukuran $m\times n$ dan $B$ berukuran $n\times p$,
+    \[
+        \nul(AB)=\nul B+\dim\bigl(\mathcal C(B)\cap\ker A\bigr).
+    \]
+    Akibatnya,
+    \[
+        \nul B\le\nul(AB)\le\min\{p,\nul A+\nul B\}.
+    \]
+    Jika $B$ mempunyai rank baris penuh, maka
+    $\nul(AB)=\nul A+\nul B$.
+\end{prop}
+\begin{proof}
+    Matriks $B$ dan $AB$ sama-sama mempunyai $p$ kolom.
+    Kurangkan rumus pada \autoref{rank:produk-tepat} dari $p$.
+    Untuk batasnya, gunakan
+    $0\le\dim(\mathcal C(B)\cap\ker A)\le\nul A$.
+    Jika $B$ mempunyai rank baris penuh, $\mathcal C(B)=\F^n$,
+    sehingga irisannya dengan $\ker A$ adalah seluruh $\ker A$.
+\end{proof}
+
+\begin{exam}[Kernel tambahan pada hasil kali]
+    Misalkan
+    \[
+        A=\begin{pmatrix}1&1&0\\0&0&0\end{pmatrix},\qquad
+        B=\begin{pmatrix}1&0&1&0\\0&1&1&0\\0&0&0&0\end{pmatrix}.
+    \]
+    Tentukan nulitas $A$, $B$, dan $AB$ melalui ruang kolom dan kernel.
+\end{exam}
+\begin{solution}
+    Rank $A$ adalah $1$ dan rank $B$ adalah $2$, sehingga
+    $\nul A=3-1=2$ dan $\nul B=4-2=2$.
+    Selanjutnya,
+    \[
+        \mathcal C(B)=\operatorname{span}\{e_1,e_2\},\qquad
+        \ker A=\operatorname{span}\{e_1-e_2,e_3\}.
+    \]
+    Irisannya berdimensi satu. Jadi $\nul(AB)=2+1=3$ dan $\rank(AB)=1$.
+    Selain arah dalam $\ker B$, ada satu arah bebas tambahan yang
+    keluaran $B$-nya dimatikan oleh $A$.
+    Arah $e_3\in\ker A$ tidak menyumbang kehilangan tambahan karena
+    tidak termasuk ruang kolom $B$.
+\end{solution}
+
+\ide{Hasil kali $AB$ kehilangan rank ketika sebagian keluaran $B$
+    masuk ke kernel $A$. Rank kedua faktor saja belum menentukan
+    besar kehilangan tersebut.}
+
+\begin{teorema}[][Ketaksamaan Sylvester][rank:sylvester]
+    Dengan ukuran seperti di atas,
+    \[
+        \max\{0,\rank A+\rank B-n\}
+        \le\rank(AB)\le\min\{\rank A,\rank B\}.
+    \]
+    Pada batas bawah, $n$ adalah dimensi \emph{ruang perantara}:
+    banyak kolom $A$, sekaligus banyak baris $B$.
+\end{teorema}
+\begin{proof}
+    Gunakan $\mathcal C(AB)\subseteq\mathcal C(A)$ dan
+    \autoref{rank:produk-tepat}. Untuk batas bawah,
+    \[
+        \dim(\mathcal C(B)\cap\ker A)\le\dim\ker A=n-\rank A.
+    \]
+\end{proof}
+
+\begin{prop}[Kapan batas hasil kali tercapai?]
+    \label{rank:kesamaan-produk}
+    Untuk ukuran yang sesuai,
+    \begin{align*}
+        \rank(AB)=\rank B
+        &\iff \mathcal C(B)\cap\ker A=\{0\},\\
+        \rank(AB)=\rank A
+        &\iff \mathcal C(B)+\ker A=\F^n,\\
+        \rank(AB)=\rank A+\rank B-n
+        &\iff \ker A\subseteq\mathcal C(B).
+    \end{align*}
+\end{prop}
+\begin{proof}
+    Pernyataan pertama dan ketiga langsung mengikuti rumus rank hasil
+    kali. Untuk yang kedua, $A\mathcal C(B)=\mathcal C(A)$ tepat ketika
+    setiap $x\in\F^n$ dapat ditulis $x=y+z$ dengan
+    $y\in\mathcal C(B)$ dan $z\in\ker A$.
+\end{proof}
+
+Khususnya, $AB=0$ ekuivalen dengan $\mathcal C(B)\subseteq\ker A$,
+sehingga $\rank A+\rank B\le n$.
+Ketaksamaan rank tersebut saja tidak cukup untuk menyimpulkan $AB=0$:
+ambil $A=B=\diag(1,0)$.
+
+\begin{exam}[Seluruh kemungkinan rank hasil kali]
+    Misalkan $A,B\in\Mat_8(\R)$, $\rank A=5$, dan $\rank B=6$.
+    Tentukan semua nilai yang mungkin bagi $\rank(AB)$.
+\end{exam}
+\begin{solution}
+    Sylvester memberi $3\le\rank(AB)\le5$.
+    Untuk membuktikan bahwa $3,4,5$ semuanya mungkin, tetapkan
+    $A=\diag(I_5,0_3)$. Untuk setiap $k\in\{3,4,5\}$, pilih ruang
+    kolom $B$ yang direntang oleh $k$ vektor koordinat dari
+    $e_1,\ldots,e_5$ dan $6-k$ vektor dari $e_6,e_7,e_8$.
+    Jadikan keenam vektor tersebut kolom pertama $B$, lalu tambahkan
+    dua kolom nol. Maka $\rank B=6$ dan tepat $k$ arah bertahan pada $AB$.
+    Secara umum, cara ini merealisasikan setiap bilangan bulat antara
+    $\max\{0,a+b-n\}$ dan $\min\{a,b\}$ untuk dua matriks persegi
+    berukuran $n$ dengan rank $a,b$.
+\end{solution}
+
+\begin{teorema}[][Ketaksamaan Frobenius][rank:frobenius]
+    Jika $AB$ dan $BC$ terdefinisi, maka
+    \[
+        \rank(ABC)\ge\rank(AB)+\rank(BC)-\rank B.
+    \]
+\end{teorema}
+\begin{proof}
+    Karena $\mathcal C(BC)\subseteq\mathcal C(B)$,
+    \begin{align*}
+        \rank(ABC)
+        &=\rank(BC)-\dim(\mathcal C(BC)\cap\ker A)\\
+        &\ge\rank(BC)-\dim(\mathcal C(B)\cap\ker A)\\
+        &=\rank(BC)+\rank(AB)-\rank B.
+    \end{align*}
+\end{proof}
+
+Batas Frobenius mempertahankan informasi tentang faktor tengah $B$.
+Jika hanya ukuran ruang perantara yang dipakai, informasi itu dapat
+hilang ketika Sylvester diterapkan secara berulang.
+
+\section{Rank Jumlah dan Perubahan Rank Satu}
+\label{rank:jumlah}
+
+\begin{prop}[Matriks gabungan]
+    \label{rank:gabungan}
+    Untuk $A,B$ dengan jumlah baris sama,
+    \[
+        \rank[A\ B]=\rank A+\rank B
+        -\dim(\mathcal C(A)\cap\mathcal C(B)).
+    \]
+    Untuk $A,B$ dengan jumlah kolom sama, berlaku
+    \[
+        \ker\begin{pmatrix}A\\B\end{pmatrix}=\ker A\cap\ker B.
+    \]
+\end{prop}
+\begin{proof}
+    Ruang kolom $[A\ B]$ adalah $\mathcal C(A)+\mathcal C(B)$.
+    Gunakan identitas
+    $\dim(U+V)=\dim U+\dim V-\dim(U\cap V)$, yang diperoleh dengan
+    memperluas basis $U\cap V$ menjadi basis masing-masing ruang.
+    Pernyataan kernel mengikuti kesetaraan
+    $\binom{A}{B}x=0\iff Ax=Bx=0$.
+\end{proof}
+
+\begin{teorema}[][Batas rank jumlah][rank:batas-jumlah]
+    Jika $A,B\in\Mat_{m\times n}(\F)$, maka
+    \[
+        |\rank A-\rank B|\le\rank(A+B)
+        \le\min\{m,n,\rank A+\rank B\}.
+    \]
+    Ketaksamaan yang sama berlaku untuk $A-B$.
+\end{teorema}
+\begin{proof}
+    Inklusi $\mathcal C(A+B)\subseteq\mathcal C(A)+\mathcal C(B)$
+    memberi batas atas. Terapkan batas ini pada
+    $A=(A+B)-B$ dan $B=(A+B)-A$ untuk memperoleh batas bawah.
+\end{proof}
+
+\begin{teorema}[][Kapan rank bersifat aditif?][rank:aditif]
+    Untuk dua matriks berukuran sama,
+    \[
+        \rank(A+B)=\rank A+\rank B
+    \]
+    jika dan hanya jika kedua syarat berikut dipenuhi:
+    \[
+        \mathcal C(A)\cap\mathcal C(B)=\{0\},\qquad
+        \mathcal R(A)\cap\mathcal R(B)=\{0\}.
+    \]
+\end{teorema}
+\begin{proof}
+    Dari $A+B=[A\ B]\binom{I}{I}$ dan
+    $A+B=[I\ I]\binom{A}{B}$, rank jumlah tidak melebihi rank kedua
+    matriks gabungan. Jika ranknya $\rank A+\rank B$, rumus dimensi
+    ruang kolom dan versi transposenya memaksa kedua irisan menjadi nol.
+
+    Sebaliknya, irisan ruang baris yang nol memberi
+    $\rank\binom{A}{B}=\rank A+\rank B$.
+    Pemetaan $(u,v)\mapsto u+v$ injektif pada
+    $\mathcal C(A)\times\mathcal C(B)$ karena irisan ruang kolom nol.
+    Maka penerapan pemetaan tersebut pada citra $\binom{A}{B}$ tidak
+    menurunkan dimensi, sehingga rank $A+B$ sama dengan jumlah ranknya.
+\end{proof}
+
+Satu syarat saja tidak cukup. Misalnya,
+\[
+    A=\begin{pmatrix}1&0\\0&0\end{pmatrix},\qquad
+    B=\begin{pmatrix}0&0\\1&0\end{pmatrix}
+\]
+mempunyai ruang kolom yang beririsan nol, tetapi
+$\rank(A+B)=1<2=\rank A+\rank B$ karena ruang barisnya berimpit.
+
+\subsection{Mengganggu matriks dengan satu hasil kali luar}
+
+Karena $\rank(uv^T)\le1$, selalu berlaku
+\[
+    \bigl|\rank(A+uv^T)-\rank A\bigr|\le1.
+\]
+Untuk matriks invertibel, kasus penurunan rank dapat ditentukan tepat.
+
+\begin{prop}[Perubahan rank satu pada matriks invertibel]
+    \label{rank:update}
+    Jika $A\in\Mat_n(\F)$ invertibel dan $u,v\in\F^n$, maka
+    \[
+        \rank(A+uv^T)=
+        \begin{cases}
+            n,&1+v^TA^{-1}u\ne0,\\
+            n-1,&1+v^TA^{-1}u=0.
+        \end{cases}
+    \]
+    Pada kasus kedua, $\ker(A+uv^T)=\operatorname{span}\{A^{-1}u\}$.
+\end{prop}
+\begin{proof}
+    Tuliskan $w=A^{-1}u$. Persamaan $(A+uv^T)x=0$ ekuivalen dengan
+    $x=-w(v^Tx)$. Jadi semua vektor kernel berada pada
+    $\operatorname{span}\{w\}$. Mengalikan dengan $v^T$ memberi
+    $(1+v^Tw)v^Tx=0$.
+    Jika koefisiennya tak nol, $x=0$.
+    Jika koefisiennya nol, $w\ne0$ dan $(I+wv^T)w=0$;
+    kernel berdimensi satu. Gunakan rank--nulitas.
+\end{proof}
+
+\begin{exam}[Diagonal konstan dan satu matriks rank satu]
+    Misalkan $J_n$ adalah matriks yang semua entrinya $1$, $n\ge2$.
+    Tentukan rank $tI_n+J_n$ untuk setiap $t\in\F$.
+\end{exam}
+\begin{solution}
+    Tuliskan $J_n=ee^T$ dengan $e=(1,\ldots,1)^T$.
+    Jika $t\ne0$, terapkan \autoref{rank:update} pada $A=tI_n$;
+    skalar penentunya adalah $1+n/t$.
+    Kasus $t=0$ dihitung langsung. Hasilnya
+    \[
+        \rank(tI_n+J_n)=
+        \begin{cases}
+            1,&t=0,\\
+            n-1,&t=-n,\\
+            n,&t\notin\{0,-n\}.
+        \end{cases}
+    \]
+    Pada $t=-n$ kernelnya $\operatorname{span}\{e\}$; pada $t=0$
+    kernelnya $\{x:e^Tx=0\}$.
+    Ini juga menyelesaikan matriks dengan entri diagonal $a$ dan entri
+    luar diagonal $b$: matriksnya adalah $(a-b)I_n+bJ_n$.
+\end{solution}
+
+\section{Eliminasi Blok dan Persamaan Matriks}
+\label{rank:blok}
+
+Operasi baris blok dilakukan dengan mengalikan blok dari kiri;
+operasi kolom blok mengalikan dari kanan. Urutan perkalian harus dijaga
+karena dua matriks umumnya tidak komutatif.
+
+\begin{teorema}[][Rumus rank komplemen Schur][rank:schur]
+    Misalkan
+    $M=\begin{pmatrix}P&Q\\R&S\end{pmatrix}$, dengan $P$ persegi
+    berukuran $k$ dan invertibel. Maka
+    \[
+        \rank M=k+\rank(S-RP^{-1}Q).
+    \]
+\end{teorema}
+\begin{proof}
+    Identitas
+    \[
+        \begin{pmatrix}I&0\\-RP^{-1}&I\end{pmatrix}
+        \begin{pmatrix}P&Q\\R&S\end{pmatrix}
+        \begin{pmatrix}I&-P^{-1}Q\\0&I\end{pmatrix}
+        =\begin{pmatrix}P&0\\0&S-RP^{-1}Q\end{pmatrix}
+    \]
+    menggunakan dua faktor invertibel di kiri dan kanan. Rank matriks
+    diagonal blok adalah jumlah rank blok-bloknya karena ruang kolomnya
+    menempati kelompok koordinat yang terpisah.
+\end{proof}
+
+\begin{prop}[Segitiga blok]
+    \label{rank:segitiga-blok}
+    Untuk blok-blok berukuran sesuai,
+    \[
+        \rank\begin{pmatrix}A&X\\0&B\end{pmatrix}
+        \ge\rank A+\rank B.
+    \]
+    Kesamaan selalu berlaku jika $X=0$, tetapi belum tentu jika $X\ne0$.
+\end{prop}
+\begin{proof}
+    Pilih $\rank A$ kolom bebas dari blok kolom pertama dan
+    $\rank B$ kolom dari blok kolom kedua yang bagian bawahnya bebas.
+    Gabungannya bebas: komponen bawah terlebih dahulu memaksa koefisien
+    kelompok kedua nol, lalu komponen atas memaksa sisanya nol.
+    Untuk melihat kemungkinan ketaksamaan ketat, ambil
+    $A=B=(0)$ dan $X=(1)$.
+\end{proof}
+
+\begin{exam}[Dua hasil kali dengan ukuran berbeda]
+    Jika $A$ berukuran $m\times n$ dan $B$ berukuran $n\times m$, buktikan
+    \[
+        m-\rank(I_m-AB)=n-\rank(I_n-BA).
+    \]
+\end{exam}
+\begin{solution}
+    Hitung rank matriks yang sama dengan dua pilihan pivot blok:
+    \[
+        \rank\begin{pmatrix}I_m&A\\B&I_n\end{pmatrix}
+        =m+\rank(I_n-BA)=n+\rank(I_m-AB).
+    \]
+    Jadi kedua matriks mempunyai nulitas sama, walaupun ukurannya
+    berbeda. Secara langsung, $x\mapsto Bx$ memberi isomorfisme dari
+    $\ker(I_m-AB)$ ke $\ker(I_n-BA)$ dengan invers $y\mapsto Ay$.
+    Pernyataan ini tidak berarti $\rank(AB)=\rank(BA)$.
+\end{solution}
+
+\subsection{Konsistensi dan banyaknya parameter bebas}
+
+\begin{prop}[Persamaan dengan satu faktor tetap]
+    \label{rank:ax-b}
+    Untuk $A\in\Mat_{m\times n}(\F)$ dan $C\in\Mat_{m\times q}(\F)$,
+    persamaan $AX=C$ mempunyai solusi jika dan hanya jika
+    \[
+        \mathcal C(C)\subseteq\mathcal C(A)
+        \iff \rank[A\ C]=\rank A.
+    \]
+    Jika konsisten, himpunan solusinya berbentuk $X_0+\mathcal N$, dengan
+    $\mathcal N=\{Z:AZ=0\}$ berdimensi $q\,\nul A=q(n-\rank A)$.
+\end{prop}
+\begin{proof}
+    Persamaan ini setara dengan $q$ persamaan kolom $Ax_j=c_j$.
+    Setiap kolom $C$ harus berada pada $\mathcal C(A)$.
+    Jika $X_0$ adalah satu solusi, seluruh solusi adalah $X_0+Z$,
+    dengan setiap kolom $Z$ dipilih secara bebas dari $\ker A$.
+    Tiap kolom menyumbang $n-\rank A$ parameter bebas.
+\end{proof}
+
+Untuk $q=1$, diperoleh kriteria konsistensi sistem linear $Ax=c$.
+Jika konsisten, solusi tunggal tepat ketika $\nul A=0$, atau ekuivalen
+$\rank A=n$.
+Untuk $C\ne0$, himpunan solusi umumnya merupakan ruang afin
+(translasi suatu subruang), bukan subruang yang melalui nol.
+
+\begin{teorema}[][Persamaan dengan dua faktor tetap][rank:axb]
+    Ambil $A\in\Mat_{m\times n}(\F)$,
+    $B\in\Mat_{p\times q}(\F)$, dan $C\in\Mat_{m\times q}(\F)$.
+    Persamaan $AXB=C$, dengan peubah $X\in\Mat_{n\times p}(\F)$,
+    konsisten jika dan hanya jika
+    \[
+        \mathcal C(C)\subseteq\mathcal C(A),\qquad
+        \mathcal R(C)\subseteq\mathcal R(B).
+    \]
+    Jika konsisten, banyak parameter bebasnya adalah
+    \[
+        np-(\rank A)(\rank B).
+    \]
+\end{teorema}
+\begin{proof}
+    Syarat inklusi perlu karena perkalian di kanan menghasilkan
+    kombinasi kolom, sedangkan perkalian di kiri menghasilkan kombinasi baris.
+    Untuk membuktikan kecukupan dan menghitung dimensinya, pilih
+    \[
+        PAQ=D_a,\qquad RBS=D_b,\qquad a=\rank A,\quad b=\rank B,
+    \]
+    dalam bentuk normal \autoref{rank:normal}.
+    Dengan $Y=Q^{-1}XR^{-1}$ dan $C'=PCS$, persamaannya menjadi
+    \[
+        D_aYD_b=C'.
+    \]
+    Kedua syarat inklusi tepat menyatakan bahwa entri $C'$ di luar
+    $a$ baris pertama dan $b$ kolom pertama semuanya nol.
+    Perkalian $D_aYD_b$ mengambil blok $a\times b$ di pojok kiri atas
+    $Y$ dan mengisi bagian lainnya dengan nol.
+    Jadi $ab$ entri $Y$ ditentukan oleh $C'$, sedangkan $np-ab$ entri
+    sisanya bebas. Perubahan peubah antara $X$ dan $Y$ bijektif.
+\end{proof}
+
+Hasil ini merupakan penerapan bentuk normal rank dan kriteria
+faktorisasi ruang kolom dan baris.
+Kondisi di atas juga dapat diperiksa melalui
+$\rank[A\ C]=\rank A$ dan
+$\rank\binom{B}{C}=\rank B$.
+
+Pandang $\mathcal L(X)=AXB$ sebagai pemetaan linear dari
+$\Mat_{n\times p}(\F)$ ke $\Mat_{m\times q}(\F)$.
+Domainnya berdimensi $np$, dan pembuktian di atas menunjukkan
+\[
+    \rank\mathcal L=(\rank A)(\rank B),\qquad
+    \nul\mathcal L=np-(\rank A)(\rank B).
+\]
+Di sini rank dan nulitas pemetaan berarti dimensi citra dan kernelnya.
+Nulitas tersebut adalah dimensi ruang matriks $Z$ yang memenuhi $AZB=0$,
+sekaligus banyaknya parameter bebas pada setiap persamaan $AXB=C$
+yang konsisten.
+
+\begin{exam}[Sembilan peubah, empat kendala bebas]
+    Misalkan
+    \[
+        A=\begin{pmatrix}1&2&0\\0&0&1\end{pmatrix},\qquad
+        B=\begin{pmatrix}1&0\\0&1\\1&1\end{pmatrix},\qquad
+        C\in\Mat_2(\R).
+    \]
+    Tentukan apakah $AXB=C$ selalu dapat diselesaikan dan berapa banyak
+    parameter bebas dalam solusinya.
+\end{exam}
+\begin{solution}
+    Matriks $A$ mempunyai rank baris penuh $2$, dan $B$ mempunyai
+    rank kolom penuh $2$. Maka kedua syarat inklusi selalu dipenuhi,
+    dan banyak parameter bebasnya $3\cdot3-2\cdot2=5$.
+    Secara konstruktif, gunakan
+    \[
+        R=\begin{pmatrix}1&0\\0&0\\0&1\end{pmatrix},\qquad
+        L=\begin{pmatrix}1&0&0\\0&1&0\end{pmatrix}.
+    \]
+    Karena $AR=I_2$ dan $LB=I_2$, matriks $X_0=RCL$ adalah satu solusi.
+    Semua solusi diperoleh dengan menambahkan $Z$ yang memenuhi $AZB=0$.
+\end{solution}
+
+\section{Transpose Konjugat dan Pangkat Matriks}
+\label{rank:pangkat}
+
+\subsection{Menggunakan kepositifan untuk menemukan kernel}
+
+Untuk matriks kompleks, tuliskan $A^*=\overline A^{\,T}$.
+Jika $A$ real, $A^*=A^T$.
+
+\begin{teorema}[][Rank matriks Gram][rank:gram]
+    Untuk setiap matriks kompleks $A$,
+    \[
+        \ker(A^*A)=\ker A,\qquad
+        \rank(A^*A)=\rank A=\rank(AA^*).
+    \]
+\end{teorema}
+\begin{proof}
+    Jelas $Ax=0$ mengakibatkan $A^*Ax=0$.
+    Sebaliknya, jika $A^*Ax=0$, maka
+    \[
+        0=x^*A^*Ax=(Ax)^*(Ax)=\sum_i |(Ax)_i|^2,
+    \]
+    sehingga $Ax=0$.
+    Rank--nulitas memberi kesamaan rank pertama.
+    Konjugasi mempertahankan kebebasan linear, sehingga
+    $\rank A^*=\rank A$. Terapkan hasil pertama pada $A^*$ untuk
+    mendapatkan $\rank(AA^*)=\rank A$.
+\end{proof}
+
+\begin{remark}
+    Di atas $\C$, jangan mengganti $A^*$ dengan $A^T$ secara sembarang.
+    Untuk $A=(1,i)^T$, diperoleh $A^TA=0$, padahal $\rank A=1$.
+    Sebaliknya, $A^*A=(2)$ mempunyai rank satu sebagaimana mestinya.
+\end{remark}
+
+Jika $A$ berukuran $m\times n$ dan mempunyai rank $r$, teorema Gram memberi
+\[
+    \nul(A^*A)=n-r=\nul A,\qquad \nul(AA^*)=m-r.
+\]
+Kedua matriks Gram mempunyai rank sama, sedangkan nulitasnya mengikuti
+ukuran masing-masing matriks.
+
+\subsection{Barisan rank, nulitas, dan stabilisasi kernel}
+
+\begin{teorema}[][Penurunan rank pangkat][rank:deret-pangkat]
+    Misalkan $A\in\Mat_n(\F)$ dan $r_k=\rank(A^k)$, dengan $r_0=n$.
+    Maka
+    \[
+        n=r_0\ge r_1\ge r_2\ge\cdots\ge0,
+        \qquad r_{k-1}-r_k\ge r_k-r_{k+1}\quad(k\ge1).
+    \]
+    Jika $r_s=r_{s+1}$ untuk suatu $s\ge0$, semua rank berikutnya
+    sama dengan $r_s$.
+\end{teorema}
+\begin{proof}
+    Inklusi
+    \[
+        \ker A^k\subseteq\ker A^{k+1},\qquad
+        \mathcal C(A^{k+1})\subseteq\mathcal C(A^k)
+    \]
+    memberi penurunan rank. Terapkan Frobenius pada
+    $A\cdot A^{k-1}\cdot A$:
+    \[
+        r_{k+1}\ge2r_k-r_{k-1}.
+    \]
+    Ini tepat ketaksamaan untuk selisih rank.
+    Selisih-selisih tersebut nonnegatif dan tidak meningkat, sehingga
+    sesudah satu selisih nol, semua selisih berikutnya juga nol.
+\end{proof}
+
+Jadi bukan setiap barisan bilangan bulat menurun dapat menjadi barisan
+rank pangkat. Misalnya, untuk matriks berukuran $8$ dengan rank $6$,
+harus berlaku $\rank A^2\ge4$; nilai $3$ mustahil.
+Stabilisasi pasti terjadi paling lambat pada $A^n$, sebab rank tidak
+dapat turun ketat lebih dari $n$ kali.
+
+Dalam bahasa nulitas, tuliskan $d_k=\nul(A^k)=n-r_k$, dengan $d_0=0$.
+Maka
+\[
+    0=d_0\le d_1\le d_2\le\cdots\le n,\qquad
+    d_{k+1}-d_k\le d_k-d_{k-1}.
+\]
+Kernel bertambah besar, tetapi pertambahan dimensinya tidak meningkat.
+Karena $\ker A^k\subseteq\ker A^{k+1}$, kesamaan dua nulitas berurutan
+berarti kedua kernel sudah sama; setelah itu seluruh kernel berikutnya
+juga sama. Selain itu, nulitas hasil kali memberi
+\[
+    \nul A\le\nul(A^k)\le\min\{n,k\,\nul A\}\qquad(k\ge1).
+\]
+Batas kanan diperoleh dengan menerapkan
+\autoref{rank:nulitas-produk} secara berulang.
+
+\begin{prop}[Rank tidak turun setelah dikuadratkan]
+    \label{rank:stabil-awal}
+    Untuk $A\in\Mat_n(\F)$, pernyataan berikut ekuivalen:
+    \begin{enumerate}[label=(\roman*),nosep]
+        \item $\rank A^2=\rank A$;
+        \item $\mathcal C(A)\cap\ker A=\{0\}$;
+        \item $\F^n=\mathcal C(A)\oplus\ker A$;
+        \item dalam suatu basis, matriks $A$ berbentuk
+            $\begin{pmatrix}D&0\\0&0\end{pmatrix}$ dengan $D$ invertibel
+            berukuran $\rank A$.
+    \end{enumerate}
+    Untuk $A=0$, blok $D$ kosong dan pernyataan terakhir diartikan
+    sebagai matriks nol.
+\end{prop}
+\begin{proof}
+    Ekuivalensi (i)--(ii) berasal dari rumus rank hasil kali.
+    Karena dimensi ruang kolom dan kernel berjumlah $n$, (ii) ekuivalen
+    dengan (iii). Pada (iii), kedua subruang invarian terhadap $A$.
+    Pembatasan $A$ pada $\mathcal C(A)$ injektif, sehingga invertibel
+    pada ruang berdimensi hingga itu; pada $\ker A$, pemetaannya nol.
+    Gabungan basis kedua subruang memberikan (iv).
+    Sebaliknya, bentuk (iv) langsung memberikan (i).
+\end{proof}
+
+\begin{prop}[Batas rank dan nulitas matriks nilpoten]
+    \label{rank:nilpoten}
+    Jika $A^k=0$ untuk suatu bilangan bulat $k\ge1$, maka
+    \[
+        \rank A\le n-\left\lceil\frac nk\right\rceil,
+        \qquad \nul A\ge\left\lceil\frac nk\right\rceil.
+    \]
+    Khususnya, $A^2=0$ mengakibatkan
+    $\rank A\le\lfloor n/2\rfloor$ dan $\nul A\ge\lceil n/2\rceil$.
+\end{prop}
+\begin{proof}
+    Sylvester berulang memberi
+    $\rank A^k\ge k\rank A-(k-1)n$.
+    Karena ruas kiri nol, $\rank A\le n-n/k$.
+    Rank bilangan bulat, sehingga batasnya
+    $\lfloor n-n/k\rfloor=n-\lceil n/k\rceil$.
+    Untuk $k=2$, bukti langsungnya adalah
+    $\mathcal C(A)\subseteq\ker A$.
+\end{proof}
+
+\begin{exam}[Batas yang dapat dicapai]
+    Berapakah rank terbesar dan nulitas terkecil matriks $10\times10$
+    yang memenuhi $A^3=0$?
+\end{exam}
+\begin{solution}
+    Batas di atas memberi $\rank A\le10-\lceil10/3\rceil=6$.
+    Definisikan matriks pergeseran
+    \[
+        N_3=\begin{pmatrix}0&1&0\\0&0&1\\0&0&0\end{pmatrix}.
+    \]
+    Matriks $A=\diag(N_3,N_3,N_3,0)$ berukuran $10$, memenuhi $A^3=0$,
+    dan mempunyai rank $2+2+2=6$. Jadi rank terbesar adalah $6$ dan
+    nulitas terkecil adalah $10-6=4$.
+    Untuk ukuran umum, rantai pergeseran dengan panjang paling tinggi
+    $k$ juga memperlihatkan ketajaman batas pada \autoref{rank:nilpoten}.
+\end{solution}
+
+\section{Identitas Matriks, Rank, dan Nulitas}
+\label{rank:identitas}
+
+\begin{teorema}[][Idempoten dan pasangan komplemennya][rank:idempoten]
+    Jika $E^2=E$, maka
+    \[
+        \mathcal C(E)=\ker(I-E),\qquad
+        \ker E=\mathcal C(I-E),\qquad
+        \rank E+\rank(I-E)=n.
+    \]
+    Sebaliknya, jika $A+B=I_n$ dan $\rank A+\rank B=n$, maka
+    $A^2=A$, $B^2=B$, dan $AB=BA=0$.
+\end{teorema}
+\begin{proof}
+    Jika $y=Ex$, maka $Ey=E^2x=y$. Sebaliknya, $Ey=y$ berarti
+    $y\in\mathcal C(E)$. Ini membuktikan kesamaan pertama.
+    Kesamaan kedua mengikuti $E(I-E)=0$ dan
+    $x\in\ker E\Rightarrow x=(I-E)x$.
+    Rank--nulitas memberi jumlah rank yang dinyatakan.
+
+    Untuk arah sebaliknya, $A+B=I$ memberi
+    $\mathcal C(A)+\mathcal C(B)=\F^n$. Syarat jumlah dimensi
+    memaksa irisannya nol. Karena $B=I-A$, berlaku $AB=BA$;
+    setiap kolom $AB$ berada pada kedua ruang kolom, sehingga $AB=BA=0$.
+    Maka $A=A(A+B)=A^2$ dan $B=(A+B)B=B^2$.
+\end{proof}
+
+\begin{prop}[Identitas kuadratik dengan dua akar berbeda]
+    \label{rank:kuadratik}
+    Jika $(A-aI)(A-bI)=0$, dengan $a\ne b$, maka
+    \[
+        \rank(A-aI)+\rank(A-bI)=n.
+    \]
+    Khususnya, jika $A^2=I$, maka
+    $\rank(A-I)+\rank(A+I)=n$.
+\end{prop}
+\begin{proof}
+    Definisikan
+    \[
+        E=\frac{A-bI}{a-b},\qquad F=\frac{aI-A}{a-b}.
+    \]
+    Kedua matriks berjumlah $I$ dan memenuhi $EF=FE=0$.
+    Akibatnya $E^2=E$ dan $F=I-E$. Terapkan
+    \autoref{rank:idempoten}, lalu gunakan bahwa perkalian dengan
+    skalar tak nol mempertahankan rank.
+\end{proof}
+
+Sebagai contoh, jika $A\in\Mat_3(\F)$ memenuhi $A^2=I$ dan
+$A\ne\pm I$, kedua rank $A-I$ dan $A+I$ positif serta berjumlah $3$.
+Jadi ranknya $1$ dan $2$, dalam suatu urutan.
+
+\begin{prop}[Identitas rank untuk $A-ABA$]
+    \label{rank:aba}
+    Jika $A\in\Mat_{m\times n}(\F)$ dan
+    $B\in\Mat_{n\times m}(\F)$, maka
+    \[
+        \rank(A-ABA)=\rank A+\rank(I_n-BA)-n.
+    \]
+\end{prop}
+\begin{proof}
+    Untuk setiap $x\in\ker A$, berlaku $(I_n-BA)x=x$.
+    Maka $\ker A\subseteq\mathcal C(I_n-BA)$, sehingga irisan kedua
+    ruang itu tepat $\ker A$. Terapkan rumus rank hasil kali pada
+    $A(I_n-BA)$:
+    \[
+        \rank(A-ABA)=\rank(I_n-BA)-\dim\ker A.
+    \]
+\end{proof}
+
+Untuk idempoten $E$, hubungan ruang kolom dan kernel di atas juga memberi
+$\nul E=\rank(I-E)$ dan $\nul E+\nul(I-E)=n$.
+Untuk $(A-aI)(A-bI)=0$ dengan $a\ne b$, rank--nulitas memberikan
+\[
+    \nul(A-aI)+\nul(A-bI)=n.
+\]
+Jadi solusi kedua sistem homogen itu bersama-sama menyediakan $n$
+arah bebas: kernelnya beririsan nol dan berjumlah langsung menjadi $\F^n$.
+Irisannya nol karena $Ax=ax$ dan $Ax=bx$ memaksa $(a-b)x=0$.
+
+\subsection{Memilih pendekatan pada soal rank dan nulitas}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=3pt]
+    \item Untuk pola entri, cari faktorisasi $UV$ atau tulis kolom
+        sebagai kombinasi beberapa vektor tetap. Buktikan juga batas
+        bawahnya; faktorisasi saja baru memberi batas atas.
+    \item Untuk nulitas, tentukan banyak kolom lebih dahulu. Jika kernel
+        mudah dideskripsikan, hitung dimensinya langsung; jika rank lebih
+        mudah ditemukan, gunakan $\nul A=n-\rank A$.
+    \item Untuk hasil kali, selidiki $\mathcal C(B)\cap\ker A$;
+        gunakan Sylvester jika hanya rank kedua faktor yang diketahui.
+    \item Untuk jumlah, periksa ruang kolom dan ruang baris sekaligus.
+        Rank umumnya tidak aditif.
+    \item Untuk blok, cari blok invertibel yang bisa dijadikan pivot.
+        Untuk parameter, pisahkan dahulu nilai yang membuat pivot gagal.
+    \item Untuk identitas seperti $A^2=0$ atau $A^2=A$, ubah identitas
+        menjadi inklusi atau dekomposisi ruang kolom dan kernel.
+    \item Untuk rank pangkat, periksa apakah penurunan rank mengecil
+        dan apakah kernel sudah stabil.
+\end{enumerate}
+
+Hubungan dengan determinan akan dibahas pada \autoref{ch:determinan}.
+Rank penuh matriks persegi berarti matriks tersebut invertibel;
+nanti kondisi yang sama dapat dikenali melalui determinan tak nol.
+
+\section{Latihan Pilihan}
+\label{rank:latihan}
+
+Soal berikut menggabungkan perhitungan struktural dan pembuktian.
+
+\begin{latihan}\label{rank:lat-siklus}
+    Misalkan $e_1,\ldots,e_n$ basis standar $\F^n$, $n\ge2$.
+    Matriks $C_t$ mempunyai kolom
+    \[
+        e_1-e_2,\ e_2-e_3,\ldots,e_{n-1}-e_n,\ e_n-te_1.
+    \]
+    Tentukan rank dan kernel $C_t$ untuk semua $t\in\F$.
+\end{latihan}
+
+\begin{latihan}\label{rank:lat-cancel}
+    Misalkan $\rank(AB)=\rank B$. Buktikan bahwa, untuk setiap
+    $X,Y$ berukuran sesuai,
+    \[
+        ABX=ABY\iff BX=BY.
+    \]
+    Buktikan pula versi kanan: jika $\rank(AB)=\rank A$, maka
+    $XAB=YAB\iff XA=YA$.
+\end{latihan}
+
+\begin{latihan}\label{rank:lat-produk-identitas}
+    Untuk $A_1,\ldots,A_k\in\Mat_n(\F)$, buktikan
+    \[
+        \rank(A_1A_2\cdots A_k-I)
+        \le\sum_{j=1}^k\rank(A_j-I).
+    \]
+    Untuk kasus $A_1=\cdots=A_k=A$, temukan batas atas yang lebih
+    kuat dengan memfaktorkan $A^k-I$.
+\end{latihan}
+
+\begin{latihan}\label{rank:lat-konstruksi}
+    Diberikan $A\in\Mat_{m\times n}(\F)$ dengan rank $r$.
+    Untuk setiap bilangan bulat $k$ dengan $r\le k\le n$, buktikan
+    bahwa terdapat $B\in\Mat_n(\F)$ sedemikian sehingga
+    \[
+        AB=0,\qquad \rank A+\rank B=k.
+    \]
+\end{latihan}
+
+\begin{latihan}\label{rank:lat-kernel-sama}
+    Misalkan $A,B\in\Mat_n(\F)$. Buktikan bahwa $\ker A=\ker B$
+    jika dan hanya jika terdapat matriks invertibel $P$ sehingga $A=PB$.
+    Apakah kesamaan $\rank A=\rank B$ saja sudah cukup untuk
+    menjamin keberadaan $P$ tersebut?
+\end{latihan}
+
+\begin{latihan}\label{rank:lat-gabungan}
+    Benar atau salah: untuk setiap $A,B\in\Mat_n(\F)$,
+    \[
+        \rank\begin{pmatrix}A\\B\end{pmatrix}=\rank[A\ B]?
+    \]
+    Jika salah, berikan contoh eksplisit terkecil yang memungkinkan.
+\end{latihan}
+
+\begin{latihan}\label{rank:lat-tiga-ruang}
+    Untuk matriks $A,B,C$ dengan jumlah baris sama, buktikan
+    \[
+        \rank[A\ B\ C]\le\rank[A\ B]+\rank[B\ C]-\rank B.
+    \]
+    Tentukan syarat tepat terjadinya kesamaan dalam bahasa ruang kolom.
+\end{latihan}
+
+\begin{latihan}\label{rank:lat-proyeksi}
+    Untuk $0\ne x\in\C^n$, definisikan
+    \[
+        P=I_n-\frac{xx^*}{x^*x}.
+    \]
+    Tentukan rank, ruang kolom, dan kernel $P$.
+\end{latihan}
+
+\begin{latihan}\label{rank:lat-stabil}
+    Buktikan bahwa $\rank A^2=\rank A$ jika dan hanya jika terdapat
+    matriks invertibel $B$ dengan $A^2=BA$.
+\end{latihan}
+
+\begin{latihan}\label{rank:lat-dua-idempoten}
+    Misalkan $E^2=E$ dan $F^2=F$. Buktikan bahwa $E+F$ idempoten
+    jika dan hanya jika $EF=FE=0$. Jika kondisi ini dipenuhi,
+    buktikan pula $\rank(E+F)=\rank E+\rank F$.
+\end{latihan}
+
+\begin{latihan}\label{rank:lat-blok-identitas}
+    Untuk $A,B\in\Mat_n(\F)$, buktikan
+    \[
+        \rank\begin{pmatrix}A&I_n\\0&B\end{pmatrix}=n+\rank(BA).
+    \]
+    Gunakan hasil tersebut untuk membuktikan ketaksamaan Sylvester
+    dengan bantuan \autoref{rank:segitiga-blok}.
+\end{latihan}
+
+\begin{latihan}\label{rank:lat-nilpoten}
+    Diberikan $A\in\Mat_{11}(\F)$ dengan $A^3=0$ dan $\rank A=7$.
+    Tentukan $\rank A^2$, $\nul A$, dan $\nul A^2$, lalu konstruksikan
+    satu matriks yang memenuhi seluruh syarat tersebut.
+\end{latihan}
+
+\begin{latihan}\label{rank:lat-irisan-kernel}
+    Matriks $A$ dan $B$ sama-sama mempunyai $n$ kolom, dengan
+    $\nul A=a$ dan $\nul B=b$.
+    Buktikan bahwa
+    \[
+        \max\{0,a+b-n\}\le\dim(\ker A\cap\ker B)\le\min\{a,b\}.
+    \]
+    Nyatakan dimensi irisan tersebut sebagai nulitas sebuah matriks blok,
+    lalu tentukan syarat agar $Ax=0$ dan $Bx=0$ hanya mempunyai solusi nol.
+\end{latihan}
+
+\begin{latihan}\label{rank:lat-nulitas-produk}
+    Matriks $A$ berukuran $3\times5$ dengan $\nul A=3$, sedangkan
+    $B$ berukuran $5\times4$ dengan $\nul B=1$.
+    Tentukan semua nilai yang mungkin bagi $\nul(AB)$ dan berikan
+    konstruksi untuk setiap nilai tersebut.
+\end{latihan}
+
+\ifpembahasan
+\section{Pembahasan Latihan}
+\label{rank:pembahasan}
+
+\subsection*{Latihan \ref{rank:lat-siklus}: relasi kolom sepanjang siklus}
+Persamaan $C_tc=0$ memberikan
+\[
+    c_1-tc_n=0,\qquad -c_{j-1}+c_j=0\quad(2\le j\le n).
+\]
+Jadi semua $c_j$ sama, dan $(1-t)c_1=0$.
+Untuk $t\ne1$, kernelnya nol dan ranknya $n$.
+Untuk $t=1$, kernelnya $\operatorname{span}\{(1,\ldots,1)^T\}$
+dan ranknya $n-1$. Hubungan kolom yang menyebabkan penurunan rank
+adalah jumlah seluruh kolom sama dengan nol.
+
+\subsection*{Latihan \ref{rank:lat-cancel}: pencoretan pada ruang kolom}
+Dari \autoref{rank:kesamaan-produk},
+$\mathcal C(B)\cap\ker A=\{0\}$.
+Jika $AB(X-Y)=0$, setiap kolom $B(X-Y)$ terletak pada irisan tersebut,
+sehingga $B(X-Y)=0$. Arah sebaliknya langsung.
+Untuk versi kanan, transpose persamaan dan gunakan
+$\rank(B^TA^T)=\rank A^T$. Pencoretan ini sah pada ruang yang relevan
+walaupun $A$ atau $B$ tidak invertibel pada seluruh ruang.
+
+\subsection*{Latihan \ref{rank:lat-produk-identitas}: ekspansi teleskopik}
+Gunakan identitas
+\[
+    A_1\cdots A_k-I
+    =\sum_{j=1}^k A_1\cdots A_{j-1}(A_j-I),
+\]
+dengan hasil kali kosong untuk $j=1$ diartikan $I$.
+Subaditivitas rank dan batas rank hasil kali memberi
+\[
+    \rank(A_1\cdots A_k-I)
+    \le\sum_{j=1}^k\rank\bigl(A_1\cdots A_{j-1}(A_j-I)\bigr)
+    \le\sum_{j=1}^k\rank(A_j-I).
+\]
+Jika semua $A_j=A$, batas umum tersebut dapat diperkuat:
+\[
+    A^k-I=(A-I)(I+A+\cdots+A^{k-1})
+    \quad\Longrightarrow\quad
+    \rank(A^k-I)\le\rank(A-I).
+\]
+Kesamaan dapat terjadi, misalnya pada $A=0$.
+Identitas khusus untuk faktor-faktor yang sama memberi informasi
+lebih kuat daripada hanya menjumlahkan batas rank setiap suku.
+
+\subsection*{Latihan \ref{rank:lat-konstruksi}: memilih citra di dalam kernel}
+Karena $\dim\ker A=n-r\ge k-r$, pilih $k-r$ vektor bebas
+$u_1,\ldots,u_{k-r}$ di dalam $\ker A$.
+Ambil $B$ yang kolom pertamanya adalah vektor-vektor itu dan semua
+kolom sisanya nol. Maka $AB=0$ dan $\rank B=k-r$.
+Untuk $k=r$, cukup pilih $B=0$.
+Konstruksi ini juga menjelaskan mengapa syarat $k\le n$ diperlukan.
+
+\subsection*{Latihan \ref{rank:lat-kernel-sama}: memperluas isomorfisme}
+Jika $A=PB$ dengan $P$ invertibel, jelas $Ax=0\iff Bx=0$.
+Sebaliknya, asumsikan kernelnya sama dan definisikan
+\[
+    T:\mathcal C(B)\longrightarrow\mathcal C(A),\qquad T(Bx)=Ax.
+\]
+Pemetaan ini terdefinisi baik: $Bx=By$ mengakibatkan
+$x-y\in\ker B=\ker A$, sehingga $Ax=Ay$.
+Ia surjektif menurut definisi ruang kolom dan injektif oleh kesamaan kernel.
+Pilih basis ruang kolom $B$, ambil bayangannya sebagai basis ruang
+kolom $A$, lalu perluas keduanya menjadi basis $\F^n$.
+Pemetaan yang memasangkan kedua basis lengkap memberikan matriks
+invertibel $P$ dengan $PBx=Ax$ untuk semua $x$.
+
+Kesamaan rank saja tidak cukup. Matriks
+$A=\diag(1,0)$ dan $B=\diag(0,1)$ sama-sama mempunyai rank satu tetapi
+mempunyai kernel berbeda, sehingga tidak dapat memenuhi $A=PB$
+dengan $P$ invertibel.
+
+\subsection*{Latihan \ref{rank:lat-gabungan}: ruang baris dan kolom berbeda}
+Pernyataannya salah. Ambil
+\[
+    A=\begin{pmatrix}1&0\\0&0\end{pmatrix},\qquad
+    B=\begin{pmatrix}0&1\\0&0\end{pmatrix}.
+\]
+Gabungan horizontal mempunyai rank satu, sedangkan gabungan vertikal
+mempunyai rank dua. Ukuran $2$ adalah yang terkecil: pada ukuran $1$,
+kedua gabungan sama-sama mempunyai rank nol jika kedua skalar nol,
+dan rank satu jika setidaknya satu skalar tak nol.
+
+\subsection*{Latihan \ref{rank:lat-tiga-ruang}: satu irisan yang pasti ada}
+Tuliskan
+$U=\mathcal C(A)+\mathcal C(B)$ dan
+$V=\mathcal C(B)+\mathcal C(C)$.
+Karena $\mathcal C(B)\subseteq U\cap V$, diperoleh
+\begin{align*}
+    \rank[A\ B\ C]
+    &=\dim(U+V)=\dim U+\dim V-\dim(U\cap V)\\
+    &\le\rank[A\ B]+\rank[B\ C]-\rank B.
+\end{align*}
+Kesamaan berlaku tepat ketika
+\[
+    \bigl(\mathcal C(A)+\mathcal C(B)\bigr)
+    \cap\bigl(\mathcal C(B)+\mathcal C(C)\bigr)=\mathcal C(B).
+\]
+
+\subsection*{Latihan \ref{rank:lat-proyeksi}: satu arah dihilangkan}
+Karena $x^*x>0$, rumus $P$ terdefinisi. Untuk setiap $y$,
+$Py=y-x(x^*y)/(x^*x)$.
+Jadi $Py=0$ tepat ketika $y$ kelipatan $x$.
+Selanjutnya, $x^*Py=0$; sebaliknya, jika $x^*z=0$, maka $Pz=z$.
+Dengan demikian
+\[
+    \ker P=\operatorname{span}\{x\},\qquad
+    \mathcal C(P)=\{z:x^*z=0\},\qquad \rank P=n-1.
+\]
+
+\subsection*{Latihan \ref{rank:lat-stabil}: faktor invertibel dari dekomposisi}
+Jika $A^2=BA$ dengan $B$ invertibel, perkalian di kiri tidak
+mengubah rank, sehingga $\rank A^2=\rank A$.
+Sebaliknya, \autoref{rank:stabil-awal} memberi
+\[
+    A=S\begin{pmatrix}D&0\\0&0\end{pmatrix}S^{-1}
+\]
+dengan $D$ invertibel. Pilih
+$B=S\diag(D,I_{n-\rank A})S^{-1}$.
+Matriks ini invertibel dan $BA=A^2$.
+Untuk $A=0$, dapat langsung dipilih $B=I_n$.
+
+\subsection*{Latihan \ref{rank:lat-dua-idempoten}: memaksa dua hasil kali nol}
+Dari $(E+F)^2=E+F$ diperoleh $EF+FE=0$.
+Kalikan dari kiri dan kanan dengan $E$ secara terpisah:
+\[
+    EF+EFE=0,\qquad EFE+FE=0.
+\]
+Maka $EF=FE$, sehingga $2EF=0$ dan $EF=FE=0$ di atas $\R$ atau $\C$.
+Arah sebaliknya diperoleh dengan mengembangkan $(E+F)^2$.
+
+Jika $EF=FE=0$, setiap $z\in\mathcal C(E)\cap\mathcal C(F)$ memenuhi
+$Ez=z$ karena $E$ idempoten, tetapi juga $Ez=0$ karena $EF=0$.
+Jadi irisannya nol. Selain itu,
+$(E+F)E=E$ dan $(E+F)F=F$, sehingga
+$\mathcal C(E+F)=\mathcal C(E)+\mathcal C(F)$.
+Rumus dimensi memberi $\rank(E+F)=\rank E+\rank F$.
+
+\subsection*{Latihan \ref{rank:lat-blok-identitas}: menukar blok kolom}
+Pertukaran kedua blok kolom mempertahankan rank dan menghasilkan
+\[
+    \begin{pmatrix}I&A\\B&0\end{pmatrix}.
+\]
+Komplemen Schur terhadap $I$ adalah $-BA$, sehingga ranknya
+$n+\rank(BA)$.
+Di sisi lain, \autoref{rank:segitiga-blok} memberi batas bawah
+$\rank A+\rank B$ untuk matriks semula. Maka
+\[
+    \rank(BA)\ge\rank A+\rank B-n.
+\]
+Ini adalah Sylvester untuk $BA$; tukar nama $A,B$ untuk bentuk $AB$.
+
+\subsection*{Latihan \ref{rank:lat-nilpoten}: mengekang selisih rank}
+Tuliskan $s=\rank A^2$. Barisan ranknya dimulai dengan $11,7,s,0$.
+Selisih-selisihnya harus tidak meningkat:
+\[
+    4\ge7-s\ge s\ge0.
+\]
+Jadi $s\ge3$ dan $s\le7/2$; karena $s$ bilangan bulat, $s=3$.
+Dengan rank--nulitas, $\nul A=11-7=4$ dan $\nul A^2=11-3=8$.
+Dengan $N_3$ seperti pada contoh sebelumnya dan
+$N_2=\begin{pmatrix}0&1\\0&0\end{pmatrix}$, ambil
+\[
+    A=\diag(N_3,N_3,N_3,N_2).
+\]
+Matriks ini berukuran $11$, ranknya $2+2+2+1=7$,
+rank kuadratnya $1+1+1=3$, dan pangkat tiganya nol.
+
+\subsection*{Latihan \ref{rank:lat-irisan-kernel}: dua sistem homogen sekaligus}
+Ambil $U=\ker A$ dan $V=\ker B$ sebagai subruang $\F^n$.
+Rumus dimensi memberi
+\[
+    \dim(U\cap V)=a+b-\dim(U+V)\ge a+b-n.
+\]
+Dimensi tidak negatif, dan $U\cap V$ termuat dalam masing-masing
+ruang, sehingga juga tidak melebihi $\min\{a,b\}$.
+Selanjutnya,
+\[
+    \ker\begin{pmatrix}A\\B\end{pmatrix}=U\cap V.
+\]
+Jadi sistem gabungan hanya mempunyai solusi nol tepat ketika
+$\nul\binom{A}{B}=0$, atau ekuivalen $\rank\binom{A}{B}=n$.
+Syarat $a+b\le n$ perlu untuk itu, tetapi belum cukup;
+misalnya, dua kernel yang sama-sama berupa garis yang sama di $\F^2$
+tetap beririsan tak nol.
+
+\subsection*{Latihan \ref{rank:lat-nulitas-produk}: memperhatikan ruang perantara}
+Rank kedua faktor adalah $\rank A=5-3=2$ dan $\rank B=4-1=3$.
+Di ruang perantara $\F^5$, ruang $\mathcal C(B)$ dan $\ker A$
+sama-sama berdimensi $3$. Dimensi irisannya sedikitnya $3+3-5=1$
+dan paling banyak $3$. Karena itu,
+\[
+    \nul(AB)=\nul B+\dim(\mathcal C(B)\cap\ker A)\in\{2,3,4\}.
+\]
+Untuk merealisasikan ketiganya, tetapkan
+\[
+    A=\begin{pmatrix}1&0&0&0&0\\0&1&0&0&0\\0&0&0&0&0\end{pmatrix}.
+\]
+Dengan $e_j$ basis standar $\F^5$, pilih secara berturut-turut
+\[
+    B_2=[e_1\ e_2\ e_3\ 0],\quad
+    B_3=[e_1\ e_3\ e_4\ 0],\quad
+    B_4=[e_3\ e_4\ e_5\ 0].
+\]
+Masing-masing mempunyai rank $3$ dan nulitas $1$.
+Hasil kali $AB_2,AB_3,AB_4$ mempunyai rank $2,1,0$ dan
+nulitas $2,3,4$, sesuai konstruksi yang diminta.
+\fi

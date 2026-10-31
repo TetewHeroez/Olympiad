@@ -4,9 +4,8 @@
 \chapter{Determinan}
 \label{ch:determinan}
 
-Pembahasan ini mengikuti bagian \emph{Definitions and Facts} pada
-\citet[hlm.~21--23]{zhang2009}, yaitu halaman PDF 40--42, kemudian
-mengembangkan teknik determinan dari soal-soal Bab 2 buku tersebut.
+Bab ini membahas sifat dasar determinan dan mengembangkan teknik
+perhitungannya melalui identitas, pola entri, rekurensi, dan matriks blok.
 Operasi matriks, operasi baris elementer, dan pengertian invers dianggap
 sudah dikenal. Semua matriks berentri dalam $\F=\R$ atau $\C$, kecuali
 dinyatakan lain. Notasi $|A|$ berarti $\det A$; untuk suatu skalar
@@ -145,7 +144,7 @@ multilinearitas: suku tambahan mempunyai dua baris yang sama.
       Terapkan \autoref{det:unik} pada kolom-kolom $B$.
 \end{proof}
 
-\begin{prop}[Sifat-sifat dasar Zhang]
+\begin{prop}[Sifat-sifat dasar determinan]
       \label{det:dasar}
       Untuk $A,B\in\Mat_n(\F)$, skalar $c$, dan matriks invertibel $S$:
       \begin{enumerate}[label=(d\arabic*),nosep]
@@ -158,7 +157,6 @@ multilinearitas: suku tambahan mempunyai dua baris yang sama.
             \item $\det(AB)=\det A\det B$.
             \item $\det(S^{-1}AS)=\det A$.
       \end{enumerate}
-      \sumber{\citet[hlm.~22, sifat (d1)--(d7)]{zhang2009}}
 \end{prop}
 \begin{proof}
       Pada matriks segitiga, hanya permutasi identitas yang dapat memberi
@@ -188,7 +186,6 @@ multilinearitas: suku tambahan mempunyai dua baris yang sama.
       Jika $C=[r_4\ r_3\ r_2\ a+b]$, urutan empat kolom dibalik melalui
       $\binom42=6$ pertukaran, sehingga $\det C=(-1)^6(4+1)=5$.
       Pada umumnya $\det(A+B)\ne\det A+\det B$.
-      \sumber{\citet[Soal 2.13]{zhang2009}}
 \end{exam}
 
 \subsection{Tanda permutasi dan kenolan struktural}
@@ -201,8 +198,7 @@ di sebelah kiri diagonal sekundernya,
       \det A=(-1)^{n(n-1)/2}\prod_{i=1}^n a_{i,n+1-i}.
 \]
 Pembalikan kolom mengubah matriks tersebut menjadi segitiga bawah.
-Argumen ini juga menerangkan tanda determinan matriks pembalik urutan
-pada \citet[Soal 2.31]{zhang2009}.
+Argumen ini juga menerangkan tanda determinan matriks pembalik urutan.
 
 \begin{exam}[Determinan nol tanpa ekspansi]
       Determinan matriks berikut nol untuk semua nilai entrinya:
@@ -215,7 +211,6 @@ pada \citet[Soal 2.31]{zhang2009}.
       Dalam suku Leibniz yang tidak nol, tiga baris terakhir harus memilih
       kolom dari himpunan $\{1,2\}$. Tiga kolom yang berbeda tidak dapat
       dipilih dari dua kemungkinan. Jadi setiap suku Leibniz nol.
-      \sumber{\citet[Soal 2.3]{zhang2009}}
 \end{exam}
 
 \section{Adjugat dan Perubahan Entri}
@@ -227,8 +222,7 @@ pada \citet[Soal 2.31]{zhang2009}.
       \[
             (\operatorname{adj}(A))_{ij}=C_{ji}.
       \]
-      Istilah \emph{adjoint} pada halaman 22 buku Zhang menunjuk ke matriks
-      ini, bukan transpose konjugat $A^*=\overline A^{\,T}$.
+      Adjugat berbeda dari transpose konjugat $A^*=\overline A^{\,T}$.
 \end{defi}
 
 \begin{thm}[Identitas adjugat]
@@ -274,8 +268,7 @@ pada \citet[Soal 2.31]{zhang2009}.
 \end{proof}
 
 Khususnya, $\det(I_n+uv^T)=1+v^Tu$. Dengan $v^T$ diganti oleh
-$-y^*$, diperoleh $\det(I_n-xy^*)=1-y^*x$, yaitu identitas dalam
-\citet[Soal 2.41(a)]{zhang2009}. Rumus adjugat di atas tetap sah
+$-y^*$, diperoleh $\det(I_n-xy^*)=1-y^*x$. Rumus adjugat di atas tetap sah
 ketika $A$ singular; rumus yang mengandung $A^{-1}$ tidak boleh
 dipakai pada kasus tersebut.
 
@@ -315,8 +308,6 @@ menghitung keseluruhan polinom.
       \]
       Jika $A(t)$ invertibel, bentuknya menjadi
       $\det A(t)\,\tr(A(t)^{-1}A'(t))$.
-      \sumber{pengembangan rumus diferensiasi per kolom pada
-            \citet[Soal 2.11]{zhang2009}}
 \end{prop}
 \begin{proof}
       Turunkan rumus Leibniz dengan aturan turunan hasil kali.
@@ -347,7 +338,6 @@ Rumus tanpa invers tetap berlaku pada nilai $t$ yang membuat $A(t)$ singular.
 \begin{exam}[Entri di luar diagonal sama]
       Tentukan determinan matriks dengan entri diagonal $p_1,\ldots,p_n$
       dan seluruh entri di luar diagonal sama dengan $a$.
-      \sumber{\citet[Soal 2.6(b)]{zhang2009}, ditulis dalam bentuk ekuivalen}
 \end{exam}
 \begin{solution}
       Dengan $\boldsymbol{1}=(1,\ldots,1)^T$, matriksnya adalah
@@ -361,7 +351,7 @@ Rumus tanpa invers tetap berlaku pada nilai $t$ yang membuat $A(t)$ singular.
       \]
       Jika $f(x)=\prod_i(p_i-x)$ dan $f_i(a)=\prod_{j\ne i}(p_j-a)$,
       hasil ini sama dengan $f(a)+a\sum_i f_i(a)$.
-      Karena $f(a)=(p_n-a)f_n(a)$, bentuk yang dicantumkan Zhang ialah
+      Karena $f(a)=(p_n-a)f_n(a)$, bentuk ekuivalennya ialah
       $a\sum_{i=1}^{n-1}f_i(a)+p_nf_n(a)$.
 
       Khususnya, jika semua entri diagonal adalah $\alpha$ dan semua entri
@@ -370,7 +360,7 @@ Rumus tanpa invers tetap berlaku pada nilai $t$ yang membuat $A(t)$ singular.
             \boxed{\det M=(\alpha-\beta)^{n-1}
                   \bigl(\alpha+(n-1)\beta\bigr).}
       \]
-      Inilah hasil pada Soal 2.6(c). Untuk $n\ge2$, kedua kemungkinan
+      Untuk $n\ge2$, kedua kemungkinan
       singularnya adalah $\alpha=\beta$ atau $\alpha=-(n-1)\beta$.
 \end{solution}
 
@@ -390,7 +380,6 @@ Rumus tanpa invers tetap berlaku pada nilai $t$ yang membuat $A(t)$ singular.
       \[
             \det M=\frac{bf(a)-af(b)}{b-a}.
       \]
-      \sumber{\citet[Soal 2.6(a)]{zhang2009}}
 \end{exam}
 \begin{solution}
       \ide{Kurangkan satu matriks rank satu agar sisanya segitiga.}
@@ -438,7 +427,6 @@ Rumus tanpa invers tetap berlaku pada nilai $t$ yang membuat $A(t)$ singular.
             \end{vmatrix}
             =\prod_{1\le i<j\le n}(x_j-x_i).
       \]
-      \sumber{\citet[Soal 2.7]{zhang2009}}
 \end{thm}
 \begin{proof}
       Pandang $V_n$ sebagai polinom dalam $x_n$, dengan koefisien berupa polinom
@@ -484,8 +472,6 @@ Rumus tanpa invers tetap berlaku pada nilai $t$ yang membuat $A(t)$ singular.
       mempunyai koefisien utama $1/k!$. Evaluasi pada $0,1,\ldots,n-1$
       menghasilkan faktor Vandermonde $\prod_{k=1}^{n-1}k!$, yang tepat
       membatalkan hasil kali koefisien utama.
-      \sumber{bagian pertama \citet[Soal 2.7]{zhang2009}; bagian binomial
-            merupakan pengembangan dari identitas yang sama}
 \end{exam}
 
 \section{Determinan melalui Rekurensi}
@@ -517,7 +503,6 @@ Rumus tanpa invers tetap berlaku pada nilai $t$ yang membuat $A(t)$ singular.
 \begin{exam}[Dua akar rekurensi yang dapat berimpit]
       Ambil $p=a+b$, $q=ab$, dan $r=1$ pada $T_n$.
       Tentukan $D_n$, termasuk ketika $a=b$.
-      \sumber{\citet[Soal 2.8]{zhang2009}}
 \end{exam}
 \begin{solution}
       Rekurensinya
@@ -539,7 +524,6 @@ Rumus tanpa invers tetap berlaku pada nilai $t$ yang membuat $A(t)$ singular.
       Untuk $p=q=1$ dan $r=-1$, rekurensinya $D_n=D_{n-1}+D_{n-2}$,
       dengan $D_0=D_1=1$. Dengan konvensi $F_0=0$, $F_1=1$, diperoleh
       $D_n=F_{n+1}$. Khususnya determinan berukuran $5$ bernilai $F_6=8$.
-      \sumber{\citet[Soal 2.2]{zhang2009}; rekurensi ditulis untuk ukuran umum}
 \end{exam}
 
 \begin{exam}[Determinan matriks pendamping]
@@ -554,7 +538,6 @@ Rumus tanpa invers tetap berlaku pada nilai $t$ yang membuat $A(t)$ singular.
             \end{pmatrix}.
       \]
       Buktikan $\det(tI_n-C)=t^n+a_{n-1}t^{n-1}+\cdots+a_1t+a_0$.
-      \sumber{\citet[Soal 2.10]{zhang2009}, dengan konvensi $\det(tI-C)$}
 \end{exam}
 \begin{solution}
       Tuliskan determinan yang dicari sebagai $P_n(t)$.
@@ -604,7 +587,6 @@ hipotesis tambahan dan urutan faktor yang tepat.
       \]
       Jika $D$ invertibel, rumus alternatifnya adalah
       $\det M=\det D\det(A-BD^{-1}C)$.
-      \sumber{rumus pertama pada \citet[Soal 2.35(a)]{zhang2009}}
 \end{thm}
 \begin{proof}
       Kalikan dari kiri dengan matriks segitiga blok berdeterminan $1$:
@@ -624,7 +606,6 @@ hipotesis tambahan dan urutan faktor yang tepat.
       \[
             \det\begin{pmatrix}A&B\\C&D\end{pmatrix}=\det(AD-CB).
       \]
-      \sumber{\citet[Soal 2.35(b)]{zhang2009}}
 \end{thm}
 \begin{proof}
       Jika $A$ invertibel, rumus Schur memberi
@@ -673,7 +654,6 @@ melalui satu determinan $2\times2$, berapa pun besarnya $n$.
             \det\begin{pmatrix}A&B\\B&A\end{pmatrix}
             =\det(A+B)\det(A-B).
       \]
-      \sumber{bagian determinan pada \citet[Soal 2.40]{zhang2009}}
 \end{exam}
 \begin{solution}
       Ambil $T=\left(\begin{smallmatrix}I&I\\I&-I\end{smallmatrix}\right)$,
@@ -691,7 +671,6 @@ melalui satu determinan $2\times2$, berapa pun besarnya $n$.
       \[
             \det\begin{pmatrix}A&B\\-B&A\end{pmatrix}\ge0.
       \]
-      \sumber{bagian real dari \citet[Soal 2.39]{zhang2009}}
 \end{exam}
 \begin{solution}
       Lakukan perhitungan di $\C$ dengan
@@ -714,13 +693,11 @@ melalui satu determinan $2\times2$, berapa pun besarnya $n$.
 \end{solution}
 
 \clearpage
-\section{Latihan dari Zhang}
+\section{Latihan Pilihan}
 \label{det:latihan}
 
-Soal-soal berikut dipilih dari Bab 2 \citet{zhang2009} dan dituliskan
-kembali dalam bahasa Indonesia. Nomor soal sumber dicantumkan agar
-dapat dicocokkan dengan buku. Jawaban perlu disertai identitas atau
-struktur yang digunakan, bukan hanya nilai akhir determinan.
+Soal-soal berikut melatih penggunaan sifat dan teknik determinan.
+Sertakan identitas atau struktur yang digunakan dalam setiap jawaban.
 
 \begin{latihan}\label{det:lat-tigadeterminan}
       Tentukan ketiga determinan berikut, dengan $x\in\F$:
@@ -730,13 +707,11 @@ struktur yang digunakan, bukan hanya nilai akhir determinan.
             \qquad
             \begin{vmatrix}x&x^2&x^3\\x^8&x^9&x^4\\x^7&x^6&x^5\end{vmatrix}.
       \]
-      \sumber{\citet[Soal 2.1, hlm.~26; PDF hlm.~45]{zhang2009}}
 \end{latihan}
 
 \begin{latihan}\label{det:lat-divisibilitas}
       Jika seluruh entri $A\in\Mat_n(\Z)$ bernilai $1$ atau $-1$,
       buktikan bahwa $2^{n-1}$ membagi $\det A$.
-      \sumber{\citet[Soal 2.12, hlm.~29; PDF hlm.~48]{zhang2009}}
 \end{latihan}
 
 \begin{latihan}\label{det:lat-paritas}
@@ -746,13 +721,11 @@ struktur yang digunakan, bukan hanya nilai akhir determinan.
             \item Jika $A\in\Mat_n(\R)$ memenuhi $A^2+I_n=0$, buktikan $n$ genap.
             \item Apakah kesimpulan (b) tetap berlaku untuk matriks kompleks?
       \end{enumerate}
-      \sumber{\citet[Soal 2.14, hlm.~29; PDF hlm.~48]{zhang2009}}
 \end{latihan}
 
 \begin{latihan}\label{det:lat-ortogonal}
       Misalkan $A\in\Mat_n(\C)$ memenuhi $AA^T=I_n$ dan $\det A<0$.
       Tentukan $\det(A+I_n)$ tanpa menggunakan nilai eigen.
-      \sumber{\citet[Soal 2.15, hlm.~29; PDF hlm.~48]{zhang2009}}
 \end{latihan}
 
 \begin{latihan}\label{det:lat-blok-syarat}
@@ -762,7 +735,6 @@ struktur yang digunakan, bukan hanya nilai akhir determinan.
             \item mengganti $\det(AD-CB)$ oleh $\det(AD-BC)$ meskipun $AC=CA$;
             \item menggunakan $\det M=\det(AD-CB)$ tanpa syarat $AC=CA$.
       \end{enumerate}
-      \sumber{\citet[Soal 2.35(c),(d), hlm.~33; PDF hlm.~52]{zhang2009}}
 \end{latihan}
 
 \begin{latihan}\label{det:lat-dependensi}
@@ -772,7 +744,6 @@ struktur yang digunakan, bukan hanya nilai akhir determinan.
             \det(A+B_i)=\det A+\det B_i,\qquad i=1,2,3,4,
       \]
       buktikan bahwa $B_1,B_2,B_3,B_4$ bergantung linear atas $\R$.
-      \sumber{\citet[Soal 2.36(b), hlm.~33; PDF hlm.~52]{zhang2009}}
 \end{latihan}
 
 \begin{latihan}\label{det:lat-permutasiblok}
@@ -785,7 +756,6 @@ struktur yang digunakan, bukan hanya nilai akhir determinan.
                   a_1 & 0 & 0 & b_1 \\0&a_2&b_2&0\\0&b_3&a_3&0\\b_4&0&0&a_4
             \end{vmatrix}.
       \]
-      \sumber{\citet[Soal 2.4, hlm.~26; PDF hlm.~45]{zhang2009}}
 \end{latihan}
 
 \ifpembahasan

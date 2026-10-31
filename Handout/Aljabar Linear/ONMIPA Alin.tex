@@ -110,6 +110,12 @@
     exam={\textbf{Contoh}}[chapter]{interior style={left color=DarkGreen!8,right color=DarkGreen!5!CyaN!50}, borderline west={1.5mm}{0mm}{DarkGreen}},
 }
 \newtheorem*{remark}{\textbf{Catatan}}
+
+\mynewtcbtheorem{
+    definisi={style={handout ribbon={Definisi}{AADarkRed}{defi}}},
+    teorema={style={handout ribbon={Teorema}{AAIndigo}{thm}}},
+}
+
 % Names used by \autoref for the custom theorem counters.
 \renewcommand{\defiautorefname}{Definisi}
 \renewcommand{\thmautorefname}{Teorema}
@@ -124,16 +130,16 @@
 \def\theHexam{\theHchapter.\arabic{exam}}
 
 
-% Materi lokal (2026-10-31): Determinan, mengikuti Bab 2 Fuzhen Zhang.
+% Materi matriks dan dekomposisinya; rujukan buku-buku Fuzhen Zhang.
 \DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nul}{nul}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\diag}{diag}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Mat}{\mathrm{M}}
-\newcommand{\sumber}[1]{\par\smallskip{\normalfont\small\color{AABlue}Sumber: #1.}\par}
+\newcommand{\Mat}{\mathbb{M}}
 \newcommand{\ide}[1]{\par\smallskip\noindent\textbf{Ide utama.} #1\par\smallskip}
 \theoremstyle{definition}
 \newtheorem{latihan}{Latihan}[chapter]
@@ -146,7 +152,7 @@
 \pembahasantrue
 \setcounter{tocdepth}{1}
 \setcounter{secnumdepth}{2}
-\hypersetup{pdftitle={Handout ONMIPA-PT: Aljabar Linear -- Determinan},
+\hypersetup{pdftitle={Handout ONMIPA-PT: Aljabar Linear -- Matriks},
     pdfauthor={Teosofi Hidayah Agung}}
 \begin{document}
 \thispagestyle{empty}
@@ -163,7 +169,7 @@
 \makeatletter
 \oddoutermargin{\sffamily \leftmark}
 \evenoutermargin{\sffamily\@title}
-\chapimage{bookstyle/LogoAA.png}
+\chapimage{}
 \makeatother
 
 
@@ -188,12 +194,89 @@
 
 \mainmatter
 \pagenumbering{arabic}
-\partabstract{\hspace*{2em} Identitas dan teknik determinan untuk
-    persiapan ONMIPA, mengikuti pembahasan dan soal-soal Bab 2
-    \emph{Linear Algebra: Challenging Problems for Students}
-    karya Fuzhen Zhang.}
+\partabstract{
+
+    Sebelum memasuki pembahasan pada bagian ini, pembaca
+    diharapkan telah memahami \textit{operasi baris elementer}
+    (OBE) dan \textit{operasi kolom elementer} (OKE).
+    Kedua operasi tersebut merupakan perangkat dasar dalam
+    aljabar linear yang memungkinkan suatu matriks
+    ditransformasikan ke bentuk yang lebih sederhana.
+    Dalam penyelesaian soal-soal olimpiade matematika,
+    kemampuan memilih transformasi yang tepat sering kali
+    lebih penting daripada melakukan perhitungan secara
+    langsung.
+
+    Sebagai pengingat, terdapat tiga jenis operasi baris
+    elementer, yaitu pertukaran dua baris, perkalian suatu
+    baris dengan skalar tak nol, serta penjumlahan suatu
+    baris dengan kelipatan baris lainnya. Ketiganya dapat
+    dinyatakan secara simbolis sebagai berikut:
+    \[
+        \begin{aligned}
+            R_i & \leftrightarrow R_j
+                &                                            & \text{(pertukaran dua baris)},        \\
+            R_i & \leftarrow \lambda R_i,\quad \lambda\neq 0
+                &                                            & \text{(perkalian dengan skalar)},     \\
+            R_i & \leftarrow R_i+\lambda R_j,\quad i\neq j
+                &                                            & \text{(penjumlahan kelipatan baris)}.
+        \end{aligned}
+    \]
+    Operasi kolom elementer didefinisikan secara analog
+    dengan mengganti baris $R_i$ menjadi kolom $C_i$.
+
+    Dari sudut pandang aljabar, operasi baris elementer
+    bersesuaian dengan perkalian matriks elementer dari
+    sebelah kiri, sedangkan operasi kolom elementer
+    bersesuaian dengan perkalian dari sebelah kanan.
+    Dengan demikian, untuk setiap
+    $A\in\mathbb{F}^{m\times n}$, serangkaian operasi
+    baris dan kolom elementer dapat dinyatakan sebagai
+    \[
+        A\longmapsto PAQ,
+    \]
+    dengan $P\in GL_m(\mathbb{F})$ dan
+    $Q\in GL_n(\mathbb{F})$ merupakan matriks invertibel.
+    Transformasi tersebut mempertahankan rank matriks,
+    yakni
+    \[
+        \operatorname{rank}(PAQ)=\operatorname{rank}(A).
+    \]
+    Bahkan, dengan pemilihan $P$ dan $Q$ yang sesuai,
+    setiap matriks $A$ dapat direduksi menjadi bentuk
+    \[
+        PAQ=
+        \begin{pmatrix}
+            I_r & 0 \\
+            0   & 0
+        \end{pmatrix},
+        \qquad r=\operatorname{rank}(A).
+    \]
+
+    Perlu diperhatikan bahwa tidak semua sifat matriks
+    dipertahankan oleh operasi-operasi tersebut. Sebagai
+    contoh, pada matriks persegi, determinan, trace, dan
+    nilai eigen pada umumnya dapat berubah. Oleh karena
+    itu, pemahaman mengenai besaran yang invarian terhadap
+    suatu transformasi menjadi salah satu gagasan penting
+    yang akan terus digunakan dalam pembahasan matriks,
+    khususnya pada persoalan-persoalan olimpiade.
+
+}
 \part{Matriks}
-\input{Bab/01-Matriks/01-Determinan}
+\input{Bab/01-Matriks/01-Rank-dan-Nulitas}
+\input{Bab/01-Matriks/02-Determinan}
+\input{Bab/01-Matriks/03-Nilai-Eigen-dan-Vektor-Eigen}
+\input{Bab/01-Matriks/04-Dekomposisi-Matriks}
+\input{Bab/01-Matriks/05-Matriks-Khusus}
+
+\partabstract{}
+\part{Ruang Vektor}
+
+\partabstract{}
+\part{Hasil Kali Dalam}
+
+\nocite{zhang2009,zhang2011}
 \bibliographystyle{plainnat}
 \bibliography{references}
 \end{document}

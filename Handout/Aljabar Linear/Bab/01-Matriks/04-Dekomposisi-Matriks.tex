@@ -1,0 +1,817 @@
+% !TeX root = ../../ONMIPA Alin.tex
+% Sumber utama: Zhang (2009), Bab 3; Zhang (2011), bagian 3.1--3.4.
+\chapter{Dekomposisi Matriks}
+\label{ch:dekomposisi}
+
+Bab sebelumnya menyediakan nilai eigen, ruang eigen, dan polinom minimal.
+Sekarang kita memilih basis yang menyederhanakan matriks: mula-mula
+basis vektor eigen, lalu basis rantai Jordan, dan akhirnya basis
+ortonormal pada dekomposisi Schur serta spektral.
+
+\section{Diagonalisasi}
+\label{eigen:diagonalisasi}
+
+\begin{definisi}[][Matriks yang dapat didiagonalkan][dekomp:def-diagonal]
+    Matriks $A\in\Mat_n(\F)$ dapat didiagonalkan di atas $\F$ jika
+    $A=PDP^{-1}$ dengan $D$ diagonal dan $P$ invertibel, keduanya
+    berentri dalam $\F$.
+\end{definisi}
+
+\begin{teorema}[][Kriteria diagonalisasi][eigen:kriteria-diagonal]
+    Untuk $A\in\Mat_n(\F)$, pernyataan berikut ekuivalen:
+    \begin{enumerate}[label=(\roman*),nosep]
+        \item $A$ dapat didiagonalkan di atas $\F$;
+        \item terdapat basis $\F^n$ yang seluruh anggotanya vektor eigen $A$;
+        \item $\chi_A$ terurai menjadi faktor linear di atas $\F$ dan
+            $g_\lambda=a_\lambda$ untuk setiap nilai eigen $\lambda$.
+    \end{enumerate}
+\end{teorema}
+\begin{proof}
+    Jika $P=[v_1\ \cdots\ v_n]$ dan
+    $D=\diag(\lambda_1,\ldots,\lambda_n)$, persamaan $AP=PD$
+    ekuivalen dengan $Av_i=\lambda_iv_i$ untuk setiap $i$.
+    Ini membuktikan (i)--(ii).
+    Ruang-ruang eigen berbeda berjumlah langsung dan dimensinya
+    tidak melebihi multiplisitas aljabarnya.
+    Karena $\sum_\lambda a_\lambda=n$ ketika polinomnya terurai,
+    basis vektor eigen ada tepat ketika setiap batas tersebut tercapai.
+\end{proof}
+
+Adanya $n$ nilai eigen berbeda cukup untuk diagonalisasi, tetapi
+tidak perlu: matriks identitas mempunyai satu nilai eigen dan tetap
+diagonal. Sebaliknya, akar berulang mengharuskan pemeriksaan dimensi
+ruang eigen; akar berulang sendiri tidak memutuskan jawabannya.
+
+\begin{exam}[Parameter pada ruang eigen berulang]
+    Tentukan kapan
+    \[
+        A_t=\begin{pmatrix}1&t&0\\0&1&0\\0&0&2\end{pmatrix}
+    \]
+    dapat didiagonalkan.
+\end{exam}
+\begin{solution}
+    Untuk setiap $t$, $\chi_{A_t}(x)=(x-1)^2(x-2)$.
+    Persamaan $(A_t-I)v=0$ memberi $tv_2=0$ dan $v_3=0$.
+    Jadi $g_1=2$ jika $t=0$, tetapi $g_1=1$ jika $t\ne0$.
+    Karena $g_2=1$, matriks dapat didiagonalkan tepat ketika $t=0$.
+    Contoh ini juga menunjukkan bahwa polinom karakteristik yang sama
+    dapat dimiliki oleh matriks yang tidak serupa.
+\end{solution}
+
+\begin{exam}[Pola diagonal dan luar diagonal konstan]
+    Misalkan $A$ berukuran $n\ge2$, dengan entri diagonal $a$ dan
+    semua entri luar diagonal $b$. Tentukan ruang eigen dan pangkat $A$.
+\end{exam}
+\begin{solution}
+    Dengan $e=(1,\ldots,1)^T$ dan $J_n=ee^T$,
+    \[
+        A=(a-b)I+bJ_n,\qquad J_ne=ne.
+    \]
+    Pada ruang $H=\{x:e^Tx=0\}$, berlaku $J_nx=0$.
+    Karena $\F^n=\operatorname{span}\{e\}\oplus H$, matriks $A$
+    bekerja sebagai perkalian dengan $a+(n-1)b$ pada ruang pertama
+    dan $a-b$ pada ruang kedua. Jika $b\ne0$, kedua nilai ini berbeda
+    dan multiplisitasnya $1$ serta $n-1$. Jika $b=0$, $A=aI$ dan
+    ruang eigen untuk $a$ adalah seluruh $\F^n$.
+
+    Definisikan $P=J_n/n$ dan $Q=I-P$.
+    Karena $P^2=P$, $Q^2=Q$, dan $PQ=QP=0$,
+    \[
+        A^k=\bigl(a+(n-1)b\bigr)^kP+(a-b)^kQ\qquad(k\ge1).
+    \]
+    Untuk $k=0$, $A^0=P+Q=I$.
+    Jika kedua skalar tak nol, invers diperoleh dengan mengganti
+    pangkat $k$ oleh $-1$.
+\end{solution}
+
+
+\begin{exam}[Menyusun matriks perubahan basis]
+    Diagonalkan
+    \[
+        A=\begin{pmatrix}1&2&2\\2&1&2\\2&2&1\end{pmatrix}.
+    \]
+\end{exam}
+\begin{solution}
+    Karena $A=-I+2J_3$, nilai eigennya $5,-1,-1$.
+    Pilih $v_1=(1,1,1)^T$, $v_2=(1,-1,0)^T$, dan $v_3=(1,1,-2)^T$.
+    Ketiganya bebas dan memenuhi
+    \[
+        P=\begin{pmatrix}1&1&1\\1&-1&1\\1&0&-2\end{pmatrix},\qquad
+        AP=P\diag(5,-1,-1).
+    \]
+    Jadi $P^{-1}AP=\diag(5,-1,-1)$.
+    Jika tiap kolom dinormalisasi, diperoleh matriks ortogonal dan
+    diagonalisasi yang sekaligus mempertahankan hasil kali dalam.
+\end{solution}
+
+Medan skalar tetap penting. Matriks real
+$R=\begin{pmatrix}0&-1\\1&0\end{pmatrix}$ mempunyai polinom
+$t^2+1$, sehingga tidak mempunyai vektor eigen real.
+Di atas $\C$, nilai eigennya $i,-i$ berbeda dan $R$ dapat didiagonalkan.
+
+\section{Polinom Minimal dan Proyektor}
+\label{dekomp:polinom}
+
+Polinom minimal dari \autoref{eigen:minimal} memberikan kriteria
+untuk menentukan apakah suatu basis vektor eigen lengkap tersedia.
+
+\begin{teorema}[][Kriteria polinom untuk diagonalisasi][eigen:squarefree]
+    Matriks $A$ dapat didiagonalkan di atas $\F$ jika dan hanya jika
+    $m_A$ merupakan hasil kali faktor-faktor linear yang berbeda di atas $\F$.
+    Lebih umum, cukup ada polinom penganulir $q(A)=0$ yang merupakan
+    hasil kali faktor linear berbeda.
+\end{teorema}
+\begin{proof}
+    Jika $A$ diagonal dalam suatu basis, hasil kali
+    $\prod_\lambda(t-\lambda)$ atas nilai eigen berbeda menganulir $A$.
+    Polinom minimal membagi hasil kali itu dan memuat semua akarnya.
+
+    Sebaliknya, misalkan $q(t)=\prod_{i=1}^s(t-\lambda_i)$ dengan
+    $\lambda_i$ berbeda dan $q(A)=0$.
+    Bentuk polinom Lagrange
+    \[
+        \ell_i(t)=\prod_{j\ne i}\frac{t-\lambda_j}{\lambda_i-\lambda_j}.
+    \]
+    Karena $\sum_i\ell_i(t)=1$ dan $(t-\lambda_i)\ell_i(t)$
+    adalah kelipatan $q(t)$, setiap $x\in\F^n$ dapat ditulis
+    \[
+        x=\sum_i\ell_i(A)x,\qquad
+        (A-\lambda_iI)\ell_i(A)x=0.
+    \]
+    Jadi ruang-ruang eigen merentang seluruh ruang dan berjumlah langsung.
+    Gabungan basisnya merupakan basis vektor eigen.
+\end{proof}
+
+Akibatnya, $A^2=A$ dan $A^3=A$ menjamin diagonalisasi di atas $\R$
+atau $\C$, sebab polinom $t(t-1)$ dan $t(t-1)(t+1)$ mempunyai akar
+berbeda. Jika $A^k=I$, $A$ dapat didiagonalkan di atas $\C$, karena
+$t^k-1$ tidak mempunyai akar berulang.
+Sebaliknya, $A^2=0$ belum menjamin diagonalisasi; matriks nilpoten
+yang dapat didiagonalkan harus merupakan matriks nol.
+
+\subsection{Proyektor dan reduksi pangkat}
+
+Jika nilai eigen berbeda dari matriks yang dapat didiagonalkan adalah
+$\lambda_1,\ldots,\lambda_s$, definisikan $P_i=\ell_i(A)$.
+Dengan memeriksa aksinya pada setiap ruang eigen, diperoleh
+\[
+    P_i^2=P_i,\qquad P_iP_j=0\ (i\ne j),\qquad
+    \sum_iP_i=I,\qquad A=\sum_i\lambda_iP_i.
+\]
+Maka $f(A)=\sum_i f(\lambda_i)P_i$ untuk setiap polinom $f$.
+Proyektor ini belum tentu ortogonal; ortogonalitas akan muncul pada
+dekomposisi spektral matriks normal.
+
+\begin{exam}[Identitas kuadratik menentukan semua pangkat]
+    Misalkan $A^2-3A+2I=0$. Tentukan $A^k$ dan $A^{-1}$.
+\end{exam}
+\begin{solution}
+    Polinom $(t-1)(t-2)$ mempunyai dua akar berbeda.
+    Proyektor yang bersesuaian adalah $P_1=2I-A$ dan $P_2=A-I$;
+    salah satunya boleh nol jika hanya satu nilai eigen yang muncul.
+    Untuk setiap $k\ge0$,
+    \[
+        A^k=P_1+2^kP_2=(2-2^k)I+(2^k-1)A.
+    \]
+    Dari $A(3I-A)=2I$, diperoleh $A^{-1}=(3I-A)/2$.
+    Tidak diperlukan perhitungan entri atau vektor eigen satu per satu.
+\end{solution}
+
+\section{Diagonalisasi Simultan}
+\label{eigen:komutatif}
+
+\begin{prop}[Ruang eigen yang invarian]
+    Jika $AB=BA$, maka setiap ruang eigen $E_\lambda(A)$ invarian
+    terhadap $B$: $B(E_\lambda(A))\subseteq E_\lambda(A)$.
+\end{prop}
+\begin{proof}
+    Untuk $Ax=\lambda x$, berlaku $A(Bx)=B(Ax)=\lambda Bx$.
+    Vektor $Bx$ boleh nol, sehingga pernyataan yang tepat memakai
+    ruang eigen, bukan selalu vektor eigen tak nol.
+\end{proof}
+
+\begin{teorema}[][Diagonalisasi simultan][eigen:simultan]
+    Dua matriks yang masing-masing dapat didiagonalkan di atas $\F$
+    dapat didiagonalkan oleh satu perubahan basis yang sama jika dan
+    hanya jika keduanya komutatif.
+\end{teorema}
+\begin{proof}
+    Jika keduanya diagonal dalam satu basis, jelas keduanya komutatif.
+    Sebaliknya, misalkan $AB=BA$.
+    Dekomposisikan $\F^n$ menjadi jumlah langsung ruang eigen $A$.
+    Pada setiap ruang ini, pembatasan $B$ tetap dianulir oleh polinom
+    minimal $B$, yang mempunyai faktor linear berbeda.
+    Maka pembatasan itu dapat didiagonalkan.
+    Pilih basis vektor eigen $B$ di setiap ruang eigen $A$, lalu gabungkan;
+    setiap anggotanya merupakan vektor eigen untuk kedua matriks.
+\end{proof}
+
+\begin{teorema}[][Komutativitas dan spektrum sederhana][eigen:centralizer]
+    Jika $A$ mempunyai $n$ nilai eigen berbeda dan $AB=BA$, maka
+    terdapat tepat satu polinom $p$ berderajat kurang dari $n$ sehingga
+    $B=p(A)$. Khususnya, $B$ juga dapat didiagonalkan.
+\end{teorema}
+\begin{proof}
+    Setiap ruang eigen $A$ berdimensi satu, sehingga $Bv_i=\mu_iv_i$
+    pada basis vektor eigen $A$.
+    Interpolasi Lagrange memberikan satu polinom berderajat kurang
+    dari $n$ dengan $p(\lambda_i)=\mu_i$.
+    Maka $p(A)$ dan $B$ mempunyai aksi sama pada suatu basis.
+    Keunikannya mengikuti fakta bahwa polinom berderajat kurang dari
+    $n$ tidak dapat mempunyai $n$ akar berbeda kecuali polinom nol.
+\end{proof}
+
+\section{Bentuk Jordan dan Rantai Vektor Eigen}
+\label{eigen:jordan}
+
+Ketika jumlah dimensi ruang eigen kurang dari $n$, vektor eigen biasa
+belum membentuk basis. Penggantinya adalah rantai vektor yang
+berturut-turut dipetakan ke anggota rantai sebelumnya.
+
+\begin{definisi}[][Blok dan rantai Jordan][eigen:def-jordan]
+    Blok Jordan berukuran $s$ untuk $\lambda$ adalah
+    \[
+        J_s(\lambda)=\lambda I_s+N_s
+        =\begin{pmatrix}
+            \lambda&1&&0\\&\lambda&\ddots&\\&&\ddots&1\\0&&&\lambda
+        \end{pmatrix},
+    \]
+    dengan $N_s$ mempunyai entri $1$ pada superdiagonal dan nol
+    di tempat lain. Untuk $s=1$, bloknya hanya $(\lambda)$.
+    Rantai Jordan $v_1,\ldots,v_s$ memenuhi
+    \[
+        (A-\lambda I)v_1=0,\qquad
+        (A-\lambda I)v_j=v_{j-1}\quad(2\le j\le s),\qquad v_1\ne0.
+    \]
+\end{definisi}
+
+Semua anggota rantai bebas linear. Jika $\sum_jc_jv_j=0$, terapkan
+$(A-\lambda I)^{s-1}$ untuk memperoleh $c_sv_1=0$;
+lanjutkan dengan pangkat yang lebih rendah untuk mendapatkan semua
+koefisien nol. Vektor $v_j$ disebut vektor eigen tergeneralisasi karena
+$(A-\lambda I)^jv_j=0$.
+
+\begin{teorema}[][Dekomposisi Jordan][eigen:teorema-jordan]
+    Setiap $A\in\Mat_n(\C)$ dapat ditulis
+    \[
+        A=PJP^{-1},\qquad
+        J=\diag\bigl(J_{s_1}(\lambda_1),\ldots,J_{s_r}(\lambda_r)\bigr),
+    \]
+    dengan $P$ invertibel. Nilai $\lambda_i$ boleh berulang.
+    Ukuran blok untuk setiap nilai eigen ditentukan secara unik,
+    hingga urutan blok.
+\end{teorema}
+
+Secara struktural, dekomposisi ini mula-mula memisahkan ruang menjadi
+ruang-ruang eigen tergeneralisasi $\ker(A-\lambda I)^n$.
+Pemisahan tersebut mengikuti identitas Bezout untuk faktor-faktor
+polinom karakteristik yang saling prima.
+Pada ruang untuk $\lambda$, pemetaan $A-\lambda I$ nilpoten dan
+dapat disusun dalam basis rantai. Setiap rantai menghasilkan satu
+blok Jordan. Pembuktian lengkap keberadaan basis rantai
+tidak dirinci di sini.
+Untuk perhitungan, ukuran rantainya dapat dibaca dari nulitas,
+seperti dibuktikan berikut.
+
+\begin{teorema}[][Membaca blok Jordan dari nulitas][eigen:jordan-nulitas]
+    Tetapkan satu nilai eigen $\lambda$ dan tuliskan
+    $d_k=\nul(A-\lambda I)^k$, dengan $d_0=0$.
+    Jika ukuran blok Jordan untuk $\lambda$ adalah $s_1,\ldots,s_r$, maka
+    \[
+        d_k=\sum_{j=1}^r\min\{k,s_j\}.
+    \]
+    Akibatnya,
+    \begin{align*}
+        \#\{\text{blok berukuran setidaknya }k\}&=d_k-d_{k-1},\\
+        \#\{\text{blok berukuran tepat }k\}&=2d_k-d_{k-1}-d_{k+1}.
+    \end{align*}
+\end{teorema}
+\begin{proof}
+    Pada satu blok untuk $\lambda$, matriks $A-\lambda I$
+    berubah menjadi $N_s$ dan $\nul N_s^k=\min\{k,s\}$.
+    Pada blok untuk nilai eigen $\mu\ne\lambda$, matriks
+    $J_s(\mu)-\lambda I$ invertibel, sehingga tidak menyumbang kernel.
+    Nulitas matriks diagonal blok adalah jumlah nulitas blok-bloknya.
+    Satu blok menyumbang $1$ pada $d_k-d_{k-1}$ tepat ketika $s\ge k$;
+    selisih dua hitungan berurutan memberi jumlah blok berukuran tepat $k$.
+\end{proof}
+
+Dengan demikian, $g_\lambda=d_1$ adalah banyaknya blok untuk $\lambda$,
+$a_\lambda=\lim_k d_k$ adalah jumlah ukurannya, dan ukuran blok
+terbesar adalah indeks pertama $k$ dengan $d_k=d_{k+1}$.
+Ini memberi makna struktural pada stabilisasi kernel yang dibahas
+dalam \autoref{rank:deret-pangkat}.
+
+\begin{prop}[Polinom minimal dan blok terbesar]
+    \label{eigen:minimal-jordan}
+    Jika ukuran blok terbesar untuk nilai eigen $\lambda$ adalah
+    $h_\lambda$, maka
+    \[
+        m_A(t)=\prod_\lambda(t-\lambda)^{h_\lambda}.
+    \]
+\end{prop}
+\begin{proof}
+    Satu blok $J_s(\lambda)$ dianulir oleh $(t-\lambda)^s$
+    dan tidak oleh pangkat yang lebih kecil karena $N_s^{s-1}\ne0$.
+    Faktor polinom yang tidak nol di $\lambda$ memberikan matriks
+    segitiga dengan diagonal tak nol, sehingga invertibel pada blok itu.
+    Suatu polinom menganulir seluruh matriks tepat ketika menganulir
+    setiap blok, sehingga pangkat yang diperlukan untuk tiap faktor
+    adalah ukuran blok terbesarnya.
+\end{proof}
+
+\begin{exam}[Membangun perubahan basis dari rantai]
+    Tentukan bentuk Jordan dan matriks perubahan basis untuk
+    \[
+        A=\begin{pmatrix}3&-1&0\\1&1&0\\-1&1&3\end{pmatrix}.
+    \]
+\end{exam}
+\begin{solution}
+    Polinom karakteristiknya $(t-2)^2(t-3)$.
+    Ambil $v_1=(1,1,0)^T$, $v_2=(1,0,1)^T$, dan $w=(0,0,1)^T$.
+    Perkalian langsung memberikan
+    \[
+        (A-2I)v_1=0,\qquad (A-2I)v_2=v_1,\qquad Aw=3w.
+    \]
+    Kolom-kolom tersebut bebas, sehingga
+    \[
+        P=\begin{pmatrix}1&1&0\\1&0&0\\0&1&1\end{pmatrix},\qquad
+        P^{-1}AP=\begin{pmatrix}2&1&0\\0&2&0\\0&0&3\end{pmatrix}.
+    \]
+    Urutan $v_1,v_2$ membuat entri $1$ berada di superdiagonal.
+    Matriks ini tidak dapat didiagonalkan karena ruang eigen untuk $2$
+    hanya berdimensi satu.
+\end{solution}
+
+\begin{exam}[Ukuran blok dari beberapa nulitas]
+    Diketahui $A\in\Mat_8(\C)$ memenuhi
+    \[
+        \chi_A(t)=(t-2)^6(t+1)^2,
+    \]
+    serta
+    \[
+        \nul(A-2I)=3,\quad\nul(A-2I)^2=5,\quad
+        \nul(A-2I)^3=6,\quad\nul(A+I)=1.
+    \]
+    Tentukan bentuk Jordan dan polinom minimalnya.
+\end{exam}
+\begin{solution}
+    Untuk $\lambda=2$, barisan nulitas dimulai dengan $0,3,5,6,6$.
+    Selisihnya $3,2,1,0$, sehingga terdapat tiga blok, dua berukuran
+    setidaknya dua, dan satu berukuran setidaknya tiga.
+    Ukurannya tepat $3,2,1$.
+    Untuk $\lambda=-1$, multiplisitas aljabarnya dua dan jumlah bloknya
+    satu, sehingga bloknya berukuran dua. Maka
+    \[
+        J=\diag\bigl(J_3(2),J_2(2),(2),J_2(-1)\bigr),\qquad
+        m_A(t)=(t-2)^3(t+1)^2.
+    \]
+\end{solution}
+
+\subsection{Pangkat dan polinom pada satu blok}
+
+Karena $\lambda I$ dan $N_s$ komutatif serta $N_s^s=0$,
+\[
+    J_s(\lambda)^k
+    =\sum_{j=0}^{\min\{k,s-1\}}\binom{k}{j}\lambda^{k-j}N_s^j
+    \qquad(k\ge0),
+\]
+dengan faktor berpangkat nol diartikan $1$.
+Untuk polinom $f$, ekspansi Taylor yang berhingga memberi
+\[
+    f(J_s(\lambda))
+    =\sum_{j=0}^{s-1}\frac{f^{(j)}(\lambda)}{j!}N_s^j.
+\]
+Jadi akar berulang pada polinom minimal membuat turunan $f$ ikut
+menentukan $f(A)$, selain nilai $f$ pada nilai eigen.
+
+\begin{prop}[Nulitas polinom matriks]
+    \label{eigen:nulitas-polinom}
+    Misalkan $f$ polinom tak nol dan $q_\lambda$ adalah orde akarnya
+    di $\lambda$, dengan $q_\lambda=0$ jika $f(\lambda)\ne0$.
+    Setiap blok $J_s(\lambda)$ menyumbang
+    $\min\{q_\lambda,s\}$ pada nulitas $f(A)$.
+\end{prop}
+\begin{proof}
+    Tuliskan $f(t)=(t-\lambda)^{q_\lambda}g(t)$ dengan
+    $g(\lambda)\ne0$. Pada blok tersebut,
+    $f(J_s(\lambda))=N_s^{q_\lambda}g(J_s(\lambda))$.
+    Faktor kedua invertibel karena segitiga dengan diagonal
+    $g(\lambda)$, sehingga nulitasnya sama dengan nulitas
+    $N_s^{q_\lambda}$.
+\end{proof}
+
+Pada contoh ukuran delapan di atas, ambil
+$f(t)=(t-2)^2(t+1)$. Blok-blok untuk $2$ menyumbang nulitas
+$2+2+1=5$, dan blok untuk $-1$ menyumbang $1$.
+Jadi $\nul f(A)=6$ dan $\rank f(A)=2$ tanpa perlu mengetahui entri $A$.
+
+\section{Dekomposisi Schur dan Spektral}
+\label{eigen:spektral}
+
+Gunakan hasil kali dalam standar $\langle x,y\rangle=x^*y$ pada
+$\C^n$, dengan $A^*=\overline A^{\,T}$ dan $\|x\|^2=x^*x$.
+Matriks $U$ disebut \emph{uniter} jika $U^*U=UU^*=I$;
+kolom-kolomnya merupakan basis ortonormal.
+Versi realnya disebut matriks ortogonal, dengan $U^TU=I$.
+
+\begin{teorema}[][Dekomposisi Schur][eigen:schur]
+    Untuk setiap $A\in\Mat_n(\C)$, terdapat matriks uniter $U$
+    sehingga $U^*AU=T$ segitiga atas. Entri diagonal $T$ adalah
+    nilai eigen $A$, dihitung dengan multiplisitas aljabar.
+\end{teorema}
+\begin{proof}
+    Pilih satu vektor eigen satuan $u_1$, lalu perluas menjadi basis
+    ortonormal, misalnya dengan Gram--Schmidt. Jika $U_1$ mempunyai
+    basis tersebut sebagai kolom-kolomnya, maka
+    \[
+        U_1^*AU_1=\begin{pmatrix}\lambda_1&w\\0&B\end{pmatrix}.
+    \]
+    Dengan induksi pada ukuran, terdapat uniter $V$ sehingga
+    $V^*BV$ segitiga atas. Ambil $U=U_1\diag(1,V)$.
+    Determinan matriks segitiga menunjukkan bahwa entri diagonalnya
+    adalah akar polinom karakteristik, termasuk multiplisitasnya.
+\end{proof}
+
+Schur berlaku untuk semua matriks kompleks, termasuk yang tidak dapat
+didiagonalkan. Dari segitiga atas, untuk setiap polinom $f$ diperoleh
+\[
+    \tr f(A)=\sum_{i=1}^n f(\lambda_i),\qquad
+    \det f(A)=\prod_{i=1}^n f(\lambda_i).
+\]
+Secara khusus, $\tr A^k=\sum_i\lambda_i^k$ untuk $k\ge1$,
+tanpa perlu mengasumsikan diagonalisasi.
+
+\begin{definisi}[][Matriks normal dan Hermitian][eigen:normal]
+    Matriks $A$ disebut \emph{normal} jika $A^*A=AA^*$,
+    dan \emph{Hermitian} jika $A^*=A$.
+    Matriks Hermitian disebut semidefinit positif jika $x^*Ax\ge0$
+    untuk semua $x$, dan definit positif jika $x^*Ax>0$ untuk semua $x\ne0$.
+\end{definisi}
+
+\begin{teorema}[][Dekomposisi spektral][eigen:teorema-spektral]
+    Matriks $A\in\Mat_n(\C)$ normal jika dan hanya jika
+    \[
+        A=U\diag(\lambda_1,\ldots,\lambda_n)U^*
+    \]
+    untuk suatu matriks uniter $U$.
+    Khususnya, matriks Hermitian mempunyai nilai eigen real dan
+    basis ortonormal yang terdiri atas vektor eigen.
+\end{teorema}
+\begin{proof}
+    Jika $A=UDU^*$ dengan $D$ diagonal, maka
+    $A^*A=UD^*DU^*=UDD^*U^*=AA^*$.
+
+    Sebaliknya, gunakan Schur: $T=U^*AU$ segitiga atas dan normal.
+    Kesamaan entri $(1,1)$ pada $TT^*=T^*T$ memberi
+    \[
+        \sum_{j=1}^n|t_{1j}|^2=|t_{11}|^2.
+    \]
+    Maka semua entri baris pertama di luar diagonal nol.
+    Blok sisanya tetap normal dan segitiga atas; induksi menunjukkan
+    bahwa $T$ diagonal.
+    Jika $A=A^*$, untuk vektor eigen $v\ne0$ berlaku
+    $\lambda=v^*Av/(v^*v)\in\R$.
+\end{proof}
+
+Untuk matriks simetris real, vektor eigen dapat dipilih real, lalu
+diortonormalkan di setiap ruang eigen. Jadi terdapat matriks
+ortogonal real $Q$ dengan $A=QDQ^T$.
+Kondisi simetris kompleks $A^T=A$ berbeda dari Hermitian;
+contoh pada latihan menunjukkan bahwa matriks simetris kompleks
+bahkan dapat gagal didiagonalkan.
+
+\subsection{Merekonstruksi matriks dari ruang eigennya}
+
+Jika kolom-kolom $U$ adalah $u_1,\ldots,u_n$, bentuk spektral memberi
+\[
+    A=\sum_{i=1}^n\lambda_i u_iu_i^*.
+\]
+Dengan mengelompokkan nilai eigen yang sama, dapat ditulis
+$A=\sum_\lambda\lambda P_\lambda$, dengan $P_\lambda$ proyektor
+ortogonal ke $E_\lambda(A)$. Proyektor ini memenuhi
+$P_\lambda^*=P_\lambda$, $P_\lambda^2=P_\lambda$, dan
+$P_\lambda P_\mu=0$ jika $\lambda\ne\mu$.
+
+\begin{exam}[Matriks simetris dari dua vektor eigen]
+    Konstruksikan matriks simetris real $3\times3$ yang mempunyai
+    nilai eigen $1,1,-1$, dengan $(1,1,1)^T$ dan $(2,2,1)^T$
+    sebagai vektor eigen untuk $1$.
+\end{exam}
+\begin{solution}
+    Kedua vektor bebas dan merentang bidang $x_1=x_2$.
+    Komplemen ortogonalnya direntang oleh
+    $u=(1,-1,0)^T/\sqrt2$, yang harus menjadi vektor eigen untuk $-1$.
+    Matriks yang dicari adalah
+    \[
+        A=1(I-uu^T)-uu^T=I-2uu^T
+        =\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix}.
+    \]
+    Ruang eigennya menentukan aksi pada seluruh ruang, sehingga
+    matriks yang memenuhi syarat ini unik.
+\end{solution}
+
+\begin{prop}[Tanda bentuk kuadratik dan nilai eigen]
+    \label{eigen:kuadratik}
+    Jika $A$ Hermitian, maka $A$ semidefinit positif tepat ketika
+    semua nilai eigennya nonnegatif, dan definit positif tepat ketika
+    semua nilai eigennya positif. Selain itu,
+    \[
+        \lambda_{\min}\|x\|^2\le x^*Ax\le\lambda_{\max}\|x\|^2.
+    \]
+\end{prop}
+\begin{proof}
+    Tuliskan $A=UDU^*$ dan $y=U^*x$.
+    Maka $x^*Ax=\sum_i\lambda_i|y_i|^2$ dan
+    $\|y\|^2=\|x\|^2$. Ketaksamaan mengikuti dari nilai eigen terkecil
+    dan terbesar. Syarat perlu untuk kepositifan diperoleh dengan
+    mengambil $x$ berupa masing-masing vektor eigen satuan.
+\end{proof}
+
+Pada matriks normal, rank tepat sama dengan banyaknya nilai eigen
+tak nol, termasuk multiplisitasnya, karena bentuk diagonal diperoleh
+melalui perkalian invertibel. Pada matriks Hermitian, informasi
+spektral juga menentukan tanda bentuk kuadratik dan memungkinkan
+pemilihan basis ortonormal.
+
+\section{Memilih Dekomposisi}
+\label{eigen:peta-dekomposisi}
+
+Keempat bentuk berikut menjawab kebutuhan yang berbeda.
+Pada baris Jordan dan Schur, medan yang dipakai adalah $\C$.
+
+\begin{center}
+    \small
+    \renewcommand{\arraystretch}{1.35}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{.18\linewidth}
+        >{\raggedright\arraybackslash}p{.29\linewidth}
+        >{\raggedright\arraybackslash}p{.42\linewidth}}
+        \textbf{Bentuk} & \textbf{Syarat dan rumus} & \textbf{Informasi utama}\\\hline
+        Diagonalisasi & Basis vektor eigen; $A=PDP^{-1}$ &
+            Pangkat dan polinom matriks dihitung pada entri diagonal.\\
+        Jordan & Semua matriks persegi kompleks; $A=PJP^{-1}$ &
+            Ukuran rantai, polinom minimal, dan nulitas pangkat.\\
+        Schur & Semua matriks persegi kompleks; $A=UTU^*$ &
+            Bentuk segitiga dengan perubahan basis ortonormal.\\
+        Spektral & Matriks normal; $A=UDU^*$ &
+            Basis eigen ortonormal dan proyektor ortogonal.\\\hline
+    \end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=3pt]
+    \item Jika diberikan persamaan polinom untuk $A$, periksa apakah
+        polinom itu mempunyai akar berulang sebelum mencari vektor eigen.
+    \item Jika akar karakteristik berulang, hitung
+        $\nul(A-\lambda I)$ dan bandingkan dengan multiplisitas aljabarnya.
+    \item Jika diperlukan struktur yang lebih rinci, hitung nulitas
+        pangkat $A-\lambda I$ untuk menentukan blok Jordan.
+    \item Jika matriks Hermitian atau simetris real, manfaatkan
+        ortogonalitas ruang eigen dan bentuk $\sum_i\lambda_i u_iu_i^*$.
+    \item Untuk identitas trace yang melibatkan pangkat, Schur memberi
+        akses ke nilai eigen tanpa mengasumsikan diagonalisasi.
+    \item Jika dua matriks komutatif, periksa ruang eigen yang invarian;
+        spektrum sederhana sering mengubah persoalan menjadi interpolasi.
+\end{enumerate}
+
+\section{Latihan Pilihan}
+\label{dekomp:latihan}
+
+Latihan berikut menggunakan diagonalisasi, bentuk Jordan, dan dekomposisi spektral.
+
+\begin{latihan}\label{eigen:lat-komutatif}
+    Misalkan $A$ invertibel dan mempunyai $n$ nilai eigen berbeda.
+    Jika $AB=BA^{-1}$, buktikan bahwa $B^2$ dapat didiagonalkan.
+    Apakah $B$ sendiri harus dapat didiagonalkan?
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-trace}
+    Jika $A\in\Mat_n(\C)$ memenuhi $\tr A^k=0$ untuk
+    $k=1,\ldots,n$, buktikan bahwa $A^n=0$.
+    Buktikan pula arah sebaliknya.
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-real}
+    Misalkan $A\in\Mat_2(\R)$ memenuhi $A^2=-I$.
+    Buktikan bahwa $A$ serupa di atas $\R$ dengan
+    $\begin{pmatrix}0&-1\\1&0\end{pmatrix}$.
+    Jelaskan perbedaan diagonalisasinya di atas $\R$ dan $\C$.
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-rekonstruksi}
+    Matriks simetris real $A$ mempunyai nilai eigen $1,2,3$.
+    Diketahui $u=(-1,-1,1)^T$ dan $v=(1,-2,-1)^T$ merupakan
+    vektor eigen untuk $1$ dan $2$. Tentukan vektor eigen untuk $3$
+    dan hitung matriks $A$.
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-rank-diagonal}
+    Buktikan bahwa $A\in\Mat_n(\C)$ dapat didiagonalkan jika dan
+    hanya jika untuk setiap nilai eigen $\lambda$ berlaku
+    \[
+        \rank(A-\lambda I)=\rank(A-\lambda I)^2.
+    \]
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-minimal-sama}
+    Konstruksikan dua matriks $6\times6$ yang mempunyai polinom
+    karakteristik dan polinom minimal sama, tetapi tidak serupa.
+    Jelaskan mengapa setiap polinom yang menganulir salah satunya
+    juga menganulir yang lain.
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-simetris-kompleks}
+    Matriks $A=\begin{pmatrix}1&i\\i&-1\end{pmatrix}$ memenuhi $A^T=A$.
+    Tentukan polinom karakteristik, polinom minimal, dan dimensi
+    ruang eigennya. Apakah $A$ dapat didiagonalkan di atas $\C$?
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-frobenius}
+    Misalkan $\lambda_1,\ldots,\lambda_n$ adalah nilai eigen
+    $A=(a_{ij})\in\Mat_n(\C)$, dihitung dengan multiplisitas.
+    Buktikan bahwa
+    \[
+        \sum_{i=1}^n|\lambda_i|^2\le\sum_{i,j=1}^n|a_{ij}|^2,
+    \]
+    dengan kesamaan tepat ketika $A$ normal.
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-komutator}
+    Misalkan $A\in\Mat_n(\C)$ dapat didiagonalkan dan
+    $\mathcal T:\Mat_n(\C)\to\Mat_n(\C)$ didefinisikan oleh
+    $\mathcal T(X)=AX-XA$.
+    Tentukan nilai eigen $\mathcal T$ dan buktikan bahwa pemetaan ini
+    dapat didiagonalkan. Jika multiplisitas nilai eigen berbeda dari
+    $A$ adalah $m_1,\ldots,m_s$, tentukan rank dan nulitas $\mathcal T$.
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-siklik}
+    Vektor $v$ disebut siklik untuk $A\in\Mat_n(\C)$ jika
+    $v,Av,\ldots,A^{n-1}v$ merupakan basis $\C^n$.
+    \begin{enumerate}[label=(\alph*),nosep]
+        \item Jika ada vektor siklik, buktikan $m_A=\chi_A$ dan bahwa
+            setiap ruang eigen $A$ berdimensi satu.
+        \item Jika $A$ mempunyai $n$ nilai eigen berbeda, konstruksikan
+            satu vektor siklik.
+    \end{enumerate}
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-blok}
+    Untuk $A,B\in\Mat_n(\C)$, definisikan
+    $M=\begin{pmatrix}A&B\\B&A\end{pmatrix}$.
+    Nyatakan $\chi_M$ melalui $\chi_{A+B}$ dan $\chi_{A-B}$.
+    Buktikan bahwa $M$ dapat didiagonalkan jika dan hanya jika
+    $A+B$ dan $A-B$ masing-masing dapat didiagonalkan.
+    Apakah diperlukan asumsi $AB=BA$?
+\end{latihan}
+
+\ifpembahasan
+\section{Pembahasan Latihan}
+\label{dekomp:pembahasan}
+
+\subsection*{Latihan \ref{eigen:lat-komutatif}: kuadrat yang komutatif}
+Dari $AB=BA^{-1}$ diperoleh $A^{-1}B=BA$.
+Maka
+\[
+    AB^2=BA^{-1}B=B^2A.
+\]
+Karena $A$ mempunyai spektrum sederhana, \autoref{eigen:centralizer}
+menjamin $B^2$ diagonal dalam basis vektor eigen $A$.
+Matriks $B$ sendiri belum tentu dapat didiagonalkan. Contohnya,
+\[
+    A=\begin{pmatrix}2&0\\0&1/2\end{pmatrix},\qquad
+    B=\begin{pmatrix}0&1\\0&0\end{pmatrix}.
+\]
+Relasi $AB=BA^{-1}$ berlaku, tetapi $B$ nilpoten tak nol.
+
+\subsection*{Latihan \ref{eigen:lat-trace}: memisahkan nilai eigen tak nol}
+Andaikan terdapat nilai eigen tak nol yang berbeda
+$\mu_1,\ldots,\mu_s$, dengan multiplisitas aljabar $r_1,\ldots,r_s$.
+Dari Schur dan hipotesis, untuk $k=1,\ldots,s$ berlaku
+\[
+    \sum_{j=1}^s r_j\mu_j^k=0.
+\]
+Matriks koefisiennya adalah matriks Vandermonde dengan setiap kolom
+ke-$j$ dikalikan $\mu_j$. Determinannya tak nol karena semua $\mu_j$
+berbeda dan tak nol. Akibatnya semua $r_j=0$, bertentangan dengan
+multiplisitas yang positif.
+Jadi seluruh nilai eigen $A$ nol, $\chi_A(t)=t^n$, dan $A^n=0$
+oleh Cayley--Hamilton.
+Sebaliknya, $A^n=0$ memaksa setiap nilai eigen nol; Schur memberi
+$\tr A^k=0$ untuk semua $k\ge1$.
+
+\subsection*{Latihan \ref{eigen:lat-real}: basis dari satu vektor dan bayangannya}
+Pilih $v\ne0$ real. Vektor $v$ dan $Av$ bebas: jika $Av=cv$
+dengan $c\in\R$, maka $-v=A^2v=c^2v$, yang mustahil.
+Dalam basis $(v,Av)$, aksi $A$ adalah
+\[
+    v\longmapsto Av,\qquad Av\longmapsto-v.
+\]
+Jadi dengan $P=[v\ Av]$ diperoleh
+$P^{-1}AP=\begin{pmatrix}0&-1\\1&0\end{pmatrix}$.
+Di atas $\R$ tidak ada nilai eigen, sehingga diagonalisasi mustahil.
+Di atas $\C$, kedua nilai eigen $i,-i$ berbeda, sehingga diagonalisasi ada.
+
+\subsection*{Latihan \ref{eigen:lat-rekonstruksi}: proyektor ortogonal berbobot}
+Vektor $u$ dan $v$ ortogonal. Vektor $w=(1,0,1)^T$ ortogonal terhadap
+keduanya, sehingga menjadi vektor eigen untuk $3$.
+Karena $\|u\|^2=3$, $\|v\|^2=6$, dan $\|w\|^2=2$,
+\[
+    A=\frac{uu^T}{3}+2\frac{vv^T}{6}+3\frac{ww^T}{2}
+    =\frac16\begin{pmatrix}13&-2&5\\-2&10&2\\5&2&13\end{pmatrix}.
+\]
+Masing-masing suku mengatur aksi pada satu arah dalam basis ortonormal.
+
+\subsection*{Latihan \ref{eigen:lat-rank-diagonal}: mendeteksi blok berukuran dua atau lebih}
+Rank yang sama ekuivalen dengan
+$\nul(A-\lambda I)=\nul(A-\lambda I)^2$.
+Menurut \autoref{eigen:jordan-nulitas}, selisih kedua nulitas adalah
+banyaknya blok Jordan untuk $\lambda$ yang berukuran setidaknya dua.
+Jadi syarat tersebut untuk setiap nilai eigen berarti semua blok
+berukuran satu, tepat syarat diagonalisasi.
+
+\subsection*{Latihan \ref{eigen:lat-minimal-sama}: ukuran blok masih dapat berbeda}
+Ambil
+\[
+    A=\diag\bigl(J_3(0),J_3(0)\bigr),\qquad
+    B=\diag\bigl(J_3(0),J_2(0),J_1(0)\bigr).
+\]
+Keduanya mempunyai $\chi(t)=t^6$ dan $m(t)=t^3$.
+Namun, $\nul A=2$ dan $\nul B=3$, sehingga keduanya tidak serupa.
+Untuk kedua matriks, $f$ menganulirnya tepat ketika $t^3$ membagi $f$.
+Jadi kesamaan seluruh polinom penganulir belum menentukan ukuran
+semua blok Jordan.
+
+\subsection*{Latihan \ref{eigen:lat-simetris-kompleks}: simetris tidak selalu Hermitian}
+Perkalian langsung memberi $A^2=0$, sedangkan $A\ne0$.
+Karena trace dan determinannya nol, $\chi_A(t)=t^2$.
+Polinom minimalnya juga $t^2$, sebab $A$ tidak dianulir oleh $t$.
+Rank $A$ adalah satu dan $\ker A=\operatorname{span}\{(-i,1)^T\}$.
+Jadi satu-satunya nilai eigen adalah $0$, dengan multiplisitas
+aljabar dua dan geometri satu; matriks tidak dapat didiagonalkan.
+Tidak ada pertentangan dengan teorema spektral karena $A^*\ne A$.
+
+\subsection*{Latihan \ref{eigen:lat-frobenius}: entri di atas diagonal Schur}
+Untuk matriks persegi berukuran sama,
+$\tr(XY)=\sum_{i,j}x_{ij}y_{ji}=\tr(YX)$.
+Dengan dekomposisi Schur $A=UTU^*$,
+\[
+    \sum_{i,j}|a_{ij}|^2=\tr(A^*A)=\tr(T^*T)
+    =\sum_i|\lambda_i|^2+\sum_{i<j}|t_{ij}|^2.
+\]
+Ini memberi ketaksamaan. Kesamaan berlaku tepat ketika semua entri
+di atas diagonal $T$ nol, yaitu ketika $A$ dapat didiagonalkan
+secara uniter. Oleh teorema spektral, ini ekuivalen dengan normalitas $A$.
+
+\subsection*{Latihan \ref{eigen:lat-komutator}: basis matriks satuan}
+Tuliskan $A=PDP^{-1}$, dengan $D=\diag(\lambda_1,\ldots,\lambda_n)$.
+Untuk matriks satuan $E_{ij}$, yang hanya mempunyai entri $1$ pada
+posisi $(i,j),$ berlaku
+\[
+    DE_{ij}-E_{ij}D=(\lambda_i-\lambda_j)E_{ij}.
+\]
+Karena $PE_{ij}P^{-1}$ untuk semua pasangan $(i,j)$ membentuk basis
+$\Mat_n(\C)$, matriks-matriks ini merupakan basis vektor eigen
+$\mathcal T$, dengan nilai eigen $\lambda_i-\lambda_j$.
+Nilai eigen nol muncul tepat ketika kedua indeks berasal dari
+nilai eigen $A$ yang sama. Dengan demikian
+\[
+    \nul\mathcal T=\sum_{j=1}^s m_j^2,\qquad
+    \rank\mathcal T=n^2-\sum_{j=1}^s m_j^2.
+\]
+
+\subsection*{Latihan \ref{eigen:lat-siklik}: vektor siklik dan Vandermonde}
+Jika $v,Av,\ldots,A^{n-1}v$ bebas, tidak ada polinom tak nol
+berderajat kurang dari $n$ yang menganulir $A$: menerapkannya pada $v$
+akan menghasilkan relasi linear tak trivial.
+Maka $\deg m_A\ge n$; karena $m_A\mid\chi_A$ dan $\deg\chi_A=n$,
+diperoleh $m_A=\chi_A$.
+Dalam bentuk Jordan, pangkat setiap faktor dalam $m_A$ adalah ukuran
+blok terbesar, sedangkan pangkatnya dalam $\chi_A$ adalah jumlah
+ukuran semua blok untuk nilai eigen itu. Kesamaan keduanya memaksa
+tepat satu blok per nilai eigen, sehingga setiap ruang eigen berdimensi satu.
+
+Sebaliknya, jika nilai eigen $\lambda_1,\ldots,\lambda_n$ berbeda,
+pilih basis vektor eigen $v_1,\ldots,v_n$ dan ambil $v=\sum_i v_i$.
+Koordinat $v,Av,\ldots,A^{n-1}v$ terhadap basis ini membentuk matriks
+Vandermonde dengan baris ke-$i$ sama dengan
+$(1,\lambda_i,\ldots,\lambda_i^{n-1})$.
+Determinan tak nol, sehingga $v$ siklik.
+
+\subsection*{Latihan \ref{eigen:lat-blok}: memisahkan jumlah dan selisih}
+Matriks
+\[
+    U=\frac1{\sqrt2}\begin{pmatrix}I&I\\I&-I\end{pmatrix}
+\]
+uniter dan memenuhi
+\[
+    U^*MU=\begin{pmatrix}A+B&0\\0&A-B\end{pmatrix}.
+\]
+Jadi $\chi_M(t)=\chi_{A+B}(t)\chi_{A-B}(t)$.
+Jika kedua blok dapat didiagonalkan, gabungan perubahan basisnya
+mendiagonalkan matriks diagonal blok, dan karenanya juga $M$.
+Sebaliknya, jika $M$ dapat didiagonalkan, suatu polinom dengan faktor
+linear berbeda menganulir $M$ dan kedua bloknya. Maka kedua blok
+dapat didiagonalkan oleh \autoref{eigen:squarefree}.
+Tidak diperlukan $AB=BA$; identitas blok di atas berlaku tanpa asumsi itu.
+
+\fi

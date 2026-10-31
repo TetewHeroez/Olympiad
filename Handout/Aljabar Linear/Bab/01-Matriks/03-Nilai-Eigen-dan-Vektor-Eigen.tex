@@ -1,0 +1,427 @@
+% !TeX root = ../../ONMIPA Alin.tex
+% Sumber utama: Zhang (2009), Bab 3; Zhang (2011), bagian 1.3, 2.4, 3.3.
+\chapter{Nilai Eigen dan Vektor Eigen}
+\label{ch:eigen}
+
+Bab ini menghubungkan akar polinom karakteristik dengan ruang eigen,
+rank, dan nulitas. Pembahasan berlanjut ke keserupaan, polinom minimal,
+Cayley--Hamilton, serta persamaan matriks. Diagonalisasi dan bentuk-bentuk
+dekomposisi dikembangkan tersendiri pada \autoref{ch:dekomposisi}.
+
+Matriks berentri dalam $\F=\R$ atau $\C$; medan yang digunakan disebutkan
+secara eksplisit ketika seluruh akar suatu polinom diperlukan.
+
+\section{Nilai Eigen dan Ruang Eigen}
+\label{eigen:dasar}
+
+\begin{definisi}[][Nilai eigen dan vektor eigen][eigen:definisi]
+    Untuk $A\in\Mat_n(\F)$, skalar $\lambda\in\F$ disebut
+    \emph{nilai eigen} jika terdapat $0\ne v\in\F^n$ dengan
+    $Av=\lambda v$. Vektor $v$ disebut \emph{vektor eigen} yang
+    bersesuaian dengan $\lambda$. Ruang eigennya adalah
+    \[
+        E_\lambda(A)=\ker(A-\lambda I).
+    \]
+    Polinom karakteristik $A$ didefinisikan oleh
+    $\chi_A(t)=\det(tI-A)$.
+\end{definisi}
+
+Ruang eigen memuat vektor nol, tetapi vektor eigen selalu tak nol.
+Dengan hasil pada bab rank dan determinan,
+\[
+    \lambda\text{ nilai eigen}
+    \iff\chi_A(\lambda)=0
+    \iff\rank(A-\lambda I)<n.
+\]
+Menghitung nilai eigen berarti menentukan akar polinom karakteristik;
+menghitung vektor eigen berarti menyelesaikan sistem homogen untuk
+setiap akar tersebut.
+
+\begin{definisi}[][Multiplisitas aljabar dan geometri][eigen:multiplicitas]
+    Multiplisitas aljabar $a_\lambda$ adalah banyaknya faktor
+    $t-\lambda$ dalam $\chi_A(t)$. Multiplisitas geometri adalah
+    \[
+        g_\lambda=\dim E_\lambda(A)=\nul(A-\lambda I).
+    \]
+\end{definisi}
+
+\begin{teorema}[][Batas dimensi ruang eigen][eigen:batas-geometri]
+    Untuk setiap nilai eigen $\lambda$, berlaku
+    $1\le g_\lambda\le a_\lambda$.
+    Ruang-ruang eigen untuk nilai eigen yang berbeda berjumlah langsung.
+\end{teorema}
+\begin{proof}
+    Pilih basis $v_1,\ldots,v_g$ untuk $E_\lambda(A)$ dan perluas
+    menjadi basis $\F^n$. Dalam basis ini, matriks $A$ berbentuk
+    \[
+        \begin{pmatrix}\lambda I_g&C\\0&D\end{pmatrix}.
+    \]
+    Determinan segitiga blok memberi
+    $\chi_A(t)=(t-\lambda)^g\chi_D(t)$, sehingga $g\le a_\lambda$.
+
+    Untuk sifat jumlah langsung, ambil nilai eigen berbeda
+    $\lambda_1,\ldots,\lambda_s$ dan relasi
+    $x_1+\cdots+x_s=0$ dengan $x_i\in E_{\lambda_i}(A)$.
+    Untuk suatu $i$, terapkan $\prod_{j\ne i}(A-\lambda_jI)$.
+    Semua suku kecuali $x_i$ lenyap, sehingga
+    \[
+        \left(\prod_{j\ne i}(\lambda_i-\lambda_j)\right)x_i=0.
+    \]
+    Koefisiennya tak nol; maka setiap $x_i=0$.
+\end{proof}
+
+Khususnya, vektor-vektor eigen untuk nilai eigen berbeda bebas linear.
+Namun, beberapa vektor eigen untuk \emph{nilai eigen yang sama}
+masih perlu diperiksa kebebasannya.
+
+\begin{prop}[Trace, determinan, dan rank]
+    \label{eigen:trace-det}
+    Jika nilai eigen $A\in\Mat_n(\C)$ adalah
+    $\lambda_1,\ldots,\lambda_n$, dihitung dengan multiplisitas aljabar,
+    maka
+    \[
+        \chi_A(t)=\prod_{i=1}^n(t-\lambda_i),\qquad
+        \tr A=\sum_{i=1}^n\lambda_i,\qquad
+        \det A=\prod_{i=1}^n\lambda_i.
+    \]
+    Banyaknya nilai eigen tak nol, dengan multiplisitas, tidak melebihi
+    $\rank A$.
+\end{prop}
+\begin{proof}
+    Faktorkan polinom karakteristik di atas $\C$.
+    Koefisien $t^{n-1}$ dalam $\det(tI-A)$ adalah
+    $-\sum_i a_{ii}=-\tr A$, sedangkan suku konstannya $(-1)^n\det A$.
+    Membandingkan koefisien memberi dua identitas.
+    Jika $0$ adalah nilai eigen dengan multiplisitas aljabar $a_0$,
+    maka $\rank A=n-g_0\ge n-a_0$.
+    Jika $0$ bukan nilai eigen, $A$ invertibel dan ranknya $n$.
+\end{proof}
+
+Rank dapat lebih besar daripada banyaknya nilai eigen tak nol.
+Misalnya, $\begin{pmatrix}0&1\\0&0\end{pmatrix}$ mempunyai rank satu,
+tetapi kedua nilai eigennya nol. Ini membedakan informasi kernel dari
+informasi akar polinom karakteristik.
+
+
+\begin{exam}[Nilai eigen matriks rank satu]
+    Misalkan $A=uv^T$, dengan $u,v\in\F^n$ tak nol dan $n\ge2$.
+    Tuliskan $c=v^Tu$. Tentukan polinom karakteristik, ruang eigen,
+    dan pangkat $A$.
+\end{exam}
+\begin{solution}
+    Karena $Ax=u(v^Tx)$, diperoleh $\rank A=1$ dan
+    $\ker A=\ker v^T$ berdimensi $n-1$.
+    Trace $A$ adalah $c$, sehingga
+    \[
+        \chi_A(t)=t^{n-1}(t-c).
+    \]
+    Jika $c\ne0$, ruang eigen untuk $c$ adalah $\operatorname{span}\{u\}$,
+    sedangkan ruang eigen untuk $0$ adalah $\ker v^T$.
+    Jika $c=0$, satu-satunya nilai eigen adalah $0$, dan ruang eigennya
+    tetap berdimensi $n-1$. Vektor $u$ kini juga berada pada kernel.
+    Identitas $A^2=u(v^Tu)v^T=cA$ memberi
+    $A^k=c^{k-1}A$ untuk $k\ge1$, dengan faktor berpangkat nol diartikan $1$.
+\end{solution}
+
+\section{Keserupaan dan Perubahan Basis}
+\label{eigen:similaritas}
+
+\begin{definisi}[][Keserupaan matriks][eigen:similar]
+    Matriks $A,B\in\Mat_n(\F)$ disebut serupa jika
+    $B=P^{-1}AP$ untuk suatu matriks invertibel $P$.
+\end{definisi}
+
+Kolom-kolom $P$ menyatakan basis baru dalam koordinat lama.
+Persamaan $AP=PB$ berarti kolom ke-$j$ dari $B$ menyimpan koordinat
+bayangan vektor basis ke-$j$ terhadap basis baru tersebut.
+Keserupaan mempertahankan polinom karakteristik, trace, determinan,
+dan rank, sebab
+\[
+    tI-B=P^{-1}(tI-A)P.
+\]
+Kesamaan nilai eigen beserta multiplisitasnya belum cukup untuk
+menjamin keserupaan.
+
+\section{Polinom Matriks dan Cayley--Hamilton}
+\label{eigen:polinom}
+
+Untuk $f(t)=a_0+a_1t+\cdots+a_dt^d$, definisikan
+$f(A)=a_0I+a_1A+\cdots+a_dA^d$.
+Semua polinom dalam satu matriks $A$ saling komutatif.
+Jika $Av=\lambda v$, maka $f(A)v=f(\lambda)v$.
+
+\begin{prop}[Nilai eigen polinom matriks]
+    \label{eigen:spectral-mapping}
+    Untuk $A\in\Mat_n(\C)$ dan polinom $f$, nilai eigen $f(A)$
+    tepat merupakan bilangan $f(\lambda)$ dengan $\lambda$ nilai eigen $A$.
+    Khususnya, $f(A)$ invertibel jika dan hanya jika
+    $f(\lambda)\ne0$ untuk setiap nilai eigen $A$.
+\end{prop}
+\begin{proof}
+    Satu arah mengikuti $f(A)v=f(\lambda)v$.
+    Jika $f$ tidak konstan, faktorkan
+    $f(t)-\mu=c\prod_j(t-\alpha_j)$ di atas $\C$.
+    Matriks $f(A)-\mu I=c\prod_j(A-\alpha_jI)$ singular tepat ketika
+    salah satu faktornya singular. Jadi $\mu=f(\alpha_j)$ untuk
+    suatu nilai eigen $\alpha_j$ dari $A$.
+    Untuk $f$ konstan, pernyataannya langsung.
+\end{proof}
+
+\begin{teorema}[][Cayley--Hamilton][eigen:ch]
+    Setiap matriks persegi memenuhi polinom karakteristiknya:
+    jika $\chi_A(t)=t^n+c_{n-1}t^{n-1}+\cdots+c_0$, maka
+    \[
+        A^n+c_{n-1}A^{n-1}+\cdots+c_1A+c_0I=0.
+    \]
+\end{teorema}
+\begin{proof}
+    Ekspansikan adjugat sebagai polinom matriks
+    $\operatorname{adj}(tI-A)=\sum_{j=0}^{n-1}B_jt^j$.
+    Identitas adjugat memberi
+    \[
+        (tI-A)\sum_{j=0}^{n-1}B_jt^j=\chi_A(t)I.
+    \]
+    Perbandingan koefisien menghasilkan
+    \[
+        B_{n-1}=I,\qquad B_{j-1}-AB_j=c_jI\ (1\le j<n),
+        \qquad -AB_0=c_0I.
+    \]
+    Kalikan persamaan untuk $c_j$ dari kiri dengan $A^j$, kemudian
+    jumlahkan bersama persamaan konstanta dan $A^n=A^nB_{n-1}$.
+    Suku-suku yang memuat $B_j$ saling menghapus, menyisakan
+    $\chi_A(A)=0$.
+\end{proof}
+
+Identitas ini diperoleh melalui koefisien polinom. Substitusi formal
+$t=A$ ke dalam simbol determinan $\det(tI-A)$ bukan pembuktian:
+semula entri matriks tersebut adalah polinom skalar, sedangkan
+substitusi itu mengganti jenis entrinya dengan matriks.
+
+\begin{exam}[Pangkat melalui rekurensi]
+    Untuk $F=\begin{pmatrix}1&1\\1&0\end{pmatrix}$, tentukan $F^k$.
+\end{exam}
+\begin{solution}
+    Karena $\chi_F(t)=t^2-t-1$, Cayley--Hamilton memberi $F^2=F+I$.
+    Dengan bilangan Fibonacci $f_0=0$, $f_1=1$, dan
+    $f_{k+1}=f_k+f_{k-1}$, induksi memberikan
+    \[
+        F^k=f_kF+f_{k-1}I
+        =\begin{pmatrix}f_{k+1}&f_k\\f_k&f_{k-1}\end{pmatrix}
+        \qquad(k\ge1).
+    \]
+    Jadi setiap pangkat tereduksi menjadi kombinasi $I$ dan $F$.
+    Selain itu $F(F-I)=I$, sehingga $F^{-1}=F-I$.
+\end{solution}
+
+\subsection{Polinom minimal dan akar berulang}
+
+\begin{definisi}[][Polinom minimal][eigen:minimal]
+    Polinom minimal $m_A(t)$ adalah polinom monik berderajat terkecil
+    yang memenuhi $m_A(A)=0$.
+\end{definisi}
+
+\begin{prop}[Sifat polinom minimal]
+    \label{eigen:sifat-minimal}
+    Polinom minimal ada dan unik. Jika $f(A)=0$, maka $m_A\mid f$;
+    khususnya $m_A\mid\chi_A$.
+    Akar-akar $m_A$ tepat nilai eigen $A$, dan matriks serupa mempunyai
+    polinom minimal yang sama.
+\end{prop}
+\begin{proof}
+    Keberadaan mengikuti Cayley--Hamilton.
+    Bagi $f$ oleh $m_A$: $f=qm_A+r$ dengan $\deg r<\deg m_A$.
+    Maka $r(A)=0$, sehingga minimalitas memaksa $r=0$.
+    Ini sekaligus membuktikan keunikan polinom monik minimal.
+
+    Jika $Av=\lambda v$ dengan $v\ne0$, maka
+    $0=m_A(A)v=m_A(\lambda)v$, sehingga $m_A(\lambda)=0$.
+    Sebaliknya, jika $m_A(t)=(t-\lambda)q(t)$ tetapi $A-\lambda I$
+    invertibel, $m_A(A)=0$ memaksa $q(A)=0$, bertentangan dengan minimalitas.
+    Terakhir, $f(P^{-1}AP)=P^{-1}f(A)P$ menunjukkan bahwa matriks
+    serupa mempunyai polinom penganulir yang sama.
+\end{proof}
+
+
+Kriteria polinom minimal untuk diagonalisasi dan penggunaan proyektor
+akan dibahas pada \autoref{ch:dekomposisi}.
+
+\section{Hasil Kali dan Persamaan Matriks}
+\label{eigen:hasilkali}
+
+\begin{teorema}[][Nilai eigen $AB$ dan $BA$][eigen:abba]
+    Untuk $A\in\Mat_{m\times n}(\C)$ dan $B\in\Mat_{n\times m}(\C)$,
+    \[
+        t^n\chi_{AB}(t)=t^m\chi_{BA}(t).
+    \]
+    Jadi $AB$ dan $BA$ mempunyai nilai eigen tak nol yang sama,
+    termasuk multiplisitas aljabarnya.
+\end{teorema}
+\begin{proof}
+    Untuk $t\ne0$, hitung determinan
+    $\begin{pmatrix}tI_m&A\\B&I_n\end{pmatrix}$ dengan dua komplemen Schur.
+    Diperoleh
+    \[
+        \det(tI_m-AB)=t^m\det(I_n-t^{-1}BA).
+    \]
+    Kalikan dengan $t^n$ untuk mendapatkan identitas yang dinyatakan.
+    Kedua ruas adalah polinom yang sama pada semua $t\ne0$,
+    sehingga identitas berlaku juga pada $t=0$.
+\end{proof}
+
+Jika $ABx=\lambda x$ dengan $\lambda\ne0$, maka $Bx\ne0$ dan
+$BA(Bx)=\lambda Bx$. Bahkan $B$ memberi isomorfisme
+$E_\lambda(AB)\to E_\lambda(BA)$ dengan invers $A/\lambda$.
+Kesamaan multiplisitas aljabar pada teorema memerlukan identitas polinom,
+sedangkan argumen ruang eigen ini menjelaskan multiplisitas geometrinya.
+
+Untuk $m=n$, polinom karakteristiknya sama, tetapi matriksnya belum
+tentu serupa. Ambil
+\[
+    A=\begin{pmatrix}1&0\\0&0\end{pmatrix},\qquad
+    B=\begin{pmatrix}0&1\\0&0\end{pmatrix}.
+\]
+Maka $AB=B\ne0$, sedangkan $BA=0$; rank keduanya berbeda.
+Jika salah satu faktor invertibel, keserupaan berlaku, misalnya
+$BA=A^{-1}(AB)A$ ketika $A$ invertibel.
+
+\begin{prop}[Persamaan Sylvester dengan spektrum terpisah]
+    \label{eigen:sylvester}
+    Jika $A\in\Mat_m(\C)$ dan $B\in\Mat_n(\C)$ tidak mempunyai
+    nilai eigen bersama, maka untuk setiap $C\in\Mat_{m\times n}(\C)$,
+    persamaan $AX-XB=C$ mempunyai tepat satu solusi.
+\end{prop}
+\begin{proof}
+    Jika $AX=XB$, maka $A^kX=XB^k$, sehingga
+    $\chi_A(A)X=X\chi_A(B)$.
+    Ruas kiri nol oleh Cayley--Hamilton; matriks $\chi_A(B)$
+    invertibel oleh \autoref{eigen:spectral-mapping} dan pemisahan spektrum.
+    Jadi $X=0$.
+    Pemetaan linear $X\mapsto AX-XB$ pada ruang berdimensi $mn$
+    dengan demikian injektif, sehingga bijektif.
+\end{proof}
+
+\section{Latihan Pilihan}
+\label{eigen:latihan}
+
+Latihan berikut menghubungkan ruang eigen, polinom, dan persamaan matriks.
+
+\begin{latihan}\label{eigen:lat-polinom}
+    Misalkan $A\in\Mat_m(\C)$ dan $B\in\Mat_n(\C)$.
+    Buktikan bahwa $\chi_B(A)$ invertibel jika dan hanya jika
+    $A$ dan $B$ tidak mempunyai nilai eigen bersama.
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-dua-rankone}
+    Misalkan $a=(a_1,\ldots,a_n)^T\in\R^n$, $n\ge2$,
+    $\sum_i a_i=0$, dan $e=(1,\ldots,1)^T$.
+    Tentukan semua nilai eigen dan ruang eigennya untuk $M=aa^T+ee^T$.
+    Tangani juga kasus $a=0$ dan $\|a\|^2=n$.
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-persamaan}
+    Misalkan
+    \[
+        A=\begin{pmatrix}1&1\\0&2\end{pmatrix},\qquad
+        B=\begin{pmatrix}2&0\\0&3\end{pmatrix},\qquad
+        C=(c_{ij})\in\Mat_2(\C).
+    \]
+    Tentukan syarat konsistensi dan seluruh solusi $AX-XB=C$.
+    Hubungkan parameter bebasnya dengan nilai eigen bersama $A$ dan $B$.
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-jumlah-vektor}
+    Misalkan $u,v$ vektor eigen $A$ untuk nilai eigen yang berbeda.
+    Buktikan bahwa $u+v$ bukan vektor eigen $A$.
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-trace-komutator}
+    Untuk $A,B\in\Mat_n(\C)$, buktikan $\tr(AB)=\tr(BA)$.
+    Simpulkan bahwa $AB-BA=I$ tidak mungkin terjadi.
+    Selanjutnya, jika $AB-BA=A$, buktikan $A$ singular.
+\end{latihan}
+
+\begin{latihan}\label{eigen:lat-adjugat}
+    Misalkan $A\in\Mat_n(\C)$ singular, $n\ge2$, dengan
+    $\chi_A(t)=t^n+c_{n-1}t^{n-1}+\cdots+c_1t$.
+    Buktikan
+    \[
+        \chi_{\operatorname{adj}A}(t)
+        =t^{n-1}\bigl(t-(-1)^{n-1}c_1\bigr).
+    \]
+\end{latihan}
+
+\ifpembahasan
+\section{Pembahasan Latihan}
+\label{eigen:pembahasan}
+
+\subsection*{Latihan \ref{eigen:lat-polinom}: akar karakteristik sebagai penghalang invers}
+Dengan \autoref{eigen:spectral-mapping}, $\chi_B(A)$ invertibel
+tepat ketika $\chi_B(\lambda)\ne0$ untuk semua nilai eigen $\lambda$ dari $A$.
+Nol-nol $\chi_B$ tepat merupakan nilai eigen $B$.
+Jadi syarat tersebut ekuivalen dengan tidak adanya nilai eigen bersama.
+Ukuran $A$ dan $B$ tidak harus sama karena $\chi_B$ dievaluasi sebagai
+polinom skalar pada matriks $A$.
+
+\subsection*{Latihan \ref{eigen:lat-dua-rankone}: dua arah yang ortogonal}
+Karena $a^Te=0$, diperoleh $Me=ne$ dan $Ma=\|a\|^2a$.
+Untuk $x$ ortogonal terhadap $a$ dan $e$, berlaku $Mx=0$.
+Jika $a\ne0$ dan $\|a\|^2\ne n$, ruang eigennya adalah
+\[
+    E_n=\operatorname{span}\{e\},\quad
+    E_{\|a\|^2}=\operatorname{span}\{a\},\quad
+    E_0=\operatorname{span}\{a,e\}^{\perp}.
+\]
+Dimensinya $1,1,n-2$; bila $n=2$, ruang terakhir nol dan $0$ bukan nilai eigen.
+Jika $a\ne0$ dan $\|a\|^2=n$, kedua ruang pertama bergabung menjadi
+$E_n=\operatorname{span}\{a,e\}$, berdimensi dua.
+Jika $a=0$, $M=ee^T$ mempunyai nilai eigen $n$ pada
+$\operatorname{span}\{e\}$ dan $0$ pada $e^\perp$.
+
+\subsection*{Latihan \ref{eigen:lat-persamaan}: nilai eigen bersama menyisakan parameter}
+Tuliskan $X=\begin{pmatrix}x&y\\z&w\end{pmatrix}$.
+Perhitungan memberikan
+\[
+    AX-XB=\begin{pmatrix}-x+z&-2y+w\\0&-w\end{pmatrix}.
+\]
+Jadi konsistensi tepat ketika $c_{21}=0$. Jika konsisten, semua solusi adalah
+\[
+    X=\begin{pmatrix}
+        t-c_{11}&-(c_{12}+c_{22})/2\\t&-c_{22}
+    \end{pmatrix},\qquad t\in\C.
+\]
+Kedua matriks mempunyai satu nilai eigen bersama, yaitu $2$, dengan
+ruang eigen masing-masing berdimensi satu. Satu pasangan arah ini
+memberikan kernel berdimensi satu pada pemetaan $X\mapsto AX-XB$.
+
+\subsection*{Latihan \ref{eigen:lat-jumlah-vektor}: kebebasan dua vektor eigen}
+Tuliskan $Au=\lambda u$ dan $Av=\mu v$, dengan $\lambda\ne\mu$.
+Kedua vektor bebas linear. Jika $A(u+v)=\nu(u+v)$, maka
+$(\lambda-\nu)u+(\mu-\nu)v=0$, sehingga
+$\lambda=\nu=\mu$, suatu kontradiksi.
+
+\subsection*{Latihan \ref{eigen:lat-trace-komutator}: trace menghalangi invertibilitas}
+Ekspansi entri memberi
+$\tr(AB)=\sum_{i,j}a_{ij}b_{ji}=\tr(BA)$.
+Jadi trace suatu komutator $AB-BA$ selalu nol,
+sedangkan $\tr I=n\ne0$.
+Sekarang anggap $AB-BA=A$ dan $A$ invertibel.
+Mengalikan dari kiri dengan $A^{-1}$ memberi
+$B-A^{-1}BA=I$. Trace ruas kiri nol karena
+$\tr(A^{-1}BA)=\tr B$, tetapi trace ruas kanan $n$.
+Kontradiksi ini membuktikan $A$ singular.
+
+\subsection*{Latihan \ref{eigen:lat-adjugat}: satu nilai eigen yang mungkin tak nol}
+Jika $\rank A\le n-2$, semua minor berukuran $n-1$ nol,
+sehingga $\operatorname{adj}A=0$.
+Jika $\rank A=n-1$, identitas $A\operatorname{adj}A=0$
+menempatkan semua kolom adjugat pada kernel $A$ yang berdimensi satu.
+Jadi dalam kedua kasus $\rank(\operatorname{adj}A)\le1$.
+Matriks berank paling besar satu mempunyai polinom karakteristik
+$t^{n-1}(t-\tr M)$: multiplisitas aljabar nol minimal $n-1$,
+dan trace menentukan akar yang tersisa.
+Koefisien $t$ dalam $\det(tI-A)$, melalui ekspansi minor utama,
+adalah $(-1)^{n-1}$ kali jumlah minor utama berukuran $n-1$.
+Jumlah itu tepat $\tr(\operatorname{adj}A)$.
+Dengan demikian $\tr(\operatorname{adj}A)=(-1)^{n-1}c_1$,
+yang menghasilkan rumus yang diminta.
+\fi
