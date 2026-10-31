@@ -43,6 +43,12 @@ All documents are typeset in **LaTeX** using standard mathematical packages (`am
 2. Open any `.tex` file in your preferred LaTeX editor (e.g., VS Code with LaTeX Workshop, TeXStudio, or Overleaf).
 3. Compile with `pdflatex` or `xelatex` to generate PDF output.
 
+### Contributing
+
+Improvements to explanations, corrections, and additional olympiad materials
+are welcome. Please open a pull request with a short description of the
+changes and the affected subject or competition.
+
 ## 👤 Author
 
 **Teosofi Hidayah Agung** (*Tetew*)
