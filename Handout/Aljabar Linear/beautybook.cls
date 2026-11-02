@@ -211,6 +211,8 @@
 \newcommand\coverimage[1]{\def\@coverimage{#1}}
 \newcommand\chapimage[1]{\def\@chapimage{#1}}
 \chapimage{} % Empty means no illustration in chapter headers.
+\newcommand\chapstarimage[1]{\def\@chapstarimage{#1}}
+\chapstarimage{} % Illustration in the number position of unnumbered chapters.
 
 \makeatother
 % /* -------------------------------------------------------------------------- */
@@ -262,7 +264,8 @@ fuzzy shadow={0.4mm}{-0.4mm}{0mm}{0.2mm}{fill=white!40!gray},%下
 \tcblower \textbf{#1}\hfill \thecontentspage
 \end{tcolorbox}
 }
-%
+% Reserve room for three-digit page numbers in the table of contents.
+\contentsmargin{2em}
 \titlecontents{chapter}[0mm]
   {\addvspace{-.5em}}
   {\contentsmargin{0pt}\boxednum}
@@ -405,16 +408,16 @@ fuzzy shadow={0.4mm}{-0.4mm}{0mm}{0.2mm}{fill=white!40!gray},%下
         \node[above left,text=outermarginfgcolor,font=\sc\fontsize{25pt}{25pt}\selectfont,align=center] (contents name) at ([shift={(0cm,-4.45cm)}]current page.north east) {\begin{varwidth}{.7\linewidth}\baselineskip=25pt  #1\end{varwidth}};
         \end{pgfonlayer}
         \begin{pgfonlayer}{bottom}
-        \ifdefempty{\@chapimage}{}{%
-        \node[right] (image) at ([shift={(1.5cm,-1.8cm)}]current page.north west) {\includegraphics[width=3cm]{\@chapimage}};}
+        \ifdefempty{\@chapstarimage}{}{%
+        \node[inner sep=0pt] (image) at ([shift={(2.5cm,-2.5cm)}]current page.north west) {\includegraphics[width=3cm]{\@chapstarimage}};}
         \end{pgfonlayer}
         \else
         \begin{pgfonlayer}{top}
           \node[above right,text=outermarginfgcolor,font=\sc\fontsize{25pt}{25pt}\selectfont,align=center] (contents name) at ([shift={(0cm,-4.45cm)}]current page.north west) {\begin{varwidth}{.7\linewidth}\baselineskip=25pt  #1\end{varwidth}};
           \end{pgfonlayer}
       \begin{pgfonlayer}{background}
-      \ifdefempty{\@chapimage}{}{%
-      \node[left] (image) at ([shift={(-1.5cm,-1.8cm)}]current page.north east) {\includegraphics[width=3cm]{\@chapimage}};}
+      \ifdefempty{\@chapstarimage}{}{%
+      \node[inner sep=0pt] (image) at ([shift={(-2.5cm,-2.5cm)}]current page.north east) {\includegraphics[width=3cm]{\@chapstarimage}};}
       \end{pgfonlayer}
         \fi
         \path[fill=outermarginbgcolor]node[append after command={
@@ -434,20 +437,88 @@ fuzzy shadow={0.4mm}{-0.4mm}{0mm}{0.2mm}{fill=white!40!gray},%下
 \newlength{\criticstarlen}
 \setlength{\criticstarlen}{\textwidth}
 % 定义垂直方向的渐变
-\tikzfading[name=fade bottom to top,
-  bottom color=transparent!0, % 底部完全透明
-  top color=transparent!100]      % 顶部不透明
+\tikzfading[name=beautybook part fade,
+  top color=transparent!0,
+  bottom color=transparent!100]
 \tikzfading[name=middle, top color=transparent!90, bottom
 color=transparent!90, middle color=transparent!20]
 \makeatletter
 \newcommand\partabstract[1]{\def\@partabstract{#1}}
+\let\@partabstract\@empty
 \newcommand\partimage[1]{\def\@partimage{#1}}
+% Logo samar dan keterangan hanya pada halaman kosong setelah bagian.
+\newcommand\partblankimage[1]{\def\@partblankimage{#1}}
+\partblankimage{}
+\newcommand{\beautybookpartblanklogoopacity}{0.3}
+\newlength{\beautybookpartblanklogowidth}
+\setlength{\beautybookpartblanklogowidth}{13cm}
+\newcommand{\beautybookpartblanktext}{Halaman ini sengaja dikosongkan}
+\newcommand{\beautybookpartblanklogo}{%
+  \AddToHookNext{shipout/background}{%
+    \begin{tikzpicture}[remember picture,overlay]
+      \ifdefvoid{\@partblankimage}{}{%
+        \node[inner sep=0pt,opacity=\beautybookpartblanklogoopacity]
+          at (current page.center)
+          {\includegraphics[width=\beautybookpartblanklogowidth]{\@partblankimage}};}
+      \node[inner sep=0pt,text=black!65,
+        font=\normalfont\fontsize{18}{22}\selectfont\itshape,align=center]
+        at (current page.center) {\beautybookpartblanktext};
+    \end{tikzpicture}}}
+% The tint stays uniform through the title, then fades into the white page.
+\newlength{\beautybookpartfadeheight}
+\setlength{\beautybookpartfadeheight}{2cm}
+\newcommand{\beautybookpartbgopacity}{0.6}
+\newcommand{\beautybookpartimageopacity}{0.35}
+\newcommand{\beautybookpartbackground}{%
+  \begin{pgfonlayer}{bottom}
+    \coordinate (partfadeleft) at (current page.north west |- partcontents.south);
+    \coordinate (partfaderight) at (current page.north east |- partcontents.south);
+    \fill[outermarginbgcolor,opacity=\beautybookpartbgopacity]
+      (current page.north west) rectangle (partfaderight);
+    \fill[outermarginbgcolor,opacity=\beautybookpartbgopacity,
+          path fading=beautybook part fade]
+      (partfadeleft) rectangle ([yshift=-\beautybookpartfadeheight]partfaderight);
+    \ifdefvoid{\@partimage}{}{%
+      \ifodd\value{page}
+        \coordinate (partartleft) at (current page.north west);
+        \coordinate (partartright) at ([xshift=-\outermarginwidth]current page.north east);
+      \else
+        \coordinate (partartleft) at ([xshift=\outermarginwidth]current page.north west);
+        \coordinate (partartright) at (current page.north east);
+      \fi
+      \coordinate (partarttop) at ($(partartleft)!0.5!(partartright)$);
+      \coordinate (partartbottom) at (partarttop |- hbar.north);
+      \begin{scope}
+        \clip (partartleft) rectangle (partartright |- hbar.north);
+        \node[inner sep=0pt,opacity=\beautybookpartimageopacity]
+          at ($(partarttop)!0.5!(partartbottom)$)
+          {\includegraphics[width=\dimexpr\paperwidth-\outermarginwidth\relax]{\@partimage}};
+      \end{scope}}
+  \end{pgfonlayer}}
 \providecommand{\beautybookpartfontfamily}{\fontfamily{ptm}\selectfont}
-\newcommand{\beautybookpartfont}{\beautybookpartfontfamily\huge}
+% Ukuran judul bagian lebih besar daripada label "Bagian I".
+\newcommand{\beautybookpartfont}{%
+  \beautybookpartfontfamily\fontsize{38}{44}\selectfont}
 % Part typography follows tnr-check-06.png: serif small caps and sans italic.
-\newcommand{\beautybookpartnamefont}{\beautybookpartfontfamily\scshape\huge}
+\newcommand{\beautybookpartnamefont}{%
+  \beautybookpartfontfamily\scshape\fontsize{30}{36}\selectfont}
 \newcommand{\beautybookpartabstractfont}{%
   \fontencoding{T1}\fontfamily{phv}\mdseries\itshape\fontsize{13}{13}\selectfont}
+% Batang mengikuti lebar label bagian, ditambah ruang di kedua sisinya.
+\newlength{\beautybookpartbarpadding}
+\setlength{\beautybookpartbarpadding}{3mm}
+\newcommand{\beautybookpartbar}{%
+  \coordinate (partbarleft) at (partname.west |- hbar.center);
+  \coordinate (partbarright) at (partname.east |- hbar.center);
+  \fill[outermarginfgcolor]
+    ([xshift=-\beautybookpartbarpadding,yshift=2.5mm]partbarleft)
+    rectangle ([xshift=\beautybookpartbarpadding,yshift=-2.5mm]partbarright);
+  \fill[outermarginfgcolor!20!white]
+    ([xshift=-\beautybookpartbarpadding-1mm,yshift=2.5mm]partbarleft)
+    rectangle ([xshift=-\beautybookpartbarpadding,yshift=-2.5mm]partbarleft);
+  \fill[outermarginfgcolor!20!white]
+    ([xshift=\beautybookpartbarpadding,yshift=2.5mm]partbarright)
+    rectangle ([xshift=\beautybookpartbarpadding+1mm,yshift=-2.5mm]partbarright);}
 \titleformat{\part}
 {\normalfont\huge\filcenter}
 {}
@@ -455,8 +526,6 @@ color=transparent!90, middle color=transparent!20]
 {\settowidth{\partstarlen}{\beautybookpartfont #1} % 计算\partabstract的长度并写入到\partstarlen中
   \begin{tikzpicture}[remember picture,overlay]
     \def\barwidth{2cm}
-        \fill[outermarginbgcolor,opacity=0.6]
-    (current page.north west) rectangle (current page.south east);
     \ifodd\value{page}
     \fill [outermarginfgcolor!20]%
     (current page.north east) rectangle ++(-\outermarginwidth,-\paperheight);
@@ -479,27 +548,16 @@ color=transparent!90, middle color=transparent!20]
             %%--------------- Horizontal Line -------------------%%
                 \fill[outermarginbgcolor]
                 (0,-.25cm) rectangle ++(\paperwidth,-.5cm);
-                \fill[outermarginfgcolor]
-                (.67\paperwidth,-.25cm) rectangle ++(4.5cm,-.5cm);
-                \fill[outermarginfgcolor!20!white]
-                (.67\paperwidth-1mm,-.25cm) rectangle ++(1mm,-.5cm);
-                \fill[outermarginfgcolor!20!white]
-                (.67\paperwidth+4.4cm,-.25cm) rectangle ++(1mm,-.5cm);
             \end{tikzpicture}
         };
-        \node[above,text=outermarginfgcolor,font=\beautybookpartnamefont,shift={(.33\linewidth,.5\barwidth)}] (partname) at (hbar) {\partname\ \thepart};
-        \node[below left,text=outermarginfgcolor,shift={(.146\linewidth,-\barwidth)}] (partcontents) at (partname) {{\beautybookpartfontfamily\huge\begin{varwidth}{.9\linewidth}\raggedright\baselineskip=25pt \MakeUppercase{#1}\end{varwidth}}}; % 标题名称
-          \begin{pgfonlayer}{background}
-            \node[above,shift={(-.4\linewidth,-4*\barwidth)}] at (partname) {\ifdefvoid{\@partimage}{}{\includegraphics[width=1.2\linewidth]{\@partimage}}}; % 图片位置调整
-            % % 应用渐变效果
-\fill[path fading=fade bottom to top, fill=nuanbai] (current page.north west) rectangle ([xshift=-\outermarginwidth]current page.south east);
-            \end{pgfonlayer}
+        \node[above,inner xsep=0pt,outer sep=0pt,text=outermarginfgcolor,font=\beautybookpartnamefont,shift={(.33\linewidth,.5\barwidth)}] (partname) at (hbar) {\partname\ \thepart};
+        \node[below left,text=outermarginfgcolor,shift={(.146\linewidth,-\barwidth)}] (partcontents) at (partname) {{\beautybookpartfont\begin{varwidth}{.9\linewidth}\raggedright\MakeUppercase{#1}\end{varwidth}}}; % 标题名称
 %判断标题文字长度与临界长度的关系
 \ifdim\partstarlen<\criticstarlen
 %如果标题长度小于临界长度则使用(hbar)定位
-\node[below,font=\beautybookpartabstractfont,shift={(0,-1.2*\barwidth)}] at (hbar) {\ifdefvoid{\@partabstract}{}{\begin{varwidth}{.9\linewidth}\baselineskip=3ex \@partabstract\end{varwidth}}}; % 简介文字调整
+\node[below,font=\beautybookpartabstractfont,shift={(0,-2.0*\barwidth)}] at (hbar) {\ifdefvoid{\@partabstract}{}{\begin{varwidth}{.9\linewidth}\baselineskip=3ex \@partabstract\end{varwidth}}}; % 简介文字调整
 \else
-\node[below,font=\beautybookpartabstractfont,shift={(0,-1.2*\barwidth)}] at (partcontents) {\ifdefvoid{\@partabstract}{}{\begin{varwidth}{.9\linewidth}\baselineskip=3ex \@partabstract\end{varwidth}}}; % 简介文字调整
+\node[below,font=\beautybookpartabstractfont,shift={(0,-2.0*\barwidth)}] at (partcontents) {\ifdefvoid{\@partabstract}{}{\begin{varwidth}{.9\linewidth}\baselineskip=3ex \@partabstract\end{varwidth}}}; % 简介文字调整
 \fi
           \else 
           \fill [outermarginfgcolor!20]%
@@ -523,52 +581,67 @@ color=transparent!90, middle color=transparent!20]
             %%--------------- Horizontal Line -------------------%%
                       \fill[outermarginbgcolor]
                       (0,-.25cm) rectangle ++(\paperwidth,-.5cm);
-                      \fill[outermarginfgcolor]
-                      (.15\paperwidth,-.25cm) rectangle ++(4.5cm,-.5cm);
-                      \fill[outermarginfgcolor!20!white]
-                      (.15\paperwidth-1mm,-.25cm) rectangle ++(1mm,-.5cm);
-                      \fill[outermarginfgcolor!20!white]
-                      (.15\paperwidth+4.5cm,-.25cm) rectangle ++(1mm,-.5cm);
                   \end{tikzpicture}
               };
-              \node[above,text=outermarginfgcolor,font=\beautybookpartnamefont,shift={(-.31\linewidth,.5\barwidth)}] (partname) at (hbar) {\partname\ \thepart};
-              \node[below right,text=outermarginfgcolor,shift={(-.125\linewidth,-\barwidth)}] (partcontents) at (partname) {{\beautybookpartfontfamily\huge\begin{varwidth}{.9\linewidth}\raggedright\baselineskip=25pt \MakeUppercase{#1}\end{varwidth}}}; % 标题名称
-                \begin{pgfonlayer}{background}
-                  \node[above,shift={(.35\linewidth,-4*\barwidth)}] at (partname) {\ifdefvoid{\@partimage}{}{\includegraphics[width=1.2\linewidth]{\@partimage}}}; % 图片位置调整
-            % % 应用渐变效果
-            \fill[path fading=fade bottom to top, fill=nuanbai] (current page.north east) rectangle ([xshift=\outermarginwidth]current page.south west);
-                  \end{pgfonlayer}
+              \node[above,inner xsep=0pt,outer sep=0pt,text=outermarginfgcolor,font=\beautybookpartnamefont,shift={(-.31\linewidth,.5\barwidth)}] (partname) at (hbar) {\partname\ \thepart};
+              \node[below right,text=outermarginfgcolor,shift={(-.125\linewidth,-\barwidth)}] (partcontents) at (partname) {{\beautybookpartfont\begin{varwidth}{.9\linewidth}\raggedright\MakeUppercase{#1}\end{varwidth}}}; % 标题名称
 %判断标题文字长度与临界长度的关系
 \ifdim\partstarlen<\criticstarlen
 %如果标题长度小于临界长度则使用(hbar)定位
-\node[below,font=\beautybookpartabstractfont,shift={(0,-1.2*\barwidth)}] at (hbar) {\ifdefvoid{\@partabstract}{}{\begin{varwidth}{.9\linewidth}\baselineskip=3ex \@partabstract\end{varwidth}}}; % 简介文字调整
+\node[below,font=\beautybookpartabstractfont,shift={(0,-1.8*\barwidth)}] at (hbar) {\ifdefvoid{\@partabstract}{}{\begin{varwidth}{.9\linewidth}\baselineskip=3ex \@partabstract\end{varwidth}}}; % 简介文字调整
 \else
-\node[below,font=\beautybookpartabstractfont,shift={(0,-1.2*\barwidth)}] at (partcontents) {\ifdefvoid{\@partabstract}{}{\begin{varwidth}{.9\linewidth}\baselineskip=3ex \@partabstract\end{varwidth}}}; % 简介文字调整
+\node[below,font=\beautybookpartabstractfont,shift={(0,-1.8*\barwidth)}] at (partcontents) {\ifdefvoid{\@partabstract}{}{\begin{varwidth}{.9\linewidth}\baselineskip=3ex \@partabstract\end{varwidth}}}; % 简介文字调整
 \fi
           \fi
+    \beautybookpartbar
+    \beautybookpartbackground
     \end{tikzpicture}}
+% Ikhtisar opsional dalam kurung kurawal kedua, hanya untuk satu bagian.
+% Bentuk lama \partabstract{...}\part{...} juga dikonsumsi sekali.
+% Pertahankan \part* dan judul pendek \part[...]{...} dari titlesec.
+\let\beautybook@originalpart\part
+\RenewDocumentCommand{\part}{s o m +g}{%
+  \IfNoValueF{#4}{\partabstract{#4}}%
+  \IfBooleanTF{#1}
+    {\beautybook@originalpart*{#3}}
+    {\IfNoValueTF{#2}
+      {\beautybook@originalpart{#3}}
+      {\beautybook@originalpart[#2]{#3}}}%
+  \global\let\@partabstract\@empty
+}
+% titlesec menyisipkan \null hanya pada halaman kosong setelah judul.
+% Batasi pada part; jangan mengubah semua halaman bergaya empty.
+\patchcmd{\ttl@page@ii}{\null}
+  {\null\ifstrequal{#6}{part}{\beautybookpartblanklogo}{}}
+  {}{\PackageError{beautybook}{Gagal memasang logo halaman kosong bagian}
+      {Periksa definisi \string\ttl@page@ii\space pada titlesec.}}
 \makeatother
 \assignpagestyle{\part}{empty}
 \assignpagestyle{\chapter}{empty}
 
-% Shared grey-blue background behind section and subsection titles.
+% Shared grey-blue ribbon behind section and subsection titles.
 % The document can override these colours after selecting its palette.
 \colorlet{sectiontitlebgstart}{outermarginfgcolor!12!gray!26!white}
 \colorlet{sectiontitlebgend}{outermarginbgcolor!55!white}
-% [fit] ends the background just beyond the title text, for subsections.
+% [fit] follows the title width, with room for the curved ribbon end.
 \newcommand{\beautybooksectionbackground}[3][full]{%
   \begin{pgfonlayer}{background}
     \begin{scope}[overlay]
       \ifstrequal{#1}{fit}
-        {\coordinate (sectionbgend) at ([xshift=3pt]#3.east);}
+        {\coordinate (sectionbgend) at ([xshift=4*\rad+3pt]#3.east);}
         {\coordinate (sectionbgend) at
           ([xshift=\dimexpr\linewidth-1em\relax]#2.west);}
-      \shade[left color=sectiontitlebgstart,right color=sectiontitlebgend,
-             rounded corners=2pt]
-        let \p1=(#2.west), \p2=(#2.north), \p3=(#2.south),
-            \p4=(#3.north), \p5=(#3.south), \p6=(sectionbgend) in
-        (\x1,{max(\y2,\y4)+1pt}) rectangle
-        (\x6,{min(\y3,\y5)-1pt});
+      % Match the S-shaped ends of the Subbab badge. The left end
+      % overlaps the badge behind it; the right end leaves text padding.
+      \shade[left color=sectiontitlebgstart,right color=sectiontitlebgend]
+        let \p1=(#3.west), \p2=(#2.north), \p3=(#2.south),
+            \p4=(#3.north), \p5=(#3.south), \p6=(sectionbgend),
+            \n1={max(\y2,\y4)+1pt}, \n2={min(\y3,\y5)-1pt} in
+        ({\x1+1pt},\n1)
+        to[out=180,in=0,looseness=1] ({\x1-4*\rad+1pt},\n2)
+        -- ({\x6-4*\rad},\n2)
+        to[out=0,in=180,looseness=1] (\x6,\n1)
+        -- cycle;
     \end{scope}
   \end{pgfonlayer}}
 

@@ -1,0 +1,578 @@
+% !TeX root = ../../ONMIPA Alin.tex
+% Acuan: Zhang (2009), Bab 5, Soal 5.33, 5.36--5.51;
+% Zhang (2011), bagian 1.4, hubungan kernel--citra dan adjoin.
+% Seluruh operator dibahas dalam dimensi hingga; tidak memakai SVD, QR, atau LU.
+\chapter[Operator pada Ruang Hasil Kali Dalam]{Operator pada Ruang\\Hasil Kali Dalam}
+\label{ch:operator-hkd}
+
+Hasil kali dalam memungkinkan sebuah transformasi dipindahkan
+dari satu argumen ke argumen lainnya melalui operator adjoin.
+Konsep ini menghubungkan kernel dengan komplemen ortogonal citra,
+serta menjelaskan sifat geometris operator uniter dan adjoin diri.
+Semua ruang pada bab ini berdimensi hingga atas $\R$ atau $\C$.
+Konvensi hasil kali dalam tetap linear pada argumen kedua.
+
+\section{Representasi Fungsional Linear}
+
+Fungsional linear adalah transformasi linear $\ell:V\to\F$.
+Untuk setiap $z\in V$, aturan $x\mapsto\langle z,x\rangle$
+merupakan fungsional linear. Dalam dimensi hingga, semua
+fungsional linear dapat diperoleh dengan cara tersebut.
+
+\begin{teorema}[][Representasi Riesz dalam dimensi hingga][op:riesz]
+    Untuk setiap fungsional linear $\ell:V\to\F$, terdapat
+    tepat satu $z\in V$ dengan
+    \[
+        \ell(x)=\langle z,x\rangle\qquad\text{untuk semua }x\in V.
+    \]
+    Jika $V\ne\{0\}$, maka
+    $\max_{\|x\|=1}|\ell(x)|=\|z\|$.
+\end{teorema}
+\begin{proof}
+    Ambil basis ortonormal $e_1,\ldots,e_n$ dan letakkan
+    $a_j=\ell(e_j)$. Untuk $x=\sum x_je_j$,
+    $\ell(x)=\sum a_jx_j$.
+    Vektor $z=\sum\overline{a_j}e_j$ memenuhi
+    $\langle z,x\rangle=\sum a_jx_j$.
+    Jika $z'$ juga merepresentasikan $\ell$, maka
+    $\langle z-z',x\rangle=0$ untuk semua $x$.
+    Pilih $x=z-z'$ untuk memperoleh $z=z'$.
+    Cauchy--Schwarz memberi $|\ell(x)|\le\|z\|$ pada vektor satuan.
+    Jika $z\ne0$, batas dicapai pada $x=z/\|z\|$; jika $z=0$,
+    semua nilai fungsional nol.
+\end{proof}
+
+Pada ruang kompleks, pemetaan $z\mapsto\langle z,\cdot\rangle$
+bersifat konjugat-linear terhadap $z$. Konjugasi pada koefisien
+representer dalam bukti di atas tidak boleh dihapus.
+
+\begin{exam}[Kendala linear sebagai hiperbidang ortogonal]
+    Pada $\C^3$, ambil $\ell(x)=2x_1-ix_2+3x_3$.
+    Tentukan representer, nilai maksimum $|\ell(x)|$ pada
+    vektor satuan, dan solusi bernorma minimum dari $\ell(x)=b$.
+\end{exam}
+\begin{solution}
+    Representernya $z=(2,i,3)^T$, dengan $\|z\|^2=14$.
+    Maka maksimum yang diminta adalah $\sqrt{14}$ dan
+    $\ker\ell=\operatorname{span}\{z\}^\perp$.
+    Solusi minimum adalah $x_0=(b/14)z$ karena
+    $\langle z,x_0\rangle=b$.
+    Semua solusi lain berbentuk $x_0+w$ dengan $w\perp z$,
+    sehingga norma kuadratnya $|b|^2/14+\|w\|^2$.
+\end{solution}
+
+\section{Adjoin dan Matriks Representasinya}
+
+\begin{definisi}[][Adjoin transformasi linear][op:adjoin]
+    Adjoin dari $T:V\to W$ adalah transformasi $T^*:W\to V$
+    yang memenuhi
+    \[
+        \langle Tx,y\rangle_W=\langle x,T^*y\rangle_V
+        \qquad(x\in V,\ y\in W).
+    \]
+\end{definisi}
+
+\begin{teorema}[][Keberadaan dan keunikan adjoin][op:ada-adjoin]
+    Setiap transformasi linear antara dua ruang hasil kali dalam
+    berdimensi hingga mempunyai tepat satu adjoin.
+    Jika matriks $T$ dalam basis ortonormal adalah $A$, matriks
+    adjoin dalam arah sebaliknya adalah $A^*$.
+\end{teorema}
+\begin{proof}
+    Pilih basis ortonormal pada kedua ruang, dan tulis koordinat
+    $x,y$ sebagai $u,v$. Identitas
+    \[
+        (Au)^*v=u^*(A^*v)
+    \]
+    menunjukkan bahwa transformasi bermatriks $A^*$ memenuhi
+    definisi adjoin. Untuk keunikan, jika $S$ juga memenuhi definisi,
+    maka $\langle x,(S-T^*)y\rangle=0$ untuk semua $x,y$.
+    Dengan memilih $x=(S-T^*)y$, diperoleh $(S-T^*)y=0$
+    untuk semua $y$, sehingga $S=T^*$.
+\end{proof}
+
+Jika basis yang digunakan tidak ortonormal, misalkan matriks
+hasil kali dalam domain dan kodomain adalah $G_V$ dan $G_W$.
+Untuk $A=[T]_{\mathcal C\leftarrow\mathcal B}$, identitas adjoin memberi
+\[
+    [T^*]_{\mathcal B\leftarrow\mathcal C}=G_V^{-1}A^*G_W.
+\]
+Memang, kedua ruas identitas hasil kali dalam dalam koordinat
+adalah $u^*A^*G_Wv$ dan $u^*G_V[T^*]v$.
+Matriks adjoin baru sama dengan transpose konjugat matriks asal
+ketika basis-basisnya ortonormal, atau dalam keadaan khusus yang sesuai.
+
+\begin{exam}[Adjoin diri dalam hasil kali dalam berbobot]
+    Pada $\R^2$ dengan $G=\diag(1,2)$, tinjau operator
+    bermatriks $A=\begin{pmatrix}0&2\\1&0\end{pmatrix}$.
+    Tentukan matriks adjoinnya.
+\end{exam}
+\begin{solution}
+    Perhitungan memberi
+    \[
+        G^{-1}A^TG
+        =\begin{pmatrix}1&0\\0&1/2\end{pmatrix}
+         \begin{pmatrix}0&1\\2&0\end{pmatrix}
+         \begin{pmatrix}1&0\\0&2\end{pmatrix}=A.
+    \]
+    Jadi operator sama dengan adjoinnya walaupun $A$ tidak
+    simetris dalam basis standar tersebut.
+    Vektor eigen $(\sqrt2,1)^T$ dan $(-\sqrt2,1)^T$
+    ortogonal dalam metrik $G$, karena hasil kali dalamnya $-2+2=0$.
+\end{solution}
+
+\begin{prop}[Aljabar adjoin]
+    Untuk transformasi dengan domain dan kodomain yang sesuai,
+    \[
+        (T^*)^*=T,\qquad
+        (aS+bT)^*=\overline aS^*+\overline bT^*,\qquad
+        (ST)^*=T^*S^*.
+    \]
+    Jika $T$ invertibel, maka $(T^{-1})^*=(T^*)^{-1}$.
+\end{prop}
+\begin{proof}
+    Masing-masing rumus dapat diperiksa melalui identitas
+    pendefinisi adjoin dan keunikannya.
+    Misalnya,
+    $\langle STx,y\rangle=\langle Tx,S^*y\rangle
+    =\langle x,T^*S^*y\rangle$.
+    Rumus invers mengikuti pengambilan adjoin pada
+    $TT^{-1}=I$ dan $T^{-1}T=I$.
+\end{proof}
+
+\begin{exam}[Adjoin operator pada ruang matriks]
+    Pada ruang matriks dengan hasil kali dalam Frobenius,
+    tentukan adjoin $L(X)=AXB$, dengan ukuran matriks yang sesuai.
+\end{exam}
+\begin{solution}
+    Sifat siklik trace memberi
+    \[
+        \langle AXB,Y\rangle_F
+        =\tr(B^*X^*A^*Y)
+        =\tr(X^*A^*YB^*)=\langle X,A^*YB^*\rangle_F.
+    \]
+    Jadi $L^*(Y)=A^*YB^*$.
+    Secara khusus, adjoin dari $X\mapsto AX-XA$ adalah
+    $Y\mapsto A^*Y-YA^*$.
+\end{solution}
+
+\section{Hubungan Kernel, Citra, dan Ortogonalitas}
+
+\begin{teorema}[][Empat ruang fundamental melalui adjoin][op:empat-ruang]
+    Untuk $T:V\to W$,
+    \[
+        \ker T^*=(\operatorname{im}T)^\perp,\qquad
+        \operatorname{im}T^*=(\ker T)^\perp.
+    \]
+    Akibatnya,
+    \[
+        V=\ker T\oplus\operatorname{im}T^*,\qquad
+        W=\operatorname{im}T\oplus\ker T^*,
+    \]
+    dengan kedua jumlah ortogonal, dan $\rank T=\rank T^*$.
+\end{teorema}
+\begin{proof}
+    Vektor $y\in W$ berada di $(\operatorname{im}T)^\perp$
+    tepat ketika $\langle Tx,y\rangle=0$ untuk semua $x$.
+    Dengan identitas adjoin, hal ini ekuivalen dengan
+    $\langle x,T^*y\rangle=0$ untuk semua $x$, yakni $T^*y=0$.
+    Terapkan hasil ini pada $T^*$ dan ambil komplemen ortogonal
+    untuk memperoleh identitas kedua.
+    Dekomposisi mengikuti teorema komplemen ortogonal.
+    Terakhir, $\rank T^*=\dim V-\dim\ker T=\rank T$.
+\end{proof}
+
+Selain itu,
+\[
+    \langle x,T^*Tx\rangle=\|Tx\|^2,
+    \qquad \ker(T^*T)=\ker T.
+\]
+Satu inklusi kernel jelas; inklusi lainnya mengikuti bahwa
+$T^*Tx=0$ mengakibatkan $\|Tx\|^2=0$.
+Jadi $\rank(T^*T)=\rank T$.
+Dalam masalah kuadrat terkecil, hubungan ini menjelaskan mengapa
+matriks persamaan normal invertibel tepat ketika kolom matriks
+asal bebas linear.
+
+Jika $T$ surjektif, setiap persamaan $Tx=y$ mempunyai satu
+solusi yang berada dalam $(\ker T)^\perp$; solusi tersebut
+adalah solusi dengan norma minimum. Keunikannya mengikuti
+dekomposisi ortogonal, sebab solusi lain berbeda sebesar
+vektor dari $\ker T$.
+
+\section{Isometri dan Operator Uniter}
+
+\begin{definisi}[][Isometri linear dan operator uniter][op:isometri]
+    Transformasi linear $T:V\to W$ disebut isometri jika
+    $\langle Tx,Ty\rangle_W=\langle x,y\rangle_V$ untuk semua $x,y$.
+    Isometri bijektif pada ruang yang sama disebut operator
+    \emph{uniter} pada ruang kompleks dan \emph{ortogonal} pada ruang real.
+\end{definisi}
+
+\begin{teorema}[][Karakterisasi isometri linear][op:uji-isometri]
+    Untuk transformasi linear $T:V\to W$, pernyataan berikut ekuivalen:
+    \begin{enumerate}[label=(\roman*),nosep]
+        \item $T$ mempertahankan hasil kali dalam;
+        \item $\|Tx\|=\|x\|$ untuk setiap $x$;
+        \item $T^*T=I_V$;
+        \item citra suatu basis ortonormal $V$ adalah daftar ortonormal di $W$.
+    \end{enumerate}
+    Isometri selalu injektif. Jika $\dim V=\dim W$, ia bijektif
+    dan $T^{-1}=T^*$.
+\end{teorema}
+\begin{proof}
+    Pernyataan pertama memberi kedua dengan mengambil $y=x$.
+    Arah balik memakai identitas polarisasi dan linearitas $T$.
+    Identitas $\langle Tx,Ty\rangle=\langle x,T^*Ty\rangle$
+    membuktikan ekuivalensi dengan pernyataan ketiga.
+    Memeriksa pada pasangan anggota basis memberi pernyataan
+    keempat; ekspansi koordinat membuktikan arah baliknya.
+    Pelestarian norma memaksa kernel hanya nol.
+    Jika dimensi sama, injektivitas memberi bijektivitas dan
+    $T^*T=I$ kemudian memberi $T^*=T^{-1}$.
+\end{proof}
+
+\begin{exam}[Pelestarian norma tanpa linearitas]
+    Pemetaan $C(z)=\overline z$ pada $\C$ mempertahankan norma
+    dan jarak, tetapi bukan linear kompleks: $C(i)=-i\ne iC(1)$.
+    Pemetaan translasi $x\mapsto x+a$ pada $\R^n$, dengan $a\ne0$,
+    mempertahankan jarak tetapi tidak linear karena tidak
+    memetakan nol ke nol. Jadi asumsi linearitas dalam teorema
+    pelestarian norma tidak boleh dihilangkan.
+\end{exam}
+
+Dalam basis ortonormal, isometri mempunyai matriks $A$ dengan
+$A^*A=I$. Jika matriks persegi, ini ekuivalen dengan uniter.
+Pergantian antara dua basis ortonormal juga diberikan oleh
+matriks uniter, sehingga representasi suatu operator berubah
+melalui $A\mapsto U^*AU$.
+Untuk basis dengan matriks metrik $G$, operator bermatriks $A$
+mempertahankan hasil kali dalam tepat ketika $A^*GA=G$.
+
+\section{Operator Adjoin Diri, Normal, dan Positif}
+
+\begin{definisi}[][Kelas operator berdasarkan adjoin][op:kelas]
+    Operator $T:V\to V$ disebut \emph{adjoin diri} jika $T^*=T$,
+    \emph{antiadjoin diri} jika $T^*=-T$, dan \emph{normal}
+    jika $T^*T=TT^*$.
+    Operator adjoin diri disebut semidefinit positif jika
+    $\langle x,Tx\rangle\ge0$ untuk semua $x$, dan positif definit
+    jika ketaksamaan itu ketat untuk $x\ne0$.
+\end{definisi}
+
+Dalam basis ortonormal, sifat-sifat ini tepat sifat Hermitian,
+anti-Hermitian, normal, serta positif pada matriks representasinya.
+Operator adjoin diri dan operator uniter selalu normal.
+Untuk operator adjoin diri, $\langle x,Tx\rangle$ real karena
+sama dengan konjugatnya.
+
+\begin{teorema}[][Teorema spektral untuk operator][op:spektral]
+    Setiap operator adjoin diri mempunyai basis ortonormal
+    yang terdiri atas vektor eigen, dengan nilai eigen real.
+    Pada ruang kompleks, setiap operator normal mempunyai
+    basis ortonormal vektor eigen.
+\end{teorema}
+\begin{proof}
+    Pilih basis ortonormal awal. Matriks operator menjadi
+    Hermitian pada kasus adjoin diri, atau normal pada kasus kedua.
+    Terapkan teorema spektral matriks pada
+    Teorema~\ref{eigen:teorema-spektral}.
+    Kolom-kolom matriks perubahan basis uniter memberikan
+    koordinat basis ortonormal vektor eigen operator.
+    Pada ruang real dan operator adjoin diri, matriksnya simetris
+    real sehingga basis eigen dapat dipilih real.
+\end{proof}
+
+Kerealan nilai eigen adjoin diri juga dapat dilihat langsung.
+Jika $Tx=\lambda x$ dan $x\ne0$, maka
+$\lambda\|x\|^2=\langle x,Tx\rangle$ real.
+Jika $Tu=\lambda u$ dan $Tv=\mu v$ dengan $\lambda\ne\mu$,
+identitas adjoin memberi $(\lambda-\mu)\langle u,v\rangle=0$;
+jadi ruang eigen berbeda saling ortogonal.
+
+\begin{exam}[Normal real belum tentu mempunyai basis eigen real]
+    Matriks $R=\begin{pmatrix}0&-1\\1&0\end{pmatrix}$ ortogonal,
+    sehingga normal. Namun, polinom karakteristiknya $t^2+1$
+    tidak mempunyai akar real. Jadi tidak ada basis eigen real.
+    Setelah ruang diperluas ke $\C^2$, nilai eigennya $i,-i$
+    dan teorema spektral kompleks berlaku.
+\end{exam}
+
+Jika $T$ normal, ekspansi dalam basis eigen ortonormal memberi
+$\|Tx\|=\|T^*x\|$ dan $\ker T=\ker T^*$.
+Pada ruang real, kesamaan norma langsung mengikuti
+$\langle x,(T^*T-TT^*)x\rangle=0$.
+Oleh karena itu, operator normal memenuhi
+$V=\ker T\oplus\operatorname{im}T$ secara ortogonal.
+Operator normal yang nilpoten harus nol: pada ruang kompleks,
+semua nilai eigen nol dan diagonalisasi memberi $T=0$;
+untuk matriks real, argumen yang sama dapat diterapkan setelah
+dipandang sebagai matriks kompleks.
+
+\section{Hasil Bagi Rayleigh dan Dimensi Subruang Positif}
+
+\begin{teorema}[][Batas hasil bagi Rayleigh][op:rayleigh]
+    Misalkan $T$ adjoin diri pada ruang tak nol, dengan nilai
+    eigen terkecil $\lambda_{\min}$ dan terbesar $\lambda_{\max}$.
+    Untuk $x\ne0$,
+    \[
+        \lambda_{\min}\le
+        \frac{\langle x,Tx\rangle}{\|x\|^2}
+        \le\lambda_{\max}.
+    \]
+    Kesamaan pada masing-masing batas berlaku tepat ketika
+    $x$ berada dalam ruang eigen nilai batas tersebut.
+\end{teorema}
+\begin{proof}
+    Tulis $x=\sum c_je_j$ dalam basis eigen ortonormal.
+    Maka hasil bagi yang dimaksud adalah
+    \[
+        \frac{\sum_j\lambda_j|c_j|^2}{\sum_j|c_j|^2},
+    \]
+    yakni rata-rata berbobot nilai-nilai eigen.
+    Batas atas tercapai tepat ketika setiap koefisien untuk
+    nilai eigen yang lebih kecil nol. Argumen batas bawah serupa.
+\end{proof}
+
+\begin{exam}[Maksimum bentuk kuadratik pada lingkaran satuan]
+    Tentukan rentang $2x^2+2xy+2y^2$ untuk real $x^2+y^2=1$.
+\end{exam}
+\begin{solution}
+    Matriks bentuk kuadratiknya $A=\begin{pmatrix}2&1\\1&2\end{pmatrix}$
+    mempunyai nilai eigen $1$ dan $3$, masing-masing pada arah
+    $(1,-1)^T$ dan $(1,1)^T$.
+    Jadi minimum satu dicapai ketika $x=-y=\pm1/\sqrt2$,
+    dan maksimum tiga ketika $x=y=\pm1/\sqrt2$.
+    Semua nilai antara keduanya dicapai dengan mengubah
+    koefisien dalam basis eigen ortonormal.
+\end{solution}
+
+\begin{teorema}[][Banyak nilai eigen positif][op:indeks-positif]
+    Jika operator adjoin diri $T$ mempunyai tepat $r$ nilai
+    eigen positif, dihitung dengan multiplisitas, maka $r$
+    adalah dimensi terbesar subruang $U$ yang memenuhi
+    \[
+        \langle x,Tx\rangle>0\qquad\text{untuk setiap }x\in U\setminus\{0\}.
+    \]
+\end{teorema}
+\begin{proof}
+    Jumlah ruang eigen untuk nilai positif mempunyai dimensi $r$
+    dan memenuhi ketaksamaan tersebut.
+    Ruang $N$ yang dibangun oleh vektor eigen untuk nilai
+    nonpositif berdimensi $n-r$.
+    Jika $\dim U>r$, rumus dimensi memberi
+    $\dim(U\cap N)\ge\dim U+(n-r)-n>0$.
+    Vektor tak nol pada irisan menghasilkan nilai kuadrat
+    positif menurut definisi $U$ dan nonpositif menurut definisi
+    $N$, kontradiksi.
+\end{proof}
+
+Dengan mengganti $T$ oleh $-T$, diperoleh pernyataan serupa
+untuk banyaknya nilai eigen negatif. Hasil ini sering mengubah
+informasi tentang suatu subruang menjadi batas jumlah nilai
+eigen tanpa menghitung polinom karakteristik.
+
+\section{Latihan Pilihan}
+
+\begin{latihan}\label{op:lat-riesz}
+    Pada $\mathcal P_{\le2}(\R)$ dengan hasil kali dalam integral
+    pada $[-1,1]$, tentukan representer dari $\ell(p)=p(0)$.
+    Carilah konstanta terkecil $C$ sehingga
+    \[
+        |p(0)|^2\le C\int_{-1}^1|p(t)|^2\,dt
+    \]
+    untuk semua polinom pada ruang tersebut.
+\end{latihan}
+
+\begin{latihan}\label{op:lat-adjoin-berbobot}
+    Pada $\R^2$, gunakan metrik $G=\begin{pmatrix}2&1\\1&2\end{pmatrix}$.
+    Jika matriks $T$ dalam basis standar adalah
+    $A=\begin{pmatrix}1&1\\0&2\end{pmatrix}$, tentukan matriks
+    $T^*$. Apakah $T$ adjoin diri?
+\end{latihan}
+
+\begin{latihan}\label{op:lat-komutator}
+    Untuk matriks Hermitian $A\in\Mat_n(\C)$, definisikan
+    $D_A(X)=AX-XA$ pada ruang matriks dengan hasil kali dalam
+    Frobenius. Buktikan bahwa $D_A$ adjoin diri.
+    Buktikan pula bahwa $D_A$ semidefinit positif tepat ketika
+    $A$ merupakan matriks skalar.
+\end{latihan}
+
+\begin{latihan}\label{op:lat-titik-tetap}
+    Jika $U$ uniter, buktikan dekomposisi ortogonal
+    \[
+        V=\ker(U-I)\oplus\operatorname{im}(U-I).
+    \]
+    Tafsirkan kedua subruang sebagai vektor tetap dan selisih
+    vektor dengan citranya.
+\end{latihan}
+
+\begin{latihan}\label{op:lat-gram-sama}
+    Misalkan $v_1,\ldots,v_m$ dan $w_1,\ldots,w_m$ dua daftar
+    dalam ruang hasil kali dalam $V$ dengan
+    $\langle v_i,v_j\rangle=\langle w_i,w_j\rangle$ untuk semua $i,j$.
+    Buktikan bahwa ada operator uniter atau ortogonal $U$ dengan
+    $Uv_j=w_j$ untuk setiap $j$. Daftar tidak harus bebas linear.
+\end{latihan}
+
+\begin{latihan}\label{op:lat-norma-sama}
+    Untuk transformasi linear $A,B:V\to W$, andaikan
+    $\|Ax\|=\|Bx\|$ untuk semua $x$.
+    Buktikan bahwa ada operator uniter atau ortogonal $U$ pada $W$
+    sehingga $A=UB$.
+\end{latihan}
+
+\begin{latihan}\label{op:lat-kuadratik-real}
+    Pada ruang hasil kali dalam kompleks, buktikan bahwa
+    $\langle x,Tx\rangle$ real untuk semua $x$ jika dan hanya jika
+    $T$ adjoin diri. Jelaskan mengapa pernyataan ini tidak menjadi
+    kriteria adjoin diri pada ruang real.
+\end{latihan}
+
+\begin{latihan}\label{op:lat-isotropik}
+    Misalkan $T$ adjoin diri mempunyai $p$ nilai eigen positif,
+    $q$ negatif, dan $z$ nol, dihitung dengan multiplisitas.
+    Tentukan dimensi terbesar subruang $W$ yang memenuhi
+    $\langle x,Tx\rangle=0$ untuk setiap $x\in W$.
+\end{latihan}
+
+\begin{latihan}\label{op:lat-pilih-metrik}
+    Buktikan bahwa suatu operator pada ruang linear berdimensi
+    hingga dapat dibuat adjoin diri dengan memilih suatu hasil
+    kali dalam tepat ketika operator itu dapat didiagonalkan
+    dengan semua nilai eigen real.
+    Simpulkan bahwa setiap operator idempoten dapat dibuat
+    menjadi proyeksi ortogonal untuk suatu hasil kali dalam.
+\end{latihan}
+
+\ifpembahasan
+\section{Pembahasan Latihan}
+
+\subsection*{Latihan \ref{op:lat-riesz}: evaluasi sebagai hasil kali dalam}
+Tuliskan representer $r(t)=a+bt+ct^2$.
+Syarat $\langle r,1\rangle=1$, $\langle r,t\rangle=0$,
+dan $\langle r,t^2\rangle=0$ memberi
+\[
+    2a+\frac23c=1,\qquad \frac23b=0,\qquad
+    \frac23a+\frac25c=0.
+\]
+Maka $r(t)=9/8-15t^2/8$.
+Norma kuadrat representer adalah $\langle r,r\rangle=\ell(r)=9/8$.
+Jadi konstanta terbaik $C=9/8$, dengan kesamaan untuk
+polinom yang merupakan kelipatan $r$, termasuk polinom nol.
+
+\subsection*{Latihan \ref{op:lat-adjoin-berbobot}: transpose saja belum cukup}
+Rumus adjoin dalam basis ini memberi
+\[
+    [T^*]=G^{-1}A^TG
+       =\frac13\begin{pmatrix}2&-1\\-1&2\end{pmatrix}
+         \begin{pmatrix}2&1\\4&5\end{pmatrix}
+       =\begin{pmatrix}0&-1\\2&3\end{pmatrix}.
+\]
+Matriks tersebut berbeda dari $A$, sehingga $T$ bukan adjoin diri.
+Ia juga berbeda dari $A^T$, sebab basis standar tidak ortonormal
+untuk metrik $G$.
+
+\subsection*{Latihan \ref{op:lat-komutator}: selisih nilai eigen muncul berpasangan}
+Rumus adjoin pada ruang matriks memberi $D_A^*=D_{A^*}=D_A$.
+Pilih basis eigen ortonormal $u_1,\ldots,u_n$ bagi $A$,
+dengan nilai eigen real $\lambda_j$.
+Matriks $u_iu_j^*$ adalah vektor eigen $D_A$ untuk nilai
+$\lambda_i-\lambda_j$.
+Jika $D_A$ semidefinit positif, semua selisih itu nonnegatif.
+Menukar $i,j$ memaksa semuanya nol, sehingga semua nilai
+eigen $A$ sama. Teorema spektral memberi $A=cI$.
+Sebaliknya, $A=cI$ menghasilkan $D_A=0$, yang semidefinit positif.
+
+\subsection*{Latihan \ref{op:lat-titik-tetap}: kernel adjoin sama dengan kernel asal}
+Karena $U^*=U^{-1}$, persamaan $U^*x=x$ ekuivalen dengan $Ux=x$.
+Jadi $\ker((U-I)^*)=\ker(U-I)$.
+Identitas kernel--citra memberi
+\[
+    \bigl(\operatorname{im}(U-I)\bigr)^\perp=\ker(U-I).
+\]
+Dekomposisi ortogonal mengikuti dengan mengambil komplemen.
+Kernel berisi vektor yang tetap oleh $U$, sedangkan citra
+berisi semua $Ux-x$. Mengganti tandanya memberi himpunan
+yang sama, sehingga dapat pula ditulis sebagai semua $x-Ux$.
+
+\subsection*{Latihan \ref{op:lat-gram-sama}: perluas isometri pada ruang pembangun}
+Definisikan dahulu $U_0(\sum c_jv_j)=\sum c_jw_j$.
+Kesamaan matriks Gram memberi
+\[
+    \left\|\sum c_jv_j\right\|^2
+      =\left\|\sum c_jw_j\right\|^2.
+\]
+Jika dua representasi sumber sama, selisihnya bernorma nol;
+persamaan tersebut memaksa selisih citranya nol juga.
+Jadi $U_0$ terdefinisi dengan baik, linear, dan merupakan
+isometri dari ruang pembangun $v_j$ ke ruang pembangun $w_j$.
+Pilih basis ortonormal pada ruang pertama; citranya menjadi
+basis ortonormal pada ruang kedua. Perluas kedua basis ke
+basis ortonormal $V$, lalu kirim vektor tambahan secara berpasangan.
+Operator yang dihasilkan uniter atau ortogonal dan memenuhi semua syarat.
+
+\subsection*{Latihan \ref{op:lat-norma-sama}: cocokkan kedua citra}
+Definisikan $U_0(Bx)=Ax$ pada $\operatorname{im}B$.
+Jika $Bx=By$, hipotesis pada $x-y$ memberi
+$\|A(x-y)\|=\|B(x-y)\|=0$, sehingga definisinya sah.
+Pemetaan ini linear, mempertahankan norma, dan surjektif ke
+$\operatorname{im}A$. Dengan polarisasi, ia mempertahankan
+hasil kali dalam. Perluas isometri ini ke operator uniter
+atau ortogonal pada $W$ dengan melengkapi basis ortonormal
+kedua citra seperti pada latihan sebelumnya. Maka $U(Bx)=Ax$
+untuk setiap $x$, yakni $A=UB$.
+
+\subsection*{Latihan \ref{op:lat-kuadratik-real}: pisahkan dua bagian adjoin diri}
+Arah perlu mengikuti simetri konjugat dan $T^*=T$.
+Untuk arah cukup, tulis
+\[
+    T=H+iK,\qquad H=\frac{T+T^*}{2},\qquad
+    K=\frac{T-T^*}{2i}.
+\]
+Keduanya adjoin diri. Karena
+$\langle x,Tx\rangle=\langle x,Hx\rangle+i\langle x,Kx\rangle$
+real, diperoleh $\langle x,Kx\rangle=0$ untuk semua $x$.
+Uji pada basis eigen ortonormal $K$ menunjukkan bahwa setiap
+nilai eigennya nol, sehingga $K=0$ dan $T=H$ adjoin diri.
+Pada ruang real, setiap hasil kali dalam bernilai real secara
+otomatis. Rotasi $\begin{pmatrix}0&-1\\1&0\end{pmatrix}$,
+misalnya, tidak adjoin diri walaupun semua nilai kuadratnya real.
+
+\subsection*{Latihan \ref{op:lat-isotropik}: batas dimensi dan konstruksi}
+Tuliskan dekomposisi spektral ortogonal
+$V=V_+\oplus V_-\oplus V_0$, dengan dimensi $p,q,z$.
+Jika bentuk kuadratik nol pada $W$, maka
+$W\cap V_+=W\cap V_-=\{0\}$.
+Rumus dimensi memberi $\dim W\le q+z$ dan $\dim W\le p+z$.
+Jadi batas atasnya $z+\min\{p,q\}$.
+Untuk mencapai batas, pilih vektor eigen ortonormal $e_i$ untuk
+nilai positif $\lambda_i$ dan $f_i$ untuk nilai negatif $-\mu_i$,
+dengan $\lambda_i,\mu_i>0$.
+Gabungkan basis $V_0$ dengan
+\[
+    w_i=\frac{e_i}{\sqrt{\lambda_i}}+
+        \frac{f_i}{\sqrt{\mu_i}},\qquad 1\le i\le\min\{p,q\}.
+\]
+Daftar itu bebas linear. Untuk setiap kombinasinya, kontribusi
+positif dan negatif pada bentuk kuadratik saling meniadakan,
+sedangkan komponen $V_0$ tidak menyumbang apa pun.
+Jadi dimensi terbesar tepat $z+\min\{p,q\}$.
+
+\subsection*{Latihan \ref{op:lat-pilih-metrik}: jadikan basis eigen ortonormal}
+Jika operator adjoin diri untuk suatu hasil kali dalam,
+teorema spektral memberi basis eigen dan nilai eigen real.
+Sebaliknya, pilih basis eigen dengan nilai eigen real dan
+definisikan hasil kali dalam dengan menjadikan basis itu ortonormal.
+Matriks operator dalam basis tersebut diagonal real, sehingga
+operator adjoin diri.
+Jika matriks kolom basis eigen dalam koordinat awal adalah $S$,
+pilihan metriknya secara eksplisit
+$G=(S^{-1})^*S^{-1}$.
+Operator idempoten mempunyai dekomposisi
+$V=\operatorname{im}P\oplus\ker P$, dan matriksnya dalam basis
+yang sesuai adalah $\diag(I,0)$.
+Jadikan basis tersebut ortonormal. Citra dan kernel sekarang
+ortogonal, sehingga $P$ menjadi proyeksi ortogonal.
+\fi

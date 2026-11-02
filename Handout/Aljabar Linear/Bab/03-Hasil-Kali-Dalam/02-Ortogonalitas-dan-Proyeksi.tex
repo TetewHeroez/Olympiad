@@ -1,0 +1,495 @@
+% !TeX root = ../../ONMIPA Alin.tex
+% Acuan: Zhang (2009), Bab 5, Soal 5.6--5.8, 5.19--5.23,
+% 5.26--5.35, dan 5.50; Zhang (2011), bagian 1.4, khususnya
+% Gram--Schmidt, komplemen ortogonal, dan ketaksamaan Bessel.
+\chapter{Ortogonalitas dan Proyeksi}
+\label{ch:ortogonalitas}
+
+Basis ortonormal mengubah pencarian koordinat menjadi perhitungan
+hasil kali dalam. Dari basis ini, kita memperoleh dekomposisi
+ortogonal dan proyeksi, yang menjawab pertanyaan: vektor mana
+dalam suatu subruang yang paling dekat dengan vektor yang diberikan?
+Kecuali dinyatakan lain, ruang dalam bab ini berdimensi hingga.
+Hasil kali dalam tetap linear pada argumen kedua.
+
+\section{Sistem Ortogonal dan Ortonormal}
+
+\begin{definisi}[][Daftar ortogonal dan ortonormal][ortho:def]
+    Daftar $v_1,\ldots,v_m$ disebut ortogonal jika
+    $\langle v_i,v_j\rangle=0$ untuk $i\ne j$.
+    Daftar itu disebut ortonormal jika, sebagai tambahan,
+    setiap vektornya bernorma satu; ekuivalen dengan
+    $\langle v_i,v_j\rangle=\delta_{ij}$.
+\end{definisi}
+
+Setiap daftar ortogonal yang semua anggotanya tak nol bebas linear.
+Memang, dari $\sum c_jv_j=0$, ambil hasil kali dalam dengan
+$v_i$ pada argumen pertama untuk memperoleh $c_i\|v_i\|^2=0$.
+Selain itu, ekspansi langsung memberikan
+\[
+    \left\|\sum_jc_jv_j\right\|^2=\sum_j|c_j|^2\|v_j\|^2.
+\]
+Syarat tak nol tidak boleh diabaikan dalam kesimpulan kebebasan linear.
+
+\begin{teorema}[][Koordinat ortonormal dan identitas Parseval][ortho:parseval]
+    Jika $e_1,\ldots,e_n$ basis ortonormal bagi $V$, maka
+    \[
+        x=\sum_{j=1}^n\langle e_j,x\rangle e_j,
+        \qquad \|x\|^2=\sum_{j=1}^n|\langle e_j,x\rangle|^2.
+    \]
+    Lebih umum,
+    \[
+        \langle x,y\rangle
+        =\sum_{j=1}^n\overline{\langle e_j,x\rangle}\langle e_j,y\rangle.
+    \]
+\end{teorema}
+\begin{proof}
+    Tulis $x=\sum c_je_j$. Mengambil $\langle e_i,x\rangle$
+    memberi $c_i$. Ekspansi hasil kali dalam dua kombinasi
+    tersebut hanya menyisakan suku dengan indeks yang sama,
+    sehingga kedua identitas lainnya mengikuti.
+\end{proof}
+
+Jika $(v_1,\ldots,v_n)$ basis ortogonal, koefisien $v_j$ dalam
+ekspansi $x$ adalah $\langle v_j,x\rangle/\|v_j\|^2$.
+Penyebut boleh dihilangkan hanya ketika basisnya ortonormal.
+
+\begin{teorema}[][Ketaksamaan Bessel][ortho:bessel]
+    Jika $e_1,\ldots,e_m$ ortonormal, maka untuk setiap $x$,
+    \[
+        \sum_{j=1}^m|\langle e_j,x\rangle|^2\le\|x\|^2.
+    \]
+    Kesamaan berlaku tepat ketika
+    $x\in\operatorname{span}\{e_1,\ldots,e_m\}$.
+\end{teorema}
+\begin{proof}
+    Letakkan $p=\sum_j\langle e_j,x\rangle e_j$ dan $r=x-p$.
+    Untuk setiap $i$, $\langle e_i,r\rangle=0$, sehingga $p\perp r$.
+    Maka
+    \[
+        \|x\|^2=\|p\|^2+\|r\|^2
+          =\sum_j|\langle e_j,x\rangle|^2+\|r\|^2.
+    \]
+    Kesamaan berlaku tepat ketika $r=0$.
+\end{proof}
+
+\section{Proses Gram--Schmidt}
+
+\begin{teorema}[][Ortonormalisasi Gram--Schmidt][ortho:gram-schmidt]
+    Untuk daftar bebas linear $v_1,\ldots,v_m$, definisikan
+    \[
+        u_1=v_1,\quad e_1=\frac{u_1}{\|u_1\|},\qquad
+        u_k=v_k-\sum_{j=1}^{k-1}\langle e_j,v_k\rangle e_j,
+        \quad e_k=\frac{u_k}{\|u_k\|}.
+    \]
+    Setiap $u_k$ tak nol, daftar $(e_1,\ldots,e_m)$ ortonormal,
+    dan untuk setiap $k$ berlaku
+    \[
+        \operatorname{span}\{e_1,\ldots,e_k\}
+        =\operatorname{span}\{v_1,\ldots,v_k\}.
+    \]
+\end{teorema}
+\begin{proof}
+    Gunakan induksi. Jika $e_1,\ldots,e_{k-1}$ sudah ortonormal,
+    maka $\langle e_i,u_k\rangle=0$ untuk $i<k$.
+    Jika $u_k=0$, vektor $v_k$ berada dalam ruang pembangun
+    vektor-vektor sebelumnya, bertentangan dengan kebebasan linear.
+    Normalisasi memberi vektor satuan baru yang ortogonal
+    terhadap semua vektor sebelumnya.
+    Rumus $u_k$ dan bentuk baliknya menyatakan bahwa kedua
+    daftar membangun ruang yang sama pada setiap tahap.
+\end{proof}
+
+Akibatnya, setiap ruang hasil kali dalam berdimensi hingga mempunyai
+basis ortonormal. Daftar ortonormal yang belum lengkap dapat
+diperluas menjadi basis ortonormal: perluas dahulu menjadi basis
+sembarang, lalu terapkan Gram--Schmidt. Vektor ortonormal yang
+sudah ada pada awal daftar tidak berubah.
+
+Jika daftar awal bergantung linear, suatu sisa $u_k$ dapat nol.
+Sisa tersebut harus dilewati, bukan dibagi dengan normanya.
+Proses pada vektor berikutnya tetap dapat dilanjutkan untuk
+memperoleh basis ortonormal ruang pembangun daftar awal.
+
+\begin{exam}[Ortonormalisasi tiga vektor real]
+    Terapkan Gram--Schmidt pada
+    $v_1=(1,1,0)^T$, $v_2=(1,0,1)^T$, $v_3=(0,1,1)^T$.
+\end{exam}
+\begin{solution}
+    Langkah pertama memberi $e_1=(1,1,0)^T/\sqrt2$.
+    Selanjutnya,
+    \begin{align*}
+        u_2&=v_2-\tfrac12(1,1,0)^T=(1/2,-1/2,1)^T,\\
+        e_2&=(1,-1,2)^T/\sqrt6,\\
+        u_3&=v_3-\tfrac12(1,1,0)^T-\tfrac16(1,-1,2)^T
+             =\tfrac23(-1,1,1)^T.
+    \end{align*}
+    Jadi $e_3=(-1,1,1)^T/\sqrt3$.
+    Ketiganya bernorma satu dan hasil kali setiap dua vektor
+    berbeda nol, sehingga menjadi basis ortonormal $\R^3$.
+\end{solution}
+
+\begin{exam}[Basis ortonormal polinom]
+    Pada $\mathcal P_{\le2}(\R)$ dengan
+    $\langle p,q\rangle=\int_{-1}^1p(t)q(t)\,dt$,
+    ortonormalkan daftar $(1,t,t^2)$.
+\end{exam}
+\begin{solution}
+    Simetri interval membuat fungsi ganjil berintegral nol.
+    Maka $1\perp t$, dengan norma kuadrat $2$ dan $2/3$.
+    Sisa untuk $t^2$ adalah $t^2-1/3$, yang bernorma kuadrat $8/45$.
+    Hasil akhirnya adalah
+    \[
+        e_0=\frac1{\sqrt2},\qquad
+        e_1=\sqrt{\frac32}\,t,\qquad
+        e_2=\sqrt{\frac58}\,(3t^2-1).
+    \]
+    Ortogonalitas di sini ditentukan oleh integral, bukan oleh
+    hasil kali daftar koefisien dalam basis monomial.
+\end{solution}
+
+\section{Komplemen Ortogonal dan Dekomposisi}
+
+\begin{definisi}[][Komplemen ortogonal][ortho:komplemen]
+    Untuk $S\subseteq V$, definisikan
+    \[
+        S^\perp=\{x\in V:\langle s,x\rangle=0
+            \text{ untuk setiap }s\in S\}.
+    \]
+\end{definisi}
+
+Himpunan $S^\perp$ selalu subruang, bahkan jika $S$ bukan subruang.
+Selain itu, $S^\perp=(\operatorname{span}S)^\perp$.
+Jika $S\subseteq T$, maka $T^\perp\subseteq S^\perp$;
+semakin banyak syarat ortogonal, semakin kecil ruang yang tersisa.
+
+\begin{teorema}[][Dekomposisi ortogonal][ortho:dekomposisi]
+    Untuk subruang $W$ dari ruang hasil kali dalam $V$ berdimensi $n$,
+    \[
+        V=W\oplus W^\perp,\qquad
+        \dim W^\perp=n-\dim W,\qquad (W^\perp)^\perp=W.
+    \]
+    Untuk himpunan sembarang $S\subseteq V$,
+    $(S^\perp)^\perp=\operatorname{span}S$.
+\end{teorema}
+\begin{proof}
+    Pilih basis ortonormal $e_1,\ldots,e_r$ dari $W$ dan perluas
+    menjadi basis ortonormal $e_1,\ldots,e_n$ dari $V$.
+    Ekspansi koordinat menunjukkan bahwa $W^\perp$ dibangun
+    oleh $e_{r+1},\ldots,e_n$. Ini membuktikan dekomposisi dan
+    rumus dimensi. Vektor yang ortogonal terhadap semua anggota
+    $W^\perp$ tepat kombinasi $e_1,\ldots,e_r$, sehingga
+    komplemen dua kali mengembalikan $W$.
+    Pernyataan terakhir mengikuti $S^\perp=(\operatorname{span}S)^\perp$.
+\end{proof}
+
+Untuk subruang $U,W$, berlaku
+\[
+    (U+W)^\perp=U^\perp\cap W^\perp,\qquad
+    (U\cap W)^\perp=U^\perp+W^\perp.
+\]
+Identitas pertama mengikuti langsung dari definisi.
+Untuk yang kedua, terapkan identitas pertama pada $U^\perp,W^\perp$
+dan ambil komplemen ortogonal sekali lagi.
+Penggunaan komplemen ganda di sini memakai asumsi dimensi hingga.
+
+\begin{exam}[Ruang matriks bertrace nol]
+    Dalam $\Mat_n(\C)$ dengan hasil kali dalam Frobenius,
+    tentukan komplemen ortogonal dari
+    $W=\{X:\tr X=0\}$ dan dekomposisi ortogonal setiap matriks $A$.
+\end{exam}
+\begin{solution}
+    Karena $\langle I,X\rangle_F=\tr X$, diperoleh
+    $W=\operatorname{span}\{I\}^\perp$ dan $W^\perp=\operatorname{span}\{I\}$.
+    Dekomposisinya adalah
+    \[
+        A=\left(A-\frac{\tr A}{n}I\right)+\frac{\tr A}{n}I.
+    \]
+    Suku pertama bertrace nol dan suku kedua matriks skalar.
+    Jarak $A$ ke $W$ adalah $|\tr A|/\sqrt n$.
+\end{solution}
+
+\section{Proyeksi dan Vektor Terdekat}
+
+\begin{definisi}[][Proyeksi ortogonal][ortho:proyeksi]
+    Jika $x=p+r$ dengan $p\in W$ dan $r\in W^\perp$,
+    definisikan $P_Wx=p$.
+    Operator $P_W$ disebut proyeksi ortogonal ke $W$.
+\end{definisi}
+
+Keunikan dekomposisi membuat definisi ini sah. Jika $(e_1,\ldots,e_r)$
+basis ortonormal $W$, maka
+\[
+    P_Wx=\sum_{j=1}^r\langle e_j,x\rangle e_j.
+\]
+Rumus ini juga membuktikan linearitas, $P_W^2=P_W$,
+$\operatorname{im}P_W=W$, dan $\ker P_W=W^\perp$.
+Selain itu, $I-P_W=P_{W^\perp}$, serta
+\[
+    \|x\|^2=\|P_Wx\|^2+\|x-P_Wx\|^2.
+\]
+Dengan demikian $\|P_Wx\|\le\|x\|$, dengan kesamaan tepat ketika $x\in W$.
+
+\begin{teorema}[][Karakterisasi pendekatan terbaik][ortho:terdekat]
+    Untuk $p\in W$, pernyataan berikut ekuivalen:
+    \begin{enumerate}[label=(\roman*),nosep]
+        \item $p=P_Wx$;
+        \item $x-p\in W^\perp$;
+        \item $\|x-p\|\le\|x-w\|$ untuk semua $w\in W$.
+    \end{enumerate}
+    Vektor terdekat ini unik. Bahkan, untuk setiap $w\in W$,
+    \[
+        \|x-w\|^2=\|x-P_Wx\|^2+\|P_Wx-w\|^2.
+    \]
+\end{teorema}
+\begin{proof}
+    Dua pernyataan pertama adalah keunikan dekomposisi ortogonal.
+    Untuk setiap $w\in W$, tulis $x-w=(x-P_Wx)+(P_Wx-w)$.
+    Kedua suku ortogonal, sehingga Pythagoras memberi identitas
+    yang dinyatakan. Nilainya minimum tepat ketika suku kedua
+    nol, yaitu $w=P_Wx$. Ini membuktikan pernyataan ketiga dan keunikan.
+\end{proof}
+
+\begin{exam}[Proyeksi ke hiperbidang jumlah koordinat nol]
+    Pada $\F^n$, letakkan $W=\{x:\sum_jx_j=0\}$.
+    Tentukan $P_Wx$ dan jarak $x$ ke $W$.
+\end{exam}
+\begin{solution}
+    Komplemen ortogonal $W$ dibangun oleh $\boldsymbol{1}=(1,\ldots,1)^T$.
+    Dengan $\mu=\frac1n\sum_jx_j$, diperoleh
+    \[
+        P_Wx=x-\mu\boldsymbol{1},\qquad
+        d(x,W)=\sqrt n\,|\mu|
+          =\frac{|\sum_jx_j|}{\sqrt n}.
+    \]
+    Jadi proyeksi mengurangi setiap koordinat dengan rata-ratanya.
+\end{solution}
+
+\begin{exam}[Polinom linear terdekat dengan polinom kubik]
+    Dalam $\mathcal P_{\le3}(\R)$ dengan hasil kali dalam integral
+    pada $[-1,1]$, carilah polinom di $W=\operatorname{span}\{1,t\}$
+    yang paling dekat dengan $t^3$.
+\end{exam}
+\begin{solution}
+    Basis $(1,t)$ ortogonal. Koefisien proyeksi adalah
+    \[
+        \frac{\langle1,t^3\rangle}{\|1\|^2}=0,\qquad
+        \frac{\langle t,t^3\rangle}{\|t\|^2}
+          =\frac{2/5}{2/3}=\frac35.
+    \]
+    Jadi pendekatan terbaik adalah $3t/5$ dan galat kuadratnya
+    $\|t^3\|^2-\|3t/5\|^2=2/7-6/25=8/175$.
+\end{solution}
+
+\section{Rumus Matriks dan Kuadrat Terkecil}
+
+Jika $(w_1,\ldots,w_r)$ basis $W$ yang belum ortonormal,
+tulis $P_Wx=\sum_jc_jw_j$. Syarat sisa ortogonal memberi
+\[
+    \sum_{j=1}^r\langle w_i,w_j\rangle c_j=\langle w_i,x\rangle,
+    \qquad 1\le i\le r.
+\]
+Jadi $Gc=b$, dengan $G$ matriks Gram basis dan
+$b_i=\langle w_i,x\rangle$. Karena basis bebas linear, $G$
+positif definit dan $c=G^{-1}b$.
+
+Untuk $W=\operatorname{im}A\subseteq\F^m$ dengan kolom-kolom
+$A\in\Mat_{m\times r}(\F)$ bebas linear, rumus tersebut menjadi
+\[
+    P_W=A(A^*A)^{-1}A^*.
+\]
+Jika hasil kali dalamnya $x^*Hy$ dengan $H$ positif definit,
+rumus yang sesuai adalah $P_W=A(A^*HA)^{-1}A^*H$.
+Invers pada kedua rumus mensyaratkan kolom-kolom $A$ bebas linear.
+
+\begin{exam}[Proyeksi berubah ketika hasil kali dalam berubah]
+    Pada $\R^2$, gunakan $H=\begin{pmatrix}2&1\\1&2\end{pmatrix}$
+    dan $\langle x,y\rangle_H=x^THy$.
+    Tentukan proyeksi $(0,1)^T$ ke garis yang dibangun oleh $e_1$.
+\end{exam}
+\begin{solution}
+    Koefisiennya adalah
+    $\langle e_1,(0,1)^T\rangle_H/\langle e_1,e_1\rangle_H=1/2$.
+    Maka proyeksinya $(1/2,0)^T$.
+    Sisa $(-1/2,1)^T$ memang ortogonal terhadap $e_1$ dalam
+    metrik $H$, meskipun tidak ortogonal dalam hasil kali dalam standar.
+\end{solution}
+
+\begin{teorema}[][Persamaan normal kuadrat terkecil][ortho:normal]
+    Untuk $A\in\Mat_{m\times n}(\F)$ dan $b\in\F^m$, vektor
+    $c$ meminimumkan $\|Ac-b\|$ jika dan hanya jika
+    \[
+        A^*Ac=A^*b.
+    \]
+    Solusi minimum selalu ada. Vektor $Ac$ yang dihasilkan unik,
+    tetapi koefisien $c$ unik tepat ketika $\ker A=\{0\}$.
+\end{teorema}
+\begin{proof}
+    Vektor $Ac$ terdekat dengan $b$ tepat ketika
+    $b-Ac\perp\operatorname{im}A$.
+    Ini ekuivalen dengan $A^*(b-Ac)=0$, yakni persamaan normal.
+    Proyeksi ke $\operatorname{im}A$ selalu ada, dan menurut
+    definisi citra proyeksi itu dapat ditulis sebagai $Ac$.
+    Keunikan vektor proyeksi sudah diketahui. Jika $c_0$ salah
+    satu solusi, seluruh solusi adalah $c_0+\ker A$.
+\end{proof}
+
+\begin{exam}[Garis yang paling sesuai dengan tiga data]
+    Carilah garis $y=a+bt$ yang meminimumkan jumlah kuadrat
+    galat pada data $(0,1)$, $(1,2)$, dan $(2,2)$.
+\end{exam}
+\begin{solution}
+    Matriks desain dan vektor data adalah
+    \[
+        A=\begin{pmatrix}1&0\\1&1\\1&2\end{pmatrix},\qquad
+        y=\begin{pmatrix}1\\2\\2\end{pmatrix}.
+    \]
+    Persamaan normal memberi
+    \[
+        \begin{pmatrix}3&3\\3&5\end{pmatrix}
+        \begin{pmatrix}a\\b\end{pmatrix}
+        =\begin{pmatrix}5\\6\end{pmatrix}.
+    \]
+    Maka $a=7/6$, $b=1/2$.
+    Sisa $y-A(a,b)^T=(-1/6,1/3,-1/6)^T$ ortogonal terhadap
+    kedua kolom $A$, dan jumlah kuadrat galat minimum adalah $1/6$.
+\end{solution}
+
+\section{Latihan Pilihan}
+
+\begin{latihan}\label{ortho:lat-lengkapi}
+    Lengkapi $u_1=(1,1,1,1)^T/2$ dan $u_2=(1,1,-1,-1)^T/2$
+    menjadi basis ortonormal $\R^4$.
+\end{latihan}
+
+\begin{latihan}\label{ortho:lat-kompleks}
+    Pada $\C^2$, letakkan $W=\operatorname{span}\{(1,i)^T\}$.
+    Tentukan $W^\perp$, proyeksi $x=(1,1)^T$ ke $W$, dan jaraknya.
+\end{latihan}
+
+\begin{latihan}\label{ortho:lat-polinom}
+    Lanjutkan ortonormalisasi $(1,t,t^2,t^3)$ terhadap hasil
+    kali dalam integral pada $[-1,1]$. Berikan basis ortonormal
+    lengkap bagi $\mathcal P_{\le3}(\R)$.
+\end{latihan}
+
+\begin{latihan}\label{ortho:lat-kuadratik}
+    Tentukan real $a,b$ yang meminimumkan
+    $\int_{-1}^1(t^2-a-bt)^2\,dt$, beserta nilai minimumnya.
+\end{latihan}
+
+\begin{latihan}\label{ortho:lat-kendala}
+    Di antara $x\in\R^3$ yang memenuhi
+    $x_1+x_2+x_3=1$ dan $x_1-x_3=2$, tentukan vektor bernorma
+    terkecil dan norma kuadrat minimumnya.
+\end{latihan}
+
+\begin{latihan}\label{ortho:lat-dimensi}
+    Dalam ruang berdimensi $n$, misalkan $u_1,\ldots,u_p$
+    ortogonal dan semuanya tak nol. Jika $v_1,\ldots,v_q$
+    masing-masing ortogonal terhadap semua $u_i$ dan $p+q>n$,
+    buktikan bahwa daftar $v_1,\ldots,v_q$ bergantung linear.
+\end{latihan}
+
+\begin{latihan}\label{ortho:lat-dua-proyeksi}
+    Misalkan $P,Q$ matriks proyeksi ortogonal pada $\C^n$.
+    Buktikan bahwa $PQ$ merupakan matriks proyeksi ortogonal
+    jika dan hanya jika $PQ=QP$. Dalam keadaan itu, tentukan citranya.
+\end{latihan}
+
+\begin{latihan}\label{ortho:lat-kontraksi}
+    Misalkan $P^2=P$ pada ruang hasil kali dalam berdimensi hingga.
+    Buktikan bahwa $P$ proyeksi ortogonal jika dan hanya jika
+    $\|Px\|\le\|x\|$ untuk setiap $x$.
+\end{latihan}
+
+\ifpembahasan
+\section{Pembahasan Latihan}
+
+\subsection*{Latihan \ref{ortho:lat-lengkapi}: pola tanda yang saling meniadakan}
+Ambil $u_3=(1,-1,1,-1)^T/2$ dan $u_4=(1,-1,-1,1)^T/2$.
+Norma kuadrat masing-masing adalah empat kali $1/4$, yaitu satu.
+Pada hasil kali dua vektor berbeda, terdapat dua suku $1/4$
+dan dua suku $-1/4$, sehingga hasilnya nol.
+Empat vektor ortonormal di $\R^4$ membentuk basis.
+
+\subsection*{Latihan \ref{ortho:lat-kompleks}: konjugasi pada koefisien proyeksi}
+Untuk $u=(1,i)^T$, persamaan $\langle u,(a,b)^T\rangle=a-ib=0$
+memberi $W^\perp=\operatorname{span}\{(1,-i)^T\}$.
+Karena $\langle u,x\rangle=1-i$ dan $\|u\|^2=2$,
+\[
+    P_Wx=\frac{1-i}{2}\begin{pmatrix}1\\i\end{pmatrix}
+        =\begin{pmatrix}(1-i)/2\\(1+i)/2\end{pmatrix}.
+\]
+Norma kuadrat proyeksinya satu, sedangkan $\|x\|^2=2$.
+Jadi jarak $x$ ke $W$ adalah satu.
+
+\subsection*{Latihan \ref{ortho:lat-polinom}: pisahkan paritas polinom}
+Tiga vektor pertama adalah $e_0,e_1,e_2$ pada contoh sebelumnya.
+Karena $t^3$ ganjil, proyeksinya ke $e_0,e_2$ nol.
+Sisa setelah mengurangi komponen pada $t$ adalah $t^3-3t/5$,
+dengan norma kuadrat $8/175$. Jadi vektor terakhir dapat dipilih
+\[
+    e_3=\sqrt{\frac78}(5t^3-3t).
+\]
+Basis lengkapnya ialah
+$1/\sqrt2$, $\sqrt{3/2}\,t$, $\sqrt{5/8}(3t^2-1)$,
+dan $\sqrt{7/8}(5t^3-3t)$.
+
+\subsection*{Latihan \ref{ortho:lat-kuadratik}: syarat sisa ortogonal}
+Proyeksi $t^2$ ke $\operatorname{span}\{1,t\}$ mempunyai
+koefisien $a=(2/3)/2=1/3$ dan $b=0$.
+Nilai minimum adalah
+\[
+    \int_{-1}^1(t^2-1/3)^2\,dt=\frac25-\frac29=\frac8{45}.
+\]
+Keunikan proyeksi menjamin tidak ada pasangan lain yang mencapai minimum.
+
+\subsection*{Latihan \ref{ortho:lat-kendala}: pilih solusi yang ortogonal terhadap kernel}
+Dua vektor baris kendala, $(1,1,1)^T$ dan $(1,0,-1)^T$,
+saling ortogonal. Solusi yang berada dalam ruang pembangun
+keduanya adalah
+\[
+    x_0=\tfrac13(1,1,1)^T+(1,0,-1)^T
+       =(4/3,1/3,-2/3)^T.
+\]
+Seluruh solusi lain berbentuk $x_0+t(1,-2,1)^T$.
+Karena $x_0\perp(1,-2,1)^T$, norma kuadratnya adalah
+$\|x_0\|^2+6t^2=7/3+6t^2$.
+Minimum $7/3$ dicapai hanya pada $t=0$.
+
+\subsection*{Latihan \ref{ortho:lat-dimensi}: hitung ruang yang masih tersedia}
+Daftar $u_i$ bebas linear, sehingga ruang pembangunnya berdimensi $p$.
+Semua $v_j$ berada dalam komplemen ortogonal yang berdimensi $n-p$.
+Karena $q>n-p$, daftar tersebut pasti bergantung linear.
+
+\subsection*{Latihan \ref{ortho:lat-dua-proyeksi}: simetri dan idempotensi}
+Matriks proyeksi ortogonal memenuhi $P^*=P$ dan $P^2=P$,
+dan hal yang sama berlaku untuk $Q$.
+Sifat Hermitian dapat dilihat dari rumus
+$P=EE^*$ dengan kolom-kolom $E$ basis ortonormal citranya.
+Sebaliknya, matriks Hermitian idempoten mempunyai kernel
+ortogonal terhadap citra, sehingga merupakan proyeksi ortogonal.
+Jika $PQ$ proyeksi ortogonal, maka
+$PQ=(PQ)^*=QP$.
+Jika $PQ=QP$, maka $(PQ)^*=PQ$ dan $(PQ)^2=P^2Q^2=PQ$,
+sehingga $PQ$ proyeksi ortogonal.
+Citranya adalah $\operatorname{im}P\cap\operatorname{im}Q$:
+setiap $PQx$ tetap oleh $P$ dan $Q$, dan setiap vektor pada
+irisan tersebut tetap oleh $PQ$.
+
+\subsection*{Latihan \ref{ortho:lat-kontraksi}: uji komponen kernel}
+Arah perlu telah dibuktikan dengan Pythagoras.
+Untuk arah cukup, ambil $u\in\operatorname{im}P$ dan $v\in\ker P$.
+Untuk setiap skalar $t$, berlaku $P(u+tv)=u$, sehingga
+$\|u\|^2\le\|u+tv\|^2$.
+Jika $v\ne0$, pilih $t=-\langle v,u\rangle/\|v\|^2$.
+Ekspansi norma kemudian memberi
+\[
+    \|u\|^2\le\|u\|^2-\frac{|\langle v,u\rangle|^2}{\|v\|^2},
+\]
+sehingga $\langle v,u\rangle=0$.
+Kasus $v=0$ otomatis. Jadi citra dan kernel ortogonal.
+Karena $P^2=P$, keduanya merupakan komplemen langsung;
+maka $P$ tepat proyeksi ortogonal ke citranya.
+\fi

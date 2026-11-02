@@ -1,0 +1,686 @@
+% !TeX root = ../../ONMIPA Alin.tex
+% Acuan: Zhang (2009), Bab 1, khususnya Soal 1.15--1.36 dan 1.43--1.50;
+% Zhang (2011), bagian 1.1, khususnya latihan tentang dimensi dan komplemen.
+\chapter{Kebebaslinearan}
+\label{ch:kebebaslinearan}
+
+Kebebaslinearan membedakan daftar vektor yang memuat informasi
+berulang dari daftar yang setiap anggotanya diperlukan. Dari gagasan
+ini muncul basis dan dimensi: basis memberikan representasi yang
+unik, sedangkan dimensi mengukur banyaknya parameter bebas.
+Kecuali dinyatakan lain, medan skalar adalah $\F=\R$ atau $\C$.
+Dimensi selalu dihitung terhadap medan skalar yang sedang digunakan.
+
+\section{Kombinasi Linear dan Ruang Pembangun}
+
+\begin{definisi}[][Ruang yang dibangun oleh suatu himpunan][bebas:span]
+    Untuk $S\subseteq V$, ruang pembangun dari $S$ adalah
+    \[
+        \operatorname{span}_{\F}S
+        =\left\{\sum_{j=1}^{r}a_jv_j:
+        r\ge0,\ a_j\in\F,\ v_j\in S\right\}.
+    \]
+    Jumlah kosong bernilai $0$, sehingga
+    $\operatorname{span}\varnothing=\{0\}$.
+    Jika $\operatorname{span}S=V$, maka $S$ disebut
+    \emph{himpunan pembangun} bagi $V$.
+\end{definisi}
+
+Walaupun $S$ tak hingga, setiap kombinasi linear tetap memakai
+hingga banyak anggota. Deret tak hingga tidak termasuk definisi ini.
+
+\begin{prop}[Subruang terkecil yang memuat himpunan]
+    Ruang $\operatorname{span}S$ merupakan subruang terkecil dari
+    $V$ yang memuat $S$. Akibatnya, untuk $S,T\subseteq V$,
+    \[
+        S\subseteq\operatorname{span}T
+        \quad\Longrightarrow\quad
+        \operatorname{span}S\subseteq\operatorname{span}T.
+    \]
+\end{prop}
+\begin{proof}
+    Vektor nol termasuk $\operatorname{span}S$. Kombinasi linear
+    dari dua jumlah hingga kembali berupa jumlah hingga anggota
+    $S$, sehingga uji subruang berlaku. Setiap subruang yang memuat
+    $S$ harus memuat semua kombinasi linear anggotanya. Ini sekaligus
+    membuktikan sifat terkecil dan implikasi yang dinyatakan.
+\end{proof}
+
+Dua daftar membangun ruang yang sama jika setiap vektor pada
+masing-masing daftar dapat dituliskan dari daftar lainnya.
+Menambahkan $v$ ke daftar pembangun tidak memperbesar ruang
+tepat ketika $v$ sudah berada dalam ruang yang dibangun sebelumnya.
+
+\begin{exam}[Daftar panjang dengan dua arah]
+    Untuk $n\ge2$, tentukan ruang yang dibangun oleh
+    \[
+        v_k=(k,k+1,\ldots,k+n-1)^T,\qquad k=1,2,\ldots.
+    \]
+\end{exam}
+\begin{solution}
+    Tuliskan $\boldsymbol{1}=(1,\ldots,1)^T$ dan
+    $d=(0,1,\ldots,n-1)^T$. Karena $v_k=k\boldsymbol{1}+d$,
+    semua $v_k$ berada dalam $\operatorname{span}\{\boldsymbol{1},d\}$.
+    Sebaliknya, $\boldsymbol{1}=v_2-v_1$ dan $d=2v_1-v_2$.
+    Jadi ruang yang dicari adalah
+    \[
+        \operatorname{span}\{\boldsymbol{1},d\}
+        =\operatorname{span}\{v_1,v_2\}.
+    \]
+    Banyaknya vektor yang diberikan tidak menentukan banyaknya
+    arah yang sungguh-sungguh berbeda.
+\end{solution}
+
+\section{Kebebasan dan Ketergantungan Linear}
+
+\begin{definisi}[][Bebas linear dan bergantung linear][bebas:def]
+    Daftar $v_1,\ldots,v_r$ disebut \emph{bebas linear} jika
+    \[
+        a_1v_1+\cdots+a_rv_r=0
+        \quad\Longrightarrow\quad a_1=\cdots=a_r=0.
+    \]
+    Jika ada hubungan tersebut dengan koefisien tidak semuanya
+    nol, daftar itu disebut \emph{bergantung linear}.
+    Himpunan tak hingga disebut bebas linear jika setiap
+    subhimpunan hingganya bebas linear.
+\end{definisi}
+
+Daftar kosong bebas linear. Daftar yang memuat vektor nol atau
+memuat vektor yang sama dua kali bergantung linear. Setiap
+subdaftar dari daftar bebas linear juga bebas linear; setiap
+daftar yang memuat subdaftar bergantung linear tetap bergantung linear.
+
+\begin{teorema}[][Kriteria ketergantungan linear][bebas:kriteria]
+    Daftar tak kosong $v_1,\ldots,v_r$ bergantung linear jika dan
+    hanya jika sedikitnya satu $v_j$ merupakan kombinasi linear
+    dari vektor-vektor lainnya.
+    Jika $v_1\ne0$, hal ini ekuivalen dengan adanya $k\ge2$ sehingga
+    \[
+        v_k\in\operatorname{span}\{v_1,\ldots,v_{k-1}\}.
+    \]
+\end{teorema}
+\begin{proof}
+    Dari hubungan tak trivial, pilih koefisien $a_j\ne0$ dan
+    selesaikan hubungan itu terhadap $v_j$. Sebaliknya, pindahkan
+    ekspresi suatu $v_j$ ke satu ruas; koefisien $v_j$ adalah $1$,
+    sehingga hubungannya tak trivial.
+    Untuk pernyataan terakhir, pilih indeks terbesar $k$ dengan
+    $a_k\ne0$. Karena $v_1\ne0$, tidak mungkin $k=1$.
+    Maka $v_k$ merupakan kombinasi vektor-vektor sebelumnya.
+\end{proof}
+
+Frasa \emph{sedikitnya satu} tidak boleh diganti dengan
+\emph{setiap}. Daftar $(e_1,e_2,e_2)$ bergantung linear, tetapi
+$e_1$ tidak berada dalam ruang pembangun dua vektor lainnya.
+
+\begin{prop}[Menambah satu vektor dan keunikan koefisien]
+    Jika $v_1,\ldots,v_r$ bebas linear, maka
+    \[
+        v_1,\ldots,v_r,w\text{ bebas linear}
+        \iff w\notin\operatorname{span}\{v_1,\ldots,v_r\}.
+    \]
+    Selain itu, setiap anggota $\operatorname{span}\{v_1,\ldots,v_r\}$
+    mempunyai tepat satu representasi sebagai kombinasi daftar itu.
+\end{prop}
+\begin{proof}
+    Dalam hubungan $\sum a_jv_j+bw=0$, jika $b=0$ maka semua
+    $a_j=0$. Jika $b\ne0$, hubungan itu menyatakan bahwa $w$
+    berada dalam ruang pembangun. Untuk keunikan, kurangkan
+    dua representasi dari vektor yang sama dan gunakan kebebasan linear.
+\end{proof}
+
+\subsection{Mengubah daftar menjadi sistem homogen}
+Untuk $v_j\in\F^m$, bentuk matriks kolom
+$A=[v_1\ \cdots\ v_r]$. Maka
+\[
+    v_1,\ldots,v_r\text{ bebas linear}
+    \iff\ker A=\{0\}\iff\rank A=r.
+\]
+Jika $m=r$, kriteria ini ekuivalen dengan $\det A\ne0$.
+Untuk vektor abstrak, matriks yang sama dapat dibentuk dari
+koefisien terhadap suatu daftar yang sudah diketahui bebas linear.
+
+\begin{exam}[Jumlah siklik: ganjil dan genap berbeda]
+    Misalkan $v_1,\ldots,v_n$ bebas linear, $n\ge2$.
+    Definisikan $w_j=v_j+v_{j+1}$ dengan $v_{n+1}=v_1$.
+    Kapan $w_1,\ldots,w_n$ bebas linear?
+\end{exam}
+\begin{solution}
+    Dalam hubungan $\sum_{j=1}^n a_jw_j=0$, koefisien $v_j$
+    adalah $a_j+a_{j-1}$, dengan $a_0=a_n$.
+    Jadi $a_j=-a_{j-1}$ dan $a_1=(-1)^na_1$.
+    Jika $n$ ganjil, $2a_1=0$, sehingga seluruh koefisien nol.
+    Jika $n$ genap, terdapat hubungan tak trivial
+    \[
+        w_1-w_2+w_3-\cdots-w_n=0.
+    \]
+    Dengan demikian, daftar itu bebas linear tepat ketika $n$ ganjil.
+    Penggunaan $2a_1=0\Rightarrow a_1=0$ sah karena medannya
+    $\R$ atau $\C$.
+\end{solution}
+
+\subsection{Evaluasi dan perbandingan koefisien}
+Untuk polinom, persamaan vektor berarti kesamaan setiap koefisien.
+Untuk fungsi, persamaan harus berlaku di \emph{seluruh} domain.
+Evaluasi pada beberapa titik dapat membuktikan kebebasan jika
+sistem koefisiennya hanya mempunyai solusi nol. Sebaliknya,
+matriks evaluasi yang singular pada pilihan titik tertentu
+belum membuktikan bahwa fungsi-fungsinya bergantung linear.
+
+\begin{exam}[Derajat berbeda dan titik evaluasi]
+    Buktikan dua pernyataan berikut.
+    \begin{enumerate}[label=(\alph*),nosep]
+        \item Polinom tak nol yang mempunyai derajat berbeda-beda
+        selalu bebas linear.
+        \item Untuk titik berbeda $a_0,\ldots,a_n\in\F$, polinom
+        \[
+            L_j(t)=\prod_{\substack{0\le k\le n\\k\ne j}}
+                \frac{t-a_k}{a_j-a_k},\qquad 0\le j\le n,
+        \]
+        bebas linear.
+    \end{enumerate}
+\end{exam}
+\begin{solution}
+    Untuk (a), jika ada kombinasi nol tak trivial, pilih polinom
+    berderajat terbesar yang koefisien kombinasinya tidak nol.
+    Suku tertingginya tidak dapat dibatalkan polinom lain, kontradiksi.
+    Untuk (b), sifat $L_j(a_i)=\delta_{ij}$ mengubah
+    $\sum c_jL_j=0$ menjadi $c_i=0$ dengan mengevaluasi di $a_i$.
+\end{solution}
+
+\section{Basis dan Dimensi}
+
+\begin{definisi}[][Basis dan ruang berdimensi hingga][bebas:basis]
+    Basis bagi $V$ adalah himpunan bebas linear yang membangun $V$.
+    Ruang $V$ disebut \emph{berdimensi hingga} jika mempunyai
+    himpunan pembangun hingga. Jika tidak, $V$ disebut
+    \emph{berdimensi tak hingga}.
+\end{definisi}
+
+\begin{teorema}[][Lema pertukaran][bebas:pertukaran]
+    Misalkan $u_1,\ldots,u_r$ bebas linear dan
+    $v_1,\ldots,v_s$ membangun $V$. Maka $r\le s$.
+    Lebih lanjut, $r$ anggota daftar pembangun dapat diganti
+    oleh $u_1,\ldots,u_r$ sehingga daftar baru tetap membangun $V$.
+\end{teorema}
+\begin{proof}
+    Nyatakan $u_1$ dalam daftar $v_j$. Karena $u_1\ne0$, suatu
+    koefisien tidak nol; selesaikan terhadap $v_j$ itu. Mengganti
+    $v_j$ dengan $u_1$ tidak mengubah ruang pembangun.
+    Setelah $u_1,\ldots,u_k$ dimasukkan, nyatakan $u_{k+1}$
+    dalam daftar pembangun yang baru. Sedikitnya satu koefisien
+    pada $v_j$ yang tersisa tidak nol, sebab jika semuanya nol,
+    $u_{k+1}$ berada dalam ruang pembangun $u_1,\ldots,u_k$.
+    Koefisien tersebut memungkinkan pertukaran berikutnya.
+    Proses ini membutuhkan satu $v_j$ berbeda pada setiap tahap,
+    sehingga $r\le s$ dan pernyataan pertukaran terbukti.
+\end{proof}
+
+\begin{teorema}[][Keberadaan basis dan kesamaan ukurannya][bebas:dimensi]
+    Setiap ruang berdimensi hingga mempunyai basis. Semua
+    basisnya mempunyai banyak anggota yang sama, disebut
+    \emph{dimensi} $V$ dan ditulis $\dim_{\F}V$.
+    Setiap daftar bebas linear dapat diperluas menjadi basis,
+    dan dari setiap daftar pembangun hingga dapat dipilih suatu basis.
+\end{teorema}
+\begin{proof}
+    Dari daftar pembangun hingga, buang satu vektor yang merupakan
+    kombinasi lainnya selama daftar itu masih bergantung linear.
+    Ruang pembangun tidak berubah, dan proses berhenti pada basis.
+    Jika dua basis mempunyai $r$ dan $s$ anggota, lema pertukaran
+    memberi $r\le s$ dan $s\le r$, sehingga $r=s$.
+    Untuk memperluas daftar bebas linear, tambahkan anggota dari
+    suatu daftar pembangun hingga yang belum berada dalam ruang
+    pembangunnya. Daftar tetap bebas linear dan akhirnya membangun $V$.
+\end{proof}
+
+Untuk $V=\{0\}$, basisnya adalah himpunan kosong dan dimensinya
+nol. Jika $\dim V=n$, diperoleh kriteria penting berikut:
+\begin{itemize}[nosep]
+    \item setiap daftar bebas linear mempunyai paling banyak $n$ anggota;
+    \item setiap daftar pembangun mempunyai sedikitnya $n$ anggota;
+    \item daftar yang terdiri atas tepat $n$ vektor merupakan basis
+    jika bebas linear, atau jika membangun $V$.
+\end{itemize}
+Syarat \emph{tepat $n$} penting: satu vektor tak nol di $\R^3$
+bebas linear, tetapi belum merupakan basis.
+
+\subsection{Dimensi subruang dan contoh dasar}
+Jika $U\subseteq V$ dan $\dim V=n$, proses memilih vektor
+$u_{k+1}\in U\setminus\operatorname{span}\{u_1,\ldots,u_k\}$
+berhenti setelah paling banyak $n$ langkah. Hasilnya adalah basis
+bagi $U$. Maka $\dim U\le n$, dan
+\[
+    U\subseteq V,\quad \dim U=\dim V<\infty
+    \quad\Longrightarrow\quad U=V.
+\]
+Kesamaan dimensi saja, tanpa inklusi, tidak menjamin kesamaan subruang.
+
+Basis standar $\F^n$ adalah $(e_1,\ldots,e_n)$, sedangkan
+$\Mat_{m\times n}(\F)$ mempunyai basis matriks satuan $E_{ij}$
+dan dimensi $mn$. Notasi
+\[
+    \mathcal P_{\le n}(\F)=\{p\in\F[t]:\deg p\le n\}\cup\{0\}
+\]
+memiliki basis $(1,t,\ldots,t^n)$ dan dimensi $n+1$.
+Ruang $\F[t]$ berdimensi tak hingga karena memuat daftar bebas
+linear $1,t,\ldots,t^N$ untuk setiap $N$.
+
+\subsection{Perubahan medan skalar}
+Jika $(v_1,\ldots,v_n)$ basis kompleks bagi $V$, maka
+\[
+    (v_1,iv_1,\ldots,v_n,iv_n)
+\]
+merupakan basis real. Memisahkan bagian real dan imajiner dari
+koefisien membuktikan sifat pembangun sekaligus kebebasannya.
+Jadi $\dim_{\R}V=2\dim_{\C}V$.
+Kebebasan atas $\C$ mengakibatkan kebebasan atas $\R$, tetapi
+arah sebaliknya dapat gagal: $1,i$ bebas atas $\R$ dan bergantung atas $\C$.
+
+\begin{exam}[Dimensi ruang matriks Hermitian]
+    Tentukan basis real dan dimensi ruang $\mathcal H_n$
+    dari semua matriks Hermitian berukuran $n$.
+\end{exam}
+\begin{solution}
+    Entri diagonal matriks Hermitian real; pasangan entri
+    di luar diagonal berbentuk $a+bi$ dan $a-bi$.
+    Karena itu, suatu basis real diberikan oleh
+    \[
+        E_{jj}\ (1\le j\le n),\qquad
+        E_{jk}+E_{kj},\ i(E_{jk}-E_{kj})\ (j<k).
+    \]
+    Setiap matriks Hermitian mempunyai ekspansi unik dalam daftar
+    tersebut, dengan koefisien berupa entri diagonal serta bagian
+    real dan imajiner entri di atas diagonal. Maka
+    $\dim_{\R}\mathcal H_n=n+2\binom n2=n^2$.
+    Ini dimensi real; $\mathcal H_n$ bukan subruang kompleks untuk $n\ge1$.
+\end{solution}
+
+\section{Koordinat dan Pergantian Basis}
+
+\begin{definisi}[][Vektor koordinat][bebas:koordinat]
+    Untuk basis terurut $\mathcal B=(b_1,\ldots,b_n)$, jika
+    $v=x_1b_1+\cdots+x_nb_n$, definisikan
+    \[
+        [v]_{\mathcal B}=(x_1,\ldots,x_n)^T.
+    \]
+    Urutan basis merupakan bagian dari definisi koordinat.
+\end{definisi}
+
+Jika $\mathcal C=(c_1,\ldots,c_n)$ adalah basis lain, letakkan
+\[
+    P_{\mathcal B\leftarrow\mathcal C}
+      =\bigl[[c_1]_{\mathcal B}\ \cdots\ [c_n]_{\mathcal B}\bigr].
+\]
+Kolom-kolomnya menyatakan vektor basis sumber dalam basis tujuan.
+Dengan menyubstitusi ekspansi setiap $c_j$, diperoleh
+\[
+    [v]_{\mathcal B}
+      =P_{\mathcal B\leftarrow\mathcal C}[v]_{\mathcal C},
+    \qquad
+    P_{\mathcal C\leftarrow\mathcal B}
+      =P_{\mathcal B\leftarrow\mathcal C}^{-1}.
+\]
+Untuk tiga basis, urutan panah memberi aturan
+$P_{\mathcal B\leftarrow\mathcal D}
+=P_{\mathcal B\leftarrow\mathcal C}P_{\mathcal C\leftarrow\mathcal D}$.
+
+\begin{exam}[Koordinat polinom bergeser]
+    Pada $\mathcal P_{\le2}(\R)$, gunakan
+    $\mathcal B=(1,t,t^2)$ dan $\mathcal C=(1,t-1,(t-1)^2)$.
+    Tentukan $P_{\mathcal B\leftarrow\mathcal C}$ dan
+    koordinat $p(t)=2+3t+t^2$ terhadap $\mathcal C$.
+\end{exam}
+\begin{solution}
+    Ekspansi ketiga anggota $\mathcal C$ memberi
+    \[
+        P_{\mathcal B\leftarrow\mathcal C}
+        =\begin{pmatrix}1&-1&1\\0&1&-2\\0&0&1\end{pmatrix}.
+    \]
+    Dengan $s=t-1$, polinom menjadi $6+5s+s^2$.
+    Jadi $[p]_{\mathcal C}=(6,5,1)^T$, dan perkalian matriks
+    di atas mengembalikannya menjadi $[p]_{\mathcal B}=(2,3,1)^T$.
+\end{solution}
+
+Secara umum, terhadap basis $(1,t-a,\ldots,(t-a)^n)$,
+koordinat polinom $p\in\mathcal P_{\le n}(\F)$ adalah
+\[
+    p(a),\ p'(a),\ \frac{p''(a)}{2!},\ldots,
+    \frac{p^{(n)}(a)}{n!}.
+\]
+Hal ini mengikuti ekspansi polinom dalam pangkat $t-a$ lalu
+mendiferensialkan dan mengevaluasi di $a$.
+Terhadap basis Lagrange $\mathcal L=(L_0,\ldots,L_n)$, diperoleh
+\[
+    [p]_{\mathcal L}=(p(a_0),\ldots,p(a_n))^T.
+\]
+Memang, selisih $p-\sum p(a_j)L_j$ berderajat paling besar $n$ dan mempunyai
+$n+1$ akar berbeda, sehingga identik nol.
+
+\section{Jumlah Subruang dan Rumus Dimensi}
+
+\begin{definisi}[][Jumlah dan jumlah langsung][bebas:jumlah-langsung]
+    Untuk subruang $U,W\subseteq V$, definisikan
+    \[
+        U+W=\{u+w:u\in U,\ w\in W\}.
+    \]
+    Jumlah ini disebut \emph{jumlah langsung}, ditulis $U\oplus W$,
+    jika setiap anggotanya mempunyai representasi $u+w$ yang unik.
+\end{definisi}
+
+Ruang $U+W$ adalah subruang terkecil yang memuat $U\cup W$.
+Berbeda dari gabungan, jumlah dua subruang selalu merupakan subruang.
+
+\begin{teorema}[][Rumus dimensi dan kriteria jumlah langsung][bebas:grassmann]
+    Untuk subruang berdimensi hingga $U,W$,
+    \[
+        \dim(U+W)=\dim U+\dim W-\dim(U\cap W).
+    \]
+    Selain itu, jumlahnya langsung jika dan hanya jika
+    $U\cap W=\{0\}$, atau ekuivalen dengan
+    $\dim(U+W)=\dim U+\dim W$.
+\end{teorema}
+\begin{proof}
+    Ambil basis $(z_1,\ldots,z_k)$ bagi $U\cap W$.
+    Perluas dengan $u_1,\ldots,u_a$ menjadi basis $U$, dan
+    dengan $w_1,\ldots,w_b$ menjadi basis $W$.
+    Daftar gabungan
+    \[
+        (z_1,\ldots,z_k,u_1,\ldots,u_a,w_1,\ldots,w_b)
+    \]
+    membangun $U+W$.
+    Jika kombinasinya nol, kombinasi para $u_i$ berada dalam
+    $U\cap W$; kebebasan basis $U$ memaksa semua koefisien
+    $u_i$ nol. Kebebasan basis $W$ kemudian memaksa koefisien
+    sisanya nol. Jadi daftar gabungan adalah basis, dan
+    $\dim(U+W)=k+a+b=\dim U+\dim W-k$.
+
+    Jika $U\cap W=\{0\}$ dan $u+w=u'+w'$, maka
+    $u-u'=w'-w\in U\cap W$, sehingga representasi unik.
+    Sebaliknya, untuk $z\in U\cap W$, persamaan
+    $z+0=0+z$ memaksa $z=0$ jika representasi unik.
+\end{proof}
+
+Jika $U,W\subseteq V$ dan $\dim V=n$, rumus ini memberi
+\[
+    \dim(U\cap W)\ge\dim U+\dim W-n.
+\]
+Khususnya, jika $\dim U+\dim W>n$, keduanya beririsan tak trivial.
+Untuk membuktikan kesamaan subruang, sering cukup membuktikan
+satu inklusi lalu menyamakan dimensinya.
+
+\begin{exam}[Irisan dan jumlah dua subruang di ruang berdimensi empat]
+    Di $\R^4$, misalkan
+    \[
+        U=\{x:x_1+x_2+x_3+x_4=0\},\qquad
+        W=\{x:x_1=x_2,\ x_3=x_4\}.
+    \]
+    Tentukan basis $U\cap W$ serta dimensi $U+W$.
+\end{exam}
+\begin{solution}
+    Ruang $U$ berdimensi tiga, dengan basis
+    $(e_1-e_4,e_2-e_4,e_3-e_4)$.
+    Anggota $W$ berbentuk $(a,a,b,b)^T$, sehingga dimensinya dua.
+    Syarat tambahan untuk berada di $U$ adalah $2a+2b=0$.
+    Jadi $U\cap W=\operatorname{span}\{(1,1,-1,-1)^T\}$.
+    Rumus dimensi memberi $\dim(U+W)=3+2-1=4$, maka $U+W=\R^4$.
+    Jumlahnya bukan jumlah langsung.
+\end{solution}
+
+\subsection{Komplemen dan lebih dari dua subruang}
+Setiap subruang $U$ dari ruang berdimensi hingga $V$ mempunyai
+\emph{komplemen}: suatu $W$ dengan $V=U\oplus W$.
+Perluas basis $U$ menjadi basis $V$, lalu ambil $W$ sebagai
+ruang pembangun vektor-vektor tambahan. Komplemen tidak tunggal;
+di $\R^2$, baik $\operatorname{span}\{e_2\}$ maupun
+$\operatorname{span}\{e_1+e_2\}$ merupakan komplemen bagi
+$\operatorname{span}\{e_1\}$.
+
+Untuk $U_1,\ldots,U_k$, jumlahnya langsung jika hubungan
+$u_1+\cdots+u_k=0$, dengan $u_j\in U_j$, memaksa setiap $u_j=0$.
+Syarat $U_i\cap U_j=\{0\}$ untuk setiap $i\ne j$ saja belum cukup.
+Tiga garis yang dibangun oleh $e_1,e_2,e_1+e_2$ di $\R^2$
+beririsan sepasang-sepasang hanya di nol, tetapi jumlah ketiganya
+tidak langsung. Uji yang tepat adalah
+\[
+    U_j\cap(U_1+\cdots+U_{j-1})=\{0\},\qquad 2\le j\le k.
+\]
+
+\section{Latihan Pilihan}
+
+\begin{latihan}\label{bebas:lat-parameter}
+    Misalkan $u,v,w$ bebas linear. Untuk $\lambda\in\F$, tentukan
+    kapan $v-u,\lambda w-v,u-w$ bebas linear. Pada nilai parameter
+    yang gagal, berikan basis ruang pembangunnya.
+\end{latihan}
+
+\begin{latihan}\label{bebas:lat-siklik}
+    Misalkan $v_1,\ldots,v_n$ bebas linear, $n\ge2$.
+    Definisikan $w_j=v_j+\lambda v_{j+1}$, dengan $v_{n+1}=v_1$.
+    Buktikan bahwa $w_1,\ldots,w_n$ bebas linear tepat ketika
+    $(-\lambda)^n\ne1$. Tentukan dimensi ruang pembangunnya
+    jika $(-\lambda)^n=1$.
+\end{latihan}
+
+\begin{latihan}\label{bebas:lat-lokal}
+    Berikan contoh tiga vektor yang setiap dua anggotanya bebas
+    linear, tetapi ketiganya bergantung linear.
+    Secara umum, jika setiap $r-1$ anggota dari daftar
+    $v_1,\ldots,v_r$ bebas linear tetapi seluruh daftar bergantung
+    linear, buktikan bahwa setiap hubungan tak trivialnya memakai
+    koefisien yang semuanya tidak nol.
+\end{latihan}
+
+\begin{latihan}\label{bebas:lat-polinom}
+    Untuk $n\ge2$, tentukan basis dan dimensi subruang
+    \[
+        U=\{p\in\mathcal P_{\le n}(\R):p(0)=p'(0)=0\},
+        \quad
+        W=\{p\in\mathcal P_{\le n}(\R):p(1)=0\}.
+    \]
+    Tentukan pula $\dim(U\cap W)$ dan $U+W$.
+\end{latihan}
+
+\begin{latihan}\label{bebas:lat-koordinat}
+    Untuk basis $\mathcal B=(b_1,\ldots,b_n)$, letakkan
+    $c_j=b_1+\cdots+b_j$. Buktikan bahwa
+    $\mathcal C=(c_1,\ldots,c_n)$ basis.
+    Jika $[v]_{\mathcal B}=(x_1,\ldots,x_n)^T$, tentukan
+    $[v]_{\mathcal C}$.
+\end{latihan}
+
+\begin{latihan}\label{bebas:lat-eksponensial}
+    Untuk bilangan real berbeda $a_1,\ldots,a_r$, buktikan bahwa
+    fungsi $e^{a_1t},\ldots,e^{a_rt}$ bebas linear atas $\R$.
+    Gunakan evaluasi turunan di $t=0$ dan determinan Vandermonde.
+\end{latihan}
+
+\begin{latihan}\label{bebas:lat-medan}
+    Buktikan bahwa $(1,i)$ dan $(i,-1)$ bebas linear di $\C^2$
+    sebagai ruang real, tetapi bergantung sebagai ruang kompleks.
+    Tentukan basis real bagi ruang pembangun kompleks kedua vektor itu.
+\end{latihan}
+
+\begin{latihan}\label{bebas:lat-jumlah-nol}
+    Untuk $n\ge2$, misalkan $S$ ruang matriks real $n\times n$
+    yang jumlah entri pada setiap baris dan setiap kolomnya nol.
+    Buktikan bahwa $\dim S=(n-1)^2$ dan berikan basis eksplisit.
+\end{latihan}
+
+\begin{latihan}\label{bebas:lat-tiga}
+    Jika $U_1,U_2,U_3$ subruang dari ruang berdimensi $n$, buktikan
+    \[
+        \dim(U_1\cap U_2\cap U_3)
+        \ge\dim U_1+\dim U_2+\dim U_3-2n.
+    \]
+    Berikan contoh yang mencapai kesamaan dengan ketiga subruang
+    berbeda dan sejati.
+\end{latihan}
+
+\begin{latihan}\label{bebas:lat-selisih-dimensi}
+    Misalkan $U,W$ subruang berdimensi hingga dan
+    $\dim(U+W)=\dim(U\cap W)+1$.
+    Buktikan bahwa $U\subseteq W$ atau $W\subseteq U$.
+\end{latihan}
+
+\begin{latihan}\label{bebas:lat-lagrange}
+    Untuk titik berbeda $a_0,\ldots,a_n$, gunakan basis Lagrange
+    untuk membuktikan
+    \[
+        \sum_{j=0}^{n}\frac{a_j^k}
+        {\displaystyle\prod_{\ell\ne j}(a_j-a_\ell)}
+        =\begin{cases}0,&0\le k<n,\\1,&k=n.\end{cases}
+    \]
+    Untuk $k=0$, pembilang ditafsirkan sebagai $1$ pada semua titik.
+\end{latihan}
+
+\begin{latihan}\label{bebas:lat-komplemen}
+    Misalkan $U,W\subseteq V$, dengan $\dim V<\infty$ dan
+    $\dim U=\dim W$. Buktikan bahwa ada subruang $K$ sehingga
+    \[
+        V=U\oplus K=W\oplus K.
+    \]
+    Apakah adanya komplemen yang sama memaksa $U=W$?
+\end{latihan}
+
+\ifpembahasan
+\section{Pembahasan Latihan}
+
+\subsection*{Latihan \ref{bebas:lat-parameter}: koefisien dalam daftar bebas}
+Matriks koefisien terhadap $(u,v,w)$ adalah
+\[
+    A=\begin{pmatrix}-1&0&1\\1&-1&0\\0&\lambda&-1\end{pmatrix},
+    \qquad \det A=\lambda-1.
+\]
+Jadi daftar bebas tepat ketika $\lambda\ne1$.
+Untuk $\lambda=1$, jumlah ketiganya nol, sedangkan $v-u$ dan
+$w-v$ bebas linear dengan membandingkan koefisien $u$ dan $w$.
+Kedua vektor itu menjadi basis ruang pembangun yang berdimensi dua.
+
+\subsection*{Latihan \ref{bebas:lat-siklik}: menutup hubungan rekursif}
+Hubungan $\sum a_jw_j=0$ ekuivalen dengan
+$a_j+\lambda a_{j-1}=0$, dengan $a_0=a_n$.
+Maka $a_j=(-\lambda)^{j-1}a_1$ dan
+$(1-(-\lambda)^n)a_1=0$.
+Jika faktor itu tidak nol, semua $a_j=0$.
+Jika faktornya nol, $\lambda\ne0$ dan pilihan $a_1=1$
+menghasilkan hubungan tak trivial; setiap hubungan merupakan
+kelipatannya. Selain itu, $w_1,\ldots,w_{n-1}$ bebas, sebab
+hubungan yang koefisien $w_n$-nya nol memaksa semua koefisien nol.
+Hubungan yang ditemukan menyatakan $w_n$ dari sisanya.
+Jadi dimensi ruang pembangun tepat $n-1$.
+
+\subsection*{Latihan \ref{bebas:lat-lokal}: pasangan bebas belum cukup}
+Ambil $e_1,e_2,e_1+e_2$ di $\R^2$.
+Setiap pasangan bebas linear, tetapi terdapat hubungan
+$e_1+e_2-(e_1+e_2)=0$.
+Secara umum, jika suatu koefisien dalam hubungan tak trivial
+bernilai nol, hubungan itu menjadi hubungan tak trivial pada
+paling banyak $r-1$ vektor, bertentangan dengan hipotesis.
+
+\subsection*{Latihan \ref{bebas:lat-polinom}: faktor yang diwajibkan}
+Syarat pada $U$ berarti $t^2$ membagi $p$; basisnya
+$(t^2,t^3,\ldots,t^n)$ dan dimensinya $n-1$.
+Syarat pada $W$ berarti $(t-1)$ membagi $p$; basisnya
+$(t-1,t(t-1),\ldots,t^{n-1}(t-1))$ dan dimensinya $n$.
+Anggota irisan habis dibagi $t^2(t-1)$.
+Untuk $n\ge3$, basis irisannya
+\[
+    t^2(t-1),\ t^3(t-1),\ldots,t^{n-1}(t-1),
+\]
+dengan $n-2$ anggota. Untuk $n=2$, irisannya hanya nol dan
+basisnya kosong, sehingga rumus dimensi yang sama tetap berlaku.
+Maka $\dim(U+W)=(n-1)+n-(n-2)=n+1$ dan
+$U+W=\mathcal P_{\le n}(\R)$.
+
+\subsection*{Latihan \ref{bebas:lat-koordinat}: selisih koordinat berurutan}
+Persamaan $b_1=c_1$ dan $b_j=c_j-c_{j-1}$ menunjukkan bahwa
+$\mathcal C$ membangun $V$. Karena jumlahnya $n$, daftar itu basis.
+Jika $v=\sum y_jc_j$, koefisien $b_k$ adalah
+$x_k=y_k+\cdots+y_n$. Jadi
+\[
+    [v]_{\mathcal C}=(x_1-x_2,x_2-x_3,\ldots,x_{n-1}-x_n,x_n)^T.
+\]
+
+\subsection*{Latihan \ref{bebas:lat-eksponensial}: sistem Vandermonde}
+Andaikan $\sum c_je^{a_jt}=0$ untuk setiap $t$.
+Diferensialkan $k$ kali dan evaluasi di nol, untuk
+$k=0,\ldots,r-1$, sehingga $\sum c_ja_j^k=0$.
+Determinan matriks sistem ini adalah
+$\prod_{i<j}(a_j-a_i)\ne0$. Maka semua $c_j=0$ dan
+fungsi-fungsi tersebut bebas linear.
+
+\subsection*{Latihan \ref{bebas:lat-medan}: koefisien real dan kompleks}
+Tuliskan $u=(1,i)$; vektor kedua adalah $iu$.
+Untuk $a,b\in\R$, hubungan $au+b(iu)=0$ berarti
+$(a+bi)u=0$, sehingga $a=b=0$.
+Di atas $\C$, hubungan $iu-(iu)=0$ memberi ketergantungan
+antara kedua vektor dengan koefisien $i$ dan $-1$.
+Ruang pembangun kompleksnya adalah $\{zu:z\in\C\}$;
+sebagai ruang real, basisnya $(u,iu)$ dan dimensinya dua.
+
+\subsection*{Latihan \ref{bebas:lat-jumlah-nol}: pilih blok bebas}
+Pilih bebas entri $x_{ij}$ untuk $1\le i,j<n$.
+Syarat jumlah nol memaksa
+\[
+    x_{in}=-\sum_{j<n}x_{ij},\qquad
+    x_{nj}=-\sum_{i<n}x_{ij},\qquad
+    x_{nn}=\sum_{i,j<n}x_{ij}.
+\]
+Rumus terakhir memenuhi baris terakhir sekaligus kolom terakhir;
+jadi salah satu dari $2n$ persamaan semula berulang.
+Basis eksplisitnya adalah
+\[
+    B_{ij}=E_{ij}-E_{in}-E_{nj}+E_{nn},\qquad 1\le i,j<n.
+\]
+Setiap $X\in S$ mempunyai ekspansi unik
+$X=\sum_{i,j<n}x_{ij}B_{ij}$, sehingga $\dim S=(n-1)^2$.
+
+\subsection*{Latihan \ref{bebas:lat-tiga}: dua kali batas irisan}
+Terapkan batas dimensi irisan pertama pada $U_1,U_2$, kemudian
+pada $U_1\cap U_2,U_3$:
+\begin{align*}
+    \dim(U_1\cap U_2\cap U_3)
+    &\ge\dim(U_1\cap U_2)+\dim U_3-n\\
+    &\ge\dim U_1+\dim U_2+\dim U_3-2n.
+\end{align*}
+Di $\R^3$, tiga bidang koordinat $x_1=0$, $x_2=0$, $x_3=0$
+mencapai kesamaan: irisan ketiganya nol dan ruas kanan $2+2+2-6=0$.
+
+\subsection*{Latihan \ref{bebas:lat-selisih-dimensi}: dua bilangan cacah}
+Letakkan $k=\dim(U\cap W)$.
+Rumus dimensi memberi $(\dim U-k)+(\dim W-k)=1$.
+Kedua suku adalah bilangan cacah, sehingga salah satunya nol.
+Jika $\dim U=k$, inklusi $U\cap W\subseteq U$ dan kesamaan
+dimensi memberi $U=U\cap W\subseteq W$. Kasus lainnya serupa.
+
+\subsection*{Latihan \ref{bebas:lat-lagrange}: bandingkan suku tertinggi}
+Identitas interpolasi untuk $p(t)=t^k$ memberi
+$t^k=\sum_{j=0}^n a_j^kL_j(t)$.
+Koefisien $t^n$ pada $L_j$ adalah
+$1/\prod_{\ell\ne j}(a_j-a_\ell)$.
+Membandingkan koefisien $t^n$ pada kedua ruas memberi nilai
+nol untuk $k<n$ dan satu untuk $k=n$.
+
+\subsection*{Latihan \ref{bebas:lat-komplemen}: padankan bagian di luar irisan}
+Pilih basis $(z_1,\ldots,z_k)$ dari $U\cap W$ dan perluas
+menjadi $(z_1,\ldots,z_k,u_1,\ldots,u_r)$ pada $U$ serta
+$(z_1,\ldots,z_k,w_1,\ldots,w_r)$ pada $W$.
+Jumlah vektor tambahan sama karena $\dim U=\dim W$.
+Daftar $(z_1,\ldots,z_k,u_1,\ldots,u_r,w_1,\ldots,w_r)$
+adalah basis bagi $U+W$ sebagaimana pada bukti rumus dimensi.
+Definisikan
+\[
+    K_0=\operatorname{span}\{u_1+w_1,\ldots,u_r+w_r\}.
+\]
+Jika $\sum a_j(u_j+w_j)\in U$, maka $\sum a_jw_j\in U\cap W$,
+sehingga semua $a_j=0$. Jadi $K_0\cap U=\{0\}$; argumen
+simetris memberi $K_0\cap W=\{0\}$.
+Selain itu $w_j=(u_j+w_j)-u_j$ dan $u_j=(u_j+w_j)-w_j$,
+sehingga $U+W=U\oplus K_0=W\oplus K_0$.
+Ambil komplemen $L$ bagi $U+W$ di $V$ dan letakkan $K=K_0\oplus L$.
+Maka $V=U\oplus K=W\oplus K$.
+Kesamaan $U=W$ tidak wajib: di $\R^2$, pilih
+$U=\operatorname{span}\{e_1\}$,
+$W=\operatorname{span}\{e_1+e_2\}$, dan $K=\operatorname{span}\{e_2\}$.
+\fi

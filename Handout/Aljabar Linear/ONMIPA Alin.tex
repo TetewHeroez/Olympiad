@@ -170,6 +170,9 @@
 \oddoutermargin{\sffamily \leftmark}
 \evenoutermargin{\sffamily\@title}
 \chapimage{}
+\chapstarimage{bookstyle/LogoAA.png}
+\partimage{bookstyle/part.png}
+\partblankimage{bookstyle/LogoAA.png}
 \makeatother
 
 
@@ -194,87 +197,22 @@
 
 \mainmatter
 \pagenumbering{arabic}
-\partabstract{
-
-    Sebelum memasuki pembahasan pada bagian ini, pembaca
-    diharapkan telah memahami \textit{operasi baris elementer}
-    (OBE) dan \textit{operasi kolom elementer} (OKE).
-    Kedua operasi tersebut merupakan perangkat dasar dalam
-    aljabar linear yang memungkinkan suatu matriks
-    ditransformasikan ke bentuk yang lebih sederhana.
-    Dalam penyelesaian soal-soal olimpiade matematika,
-    kemampuan memilih transformasi yang tepat sering kali
-    lebih penting daripada melakukan perhitungan secara
-    langsung.
-
-    Sebagai pengingat, terdapat tiga jenis operasi baris
-    elementer, yaitu pertukaran dua baris, perkalian suatu
-    baris dengan skalar tak nol, serta penjumlahan suatu
-    baris dengan kelipatan baris lainnya. Ketiganya dapat
-    dinyatakan secara simbolis sebagai berikut:
-    \[
-        \begin{aligned}
-            R_i & \leftrightarrow R_j
-                &                                            & \text{(pertukaran dua baris)},        \\
-            R_i & \leftarrow \lambda R_i,\quad \lambda\neq 0
-                &                                            & \text{(perkalian dengan skalar)},     \\
-            R_i & \leftarrow R_i+\lambda R_j,\quad i\neq j
-                &                                            & \text{(penjumlahan kelipatan baris)}.
-        \end{aligned}
-    \]
-    Operasi kolom elementer didefinisikan secara analog
-    dengan mengganti baris $R_i$ menjadi kolom $C_i$.
-
-    Dari sudut pandang aljabar, operasi baris elementer
-    bersesuaian dengan perkalian matriks elementer dari
-    sebelah kiri, sedangkan operasi kolom elementer
-    bersesuaian dengan perkalian dari sebelah kanan.
-    Dengan demikian, untuk setiap
-    $A\in\mathbb{F}^{m\times n}$, serangkaian operasi
-    baris dan kolom elementer dapat dinyatakan sebagai
-    \[
-        A\longmapsto PAQ,
-    \]
-    dengan $P\in GL_m(\mathbb{F})$ dan
-    $Q\in GL_n(\mathbb{F})$ merupakan matriks invertibel.
-    Transformasi tersebut mempertahankan rank matriks,
-    yakni
-    \[
-        \operatorname{rank}(PAQ)=\operatorname{rank}(A).
-    \]
-    Bahkan, dengan pemilihan $P$ dan $Q$ yang sesuai,
-    setiap matriks $A$ dapat direduksi menjadi bentuk
-    \[
-        PAQ=
-        \begin{pmatrix}
-            I_r & 0 \\
-            0   & 0
-        \end{pmatrix},
-        \qquad r=\operatorname{rank}(A).
-    \]
-
-    Perlu diperhatikan bahwa tidak semua sifat matriks
-    dipertahankan oleh operasi-operasi tersebut. Sebagai
-    contoh, pada matriks persegi, determinan, trace, dan
-    nilai eigen pada umumnya dapat berubah. Oleh karena
-    itu, pemahaman mengenai besaran yang invarian terhadap
-    suatu transformasi menjadi salah satu gagasan penting
-    yang akan terus digunakan dalam pembahasan matriks,
-    khususnya pada persoalan-persoalan olimpiade.
-
-}
-\part{Matriks}
+\part{Matriks}{\input{Bab/01-Matriks/00-Ikhtisar}}
 \input{Bab/01-Matriks/01-Rank-dan-Nulitas}
 \input{Bab/01-Matriks/02-Determinan}
 \input{Bab/01-Matriks/03-Nilai-Eigen-dan-Vektor-Eigen}
 \input{Bab/01-Matriks/04-Dekomposisi-Matriks}
 \input{Bab/01-Matriks/05-Matriks-Khusus}
 
-\partabstract{}
-\part{Ruang Vektor}
+\part{Ruang Vektor}{\input{Bab/02-Ruang-Vektor/00-Ikhtisar}}
+\input{Bab/02-Ruang-Vektor/01-Ruang-Linear}
+\input{Bab/02-Ruang-Vektor/02-Kebebaslinearan}
+\input{Bab/02-Ruang-Vektor/03-Transformasi-Linear}
 
-\partabstract{}
-\part{Hasil Kali Dalam}
+\part{Hasil Kali Dalam}{\input{Bab/03-Hasil-Kali-Dalam/00-Ikhtisar}}
+\input{Bab/03-Hasil-Kali-Dalam/01-Ruang-Hasil-Kali-Dalam}
+\input{Bab/03-Hasil-Kali-Dalam/02-Ortogonalitas-dan-Proyeksi}
+\input{Bab/03-Hasil-Kali-Dalam/03-Operator-pada-Ruang-Hasil-Kali-Dalam}
 
 \nocite{zhang2009,zhang2011}
 \bibliographystyle{plainnat}

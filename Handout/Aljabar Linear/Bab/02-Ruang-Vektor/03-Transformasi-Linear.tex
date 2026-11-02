@@ -1,0 +1,817 @@
+% !TeX root = ../../ONMIPA Alin.tex
+% Acuan: Zhang (2009), Bab 3, definisi dan fakta serta Soal 3.79--3.112;
+% Zhang (2011), bagian 1.3. Contoh dan pembahasan disusun untuk handout ini.
+\chapter{Transformasi Linear}
+\label{ch:transformasi-linear}
+
+Transformasi linear mempertahankan kombinasi linear. Karena itu,
+perilakunya pada sebuah basis menentukan perilakunya di seluruh
+ruang. Bab ini menghubungkan struktur ruang vektor dengan perhitungan
+matriks, lalu memakai hubungan tersebut untuk menganalisis kernel,
+citra, proyeksi, serta pangkat suatu operator.
+Semua ruang dan transformasi menggunakan medan skalar yang sama,
+yaitu $\F=\R$ atau $\C$, kecuali jika dinyatakan lain.
+
+\section{Definisi dan Penentuan pada Basis}
+
+\begin{definisi}[][Transformasi linear][trans:def]
+    Pemetaan $T:V\to W$ disebut \emph{transformasi linear} jika
+    untuk semua $u,v\in V$ dan $a,b\in\F$ berlaku
+    \[
+        T(au+bv)=aT(u)+bT(v).
+    \]
+    Transformasi linear dari $V$ ke dirinya sendiri disebut
+    \emph{operator linear} pada $V$.
+\end{definisi}
+
+Definisi tersebut ekuivalen dengan aditivitas
+$T(u+v)=T(u)+T(v)$ dan homogenitas $T(av)=aT(v)$.
+Dengan mengambil koefisien nol, diperoleh $T(0_V)=0_W$.
+Induksi kemudian memberi
+\[
+    T\left(\sum_{j=1}^r a_jv_j\right)
+      =\sum_{j=1}^r a_jT(v_j).
+\]
+Jadi setiap hubungan linear antarvektor harus tetap berlaku
+setelah transformasi diterapkan. Syarat $T(0)=0$ saja belum
+cukup: pemetaan $T(x)=x^2$ pada $\R$ memenuhi syarat itu,
+tetapi gagal pada penjumlahan.
+
+\begin{exam}[Linear terhadap medan yang mana?]
+    Pada $\C$, tinjau $T(z)=\overline z$ dan $S(z)=\operatorname{Re}z$,
+    dengan nilai $S$ juga dipandang sebagai bilangan kompleks.
+    Apakah keduanya linear atas $\R$? Atas $\C$?
+\end{exam}
+\begin{solution}
+    Konjugasi dan bagian real mempertahankan penjumlahan dan
+    perkalian oleh skalar real, sehingga keduanya linear atas $\R$.
+    Namun, $T(i)=-i\ne iT(1)$ dan $S(i)=0\ne iS(1)$.
+    Jadi keduanya tidak linear atas $\C$.
+    Pilihan medan skalar merupakan bagian dari pernyataan linearitas.
+\end{solution}
+
+Pemetaan $x\mapsto Ax+b$ dari $\F^n$ ke $\F^m$ linear tepat
+ketika $b=0$; syarat ini langsung diperoleh dari nilai di nol.
+Pemetaan dengan $b\ne0$ disebut pemetaan afin.
+Contoh linear lain mencakup evaluasi $p\mapsto p(a)$,
+turunan $p\mapsto p'$, serta pemetaan matriks $X\mapsto AXB$
+untuk $A,B$ tetap dengan ukuran yang sesuai.
+
+\begin{teorema}[][Menentukan transformasi melalui basis][trans:basis]
+    Misalkan $\mathcal B=(v_1,\ldots,v_n)$ basis bagi $V$.
+    Untuk sembarang $w_1,\ldots,w_n\in W$, terdapat tepat satu
+    transformasi linear $T:V\to W$ dengan $T(v_j)=w_j$.
+    Transformasi tersebut diberikan oleh
+    \[
+        T\left(\sum_{j=1}^n a_jv_j\right)=\sum_{j=1}^n a_jw_j.
+    \]
+\end{teorema}
+\begin{proof}
+    Koordinat terhadap basis tunggal, sehingga rumus tersebut
+    memberikan satu nilai yang tidak bergantung pada pilihan
+    representasi. Rumusnya mempertahankan kombinasi linear.
+    Setiap transformasi linear dengan nilai basis yang ditentukan
+    harus memenuhi rumus itu, sehingga transformasinya unik.
+\end{proof}
+
+Jika nilai transformasi ditentukan pada daftar yang hanya
+membangun ruang, semua hubungan pada daftar itu harus dihormati.
+Secara tepat, aturan $v_j\mapsto w_j$ memperluas menjadi
+transformasi pada $\operatorname{span}\{v_j\}$ jika dan hanya jika
+\[
+    \sum a_jv_j=0\quad\Longrightarrow\quad\sum a_jw_j=0.
+\]
+Syarat ini perlu karena linearitas, dan cukup karena dua
+representasi dari vektor yang sama mempunyai selisih nol.
+
+\begin{exam}[Data pada tiga vektor yang bukan basis standar]
+    Carilah $T:\R^3\to\R^2$ yang memenuhi
+    \[
+        T(e_1+e_2)=(1,0),\quad
+        T(e_2+e_3)=(0,1),\quad
+        T(e_3+e_1)=(1,1).
+    \]
+\end{exam}
+\begin{solution}
+    Ketiga vektor sumber bebas linear, sebab determinan matriks
+    kolomnya adalah $2$. Jadi transformasi ada dan unik.
+    Tulis $a=T(e_1)$, $b=T(e_2)$, $c=T(e_3)$.
+    Sistem $a+b=(1,0)$, $b+c=(0,1)$, $c+a=(1,1)$
+    memberi $a=(1,0)$, $b=(0,0)$, $c=(0,1)$.
+    Maka $T(x,y,z)=(x,z)$.
+\end{solution}
+
+\section{Kernel, Citra, dan Teorema Rank--Nulitas}
+
+\begin{definisi}[][Kernel, citra, rank, dan nulitas][trans:kernel]
+    Untuk transformasi linear $T:V\to W$, definisikan
+    \[
+        \ker T=\{v\in V:T(v)=0\},\qquad
+        \operatorname{im}T=\{T(v):v\in V\}.
+    \]
+    Jika dimensinya hingga, tulis
+    $\nul T=\dim\ker T$ dan $\rank T=\dim\operatorname{im}T$.
+\end{definisi}
+
+Kernel merupakan subruang \emph{domain} $V$, sedangkan citra
+merupakan subruang \emph{kodomain} $W$.
+Untuk kernel, $T(au+bv)=0$ jika $T(u)=T(v)=0$.
+Untuk citra, kombinasi $aT(u)+bT(v)$ sama dengan $T(au+bv)$.
+Kedua himpunan memuat nol, sehingga keduanya memenuhi uji subruang.
+
+\begin{teorema}[][Teorema rank--nulitas][trans:rank-nulitas]
+    Jika $T:V\to W$ linear dan $\dim V=n<\infty$, maka
+    \[
+        \rank T+\nul T=n.
+    \]
+    Lebih tepatnya, ambil basis $(u_1,\ldots,u_k)$ bagi $\ker T$,
+    lalu perluas menjadi basis
+    \[
+        (u_1,\ldots,u_k,v_1,\ldots,v_{n-k})
+    \]
+    bagi $V$. Daftar $(T(v_1),\ldots,T(v_{n-k}))$ merupakan basis citra.
+\end{teorema}
+\begin{proof}
+    Ekspansi vektor domain dalam basis yang diberikan menunjukkan
+    bahwa citra dibangun oleh $T(v_1),\ldots,T(v_{n-k})$.
+    Jika $\sum a_jT(v_j)=0$, maka $\sum a_jv_j\in\ker T$
+    dan dapat dituliskan sebagai kombinasi $u_1,\ldots,u_k$.
+    Kebebasan basis $V$ memaksa semua $a_j=0$.
+    Maka dimensi citra adalah $n-k$, sedangkan nulitasnya $k$.
+\end{proof}
+
+\begin{prop}[Injektif, surjektif, dan kebebasan citra]
+    Transformasi $T$ injektif jika dan hanya jika $\ker T=\{0\}$,
+    dan surjektif jika dan hanya jika $\operatorname{im}T=W$.
+    Jika $T(v_1),\ldots,T(v_r)$ bebas linear, maka $v_1,\ldots,v_r$
+    bebas linear. Arah sebaliknya berlaku jika $T$ injektif.
+\end{prop}
+\begin{proof}
+    Persamaan $T(u)=T(v)$ ekuivalen dengan $u-v\in\ker T$,
+    sehingga kriteria injektivitas mengikuti langsung.
+    Kriteria surjektivitas adalah definisi citra.
+    Untuk kebebasan, terapkan $T$ pada suatu hubungan linear
+    vektor sumber. Sebaliknya, jika citra suatu kombinasi nol
+    dan $T$ injektif, kombinasi sumbernya juga nol.
+\end{proof}
+
+Jika $\dim V=\dim W=n<\infty$, teorema rank--nulitas memberi
+ekuivalensi: $T$ injektif, $T$ surjektif, dan $T$ bijektif.
+Untuk dimensi berbeda, injektivitas hanya mengharuskan
+$\dim V\le\dim W$, sedangkan surjektivitas mengharuskan
+$\dim V\ge\dim W$. Ketaksamaan dimensi saja tidak menjamin
+sifat tersebut bagi transformasi yang diberikan.
+
+\begin{exam}[Evaluasi polinom pada beberapa titik]
+    Untuk titik berbeda $a_1,\ldots,a_m\in\F$, $m\ge1$, tinjau
+    \[
+        E:\mathcal P_{\le n}(\F)\to\F^m,\qquad
+        E(p)=(p(a_1),\ldots,p(a_m))^T.
+    \]
+    Tentukan rank, nulitas, dan kapan $E$ injektif atau surjektif.
+\end{exam}
+\begin{solution}
+    Kernel terdiri atas polinom yang habis dibagi
+    $q(t)=\prod_{j=1}^m(t-a_j)$.
+    Jika $m\le n$, kernel adalah
+    $q\mathcal P_{\le n-m}(\F)$, berdimensi $n-m+1$.
+    Jika $m>n$, polinom berderajat paling besar $n$ dengan
+    $m$ akar berbeda harus nol. Jadi
+    \[
+        \nul E=\max\{n+1-m,0\},\qquad
+        \rank E=\min\{n+1,m\}.
+    \]
+    Transformasi injektif tepat ketika $m\ge n+1$ dan surjektif
+    tepat ketika $m\le n+1$. Untuk $m=n+1$, interpolasi
+    Lagrange memberikan inversnya secara eksplisit.
+\end{solution}
+
+\subsection{Serat solusi dan prapeta subruang}
+Jika $T(v_0)=w$, seluruh solusi $T(v)=w$ adalah
+\[
+    T^{-1}(\{w\})=v_0+\ker T.
+\]
+Memang, $T(v)=T(v_0)$ jika dan hanya jika $v-v_0\in\ker T$.
+Jadi suatu persamaan linear konsisten tepat ketika
+$w\in\operatorname{im}T$, dan jika konsisten, solusinya unik
+tepat ketika kernel hanya nol.
+
+Untuk subruang $Y\subseteq W$, prapeta
+$T^{-1}(Y)=\{v:T(v)\in Y\}$ selalu subruang dari $V$.
+Notasi prapeta ini tidak mensyaratkan bahwa $T$ mempunyai invers.
+Pembatasan $T$ pada $T^{-1}(Y)$ mempunyai kernel $\ker T$
+dan citra $Y\cap\operatorname{im}T$. Maka, jika $V$ berdimensi hingga,
+\[
+    \dim T^{-1}(Y)=\nul T+\dim(Y\cap\operatorname{im}T).
+\]
+Demikian pula, untuk subruang $U\subseteq V$,
+$\dim T(U)=\dim U-\dim(U\cap\ker T)$.
+
+\begin{exam}[Jumlah dimensi tidak menjamin jumlah langsung]
+    Pada $\R^2$, definisikan $T(x,y)=(y,0)$.
+    Tentukan kernel, citra, dan jumlah keduanya.
+\end{exam}
+\begin{solution}
+    Kernel dan citra keduanya $\operatorname{span}\{e_1\}$.
+    Walaupun $\nul T+\rank T=1+1=2$, jumlah kedua subruang
+    hanya garis $\operatorname{span}\{e_1\}$, bukan seluruh $\R^2$.
+    Teorema rank--nulitas menyatakan kesamaan bilangan dimensi;
+    ia tidak menyatakan bahwa domain adalah jumlah langsung
+    kernel dan citra. Untuk domain dan kodomain berbeda,
+    penjumlahan kernel dan citra bahkan belum tentu bermakna.
+\end{solution}
+
+\section{Representasi Matriks dan Pergantian Basis}
+
+\begin{definisi}[][Matriks suatu transformasi][trans:matriks]
+    Misalkan $\mathcal B=(b_1,\ldots,b_n)$ basis $V$ dan
+    $\mathcal C=(c_1,\ldots,c_m)$ basis $W$.
+    Matriks transformasi $T:V\to W$ relatif terhadap kedua basis adalah
+    \[
+        [T]_{\mathcal C\leftarrow\mathcal B}
+        =\bigl[[T(b_1)]_{\mathcal C}\ \cdots\
+        [T(b_n)]_{\mathcal C}\bigr]\in\Mat_{m\times n}(\F).
+    \]
+\end{definisi}
+
+Dengan menuliskan $v=\sum x_jb_j$, linearitas memberi
+\[
+    [T(v)]_{\mathcal C}
+      =[T]_{\mathcal C\leftarrow\mathcal B}[v]_{\mathcal B}.
+\]
+Jadi kolom ke-$j$ berisi \emph{koordinat citra vektor basis
+ke-$j$}, bukan barisnya. Untuk operator dengan basis domain dan
+kodomain sama, notasi disingkat menjadi $[T]_{\mathcal B}$.
+Rank dan nulitas matriks ini sama dengan rank dan nulitas $T$,
+karena persamaan koordinat mempertahankan hubungan linear.
+
+\begin{exam}[Turunan dalam dua basis polinom]
+    Pada $V=\mathcal P_{\le3}(\R)$, letakkan $D(p)=p'$.
+    Tentukan matriks $D$ dalam basis
+    $\mathcal B=(1,t,t^2,t^3)$ dan
+    $\mathcal C=(1,t,t^2/2,t^3/6)$.
+\end{exam}
+\begin{solution}
+    Turunan anggota basis langsung memberi
+    \[
+        [D]_{\mathcal B}
+        =\begin{pmatrix}0&1&0&0\\0&0&2&0\\0&0&0&3\\0&0&0&0\end{pmatrix},
+        \qquad
+        [D]_{\mathcal C}
+        =\begin{pmatrix}0&1&0&0\\0&0&1&0\\0&0&0&1\\0&0&0&0\end{pmatrix}.
+    \]
+    Kedua matriks menyatakan operator yang sama.
+    Basis kedua menyerap faktor dari penurunan pangkat.
+    Kernel dibangun oleh $1$, citra adalah $\mathcal P_{\le2}(\R)$,
+    dan $D^4=0$ pada ruang ini.
+\end{solution}
+
+\begin{teorema}[][Rumus pergantian basis][trans:ganti-basis]
+    Tulis $A=[T]_{\mathcal C\leftarrow\mathcal B}$,
+    $P=P_{\mathcal B\leftarrow\mathcal B'}$, dan
+    $Q=P_{\mathcal C\leftarrow\mathcal C'}$.
+    Maka
+    \[
+        [T]_{\mathcal C'\leftarrow\mathcal B'}=Q^{-1}AP.
+    \]
+    Khusus untuk operator dengan perubahan basis yang sama
+    pada domain dan kodomain, matriks baru adalah $P^{-1}AP$.
+\end{teorema}
+\begin{proof}
+    Untuk setiap $v$, lakukan perubahan koordinat berurutan:
+    \[
+        [T(v)]_{\mathcal C'}
+        =Q^{-1}[T(v)]_{\mathcal C}
+        =Q^{-1}A[v]_{\mathcal B}
+        =Q^{-1}AP[v]_{\mathcal B'}.
+    \]
+    Keunikan matriks representasi memberikan rumus yang dinyatakan.
+\end{proof}
+
+Rumus ini menjelaskan mengapa keserupaan matriks muncul pada
+operator linear: dua matriks serupa merepresentasikan operator
+yang sama dalam basis berbeda. Akibatnya, determinan, trace,
+polinom karakteristik, dan nilai eigen operator tidak bergantung
+pada pilihan basis. Untuk transformasi antar dua ruang dengan
+perubahan basis terpisah, bentuk umumnya tetap $Q^{-1}AP$;
+bentuk itu tidak harus merupakan keserupaan.
+
+\section{Komposisi, Invers, dan Ruang Transformasi}
+
+Jika $T:V\to W$ dan $S:W\to Z$ linear, komposisi
+$ST=S\circ T$ linear dan berarti \emph{menerapkan $T$ lebih dahulu}.
+Dengan basis yang sesuai,
+\[
+    [ST]_{\mathcal D\leftarrow\mathcal B}
+      =[S]_{\mathcal D\leftarrow\mathcal C}
+       [T]_{\mathcal C\leftarrow\mathcal B}.
+\]
+Urutan perkalian mengikuti urutan komposisi; dua operator pada
+ruang yang sama tidak harus komutatif.
+
+\begin{teorema}[][Rank komposisi][trans:komposisi]
+    Untuk $T:V\to W$ dan $S:W\to Z$ dengan semua ruang
+    berdimensi hingga,
+    \[
+        \rank(ST)=\rank T-\dim(\operatorname{im}T\cap\ker S).
+    \]
+    Akibatnya,
+    \[
+        \rank S+\rank T-\dim W
+        \le\rank(ST)\le\min\{\rank S,\rank T\}.
+    \]
+\end{teorema}
+\begin{proof}
+    Batasi $S$ pada $\operatorname{im}T$.
+    Kernel pembatasannya adalah $\operatorname{im}T\cap\ker S$,
+    sedangkan citranya $\operatorname{im}(ST)$.
+    Teorema rank--nulitas memberikan rumus utama.
+    Karena dimensi irisan paling besar $\dim\ker S
+    =\dim W-\rank S$, diperoleh batas bawah.
+    Batas atas oleh $\rank T$ mengikuti rumus, dan batas oleh
+    $\rank S$ mengikuti $\operatorname{im}(ST)\subseteq\operatorname{im}S$.
+\end{proof}
+
+Jika $T$ bijektif, inversnya linear: untuk $w_j=T(v_j)$,
+persamaan $T(av_1+bv_2)=aw_1+bw_2$ memberi
+$T^{-1}(aw_1+bw_2)=av_1+bv_2$.
+Transformasi linear bijektif disebut \emph{isomorfisme}.
+Dua ruang berdimensi hingga isomorfik jika dan hanya jika
+dimensinya sama: kirim basis ruang pertama ke basis ruang kedua.
+
+\begin{exam}[Invers sebagai jumlah hingga turunan]
+    Buktikan bahwa $I-D$ invertibel pada $\mathcal P_{\le n}(\F)$,
+    dengan $D(p)=p'$, dan selesaikan $p-p'=q$ di ruang tersebut.
+\end{exam}
+\begin{solution}
+    Karena $D^{n+1}=0$, identitas deret geometri operator memberi
+    \[
+        (I-D)(I+D+\cdots+D^n)=I-D^{n+1}=I.
+    \]
+    Perkalian dalam urutan terbalik juga bernilai $I$.
+    Jadi $(I-D)^{-1}=I+D+\cdots+D^n$ dan satu-satunya solusi
+    adalah $p=q+q'+\cdots+q^{(n)}$.
+    Secara umum, jika $N^k=0$, maka
+    $(I-N)^{-1}=I+N+\cdots+N^{k-1}$.
+\end{solution}
+
+Pada ruang berdimensi hingga yang sama, $ST=I$ mengakibatkan
+$TS=I$: persamaan pertama membuat $T$ injektif, sehingga
+$T$ bijektif dan $S=T^{-1}$.
+Untuk ruang tak hingga, injektif dan surjektif tidak ekuivalen.
+Pada $\F[t]$, operator turunan surjektif tetapi tidak injektif,
+sedangkan perkalian oleh $t$ injektif tetapi tidak surjektif.
+
+\subsection{Ruang semua transformasi linear}
+Himpunan $\mathcal L(V,W)$ menjadi ruang linear dengan operasi
+\[
+    (S+T)(v)=S(v)+T(v),\qquad (aT)(v)=aT(v).
+\]
+Jika $\dim V=n$ dan $\dim W=m$, maka
+$\dim\mathcal L(V,W)=mn$.
+Untuk membuktikannya, pilih basis $(b_j)$ dan $(c_i)$, lalu
+definisikan $E_{ij}^{\mathcal L}$ melalui
+\[
+    E_{ij}^{\mathcal L}(b_k)=\begin{cases}c_i,&k=j,\\0,&k\ne j.\end{cases}
+\]
+Setiap $T$ mempunyai ekspansi unik
+$T=\sum_{i,j}a_{ij}E_{ij}^{\mathcal L}$, dengan $a_{ij}$ entri
+matriks representasinya. Ini memberi basis yang beranggotakan $mn$.
+Tidak diperlukan hubungan khusus antara vektor basis domain
+dan vektor basis kodomain.
+
+\section{Proyeksi dan Subruang Invarian}
+
+\begin{definisi}[][Proyeksi dan subruang invarian][trans:proyeksi]
+    Operator $P:V\to V$ disebut \emph{proyeksi} jika $P^2=P$.
+    Subruang $U\subseteq V$ disebut \emph{invarian} terhadap
+    operator $T$ jika $T(U)\subseteq U$.
+\end{definisi}
+
+Proyeksi di sini tidak memerlukan hasil kali dalam. Istilah
+proyeksi ortogonal memuat syarat tambahan yang akan bergantung
+pada struktur hasil kali dalam.
+
+\begin{teorema}[][Proyeksi dan dekomposisi ruang][trans:dekomposisi-proyeksi]
+    Jika $P^2=P$, maka
+    \[
+        V=\operatorname{im}P\oplus\ker P,\qquad
+        \operatorname{im}(I-P)=\ker P.
+    \]
+    Sebaliknya, jika $V=U\oplus W$, terdapat tepat satu
+    proyeksi dengan citra $U$ dan kernel $W$, yaitu $P(u+w)=u$.
+\end{teorema}
+\begin{proof}
+    Setiap $v$ dapat ditulis sebagai $Pv+(v-Pv)$.
+    Suku pertama berada di citra, sedangkan suku kedua berada
+    di kernel karena $P(v-Pv)=Pv-P^2v=0$.
+    Jika $x=Py\in\ker P$, maka $0=Px=P^2y=Py=x$;
+    jadi jumlahnya langsung.
+    Selain itu, setiap $(I-P)v$ berada di kernel, dan untuk
+    $x\in\ker P$ berlaku $x=(I-P)x$.
+    Arah sebaliknya mengikuti keunikan dekomposisi $u+w$.
+    Proyeksi dengan citra $U$ bertindak sebagai identitas pada $U$
+    dan bernilai nol pada $W$, sehingga rumusnya juga unik.
+\end{proof}
+
+Jika $\dim V=n$ dan $\rank P=r$, gabungan basis citra dan
+kernel memberi matriks $\diag(I_r,0)$.
+Maka $\tr P=r$ dan $\rank(I-P)=n-r$.
+Untuk operator umum, kernel dan citra memang invarian terhadap
+operator itu sendiri, tetapi tidak harus saling komplemen.
+
+\begin{exam}[Memisahkan bagian simetris suatu matriks]
+    Pada $\Mat_n(\F)$, tinjau $P(X)=(X+X^T)/2$.
+    Tentukan citra, kernel, dan rank dari $P$.
+\end{exam}
+\begin{solution}
+    Transpose linear atas $\F$, sehingga $P$ linear.
+    Matriks $P(X)$ simetris, dan untuk matriks simetris $S$
+    berlaku $P(S)=S$. Jadi $P^2=P$ dan citranya adalah ruang
+    matriks simetris. Kernelnya ruang matriks antisimetris,
+    yaitu $X^T=-X$. Dengan menghitung entri bebas,
+    \[
+        \rank P=\frac{n(n+1)}2,\qquad
+        \nul P=\frac{n(n-1)}2.
+    \]
+    Dekomposisi yang dihasilkan adalah
+    $X=(X+X^T)/2+(X-X^T)/2$.
+    Jika transpose diganti transpose konjugat, pemetaannya
+    linear atas $\R$, tetapi umumnya tidak linear atas $\C$.
+\end{solution}
+
+\subsection{Basis yang disesuaikan dengan subruang}
+Jika $U$ invarian terhadap $T$, perluas basis $U$ menjadi basis
+$V$. Dalam basis ini, matriks $T$ berbentuk
+\[
+    \begin{pmatrix}A&B\\0&C\end{pmatrix}.
+\]
+Blok nol muncul karena citra anggota basis $U$ tidak mempunyai
+komponen di luar $U$.
+Jika $V=U\oplus W$ dan kedua subruang invarian, matriksnya
+berbentuk blok diagonal $\diag(A,C)$.
+Komplemen suatu subruang selalu ada dalam dimensi hingga,
+tetapi komplemen yang invarian belum tentu ada.
+
+Jika $ST=TS$, maka $S$ mempertahankan $\ker T$ dan
+$\operatorname{im}T$. Untuk $v\in\ker T$, berlaku
+$T(Sv)=S(Tv)=0$; untuk $v=Tu$, berlaku $Sv=T(Su)$.
+Argumen yang sama menunjukkan bahwa setiap ruang eigen
+$\ker(T-\lambda I)$ invarian terhadap $S$.
+
+\section{Operator Nilpoten dan Stabilisasi Kernel}
+
+Operator $N$ disebut nilpoten jika $N^k=0$ untuk suatu $k\ge1$.
+Rantai citra suatu vektor sering menghasilkan daftar bebas linear
+tanpa menghitung determinan.
+
+\begin{teorema}[][Rantai nilpoten][trans:rantai]
+    Jika $N^kv=0$ dan $N^{k-1}v\ne0$, maka
+    \[
+        v,Nv,\ldots,N^{k-1}v
+    \]
+    bebas linear. Khususnya, indeks nilpotensi operator pada
+    ruang berdimensi $n\ge1$ paling besar $n$.
+\end{teorema}
+\begin{proof}
+    Andaikan $\sum_{j=0}^{k-1}a_jN^jv=0$ mempunyai koefisien
+    tidak nol, dan pilih indeks terkecil $j_0$ dengan $a_{j_0}\ne0$.
+    Terapkan $N^{k-1-j_0}$ pada hubungan itu.
+    Suku dengan indeks lebih besar lenyap, sehingga
+    $a_{j_0}N^{k-1}v=0$, kontradiksi.
+    Jika $k$ adalah indeks nilpotensi, ada $v$ dengan
+    $N^{k-1}v\ne0$, sehingga $k\le n$.
+\end{proof}
+
+\begin{exam}[Basis dari satu rantai turunan]
+    Pada $\mathcal P_{\le n}(\F)$, ambil $v=t^n$ dan $D(p)=p'$.
+    Tunjukkan bahwa $v,Dv,\ldots,D^nv$ basis dan tentukan
+    $\nul D^j$ untuk $0\le j\le n+1$.
+\end{exam}
+\begin{solution}
+    Karena $D^nv=n!\ne0$ dan $D^{n+1}v=0$, teorema rantai
+    memberi $n+1$ vektor bebas, sehingga semuanya membentuk basis.
+    Untuk $1\le j\le n+1$, kernel $D^j$ terdiri atas polinom
+    berderajat paling besar $j-1$, maka $\nul D^j=j$.
+    Untuk $j=0$, $D^0=I$ dan nulitasnya nol.
+\end{solution}
+
+Untuk operator umum $T:V\to V$ dengan $\dim V=n$, selalu ada
+rantai inklusi
+\[
+    \ker T^0\subseteq\ker T\subseteq\ker T^2\subseteq\cdots,
+    \qquad
+    V\supseteq\operatorname{im}T\supseteq\operatorname{im}T^2\supseteq\cdots.
+\]
+Rantai kernel tidak dapat membesar secara ketat lebih dari $n$ kali.
+Jika $\ker T^k=\ker T^{k+1}$, maka kesamaan berlaku untuk semua
+pangkat selanjutnya. Memang, jika $T^{k+2}v=0$, maka
+$Tv\in\ker T^{k+1}=\ker T^k$, sehingga $T^{k+1}v=0$.
+Ulangi argumen ini secara induktif.
+
+\begin{teorema}[][Dekomposisi setelah kernel stabil][trans:stabil]
+    Misalkan $T$ operator pada $V$ dengan $\dim V=n<\infty$.
+    Jika $\ker T^k=\ker T^{k+1}$ untuk suatu $k\ge1$, maka
+    \[
+        V=\ker T^k\oplus\operatorname{im}T^k.
+    \]
+    Kedua subruang invarian; pembatasan $T$ pada yang pertama
+    nilpoten, dan pada yang kedua invertibel.
+    Untuk $\dim V=n\ge1$, pilihan $k=n$ selalu dapat digunakan.
+\end{teorema}
+\begin{proof}
+    Stabilisasi memberi $\ker T^{2k}=\ker T^k$.
+    Jika $x=T^ky\in\ker T^k$, maka $T^{2k}y=0$, sehingga
+    $y\in\ker T^k$ dan $x=0$.
+    Jadi irisan kernel dan citra $T^k$ hanya nol; rank--nulitas
+    menyatakan jumlah dimensinya $n$, sehingga jumlahnya seluruh $V$.
+    Keduanya invarian karena $T$ komutatif dengan pangkatnya.
+    Pada kernel, pangkat ke-$k$ bernilai nol.
+    Pada citra, jika $Tx=0$, maka $x\in\ker T^k$ juga,
+    sehingga $x=0$. Pembatasan ini injektif pada ruang berdimensi
+    hingga, maka invertibel.
+    Rantai kernel telah stabil paling lambat pada pangkat $n$.
+\end{proof}
+
+Kasus $k=1$ memberi kriteria yang sering berguna:
+\[
+    V=\ker T\oplus\operatorname{im}T
+    \iff\rank T^2=\rank T.
+\]
+Satu arah mengikuti teorema dan rank--nulitas. Untuk arah lainnya,
+jika jumlahnya langsung dan $T^2v=0$, maka
+$Tv\in\ker T\cap\operatorname{im}T=\{0\}$, sehingga
+$\ker T^2=\ker T$.
+Sifat ini tidak memaksa $T$ idempoten: $T=2I$ memenuhi
+dekomposisi tersebut, tetapi $T^2\ne T$ pada ruang tak nol.
+
+\section{Latihan Pilihan}
+
+\begin{latihan}\label{trans:lat-data}
+    Tentukan semua transformasi linear
+    $T:\mathcal P_{\le2}(\R)\to\R^2$ yang memenuhi
+    \[
+        T(1)=(1,0),\quad T(t)=(0,1),\quad T(1+t)=(a,b).
+    \]
+    Untuk parameter yang memungkinkan, apakah $T$ unik?
+    Tentukan rank dan nulitas setiap transformasi yang mungkin.
+\end{latihan}
+
+\begin{latihan}\label{trans:lat-jet}
+    Definisikan $T:\mathcal P_{\le4}(\R)\to\R^3$ melalui
+    $T(p)=(p(0),p'(0),p(1))^T$.
+    Tentukan matriks terhadap basis standar, basis kernel,
+    serta rank. Carilah semua $p$ dengan $T(p)=(\alpha,\beta,\gamma)^T$.
+\end{latihan}
+
+\begin{latihan}\label{trans:lat-basis}
+    Pada $\R^2$, definisikan $T(x,y)=(2x+y,x+2y)$.
+    Gunakan basis $\mathcal C=((1,1)^T,(1,-1)^T)$ untuk
+    menentukan $[T]_{\mathcal C}$ dan rumus $T^k(x,y)$
+    untuk setiap bilangan bulat $k$, termasuk $k<0$.
+\end{latihan}
+
+\begin{latihan}\label{trans:lat-euler}
+    Untuk $a\in\F$, tinjau operator
+    $T_a(p)=tp'-ap$ pada $\mathcal P_{\le n}(\F)$.
+    Tentukan kernel, citra, dan syarat invertibilitasnya.
+    Jika invertibel, tuliskan $T_a^{-1}$ secara eksplisit.
+\end{latihan}
+
+\begin{latihan}\label{trans:lat-komutator}
+    Ambil $A=\diag(1,1,2)$ dan definisikan
+    $T:\Mat_3(\F)\to\Mat_3(\F)$ melalui $T(X)=AX-XA$.
+    Tentukan basis kernel dan citra serta rank dan nulitasnya.
+    Generalisasikan hasilnya untuk matriks diagonal dengan
+    nilai diagonal berbeda yang bermultiplisitas $m_1,\ldots,m_s$.
+\end{latihan}
+
+\begin{latihan}\label{trans:lat-kuadrat-nol}
+    Misalkan $T^2=0$ pada ruang berdimensi $n$.
+    Buktikan bahwa $\rank T\le\lfloor n/2\rfloor$.
+    Tunjukkan bahwa setiap rank bulat antara nol dan batas itu
+    dapat dicapai. Kapan $\operatorname{im}T=\ker T$?
+\end{latihan}
+
+\begin{latihan}\label{trans:lat-dua-proyeksi}
+    Untuk proyeksi $P,Q$ pada ruang yang sama, buktikan bahwa
+    $P+Q$ proyeksi jika dan hanya jika $PQ=QP=0$.
+    Dalam keadaan itu, buktikan
+    \[
+        \operatorname{im}(P+Q)=\operatorname{im}P\oplus\operatorname{im}Q.
+    \]
+\end{latihan}
+
+\begin{latihan}\label{trans:lat-invers-sepihak}
+    Misalkan $T:V\to W$ dan $S:W\to V$ linear dengan
+    $ST=I_V$, serta kedua ruang berdimensi hingga.
+    Buktikan bahwa $TS$ proyeksi pada $W$ dan
+    \[
+        W=\operatorname{im}T\oplus\ker S.
+    \]
+    Tentukan kapan $TS=I_W$.
+\end{latihan}
+
+\begin{latihan}\label{trans:lat-irisan}
+    Untuk transformasi $T:V\to W$ dan subruang $U_1,U_2\subseteq V$,
+    buktikan
+    \[
+        T(U_1+U_2)=T(U_1)+T(U_2),\qquad
+        T(U_1\cap U_2)\subseteq T(U_1)\cap T(U_2).
+    \]
+    Berikan contoh inklusi kedua yang sejati, dan buktikan bahwa
+    kesamaan berlaku jika $T$ injektif.
+\end{latihan}
+
+\begin{latihan}\label{trans:lat-faktorisasi}
+    Misalkan $A:V\to W$ dan $B:V\to Z$ linear, dengan semua
+    ruang berdimensi hingga. Buktikan bahwa
+    \[
+        \ker A\subseteq\ker B
+        \iff B=CA\text{ untuk suatu transformasi linear }C:W\to Z.
+    \]
+    Tunjukkan bahwa $C$ unik jika $A$ surjektif.
+\end{latihan}
+
+\begin{latihan}\label{trans:lat-komplemen-invarian}
+    Pada $\R^2$, definisikan $N(x,y)=(y,0)$ dan
+    $U=\operatorname{span}\{e_1\}$.
+    Buktikan bahwa $U$ invarian, tetapi tidak mempunyai
+    komplemen invarian terhadap $N$.
+\end{latihan}
+
+\begin{latihan}\label{trans:lat-komutator-identitas}
+    Pada $\F[t]$, definisikan $D(p)=p'$ dan $M(p)=tp$.
+    Buktikan $DM-MD=I$ dan, untuk $k\ge1$,
+    \[
+        D^kM-MD^k=kD^{k-1}.
+    \]
+    Buktikan pula bahwa pada ruang tak nol berdimensi hingga
+    atas $\R$ atau $\C$, tidak ada operator $S,T$ dengan $ST-TS=I$.
+\end{latihan}
+
+\ifpembahasan
+\section{Pembahasan Latihan}
+
+\subsection*{Latihan \ref{trans:lat-data}: nilai pada daftar bergantung}
+Linearitas memaksa $T(1+t)=T(1)+T(t)=(1,1)$,
+sehingga transformasi ada tepat ketika $(a,b)=(1,1)$.
+Nilai $T(t^2)=(c,d)$ dapat dipilih sembarang.
+Seluruh transformasi yang memenuhi adalah
+\[
+    T(x+yt+zt^2)=(x+cz,y+dz),\qquad c,d\in\R.
+\]
+Jadi transformasi tidak unik. Citra memuat $(1,0)$ dan $(0,1)$,
+sehingga rank selalu dua dan nulitas satu.
+Kernelnya dibangun oleh $t^2-c-dt$.
+
+\subsection*{Latihan \ref{trans:lat-jet}: nilai dan turunan sebagai kendala}
+Matriksnya terhadap $(1,t,t^2,t^3,t^4)$ dan basis standar $\R^3$ adalah
+\[
+    [T]=\begin{pmatrix}1&0&0&0&0\\0&1&0&0&0\\1&1&1&1&1\end{pmatrix}.
+\]
+Kernel terdiri atas kelipatan $t^2(t-1)$ yang berderajat paling
+besar empat. Basisnya $(t^2(t-1),t^3(t-1))$, sehingga nulitas
+dua dan rank tiga. Solusi khusus untuk target yang diberikan adalah
+\[
+    p_0(t)=\alpha(1-t^2)+\beta(t-t^2)+\gamma t^2.
+\]
+Memeriksa nilai dan turunannya menunjukkan $T(p_0)=(\alpha,\beta,\gamma)^T$.
+Semua solusi diperoleh dengan menambahkan kernel:
+$p=p_0+t^2(t-1)(c+dt)$, dengan $c,d\in\R$.
+
+\subsection*{Latihan \ref{trans:lat-basis}: pangkat dalam basis yang tepat}
+Vektor $c_1=(1,1)^T$ dan $c_2=(1,-1)^T$ memenuhi
+$T(c_1)=3c_1$ dan $T(c_2)=c_2$. Jadi $[T]_{\mathcal C}=\diag(3,1)$.
+Karena kedua entri diagonal tak nol, $T$ invertibel dan
+pangkat bilangan bulat terdefinisi. Ekspansi
+\[
+    (x,y)^T=\frac{x+y}{2}c_1+\frac{x-y}{2}c_2
+\]
+memberi
+\[
+    T^k(x,y)=\left(
+      \frac{3^k(x+y)+x-y}{2},\
+      \frac{3^k(x+y)-x+y}{2}\right).
+\]
+
+\subsection*{Latihan \ref{trans:lat-euler}: bekerja pada setiap monomial}
+Karena $T_a(t^j)=(j-a)t^j$, matriksnya terhadap basis monomial
+adalah $\diag(-a,1-a,\ldots,n-a)$.
+Jika $a\notin\{0,1,\ldots,n\}$, semua entri tak nol,
+kernel hanya nol, citra seluruh ruang, dan
+\[
+    T_a^{-1}\left(\sum_{j=0}^n b_jt^j\right)
+      =\sum_{j=0}^n\frac{b_j}{j-a}t^j.
+\]
+Jika $a=r\in\{0,\ldots,n\}$, kernel dibangun oleh $t^r$ dan
+citra terdiri atas polinom yang koefisien $t^r$-nya nol.
+Ranknya $n$, nulitasnya satu, dan operator tidak invertibel.
+
+\subsection*{Latihan \ref{trans:lat-komutator}: matriks satuan sebagai basis}
+Untuk $A=\diag(\lambda_1,\ldots,\lambda_n)$, berlaku
+\[
+    T(E_{ij})=(\lambda_i-\lambda_j)E_{ij}.
+\]
+Pada kasus $\diag(1,1,2)$, basis kernel adalah
+$(E_{11},E_{12},E_{21},E_{22},E_{33})$, sedangkan basis citra
+adalah $(E_{13},E_{23},E_{31},E_{32})$.
+Jadi nulitas lima dan rank empat.
+Secara umum, kernel dibangun oleh $E_{ij}$ dengan
+$\lambda_i=\lambda_j$ dan citra oleh sisanya. Kelompok nilai
+diagonal bermultiplisitas $m_\ell$ menyumbang $m_\ell^2$ anggota
+basis kernel. Maka
+\[
+    \nul T=\sum_{\ell=1}^s m_\ell^2,\qquad
+    \rank T=n^2-\sum_{\ell=1}^s m_\ell^2.
+\]
+
+\subsection*{Latihan \ref{trans:lat-kuadrat-nol}: citra termuat dalam kernel}
+Dari $T^2=0$, diperoleh $\operatorname{im}T\subseteq\ker T$.
+Jika $r=\rank T$, maka $r\le n-r$, sehingga $r\le\lfloor n/2\rfloor$.
+Untuk setiap $r$ dalam rentang itu, pilih basis $(e_1,\ldots,e_n)$
+dan tetapkan $T(e_{2j})=e_{2j-1}$ untuk $1\le j\le r$,
+serta $T(e_k)=0$ untuk semua indeks lainnya.
+Operator ini berpangkat dua nol dan citranya dibangun oleh
+$e_1,e_3,\ldots,e_{2r-1}$, sehingga ranknya $r$.
+Inklusi citra dalam kernel menjadi kesamaan tepat ketika
+dimensinya sama, yaitu $n=2r$.
+
+\subsection*{Latihan \ref{trans:lat-dua-proyeksi}: dua perkalian harus lenyap}
+Jika $P+Q$ idempoten, ekspansi kuadrat memberi $PQ+QP=0$.
+Kalikan di kiri dan di kanan oleh $P$, secara terpisah:
+\[
+    PQ+PQP=0,\qquad PQP+QP=0.
+\]
+Mengurangkan keduanya memberi $PQ=QP$.
+Karena $PQ+QP=0$ dan medan berkarakteristik nol, diperoleh
+$PQ=QP=0$. Arah sebaliknya langsung dari ekspansi kuadrat.
+Jika $x\in\operatorname{im}P\cap\operatorname{im}Q$, maka
+$Px=x$, tetapi $x=Qy$ memberi $Px=PQy=0$; jadi $x=0$.
+Untuk $u=Pa$ dan $v=Qb$ berlaku $(P+Q)(u+v)=u+v$.
+Maka setiap anggota jumlah citra berada di citra $P+Q$;
+inklusi sebaliknya langsung dari rumus $P+Q$.
+
+\subsection*{Latihan \ref{trans:lat-invers-sepihak}: proyeksi pada ruang yang lebih besar}
+Persamaan $ST=I_V$ membuat $T$ injektif dan $S$ surjektif.
+Selain itu, $(TS)^2=T(ST)S=TS$, sehingga $TS$ proyeksi.
+Citranya sama dengan citra $T$: satu inklusi jelas, dan
+untuk $Tv$ berlaku $TS(Tv)=Tv$.
+Kernelnya sama dengan kernel $S$, sebab $TSw=0$ dan injektivitas
+$T$ mengakibatkan $Sw=0$.
+Teorema proyeksi memberi $W=\operatorname{im}T\oplus\ker S$.
+Selanjutnya, $TS=I_W$ tepat ketika $T$ surjektif, atau ekuivalen
+dengan $S$ injektif. Dalam dimensi hingga dan dengan $ST=I_V$,
+ini terjadi tepat ketika $\dim V=\dim W$.
+
+\subsection*{Latihan \ref{trans:lat-irisan}: prapeta yang berbeda}
+Linearitas memberi $T(u_1+u_2)=T(u_1)+T(u_2)$, sehingga
+kesamaan jumlah berlaku. Jika $v\in U_1\cap U_2$, citranya
+berada dalam kedua citra, membuktikan inklusi irisan.
+Untuk inklusi sejati, ambil $T:\R^2\to\R$,
+$T(x,y)=x+y$, serta $U_1=\operatorname{span}\{e_1\}$ dan
+$U_2=\operatorname{span}\{e_2\}$.
+Irisan sumber hanya nol, tetapi kedua citra sama dengan $\R$.
+Jika $T$ injektif dan $w=T(u_1)=T(u_2)$ dengan $u_j\in U_j$,
+maka $u_1=u_2\in U_1\cap U_2$, sehingga inklusi balik berlaku.
+
+\subsection*{Latihan \ref{trans:lat-faktorisasi}: definisikan dahulu pada citra}
+Jika $B=CA$, setiap $v\in\ker A$ memenuhi $Bv=C(Av)=0$.
+Sebaliknya, andaikan $\ker A\subseteq\ker B$.
+Definisikan $C_0:\operatorname{im}A\to Z$ melalui
+$C_0(Av)=Bv$.
+Jika $Av=Av'$, maka $v-v'\in\ker A\subseteq\ker B$,
+sehingga $Bv=Bv'$; jadi definisinya sah.
+Linearitas mengikuti dari $A$ dan $B$.
+Perluas basis citra $A$ menjadi basis $W$, lalu tentukan
+nilai $C$ pada vektor tambahan secara sembarang, misalnya nol.
+Teorema penentuan pada basis memberi perluasan linear dengan $B=CA$.
+Jika $A$ surjektif, semua anggota $W$ berbentuk $Av$ dan
+nilainya sudah dipaksa oleh $C(Av)=Bv$, sehingga $C$ unik.
+
+\subsection*{Latihan \ref{trans:lat-komplemen-invarian}: komplemen tidak selalu terpelihara}
+Karena $N(e_1)=0$, subruang $U$ invarian.
+Setiap komplemennya berupa garis yang dibangun oleh
+$w=(a,b)$ dengan $b\ne0$.
+Jika garis ini invarian, harus ada $\lambda\in\R$ dengan
+$Nw=(b,0)=\lambda(a,b)$.
+Koordinat kedua memaksa $\lambda=0$, sedangkan koordinat
+pertama kemudian memaksa $b=0$, kontradiksi.
+
+\subsection*{Latihan \ref{trans:lat-komutator-identitas}: perbedaan dimensi hingga dan tak hingga}
+Aturan turunan hasil kali memberi
+$(DM-MD)p=(tp)'-tp'=p$, sehingga $DM-MD=I$.
+Untuk $k\ge1$, gunakan identitas teleskopik
+\[
+    D^kM-MD^k
+      =\sum_{j=0}^{k-1}D^j(DM-MD)D^{k-1-j}
+      =kD^{k-1}.
+\]
+Pada ruang berdimensi $n\ge1$, representasi matriks akan
+memberikan $AB-BA=I_n$ jika operator demikian ada.
+Mengambil trace memberi $0=\tr(AB)-\tr(BA)=n$, kontradiksi
+di atas $\R$ atau $\C$.
+Tidak ada pertentangan dengan contoh polinom: $\F[t]$
+berdimensi tak hingga, dan perkalian oleh $t$ tidak mempertahankan
+subruang $\mathcal P_{\le n}(\F)$.
+\fi

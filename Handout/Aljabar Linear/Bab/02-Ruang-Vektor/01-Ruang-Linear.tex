@@ -1,0 +1,890 @@
+% !TeX root = ../../ONMIPA Alin.tex
+% Acuan: Zhang (2009), Bab 1, khususnya Soal 1.1--1.7, 1.13--1.14,
+% 1.22, 1.38, 1.41, 1.43, 1.44, dan 1.51; Zhang (2011), bagian 1.1.
+% Pembahasan dibatasi sampai subruang; tidak membahas basis dan dimensi.
+\chapter{Ruang Linear}
+\label{ch:ruang-linear}
+
+\textbf{Ruang vektor} atau bisa disebut \textbf{ruang linear}  merupakan himpunan yang dilengkapi dengan dua operasi, yaitu penjumlahan dan perkalian skalar. Menurut penulis, materi ini cukup penting dan bisa dipelajari untuk awal-awal karena tidak terlalu me-\textit{reference} definisi-definisi lain. Materi ini juga menjadi dasar untuk memahami materi-materi selanjutnya, seperti kebebasan linear, basis, dimensi, dan transformasi linear.
+
+\section{Definisi Ruang Vektor}
+\label{linear:aksioma}
+Anggota $V$ disebut \emph{vektor}, sedangkan anggota medan $\F$
+disebut \emph{skalar}. Contoh medan adalah $\R$, $\C$, dan
+bilangan rasional $\mathbb Q$. Setiap skalar tak nol dalam suatu
+medan mempunyai invers perkalian.
+
+\begin{definisi}[][Ruang linear atas suatu medan][linear:def-ruang]
+    Himpunan tak kosong $V$ disebut \emph{ruang linear atas $\F$}
+    jika dilengkapi operasi
+    \[
+        +:V\times V\longrightarrow V,
+        \qquad
+        \cdot:\F\times V\longrightarrow V,
+    \]
+    yang memenuhi aksioma berikut untuk setiap $u,v,w\in V$
+    dan $\alpha,\beta\in\F$:
+    \begin{enumerate}[label=(\roman*),nosep]
+        \item $u+v=v+u$;
+        \item $(u+v)+w=u+(v+w)$;
+        \item terdapat $0_V\in V$ sehingga $v+0_V=v$;
+        \item untuk setiap $v$ terdapat $-v\in V$ sehingga $v+(-v)=0_V$;
+        \item $\alpha(u+v)=\alpha u+\alpha v$;
+        \item $(\alpha+\beta)v=\alpha v+\beta v$;
+        \item $(\alpha\beta)v=\alpha(\beta v)$;
+        \item $1v=v$, dengan $1$ identitas perkalian dalam $\F$.
+    \end{enumerate}
+\end{definisi}
+
+Penulisan kedua operasi sebagai pemetaan ke $V$ sudah mencakup
+\emph{ketertutupan}: $u+v$ dan $\alpha v$ harus tetap berada di $V$.
+Jika ketertutupan ditulis sebagai dua syarat tersendiri, daftar di
+atas menjadi sepuluh syarat. Kedua cara penulisan itu ekuivalen.
+
+Vektor nol $0_V$ dan skalar nol $0\in\F$ mempunyai peran berbeda.
+Pada $\R^n$, vektor nol adalah $(0,\ldots,0)^T$; pada ruang matriks,
+ia adalah matriks nol; pada ruang fungsi, ia adalah fungsi yang
+bernilai nol di setiap titik. Setelah jenis objeknya jelas, keduanya
+sering ditulis dengan simbol $0$.
+
+Untuk $v_1,\ldots,v_r\in V$ dan $\alpha_1,\ldots,\alpha_r\in\F$,
+ekspresi $\alpha_1v_1+\cdots+\alpha_rv_r$ disebut
+\emph{kombinasi linear} dari vektor-vektor tersebut.
+Penjumlahan ini mempunyai hingga banyak suku dan selalu
+menghasilkan anggota $V$ karena ketertutupan kedua operasi.
+
+\begin{exam}[Medan skalar harus disebutkan]
+    Tentukan apakah $\C$ merupakan ruang linear atas $\C$ dan atas
+    $\R$. Apakah $\R$ merupakan ruang linear atas $\C$ dengan
+    penjumlahan dan perkalian biasa?
+\end{exam}
+\begin{solution}
+    Himpunan $\C$ merupakan ruang linear atas kedua medan tersebut:
+    penjumlahan kompleks dan perkalian oleh skalar yang diperbolehkan
+    tetap menghasilkan bilangan kompleks, dan aksiomanya mengikuti
+    sifat aritmetika kompleks.
+    Namun, $\R$ tidak tertutup terhadap perkalian oleh skalar kompleks,
+    sebab $i\cdot1=i\notin\R$. Dengan operasi yang disebutkan,
+    $\R$ bukan ruang linear atas $\C$.
+\end{solution}
+
+Secara umum, ruang linear atas $\C$ juga dapat dipandang sebagai
+ruang linear atas $\R$ dengan membatasi skalar yang digunakan.
+Arah sebaliknya memerlukan definisi perkalian oleh skalar kompleks
+dan tidak berlaku secara otomatis.
+
+\section{Contoh \emph{Well-Known}}
+\label{linear:contoh}
+
+\subsection{Koordinat, matriks, polinom, fungsi, dan barisan}
+
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Vektor koordinat.} Himpunan $\F^n$ merupakan
+          ruang linear dengan penjumlahan dan perkalian skalar per
+          koordinat. Untuk perkalian $Ax$, vektor $x$ ditulis sebagai kolom.
+    \item \textbf{Matriks berukuran tetap.} Himpunan
+          $\Mat_{m\times n}(\F)$ merupakan ruang linear atas $\F$.
+          Ukuran harus tetap agar penjumlahan terdefinisi.
+          Perkalian dua matriks bukan bagian dari aksioma ruang linear.
+    \item \textbf{Polinom.} Himpunan $\F[t]$ berisi semua polinom
+          dengan koefisien dalam $\F$. Untuk $n\ge0$, tuliskan
+          \[
+              \mathcal P_{\le n}(\F)
+              =\{a_0+a_1t+\cdots+a_nt^n:a_j\in\F\}.
+          \]
+          Polinom nol ikut termuat. Penjumlahan dan perkalian skalar
+          tidak menaikkan derajat melampaui $n$, sehingga himpunan
+          ini juga merupakan ruang linear. Notasi $\le n$ menegaskan
+          bahwa batas derajatnya termasuk $n$.
+    \item \textbf{Fungsi.} Untuk himpunan tak kosong $S$,
+          himpunan semua fungsi $S\to\F$, ditulis $\F^S$,
+          mempunyai operasi titik demi titik:
+          \[
+              (f+g)(s)=f(s)+g(s),\qquad
+              (\alpha f)(s)=\alpha f(s).
+          \]
+          Aksioma berlaku karena dapat diperiksa pada setiap $s\in S$.
+          Himpunan $C([a,b],\R)$ dari fungsi real kontinu pada
+          $[a,b]$, $a<b$, juga merupakan ruang linear, sebab jumlah
+          dan kelipatan skalar fungsi kontinu tetap kontinu.
+    \item \textbf{Barisan.} Himpunan $\F^{\mathbb N}$ dari semua
+          barisan $(a_1,a_2,\ldots)$ merupakan ruang linear dengan
+          operasi per suku. Tidak ada syarat kekonvergenan dalam
+          definisi ruang ini.
+\end{enumerate}
+
+Pada contoh-contoh tersebut, objeknya berbeda tetapi mekanisme
+pembuktiannya sama: operasi diwarisi dari aritmetika dalam $\F$,
+lalu diterapkan pada setiap koordinat, entri, koefisien, atau nilai fungsi.
+
+\subsection{Bilangan positif sebagai vektor}
+
+\begin{exam}[Penjumlahan berupa perkalian]
+    Pada $V=\R_{>0}$, definisikan
+    \[
+        u\oplus v=uv,\qquad \alpha\odot u=u^\alpha
+        \quad(u,v>0,\ \alpha\in\R).
+    \]
+    Buktikan bahwa $V$ merupakan ruang linear atas $\R$.
+    Tentukan vektor nol dan invers penjumlahan dari $u$.
+\end{exam}
+\begin{solution}
+    Kedua operasi tertutup karena hasilnya tetap positif.
+    Sifat komutatif dan asosiatif $\oplus$ mengikuti perkalian real.
+    Identitas penjumlahannya adalah $1$, dan invers penjumlahan $u$
+    adalah $u^{-1}$, sebab $u\oplus1=u$ dan $u\oplus u^{-1}=1$.
+    Hukum pangkat memberi
+    \begin{align*}
+        \alpha\odot(u\oplus v)
+         & =(uv)^\alpha=u^\alpha v^\alpha
+        =(\alpha\odot u)\oplus(\alpha\odot v), \\
+        (\alpha+\beta)\odot u
+         & =u^{\alpha+\beta}=u^\alpha u^\beta
+        =(\alpha\odot u)\oplus(\beta\odot u),  \\
+        (\alpha\beta)\odot u
+         & =(u^\beta)^\alpha
+        =\alpha\odot(\beta\odot u),
+    \end{align*}
+    serta $1\odot u=u$. Jadi seluruh aksioma terpenuhi.
+    Di ruang ini, $0\odot u=1$ memang benar: bilangan $1$
+    adalah vektor nol untuk operasi $\oplus$.
+\end{solution}
+
+Fungsi $u\mapsto\log u$ membantu membaca struktur tadi:
+$\log(u\oplus v)=\log u+\log v$ dan
+$\log(\alpha\odot u)=\alpha\log u$.
+Dengan operasi biasa, $\R_{>0}$ tidak menjadi ruang linear atas
+$\R$, sebab perkalian oleh skalar nol atau negatif keluar dari himpunan.
+
+\subsection{Vektor nol dapat berada di titik lain}
+
+\begin{exam}[Menggeser operasi pada ruang koordinat]
+    Tetapkan $a\in\F^n$. Pada himpunan $\F^n$, definisikan
+    \[
+        u\oplus v=u+v-a,\qquad
+        \alpha\odot u=a+\alpha(u-a).
+    \]
+    Tunjukkan bahwa operasi ini membentuk ruang linear atas $\F$.
+\end{exam}
+\begin{solution}
+    Pemetaan $T(u)=u-a$ bijektif dari $\F^n$ ke dirinya dan memenuhi
+    \[
+        T(u\oplus v)=T(u)+T(v),\qquad
+        T(\alpha\odot u)=\alpha T(u).
+    \]
+    Maka setiap identitas aksioma, setelah dikenai $T$, menjadi
+    identitas pada ruang koordinat biasa. Karena $T$ injektif,
+    identitas sebelum dikenai $T$ juga berlaku.
+    Vektor nolnya adalah $a$, sebab $u\oplus a=u$.
+    Invers penjumlahan dari $u$ adalah $2a-u$.
+\end{solution}
+
+Kedua contoh tersebut menunjukkan bahwa himpunan saja belum
+menentukan suatu ruang linear. Medan dan kedua operasi harus diketahui.
+
+\section{Definisi dan Kriteria Subruang}
+\label{linear:subruang}
+
+\begin{definisi}[][Subruang linear][linear:def-subruang]
+    Misalkan $V$ ruang linear atas $\F$. Himpunan $W\subseteq V$
+    disebut \emph{subruang linear} dari $V$ jika $W$ sendiri
+    merupakan ruang linear atas $\F$ dengan penjumlahan dan
+    perkalian skalar yang diwarisi dari $V$.
+\end{definisi}
+
+Frasa ``diwarisi dari $V$'' penting: kita tidak boleh mengganti
+operasi atau medan skalar ketika menguji apakah $W$ subruang.
+Misalnya, ruang bilangan positif dengan operasi $\oplus,\odot$
+di atas bukan subruang dari $\R$ yang menggunakan operasi biasa.
+
+\begin{teorema}[][Uji subruang][linear:uji-subruang]
+    Misalkan $W\subseteq V$. Pernyataan berikut ekuivalen:
+    \begin{enumerate}[label=(\roman*),nosep]
+        \item $W$ merupakan subruang dari $V$;
+        \item $0_V\in W$, $u+v\in W$ untuk semua $u,v\in W$,
+              dan $\alpha u\in W$ untuk semua $\alpha\in\F$, $u\in W$;
+        \item $W\ne\varnothing$ dan
+              $\alpha u+\beta v\in W$ untuk semua $u,v\in W$
+              serta $\alpha,\beta\in\F$.
+    \end{enumerate}
+\end{teorema}
+\begin{proof}
+    Jika $W$ subruang, vektor nolnya sama dengan vektor nol $V$:
+    identitas $w+0_W=w$ dalam $V$ dan pencoretan memberi $0_W=0_V$.
+    Ketertutupan kedua operasi mengikuti definisi, sehingga (i)
+    mengakibatkan (ii). Dari (ii), perkalian skalar dan penjumlahan
+    berurutan memberi (iii).
+
+    Sekarang anggap (iii). Ambil satu $w\in W$.
+    Dengan $\alpha=\beta=0$ diperoleh $0_V\in W$.
+    Pilihan $\alpha=\beta=1$ memberi ketertutupan penjumlahan,
+    sedangkan $\beta=0$ memberi ketertutupan perkalian skalar.
+    Khususnya, $-u=(-1)u\in W$ untuk setiap $u\in W$.
+    Aksioma asosiatif, komutatif, distributif, dan identitas skalar
+    sudah berlaku di $V$, sehingga juga berlaku pada anggota $W$.
+    Dengan demikian $W$ merupakan ruang linear.
+\end{proof}
+
+Syarat tak kosong tidak boleh dihilangkan. Pernyataan
+``untuk setiap $u,v\in W$'' otomatis benar apabila $W$ kosong,
+tetapi himpunan kosong tidak mempunyai vektor nol.
+Subruang $\{0_V\}$ dan $V$ selalu ada. Subruang $W$ disebut
+\emph{sejati} jika $W\ne V$; dengan pengertian ini,
+$\{0_V\}$ juga sejati apabila $V\ne\{0_V\}$.
+
+\begin{prop}[Subruang di dalam subruang]
+    Jika $U$ subruang dari $W$ dan $W$ subruang dari $V$,
+    semuanya atas medan yang sama, maka $U$ subruang dari $V$.
+\end{prop}
+\begin{proof}
+    Inklusi $U\subseteq W\subseteq V$ berlaku dan kedua operasi
+    yang digunakan sama. Vektor nol berada di $U$, dan $U$
+    tertutup terhadap kedua operasi; terapkan uji subruang.
+\end{proof}
+
+\begin{exam}[Garis homogen dan garis bergeser]
+    Untuk $c\in\R$, tentukan kapan
+    $W_c=\{(x,y)\in\R^2:2x-3y=c\}$ merupakan subruang.
+\end{exam}
+\begin{solution}
+    Jika $c\ne0$, vektor $(0,0)$ tidak berada di $W_c$, sehingga
+    $W_c$ bukan subruang.
+    Jika $c=0$ dan $u=(x_1,y_1),v=(x_2,y_2)\in W_0$, maka
+    \[
+        2(\alpha x_1+\beta x_2)-3(\alpha y_1+\beta y_2)
+        =\alpha(2x_1-3y_1)+\beta(2x_2-3y_2)=0.
+    \]
+    Karena $(0,0)\in W_0$, uji subruang berlaku.
+    Jadi syaratnya tepat $c=0$.
+\end{solution}
+
+\begin{exam}[Dua jenis ketertutupan yang berbeda]
+    Himpunan $\Z^2\subset\R^2$ tertutup terhadap penjumlahan,
+    tetapi tidak terhadap semua skalar real: $(1,0)\in\Z^2$,
+    sedangkan $\tfrac12(1,0)\notin\Z^2$.
+    Sebaliknya,
+    \[
+        S=\{(x,y)\in\R^2:xy=0\}
+    \]
+    tertutup terhadap perkalian skalar, tetapi tidak terhadap penjumlahan:
+    \[
+        (1,0),(0,1)\in S,\qquad (1,0)+(0,1)\notin S.
+    \]
+    Kedua himpunan memuat nol, tetapi keduanya bukan subruang real.
+\end{exam}
+
+\section{Mengenali Subruang dari Syarat Pembentuknya}
+\label{linear:kendala}
+
+\subsection{Persamaan homogen pada vektor dan matriks}
+
+\begin{prop}[Himpunan solusi sistem homogen]
+    \label{linear:kernel}
+    Untuk $A\in\Mat_{m\times n}(\F)$, himpunan
+    \[
+        W=\{x\in\F^n:Ax=0\}
+    \]
+    merupakan subruang dari $\F^n$.
+    Lebih umum, untuk $A\in\Mat_{m\times n}(\F)$ dan
+    $B\in\Mat_{p\times q}(\F)$ tetap,
+    \[
+        \{X\in\Mat_{n\times p}(\F):AXB=0\}
+    \]
+    merupakan subruang dari $\Mat_{n\times p}(\F)$.
+\end{prop}
+\begin{proof}
+    Vektor atau matriks nol memenuhi persamaan masing-masing.
+    Jika $Au=Av=0$, maka
+    $A(\alpha u+\beta v)=\alpha Au+\beta Av=0$.
+    Untuk versi matriks, jika $AXB=AYB=0$, maka
+    \[
+        A(\alpha X+\beta Y)B=\alpha AXB+\beta AYB=0.
+    \]
+    Kedua kesimpulan mengikuti uji subruang.
+\end{proof}
+
+Himpunan pada bagian pertama adalah $\ker A$ yang telah muncul
+pada bab rank dan nulitas. Untuk sistem tak homogen $Ax=b$
+dengan $b\ne0$, himpunan solusinya bukan subruang dari $\F^n$,
+karena vektor nol tidak memenuhi persamaan. Jika tidak ada solusi,
+himpunannya kosong dan juga bukan subruang.
+
+\begin{exam}[Parameter dalam suatu subruang]
+    Buktikan bahwa
+    \[
+        W=\{(x_1,x_2,x_3,x_4)\in\F^4:
+        x_3=x_1+x_2,\ x_4=x_1-x_2\}
+    \]
+    merupakan subruang. Tentukan semua anggotanya dalam bentuk parameter.
+\end{exam}
+\begin{solution}
+    Kedua syarat adalah persamaan linear homogen, sehingga
+    \autoref{linear:kernel} dapat diterapkan.
+    Dengan $s=x_1$ dan $t=x_2$, seluruh anggota $W$ berbentuk
+    \[
+        (s,t,s+t,s-t),\qquad s,t\in\F.
+    \]
+    Ini juga memberi pemeriksaan langsung: kombinasi dengan skalar
+    $\alpha,\beta$ dari anggota berparameter $(s_1,t_1)$ dan
+    $(s_2,t_2)$ mempunyai parameter
+    $(\alpha s_1+\beta s_2,\alpha t_1+\beta t_2)$, sehingga tetap di $W$.
+\end{solution}
+
+\subsection{Kendala pada polinom dan fungsi}
+
+Evaluasi di titik tetap menghormati kedua operasi:
+$(\alpha p+\beta q)(a)=\alpha p(a)+\beta q(a)$.
+Karena itu, syarat seperti $p(a)=0$, $p(a)=p(b)$, atau
+$2p(0)-p(1)=0$ menghasilkan subruang polinom.
+Demikian pula, jika turunan terdefinisi, sifat
+$(\alpha p+\beta q)'=\alpha p'+\beta q'$ dapat digunakan.
+
+\begin{exam}[Mengubah syarat polinom menjadi syarat koefisien]
+    Dalam $\mathcal P_{\le3}(\R)$, tentukan seluruh polinom
+    yang memenuhi $p(0)=p(1)$ dan $p'(0)=0$.
+    Buktikan bahwa himpunannya merupakan subruang.
+\end{exam}
+\begin{solution}
+    Tuliskan $p(t)=a+bt+ct^2+dt^3$.
+    Syarat $p'(0)=0$ memberi $b=0$, sedangkan $p(0)=p(1)$
+    memberi $b+c+d=0$. Jadi $c=-d$ dan
+    \[
+        p(t)=a+d(t^3-t^2),\qquad a,d\in\R.
+    \]
+    Polinom nol diperoleh saat $a=d=0$.
+    Penjumlahan dan perkalian skalar pada polinom hanya menjumlahkan
+    dan mengalikan kedua parameter, sehingga himpunan tersebut subruang.
+\end{solution}
+
+Berbeda dari derajat \emph{paling besar} $n$, syarat derajat
+\emph{tepat} $n$ tidak membentuk subruang, sebab polinom nol
+tidak memenuhi syarat itu. Syarat $p(0)=1$ juga langsung gagal
+pada polinom nol. Sementara itu, polinom yang tak negatif pada
+seluruh $\R$ memuat polinom nol, tetapi tidak tertutup terhadap
+skalar negatif: polinom $1$ memenuhi syarat, sedangkan $-1$ tidak.
+
+\begin{prop}[Fungsi genap dan fungsi ganjil]
+    \label{linear:paritas}
+    Di dalam ruang semua fungsi $\R\to\F$, masing-masing himpunan
+    \begin{align*}
+        E & =\{f:f(-t)=f(t)\text{ untuk setiap }t\in\R\}, \\
+        O & =\{f:f(-t)=-f(t)\text{ untuk setiap }t\in\R\}
+    \end{align*}
+    merupakan subruang atas $\F$.
+\end{prop}
+\begin{proof}
+    Fungsi nol termasuk kedua himpunan. Jika $f,g\in E$,
+    maka untuk setiap $t$,
+    \[
+        (\alpha f+\beta g)(-t)
+        =\alpha f(t)+\beta g(t)=(\alpha f+\beta g)(t).
+    \]
+    Jadi $\alpha f+\beta g\in E$. Jika $f,g\in O$,
+    perhitungan yang sama memberi
+    $(\alpha f+\beta g)(-t)=-(\alpha f+\beta g)(t)$.
+\end{proof}
+
+Syarat itu harus berlaku untuk \emph{setiap} $t$, bukan hanya
+pada sejumlah titik yang dipilih. Jika fungsi juga dipersyaratkan
+kontinu, pembuktian tetap berlaku karena kombinasi linear hingga
+dari fungsi kontinu tetap kontinu.
+
+\subsection{Ketergantungan pada medan skalar}
+
+Untuk matriks simetris, transpose memenuhi
+$(\alpha A+\beta B)^T=\alpha A^T+\beta B^T$.
+Jadi matriks simetris dalam $\Mat_n(\F)$ membentuk subruang atas
+$\F$, baik ketika $\F=\R$ maupun ketika $\F=\C$.
+
+Untuk transpose konjugat, skalar ikut dikonjugatkan:
+\[
+    (\alpha A+\beta B)^*=
+    \overline\alpha A^*+\overline\beta B^*.
+\]
+Akibatnya, matriks Hermitian membentuk subruang \emph{real}
+dari $\Mat_n(\C)$ yang dipandang sebagai ruang atas $\R$.
+Namun, himpunan itu bukan subruang kompleks: $I$ Hermitian,
+sedangkan $(iI)^*=-iI\ne iI$.
+
+\begin{exam}[Subruang kompleks yang seluruh anggotanya Hermitian]
+    Misalkan $W$ subruang kompleks dari $\Mat_n(\C)$ dan setiap
+    $A\in W$ Hermitian. Buktikan $W=\{0\}$.
+\end{exam}
+\begin{solution}
+    Untuk setiap $A\in W$, ketertutupan terhadap skalar kompleks
+    memberi $iA\in W$. Karena $A$ dan $iA$ keduanya Hermitian,
+    \[
+        iA=(iA)^*=-iA^*=-iA.
+    \]
+    Jadi $2iA=0$ dan $A=0$. Karena $0\in W$, diperoleh $W=\{0\}$.
+\end{solution}
+
+\subsection{Syarat nonlinear perlu diperiksa langsung}
+
+Tidak semua syarat yang tampak homogen menghasilkan subruang.
+Contohnya, matriks $2\times2$ berank paling besar satu tertutup
+terhadap perkalian skalar, tetapi
+\[
+    \rank\begin{pmatrix}1&0\\0&0\end{pmatrix}
+    =\rank\begin{pmatrix}0&0\\0&1\end{pmatrix}=1,
+    \qquad \rank I_2=2.
+\]
+Himpunan tersebut tidak tertutup terhadap penjumlahan.
+Sebaliknya, suatu persamaan nonlinear dapat saja mendefinisikan
+subruang: dalam $\R^2$, syarat $x^2+y^2=0$ hanya dipenuhi oleh
+$(0,0)$, sehingga himpunan solusinya merupakan subruang.
+Yang harus diperiksa adalah himpunan solusinya, bukan sekadar
+bentuk persamaan yang dipakai untuk menuliskannya.
+
+\section{Irisan dan Gabungan Subruang}
+\label{linear:irisan-gabungan}
+
+\begin{teorema}[][Irisan sebarang keluarga subruang][linear:irisan]
+    Jika setiap $W_j$, $j\in J$, merupakan subruang dari $V$,
+    maka $\bigcap_{j\in J}W_j$ merupakan subruang dari $V$.
+\end{teorema}
+\begin{proof}
+    Vektor nol berada di setiap $W_j$, sehingga berada di irisan.
+    Jika $u,v$ berada di irisan, maka keduanya berada di setiap
+    $W_j$. Ketertutupan setiap $W_j$ memberi
+    $\alpha u+\beta v\in W_j$ untuk setiap $j$, sehingga kombinasi
+    itu berada di irisan. Untuk keluarga kosong, irisan relatif
+    terhadap semesta $V$ diartikan sebagai $V$ sendiri.
+\end{proof}
+
+Sebagai contoh, polinom yang memenuhi $p(0)=p(1)=p(2)=0$
+merupakan irisan tiga subruang yang masing-masing ditentukan
+oleh satu syarat evaluasi. Hasil ini juga berlaku untuk tak hingga
+banyak syarat: irisan himpunan $\{p\in\R[t]:p(a)=0\}$ atas
+semua $a\in\R$ adalah subruang yang hanya berisi polinom nol.
+Untuk fungsi pada \autoref{linear:paritas}, berlaku $E\cap O=\{0\}$,
+sebab fungsi yang sekaligus genap dan ganjil memenuhi $f(t)=-f(t)$.
+
+\begin{teorema}[][Gabungan dua subruang][linear:gabungan-dua]
+    Jika $U,W$ subruang dari $V$, maka
+    \[
+        U\cup W\text{ subruang}
+        \iff U\subseteq W\ \text{atau}\ W\subseteq U.
+    \]
+\end{teorema}
+\begin{proof}
+    Jika salah satu termuat di dalam yang lain, gabungannya adalah
+    subruang yang lebih besar.
+    Sebaliknya, andaikan tidak ada inklusi di antara keduanya.
+    Pilih $u\in U\setminus W$ dan $w\in W\setminus U$.
+    Jika gabungannya subruang, $u+w$ harus berada di $U\cup W$.
+    Jika $u+w\in U$, maka $w=(u+w)-u\in U$, kontradiksi.
+    Jika $u+w\in W$, maka $u=(u+w)-w\in W$, juga kontradiksi.
+\end{proof}
+
+Karena itu, gabungan dua garis berbeda yang melalui titik asal
+di $\R^2$ bukan subruang. Gabungannya memuat dua arah, tetapi
+tidak memuat seluruh hasil penjumlahan vektor dari arah-arah tersebut.
+
+\begin{prop}[Gabungan subruang yang meningkat]
+    \label{linear:rantai}
+    Jika $W_1\subseteq W_2\subseteq\cdots$ adalah barisan
+    subruang dari $V$, maka $\bigcup_{j\ge1}W_j$ merupakan subruang.
+\end{prop}
+\begin{proof}
+    Vektor nol berada di gabungan. Jika $u\in W_r$ dan $v\in W_s$,
+    ambil $k=\max(r,s)$. Kedua vektor berada di $W_k$, sehingga
+    $\alpha u+\beta v\in W_k$ dan karenanya berada di gabungan.
+\end{proof}
+
+Contohnya,
+$\R[t]=\bigcup_{n\ge0}\mathcal P_{\le n}(\R)$.
+Setiap polinom mempunyai derajat berhingga, tetapi tidak ada satu
+batas derajat yang berlaku untuk seluruh anggota $\R[t]$.
+
+\subsection{Gabungan hingga dan medan tak hingga}
+
+\begin{teorema}[][Gabungan hingga subruang sejati][linear:penutup-hingga]
+    Misalkan $V$ ruang linear atas medan tak hingga, khususnya
+    $\R$ atau $\C$. Jika $W_1,\ldots,W_m$ subruang sejati dari $V$,
+    maka
+    \[
+        V\ne\bigcup_{j=1}^m W_j.
+    \]
+\end{teorema}
+\begin{proof}
+    Gunakan induksi pada $m$. Untuk $m=1$, pernyataan mengikuti
+    definisi subruang sejati.
+    Untuk langkah induksi, pilih
+    $x\notin W_1\cup\cdots\cup W_{m-1}$.
+    Jika $x\notin W_m$, pembuktian selesai.
+    Jika $x\in W_m$, pilih $y\notin W_m$ dan pertimbangkan
+    vektor $y+tx$, $t\in\F$.
+
+    Tidak satu pun vektor itu berada di $W_m$: jika $y+tx\in W_m$,
+    maka $y=(y+tx)-tx\in W_m$, kontradiksi.
+    Untuk setiap $j<m$, paling banyak ada satu nilai $t$ yang
+    membuat $y+tx\in W_j$. Sebab, jika dua nilai berbeda $s,t$
+    memenuhi syarat itu, maka $(s-t)x\in W_j$, sehingga
+    $x\in W_j$, kontradiksi.
+    Hanya ada hingga banyak nilai parameter yang terlarang.
+    Karena $\F$ tak hingga, kita dapat memilih $t$ lain dan
+    memperoleh vektor di luar seluruh $W_j$.
+\end{proof}
+
+\begin{prop}[Satu subruang harus memuat semuanya]
+    \label{linear:termuat-gabungan}
+    Di atas $\R$ atau $\C$, jika subruang $U$ memenuhi
+    $U\subseteq W_1\cup\cdots\cup W_m$, dengan semua $W_j$
+    subruang, maka $U\subseteq W_j$ untuk sedikitnya satu $j$.
+    Akibatnya, gabungan hingga subruang merupakan subruang tepat
+    ketika salah satu anggotanya memuat semua anggota lainnya.
+\end{prop}
+\begin{proof}
+    Tulis $U=\bigcup_{j=1}^m(U\cap W_j)$.
+    Jika setiap $U\cap W_j$ sejati di dalam $U$, teorema sebelumnya
+    memberi kontradiksi. Maka $U=U\cap W_j$ untuk suatu $j$.
+    Untuk pernyataan terakhir, terapkan hasil ini pada subruang
+    $U=\bigcup_j W_j$; arah sebaliknya langsung.
+\end{proof}
+
+Sifat hingga pada keluarga subruang penting. Semua garis yang
+melalui titik asal di $\R^2$, jika digabungkan, menutupi seluruh
+$\R^2$, walaupun masing-masing garis merupakan subruang sejati.
+Pada penggunaan teorema ini, medan skalar juga harus diperiksa;
+pembuktian pemilihan parameter tadi memakai ketersediaan tak
+hingga banyak skalar.
+
+\section{Latihan Pilihan}
+\label{linear:latihan}
+
+Nyatakan medan dan operasi yang digunakan sebelum menguji suatu
+himpunan. Untuk jawaban negatif, berikan kegagalan aksioma atau
+contoh konkret yang melanggar ketertutupan.
+
+\begin{latihan}\label{linear:lat-operasi}
+    Tetapkan $p,q\in\R^n$, $n\ge1$. Pada himpunan $\R^n$, definisikan
+    \[
+        u\oplus v=u+v+p,\qquad
+        \alpha\odot u=\alpha u+(\alpha-1)q.
+    \]
+    Tentukan syarat perlu dan cukup pada $p,q$ agar kedua operasi
+    itu membentuk ruang linear atas $\R$. Tentukan pula vektor nol
+    dan invers penjumlahan setiap vektor.
+\end{latihan}
+
+\begin{latihan}\label{linear:lat-kompleks}
+    Misalkan $V$ ruang linear kompleks, dan $W\subseteq V$
+    merupakan subruang ketika skalar dibatasi pada $\R$.
+    \begin{enumerate}[label=(\alph*),nosep]
+        \item Buktikan bahwa $W$ subruang kompleks jika dan hanya
+              jika $iw\in W$ untuk setiap $w\in W$.
+        \item Tentukan apakah
+              \[
+                  \mathcal H=\left\{
+                  \begin{pmatrix}z&w\\-\overline w&\overline z\end{pmatrix}
+                  :z,w\in\C\right\}
+              \]
+              merupakan subruang real dan apakah merupakan subruang
+              kompleks dari $\Mat_2(\C)$.
+    \end{enumerate}
+\end{latihan}
+
+\begin{latihan}\label{linear:lat-kuadratik}
+    Untuk $\lambda\in\R$, definisikan
+    \[
+        W_\lambda=\{(x,y)\in\R^2:x^2+\lambda y^2=0\}.
+    \]
+    Tentukan semua $\lambda$ yang membuat $W_\lambda$ subruang real.
+    Kemudian jawab pertanyaan yang sama untuk
+    $\widetilde W_\lambda=\{(x,y)\in\C^2:x^2+\lambda y^2=0\}$
+    sebagai subruang kompleks, dengan parameter $\lambda$ tetap real.
+\end{latihan}
+
+\begin{latihan}\label{linear:lat-polinom}
+    Di dalam $\mathcal P_{\le4}(\R)$, pertimbangkan
+    \begin{align*}
+        U & =\{p:p(0)=p(1)=p(2)\}, \\
+        W & =\{p:p(0)p(1)=0\}.
+    \end{align*}
+    Tentukan himpunan mana yang merupakan subruang.
+    Tuliskan semua polinom dalam $U$ dalam bentuk parameter,
+    tanpa menghitung basis atau dimensi.
+\end{latihan}
+
+\begin{latihan}\label{linear:lat-komutatif}
+    Misalkan $N=\begin{pmatrix}0&1\\0&0\end{pmatrix}$ dan
+    \[
+        U=\{X\in\Mat_2(\R):XN=NX\},\qquad
+        W=\{X\in\Mat_2(\R):XN=-NX\}.
+    \]
+    Buktikan keduanya merupakan subruang dan tentukan semua
+    anggotanya secara eksplisit. Apakah $W$ tertutup terhadap
+    perkalian dua matriks? Jelaskan kaitannya dengan definisi subruang.
+\end{latihan}
+
+\begin{latihan}\label{linear:lat-trace-kuadrat}
+    Tentukan apakah masing-masing himpunan berikut merupakan
+    subruang dari $\Mat_2(\R)$:
+    \[
+        S=\{X:\tr(X^2)=0\},\qquad
+        T=\{X:X^T=X,\ \tr(X^2)=0\}.
+    \]
+    Semua operasi menggunakan penjumlahan dan perkalian skalar biasa.
+\end{latihan}
+
+\begin{latihan}\label{linear:lat-rekurensi}
+    Untuk $c\in\R$, misalkan $W_c$ terdiri atas semua barisan real
+    $(a_n)_{n\ge1}$ yang memenuhi
+    \[
+        a_{n+2}-a_{n+1}-a_n=c\qquad(n\ge1).
+    \]
+    Tentukan kapan $W_c$ merupakan subruang dari $\R^{\mathbb N}$.
+    Untuk $W_0$, buktikan bahwa setiap pilihan $a_1,a_2$ menentukan
+    tepat satu barisan, dan bahwa syarat $a_1=a_2=0$ hanya
+    menghasilkan barisan nol.
+\end{latihan}
+
+\begin{latihan}\label{linear:lat-afine}
+    Misalkan $W\subseteq V$, dengan $V$ ruang linear real,
+    memenuhi $0_V\in W$ serta
+    \[
+        \alpha u+(1-\alpha)v\in W
+        \quad\text{untuk setiap }u,v\in W,\ \alpha\in\R.
+    \]
+    Buktikan $W$ subruang.
+    Apakah masih cukup jika ketertutupan tersebut hanya diketahui
+    untuk $\alpha=\tfrac12$? Apakah syarat $0_V\in W$ boleh dihilangkan?
+\end{latihan}
+
+\begin{latihan}\label{linear:lat-barisan}
+    Di dalam $\R^{\mathbb N}$, definisikan
+    \begin{align*}
+        C_{00} & =\{(a_n):a_n=0\text{ untuk semua }n\text{ yang cukup besar}\},       \\
+        E      & =\{(a_n):a_n\text{ konstan untuk semua }n\text{ yang cukup besar}\}.
+    \end{align*}
+    Buktikan bahwa keduanya subruang dan bahwa
+    $C_{00}\subsetneq E\subsetneq\R^{\mathbb N}$.
+    Nyatakan $C_{00}$ sebagai gabungan meningkat subruang-subruang
+    yang masing-masing mengizinkan hanya hingga banyak suku awal tak nol.
+\end{latihan}
+
+\begin{latihan}\label{linear:lat-garis}
+    Buktikan bahwa setiap subruang sejati tak nol dari $\R^2$
+    berbentuk $\{tu:t\in\R\}$ untuk suatu $u\ne0$.
+    Gunakan hasil ini untuk menjelaskan mengapa gabungan tak hingga
+    subruang sejati dapat sama dengan seluruh ruang.
+\end{latihan}
+
+\begin{latihan}\label{linear:lat-hindari}
+    Diberikan vektor-vektor tak nol $a_1,\ldots,a_m\in\R^n$,
+    dengan $m,n\ge1$. Buktikan bahwa ada $x\in\R^n$ sehingga
+    \[
+        a_j^Tx\ne0\qquad\text{untuk semua }j=1,\ldots,m.
+    \]
+    Berikan dua pembuktian: satu menggunakan teorema gabungan hingga,
+    dan satu lagi dengan memilih $x=(1,t,\ldots,t^{n-1})^T$ secara tepat.
+\end{latihan}
+
+\begin{latihan}\label{linear:lat-nol-bersama}
+    Buktikan kedua pernyataan berikut.
+    \begin{enumerate}[label=(\alph*)]
+        \item Misalkan $W$ subruang dari $\R^n$ dan setiap $w\in W$
+              mempunyai sedikitnya satu koordinat nol. Maka terdapat
+              satu indeks $j$ yang sama sehingga $w_j=0$ untuk semua $w\in W$.
+        \item Misalkan $U$ subruang dari $\R[t]$, dan
+              $a_1,\ldots,a_m$ bilangan real tetap yang berbeda, $m\ge1$.
+              Jika setiap $p\in U$ mempunyai akar di antara
+              $a_1,\ldots,a_m$, maka ada satu $a_j$ yang menjadi
+              akar semua polinom dalam $U$.
+    \end{enumerate}
+\end{latihan}
+
+\ifpembahasan
+    \section{Pembahasan Latihan}
+    \label{linear:pembahasan}
+
+    \subsection*{Latihan \ref{linear:lat-operasi}: dua cara menentukan vektor nol}
+    Identitas untuk operasi $\oplus$ harus memenuhi $u\oplus e=u$,
+    yakni $u+e+p=u$. Jadi $e=-p$.
+    Jika kedua operasi membentuk ruang linear, identitas $0\odot u=e$
+    harus berlaku. Namun, $0\odot u=-q$, sehingga $p=q$ merupakan
+    syarat perlu.
+    Jika $p=q$, ambil $a=-p$ pada contoh pergeseran operasi:
+    \[
+        u\oplus v=u+v-a,\qquad
+        \alpha\odot u=a+\alpha(u-a).
+    \]
+    Contoh tersebut membuktikan kecukupan. Dengan demikian syaratnya
+    tepat $p=q$; vektor nolnya $-p$ dan invers penjumlahan dari $u$
+    adalah $-u-2p$.
+
+    \subsection*{Latihan \ref{linear:lat-kompleks}: cukup menguji perkalian oleh $i$}
+    Jika $W$ subruang kompleks, tentu $iw\in W$.
+    Sebaliknya, tulis $\alpha=a+bi$ dengan $a,b\in\R$.
+    Karena $W$ subruang real dan $iw\in W$, diperoleh
+    \[
+        \alpha w=aw+b(iw)\in W.
+    \]
+    Ketertutupan penjumlahan sudah diketahui, sehingga $W$ subruang kompleks.
+
+    Untuk $\mathcal H$, matriks nol diperoleh dari $z=w=0$.
+    Penjumlahan menjumlahkan parameter $z,w$, dan perkalian oleh
+    skalar real mempertahankan hubungan konjugasi pada kedua entri
+    baris bawah. Jadi $\mathcal H$ subruang real.
+    Matriks $I_2$ berada di $\mathcal H$, tetapi $iI_2$ tidak:
+    entri kiri atasnya memaksa $z=i$, sehingga entri kanan bawah
+    seharusnya $\overline z=-i$, bukan $i$.
+    Maka $\mathcal H$ bukan subruang kompleks.
+
+    \subsection*{Latihan \ref{linear:lat-kuadratik}: medan mengubah himpunan solusi}
+    Untuk skalar real, jika $\lambda>0$, persamaan hanya mempunyai
+    solusi $(0,0)$. Jika $\lambda=0$, solusinya seluruh pasangan
+    $(0,y)$; kedua himpunan merupakan subruang.
+    Jika $\lambda<0$, letakkan $c=\sqrt{-\lambda}>0$.
+    Vektor $(c,1)$ dan $(-c,1)$ memenuhi persamaan, tetapi jumlahnya
+    $(0,2)$ tidak, sebab $0^2+\lambda\,2^2=4\lambda\ne0$.
+    Jadi $W_\lambda$ subruang real tepat ketika $\lambda\ge0$.
+
+    Di atas $\C$, untuk setiap $\lambda\ne0$ terdapat $c\ne0$
+    dengan $c^2=-\lambda$. Kedua vektor yang sama kembali memberi
+    kegagalan ketertutupan penjumlahan.
+    Karena kasus $\lambda=0$ tetap menghasilkan $\{(0,y):y\in\C\}$,
+    $\widetilde W_\lambda$ subruang kompleks tepat ketika $\lambda=0$.
+
+    \subsection*{Latihan \ref{linear:lat-polinom}: tiga nilai yang sama dan satu perkalian}
+    Syarat pada $U$ ekuivalen dengan dua persamaan linear homogen
+    $p(0)-p(1)=0$ dan $p(1)-p(2)=0$, sehingga $U$ subruang.
+    Jika $a=p(0)$, polinom $p(t)-a$ mempunyai akar $0,1,2$.
+    Teorema faktor memberi
+    \[
+        p(t)=a+t(t-1)(t-2)(bt+c),\qquad a,b,c\in\R,
+    \]
+    karena derajat $p$ paling besar empat. Sebaliknya, setiap polinom
+    berbentuk ini mempunyai nilai $a$ pada ketiga titik.
+
+    Himpunan $W$ bukan subruang. Polinom $p(t)=t$ dan $q(t)=t-1$
+    masing-masing berada di $W$, tetapi $p+q=2t-1$ mempunyai nilai
+    $-1$ di $0$ dan $1$ di $1$, sehingga tidak berada di $W$.
+
+    \subsection*{Latihan \ref{linear:lat-komutatif}: persamaan linear pada entri}
+    Dengan $X=\begin{pmatrix}a&b\\c&d\end{pmatrix}$,
+    \[
+        XN=\begin{pmatrix}0&a\\0&c\end{pmatrix},\qquad
+        NX=\begin{pmatrix}c&d\\0&0\end{pmatrix}.
+    \]
+    Maka
+    \[
+        U=\left\{\begin{pmatrix}a&b\\0&a\end{pmatrix}:a,b\in\R\right\},
+        \qquad
+        W=\left\{\begin{pmatrix}a&b\\0&-a\end{pmatrix}:a,b\in\R\right\}.
+    \]
+    Matriks nol berada di kedua himpunan, dan kombinasi linear
+    mempertahankan bentuk masing-masing. Jadi keduanya subruang.
+    Matriks $D=\diag(1,-1)$ berada di $W$, tetapi $D^2=I_2$ tidak
+    berada di $W$. Ini tidak bertentangan dengan definisi subruang,
+    karena definisi tersebut tidak mensyaratkan ketertutupan perkalian matriks.
+
+    \subsection*{Latihan \ref{linear:lat-trace-kuadrat}: simetris memberi jumlah kuadrat}
+    Ambil $A=\begin{pmatrix}0&1\\0&0\end{pmatrix}$ dan
+    $B=\begin{pmatrix}0&0\\1&0\end{pmatrix}$.
+    Karena $A^2=B^2=0$, keduanya berada di $S$.
+    Namun, $(A+B)^2=I_2$, sehingga $\tr((A+B)^2)=2\ne0$.
+    Jadi $S$ bukan subruang.
+    Untuk matriks simetris real $X=\begin{pmatrix}a&b\\b&c\end{pmatrix}$,
+    \[
+        \tr(X^2)=a^2+2b^2+c^2.
+    \]
+    Nilainya nol tepat ketika $a=b=c=0$. Jadi $T=\{0\}$ merupakan subruang.
+
+    \subsection*{Latihan \ref{linear:lat-rekurensi}: ketertutupan diperiksa pada setiap indeks}
+    Jika $c\ne0$, barisan nol tidak memenuhi persamaan, sehingga
+    $W_c$ bukan subruang. Untuk $c=0$, barisan nol termasuk $W_0$.
+    Jika $(a_n),(b_n)\in W_0$ dan $d_n=\alpha a_n+\beta b_n$, maka
+    \[
+        d_{n+2}-d_{n+1}-d_n
+        =\alpha(a_{n+2}-a_{n+1}-a_n)
+        +\beta(b_{n+2}-b_{n+1}-b_n)=0
+    \]
+    untuk setiap $n$. Jadi $W_0$ subruang.
+    Setelah $a_1,a_2$ dipilih, rumus $a_{n+2}=a_{n+1}+a_n$
+    mendefinisikan setiap suku berikutnya secara tunggal.
+    Induksi menunjukkan bahwa dua barisan dengan suku awal sama
+    harus identik. Jika kedua suku awal nol, induksi juga memberi
+    $a_n=0$ untuk setiap $n$.
+
+    \subsection*{Latihan \ref{linear:lat-afine}: peran nol dan seluruh skalar}
+    Dengan memilih $v=0_V$, syarat soal memberi $\alpha u\in W$
+    untuk setiap skalar real $\alpha$.
+    Untuk $u,v\in W$, pilihan $\alpha=\tfrac12$ memberi
+    $(u+v)/2\in W$. Ketertutupan skalar yang baru dibuktikan
+    kemudian memberi $u+v\in W$. Maka $W$ subruang.
+
+    Jika hanya titik tengah yang diketahui berada di $W$, kesimpulan
+    dapat gagal. Himpunan $\mathbb Q\subset\R$ memuat nol dan tertutup
+    terhadap rata-rata dua anggotanya, tetapi
+    $\sqrt2\cdot1\notin\mathbb Q$.
+    Syarat memuat nol juga penting: garis
+    $W=\{(x,1):x\in\R\}$ tertutup terhadap semua kombinasi
+    $\alpha u+(1-\alpha)v$, tetapi bukan subruang karena tidak memuat $(0,0)$.
+
+    \subsection*{Latihan \ref{linear:lat-barisan}: ambil batas indeks yang lebih besar}
+    Jika dua barisan nol setelah indeks masing-masing $r$ dan $s$,
+    kombinasi linearnya nol setelah $\max(r,s)$.
+    Jika dua barisan konstan setelah indeks-indeks itu, dengan nilai
+    akhir $a$ dan $b$, kombinasi linearnya konstan dengan nilai
+    $\alpha a+\beta b$ setelah $\max(r,s)$.
+    Kedua himpunan memuat barisan nol, sehingga keduanya subruang.
+    Barisan yang akhirnya nol tentu akhirnya konstan, tetapi
+    $(1,1,1,\ldots)\in E\setminus C_{00}$.
+    Barisan $(1,2,3,\ldots)$ tidak berada di $E$, sehingga kedua
+    inklusi pada soal bersifat sejati.
+    Dengan
+    \[
+        V_k=\{(a_n):a_n=0\text{ untuk setiap }n>k\},\qquad k\ge1,
+    \]
+    setiap $V_k$ subruang, $V_k\subseteq V_{k+1}$, dan
+    $C_{00}=\bigcup_{k\ge1}V_k$.
+
+    \subsection*{Latihan \ref{linear:lat-garis}: dua arah berbeda memenuhi seluruh bidang}
+    Misalkan $W$ subruang sejati tak nol. Pilih $u\in W\setminus\{0\}$.
+    Ketertutupan skalar memberi $\{tu:t\in\R\}\subseteq W$.
+    Andaikan ada $v\in W$ yang bukan kelipatan $u$.
+    Matriks $[u\ v]$ berukuran dua mempunyai determinan tak nol:
+    jika determinannya nol, hubungan antar kedua koordinat
+    akan memaksa $v$ kelipatan $u$.
+    Karena itu, untuk setiap $x\in\R^2$, sistem
+    $[u\ v](\alpha,\beta)^T=x$ mempunyai solusi.
+    Jadi setiap $x$ adalah $\alpha u+\beta v\in W$, bertentangan
+    dengan $W$ sejati. Maka $W=\{tu:t\in\R\}$.
+    Setiap vektor tak nol terletak pada garis yang dibentuk oleh
+    kelipatan dirinya. Gabungan seluruh garis demikian, bersama
+    vektor nol yang sudah termuat pada tiap garis, adalah $\R^2$.
+
+    \subsection*{Latihan \ref{linear:lat-hindari}: hindari hingga banyak kendala}
+    Untuk setiap $j$, definisikan $H_j=\{x:a_j^Tx=0\}$.
+    Ini subruang sejati: karena $a_j\ne0$, terdapat koordinat tak nol,
+    dan vektor satuan pada koordinat tersebut tidak berada di $H_j$.
+    Teorema \ref{linear:penutup-hingga} menjamin ada
+    $x\notin\bigcup_j H_j$, sehingga semua $a_j^Tx\ne0$.
+
+    Untuk cara kedua, tulis $a_j=(a_{j1},\ldots,a_{jn})^T$ dan bentuk
+    \[
+        f_j(t)=a_{j1}+a_{j2}t+\cdots+a_{jn}t^{n-1}.
+    \]
+    Setiap $f_j$ polinom tak nol, sehingga hanya mempunyai hingga
+    banyak akar real. Pilih $t$ di luar gabungan seluruh akar
+    $f_1,\ldots,f_m$. Vektor $x=(1,t,\ldots,t^{n-1})^T$
+    memenuhi $a_j^Tx=f_j(t)\ne0$ untuk setiap $j$.
+
+    \subsection*{Latihan \ref{linear:lat-nol-bersama}: satu koordinat atau akar bersama}
+    Untuk (a), definisikan subruang koordinat
+    $H_j=\{x\in\R^n:x_j=0\}$.
+    Hipotesis soal menyatakan $W\subseteq\bigcup_{j=1}^n H_j$.
+    Proposisi \ref{linear:termuat-gabungan} memberi $W\subseteq H_j$
+    untuk sedikitnya satu indeks $j$. Itulah koordinat yang selalu nol.
+
+    Untuk (b), ambil $K_j=\{p\in\R[t]:p(a_j)=0\}$, yang merupakan
+    subruang karena evaluasi menghormati penjumlahan dan perkalian skalar.
+    Hipotesis menyatakan $U\subseteq\bigcup_{j=1}^m K_j$.
+    Proposisi yang sama memberi $U\subseteq K_j$ untuk suatu $j$,
+    sehingga $p(a_j)=0$ untuk semua $p\in U$.
+    Perhatikan perubahan kuantornya: pilihan koordinat atau akar
+    pada hipotesis boleh bergantung pada vektor; kesimpulannya memberi
+    satu pilihan yang berlaku serentak untuk seluruh subruang.
+\fi

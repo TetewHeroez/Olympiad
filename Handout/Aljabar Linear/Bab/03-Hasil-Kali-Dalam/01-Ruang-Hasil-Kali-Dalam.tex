@@ -1,0 +1,487 @@
+% !TeX root = ../../ONMIPA Alin.tex
+% Acuan: Zhang (2009), Bab 5, definisi serta Soal 5.1--5.21;
+% Zhang (2011), bagian 1.4. Konvensi di sini linear pada argumen kedua,
+% sesuai x^*y pada bab matriks; semua rumus konjugasi disesuaikan.
+\chapter{Ruang Hasil Kali Dalam}
+\label{ch:hasil-kali-dalam}
+
+Dimensi dan kebebasan linear tidak menentukan panjang suatu vektor
+atau sudut antarvektor. Kedua gagasan itu memerlukan struktur
+tambahan berupa hasil kali dalam. Struktur yang sama juga berlaku
+pada ruang polinom dan ruang matriks, sehingga argumen geometris
+dapat digunakan untuk menyelesaikan persoalan yang tampaknya aljabar.
+Sepanjang bagian ini, medan skalar adalah $\F=\R$ atau $\C$.
+
+\section{Definisi dan Konvensi Konjugasi}
+
+\begin{definisi}[][Hasil kali dalam][hkd:def]
+    Hasil kali dalam pada ruang linear $V$ adalah pemetaan
+    $\langle\cdot,\cdot\rangle:V\times V\to\F$ yang memenuhi
+    \begin{enumerate}[label=(\roman*),nosep]
+        \item $\langle x,x\rangle$ real dan nonnegatif, serta
+        $\langle x,x\rangle=0$ tepat ketika $x=0$;
+        \item $\langle x,y\rangle=\overline{\langle y,x\rangle}$;
+        \item $\langle x,ay+bz\rangle
+        =a\langle x,y\rangle+b\langle x,z\rangle$.
+    \end{enumerate}
+    Syarat-syarat tersebut berlaku untuk semua vektor dan skalar
+    yang sesuai. Ruang $V$ bersama hasil kali dalamnya disebut
+    \emph{ruang hasil kali dalam}.
+\end{definisi}
+
+Konvensi handout ini adalah \textbf{linear pada argumen kedua}.
+Simetri konjugat kemudian memberi
+\[
+    \langle ax+by,z\rangle
+      =\overline a\langle x,z\rangle+\overline b\langle y,z\rangle.
+\]
+Jadi pada ruang kompleks, hasil kali dalam bersifat konjugat-linear
+pada argumen pertama. Secara umum,
+\[
+    \left\langle\sum_i a_ix_i,\sum_j b_jy_j\right\rangle
+      =\sum_{i,j}\overline{a_i}b_j\langle x_i,y_j\rangle.
+\]
+Pada ruang real, konjugasi tidak mengubah skalar sehingga bentuknya
+bilinear dan simetris. Selain itu, $\langle0,x\rangle
+=\langle x,0\rangle=0$.
+
+Hasil kali dalam standar pada $\F^n$ adalah
+$\langle x,y\rangle=x^*y=\sum_j\overline{x_j}y_j$.
+Untuk vektor real, rumus ini menjadi $x^Ty$.
+
+\begin{exam}[Konjugasi tidak boleh dihilangkan]
+    Apakah $B(x,y)=x_1y_1+x_2y_2$ merupakan hasil kali dalam
+    pada $\C^2$?
+\end{exam}
+\begin{solution}
+    Tidak. Vektor tak nol $x=(1,i)^T$ memenuhi
+    $B(x,x)=1+i^2=0$, sehingga syarat positif definit gagal.
+    Bahkan $B((i,0)^T,(i,0)^T)=-1$.
+    Pada hasil kali dalam standar, kedua norma kuadrat itu
+    masing-masing bernilai dua dan satu.
+\end{solution}
+
+Jika $U\subseteq V$ subruang, pembatasan hasil kali dalam pada
+$U\times U$ kembali menjadi hasil kali dalam. Namun, suatu
+bentuk yang hanya nonnegatif dapat mempunyai vektor tak nol
+dengan nilai kuadrat nol; bentuk seperti itu belum menjadi hasil kali dalam.
+
+\section{Hasil Kali Dalam pada Polinom dan Matriks}
+
+\begin{exam}[Hasil kali dalam integral]
+    Pada $\mathcal P_{\le n}(\F)$, buktikan bahwa
+    \[
+        \langle p,q\rangle=\int_{-1}^{1}\overline{p(t)}q(t)\,dt
+    \]
+    merupakan hasil kali dalam.
+\end{exam}
+\begin{solution}
+    Linearitas dan simetri konjugat mengikuti sifat integral.
+    Nilai $\langle p,p\rangle=\int_{-1}^1|p(t)|^2\,dt$ nonnegatif.
+    Jika integralnya nol, fungsi kontinu nonnegatif $|p|^2$
+    harus nol di seluruh interval: nilai positif di satu titik
+    akan memberikan integral positif pada interval kecil di sekitarnya.
+    Maka polinom $p$ mempunyai tak hingga banyak akar dan identik nol.
+    Arah sebaliknya langsung.
+\end{solution}
+
+Pada ruang matriks berukuran $m\times n$, hasil kali dalam Frobenius adalah
+\[
+    \langle A,B\rangle_F=\tr(A^*B)
+      =\sum_{i=1}^m\sum_{j=1}^n\overline{a_{ij}}b_{ij}.
+\]
+Kesamaan terakhir menunjukkan bahwa ini tepat hasil kali dalam
+standar pada daftar seluruh entri. Norma yang dihasilkannya adalah
+$\|A\|_F=(\sum_{i,j}|a_{ij}|^2)^{1/2}$.
+Matriks satuan $E_{ij}$ saling ortogonal dan masing-masing bernorma satu.
+
+\begin{teorema}[][Representasi oleh matriks positif definit][hkd:matriks-metrik]
+    Pada $\F^n$, rumus $\langle x,y\rangle_G=x^*Gy$ merupakan
+    hasil kali dalam jika dan hanya jika $G$ Hermitian positif definit.
+    Setiap hasil kali dalam pada $\F^n$ mempunyai representasi
+    tersebut secara tunggal.
+\end{teorema}
+\begin{proof}
+    Jika $G$ Hermitian positif definit, ketiga aksioma segera
+    mengikuti perkalian matriks dan $x^*Gx>0$ untuk $x\ne0$.
+    Sebaliknya, letakkan $g_{ij}=\langle e_i,e_j\rangle$.
+    Ekspansi kedua argumen dalam basis standar memberi
+    $\langle x,y\rangle=x^*Gy$.
+    Simetri konjugat memberi $G^*=G$, dan aksioma kepositifan
+    memberi sifat positif definit. Setiap entri dipaksa oleh
+    hasil kali dua vektor basis, sehingga $G$ unik.
+\end{proof}
+
+Untuk basis terurut sembarang $\mathcal B=(b_1,\ldots,b_n)$,
+matriks $G_{\mathcal B}=(\langle b_i,b_j\rangle)$ memenuhi
+\[
+    \langle x,y\rangle=[x]_{\mathcal B}^*G_{\mathcal B}[y]_{\mathcal B}.
+\]
+Jika $P=P_{\mathcal B\leftarrow\mathcal C}$, maka
+$G_{\mathcal C}=P^*G_{\mathcal B}P$.
+Jadi perubahan basis pada hasil kali dalam menghasilkan
+\emph{kongruensi}, bukan rumus keserupaan $P^{-1}GP$.
+
+\begin{exam}[Parameter dalam hasil kali dalam berbobot]
+    Untuk $z\in\C$ dan $a\in\R$, kapan matriks
+    \[
+        G=\begin{pmatrix}1&z\\\overline z&a\end{pmatrix}
+    \]
+    mendefinisikan hasil kali dalam pada $\C^2$?
+\end{exam}
+\begin{solution}
+    Untuk $x=(x_1,x_2)^T$, lengkapi kuadrat:
+    \[
+        x^*Gx=|x_1+zx_2|^2+(a-|z|^2)|x_2|^2.
+    \]
+    Nilainya positif untuk setiap $x\ne0$ tepat ketika $a>|z|^2$.
+    Jika $a=|z|^2$, vektor $(-z,1)^T$ menghasilkan nilai nol.
+    Jika $a<|z|^2$, vektor yang sama menghasilkan nilai negatif.
+\end{solution}
+
+\section{Norma dan Ketaksamaan Cauchy--Schwarz}
+
+\begin{definisi}[][Norma dan jarak][hkd:norma]
+    Norma yang diinduksi oleh hasil kali dalam didefinisikan oleh
+    $\|x\|=\sqrt{\langle x,x\rangle}$.
+    Jarak antara $x$ dan $y$ adalah $d(x,y)=\|x-y\|$.
+    Vektor dengan norma satu disebut vektor satuan.
+\end{definisi}
+
+\begin{teorema}[][Ketaksamaan Cauchy--Schwarz][hkd:cauchy-schwarz]
+    Untuk setiap $x,y$,
+    \[
+        |\langle x,y\rangle|^2\le\|x\|^2\|y\|^2.
+    \]
+    Kesamaan berlaku jika dan hanya jika $x,y$ bergantung linear.
+\end{teorema}
+\begin{proof}
+    Kasus $y=0$ langsung. Untuk $y\ne0$, letakkan
+    $c=\langle y,x\rangle/\|y\|^2$ dan $r=x-cy$.
+    Maka $\langle y,r\rangle=0$ dan
+    \[
+        0\le\|r\|^2
+          =\|x\|^2-\frac{|\langle y,x\rangle|^2}{\|y\|^2}.
+    \]
+    Ini memberi ketaksamaan yang diminta.
+    Kesamaan ekuivalen dengan $r=0$, yakni $x=cy$.
+    Dengan memasukkan kembali kasus vektor nol, kondisi itu
+    tepat ketergantungan linear kedua vektor.
+\end{proof}
+
+\begin{prop}[Ketaksamaan segitiga dan kesamaannya]
+    Norma memenuhi $\|ax\|=|a|\|x\|$ serta
+    \[
+        \|x+y\|\le\|x\|+\|y\|,\qquad
+        \bigl|\|x\|-\|y\|\bigr|\le\|x-y\|.
+    \]
+    Jika $x,y$ tak nol, kesamaan pada ketaksamaan segitiga
+    pertama berlaku tepat ketika $x=cy$ untuk suatu real $c>0$.
+    Jika salah satu vektor nol, kesamaan juga berlaku.
+\end{prop}
+\begin{proof}
+    Homogenitas norma mengikuti $\langle ax,ax\rangle
+    =|a|^2\langle x,x\rangle$.
+    Selanjutnya,
+    \begin{align*}
+        \|x+y\|^2
+        &=\|x\|^2+\|y\|^2+2\operatorname{Re}\langle x,y\rangle\\
+        &\le\|x\|^2+\|y\|^2+2|\langle x,y\rangle|\\
+        &\le(\|x\|+\|y\|)^2.
+    \end{align*}
+    Untuk vektor tak nol, kedua ketaksamaan menjadi kesamaan
+    jika keduanya bergantung linear dan hasil kali dalamnya
+    real positif. Ini memaksa kelipatan real positif.
+    Ketaksamaan kedua diperoleh dari
+    $\|x\|\le\|x-y\|+\|y\|$, lalu menukar $x,y$.
+\end{proof}
+
+Ketergantungan linear saja tidak cukup untuk kesamaan segitiga.
+Di $\C$, vektor $1$ dan $i$ bergantung linear, tetapi
+$|1+i|=\sqrt2<2=|1|+|i|$.
+
+\begin{exam}[Ketaksamaan berbobot dan kondisi kesamaan]
+    Untuk $w_j>0$ dan $a_j\in\C$, buktikan
+    \[
+        \left|\sum_{j=1}^n a_j\right|^2
+        \le\left(\sum_{j=1}^n w_j|a_j|^2\right)
+            \left(\sum_{j=1}^n\frac1{w_j}\right).
+    \]
+\end{exam}
+\begin{solution}
+    Gunakan Cauchy--Schwarz pada
+    $x=(1/\sqrt{w_j})_j$ dan $y=(\sqrt{w_j}a_j)_j$.
+    Kesamaan berlaku tepat ketika $y=cx$, yaitu
+    $a_j=c/w_j$ untuk suatu konstanta kompleks $c$ yang sama.
+    Kondisi kesamaan ini penting ketika ketaksamaan digunakan
+    untuk menentukan nilai minimum atau maksimum.
+\end{solution}
+
+\section{Identitas Polarisasi dan Ortogonalitas}
+
+\begin{teorema}[][Jajargenjang dan polarisasi][hkd:polarisasi]
+    Norma dari hasil kali dalam memenuhi
+    \[
+        \|x+y\|^2+\|x-y\|^2=2\|x\|^2+2\|y\|^2.
+    \]
+    Pada ruang real,
+    $4\langle x,y\rangle=\|x+y\|^2-\|x-y\|^2$.
+    Pada ruang kompleks dengan konvensi handout ini,
+    \begin{align*}
+        4\langle x,y\rangle
+        ={}&\|x+y\|^2-\|x-y\|^2\\
+            &-i\|x+iy\|^2+i\|x-iy\|^2.
+    \end{align*}
+\end{teorema}
+\begin{proof}
+    Ekspansi $\|x\pm y\|^2$ memberikan suku silang
+    $\pm2\operatorname{Re}\langle x,y\rangle$.
+    Menjumlahkan memberi identitas jajargenjang, sedangkan
+    mengurangkan memberi empat kali bagian real.
+    Karena $\langle x,iy\rangle=i\langle x,y\rangle$,
+    selisih $\|x+iy\|^2-\|x-iy\|^2$ adalah
+    $-4\operatorname{Im}\langle x,y\rangle$.
+    Gabungkan bagian real dan imajiner untuk memperoleh rumus kompleks.
+\end{proof}
+
+Norma menentukan hasil kali dalamnya secara tunggal melalui
+polarisasi. Namun, tidak setiap norma berasal dari hasil kali dalam.
+Sebagai contoh, norma $\|(x_1,x_2)\|_1=|x_1|+|x_2|$ memberi
+\[
+    \|e_1+e_2\|_1^2+\|e_1-e_2\|_1^2=8,
+    \qquad 2\|e_1\|_1^2+2\|e_2\|_1^2=4,
+\]
+sehingga gagal memenuhi identitas jajargenjang.
+
+Dua vektor disebut \emph{ortogonal}, ditulis $x\perp y$, jika
+$\langle x,y\rangle=0$. Ortogonalitas mengakibatkan identitas
+Pythagoras $\|x+y\|^2=\|x\|^2+\|y\|^2$.
+Pada ruang real, arah sebaliknya juga benar.
+
+\begin{exam}[Pythagoras belum cukup di ruang kompleks]
+    Di $\C$ dengan hasil kali dalam standar, ambil $x=1$ dan $y=i$.
+    Maka $\|x+y\|^2=2=\|x\|^2+\|y\|^2$, tetapi
+    $\langle x,y\rangle=i\ne0$.
+    Jadi identitas Pythagoras hanya memaksa bagian real hasil
+    kali dalam bernilai nol. Pada ruang kompleks, syarat yang tepat adalah
+    \[
+        x\perp y\iff
+        \begin{cases}
+            \|x+y\|=\|x-y\|,\\
+            \|x+iy\|=\|x-iy\|.
+        \end{cases}
+    \]
+    Kedua persamaan menghilangkan bagian real dan imajiner secara terpisah.
+\end{exam}
+
+\section{Matriks Gram dan Ketergantungan Linear}
+
+\begin{definisi}[][Matriks Gram][hkd:gram]
+    Untuk vektor $v_1,\ldots,v_m$, matriks Gram adalah
+    \[
+        G=(g_{ij})_{i,j=1}^m,\qquad g_{ij}=\langle v_i,v_j\rangle.
+    \]
+\end{definisi}
+
+\begin{teorema}[][Kepositifan dan rank matriks Gram][hkd:rank-gram]
+    Matriks Gram Hermitian semidefinit positif dan memenuhi
+    \[
+        \rank G=\dim\operatorname{span}\{v_1,\ldots,v_m\}.
+    \]
+    Matriks $G$ positif definit tepat ketika daftar vektor itu
+    bebas linear; ekuivalen dengan $\det G>0$.
+\end{teorema}
+\begin{proof}
+    Untuk $c=(c_1,\ldots,c_m)^T$, berlaku
+    \[
+        c^*Gc=\left\|\sum_{j=1}^m c_jv_j\right\|^2\ge0.
+    \]
+    Simetri konjugat memberi $G^*=G$.
+    Definisikan $S:\F^m\to V$ melalui $Sc=\sum c_jv_j$.
+    Jika $Gc=0$, persamaan di atas memberi $Sc=0$.
+    Sebaliknya, $Sc=0$ memberi $(Gc)_i=\langle v_i,Sc\rangle=0$.
+    Maka $\ker G=\ker S$; teorema rank--nulitas memberi
+    $\rank G=\rank S=\dim\operatorname{im}S$.
+    Kepositifan definit ekuivalen dengan $Sc\ne0$ untuk setiap
+    $c\ne0$, yakni kebebasan linear. Karena semua nilai eigen
+    $G$ nonnegatif, keadaan ini juga ekuivalen dengan $\det G>0$.
+\end{proof}
+
+Dalam koordinat ortonormal, jika kolom matriks $A$ adalah para
+$v_j$, maka $G=A^*A$. Sebaliknya, setiap matriks Hermitian
+semidefinit positif merupakan matriks Gram: ambil akar kuadrat
+Hermitian $B=G^{1/2}$ sehingga $G=B^*B$, lalu gunakan kolom-kolom $B$.
+Hasil mengenai akar kuadrat telah dibahas pada bab matriks khusus.
+
+\begin{exam}[Tiga hasil kali dalam tidak dapat dipilih sembarang]
+    Misalkan $u,v,w$ vektor satuan dalam ruang real dan
+    $a=\langle u,v\rangle$, $b=\langle u,w\rangle$,
+    $c=\langle v,w\rangle$. Buktikan
+    \[
+        (c-ab)^2\le(1-a^2)(1-b^2).
+    \]
+\end{exam}
+\begin{solution}
+    Matriks Gram ketiganya semidefinit positif, sehingga
+    \[
+        0\le\det\begin{pmatrix}1&a&b\\a&1&c\\b&c&1\end{pmatrix}
+          =1+2abc-a^2-b^2-c^2.
+    \]
+    Menata ulang memberi ketaksamaan yang diminta.
+    Kesamaan berarti determinan Gram nol, sehingga ketiga
+    vektor bergantung linear. Jika $|a|,|b|<1$, batas untuk $c$ adalah
+    $ab\pm\sqrt{(1-a^2)(1-b^2)}$.
+\end{solution}
+
+\section{Latihan Pilihan}
+
+\begin{latihan}\label{hkd:lat-tarik-balik}
+    Misalkan $A:V\to W$ linear dan $W$ ruang hasil kali dalam.
+    Buktikan bahwa $[x,y]=\langle Ax,Ay\rangle$ merupakan hasil
+    kali dalam pada $V$ tepat ketika $A$ injektif.
+    Nyatakan syaratnya jika $A$ adalah matriks $m\times n$.
+\end{latihan}
+
+\begin{latihan}\label{hkd:lat-evaluasi}
+    Pada $\mathcal P_{\le n}(\F)$, ambil titik real berbeda
+    $a_1,\ldots,a_m$ dan bobot $w_j>0$. Tentukan kapan
+    \[
+        [p,q]=\sum_{j=1}^m w_j\overline{p(a_j)}q(a_j)
+    \]
+    merupakan hasil kali dalam.
+\end{latihan}
+
+\begin{latihan}\label{hkd:lat-turunan}
+    Pada $\mathcal P_{\le n}(\F)$, buktikan bahwa
+    \[
+        [p,q]=\overline{p(0)}q(0)+\int_0^1\overline{p'(t)}q'(t)\,dt
+    \]
+    merupakan hasil kali dalam. Jelaskan mengapa menghapus
+    suku pertama membuat sifat positif definit gagal.
+\end{latihan}
+
+\begin{latihan}\label{hkd:lat-kesamaan}
+    Di $\C^2$, ambil $x=(1,i)^T$ dan $y=(a,b)^T$.
+    Tentukan semua $a,b$ yang memberikan kesamaan pada
+    Cauchy--Schwarz, lalu tentukan yang juga memenuhi
+    $\|x+y\|=\|x\|+\|y\|$.
+\end{latihan}
+
+\begin{latihan}\label{hkd:lat-trace}
+    Untuk $A,B\in\Mat_n(\C)$, buktikan
+    \[
+        |\tr A|^2\le n\tr(A^*A),\qquad
+        |\tr(AB)|\le\|A\|_F\|B\|_F.
+    \]
+    Tentukan kondisi kesamaan pada ketaksamaan pertama.
+\end{latihan}
+
+\begin{latihan}\label{hkd:lat-invers-positif}
+    Jika $G$ Hermitian positif definit dan $x\ne0$, buktikan
+    \[
+        (x^*Gx)(x^*G^{-1}x)\ge(x^*x)^2.
+    \]
+    Buktikan bahwa kesamaan berlaku tepat ketika $x$ vektor eigen $G$.
+\end{latihan}
+
+\begin{latihan}\label{hkd:lat-korelasi}
+    Untuk $m\ge2$ dan $a\in\R$, tentukan kapan terdapat
+    vektor satuan real $v_1,\ldots,v_m$ dengan
+    $\langle v_i,v_j\rangle=a$ untuk setiap $i\ne j$.
+    Tentukan dimensi terkecil ruang yang dapat memuat vektor-vektor itu.
+\end{latihan}
+
+\begin{latihan}\label{hkd:lat-negatif}
+    Dalam ruang hasil kali dalam real berdimensi $n\ge1$,
+    misalkan $v_1,\ldots,v_m$ memenuhi
+    $\langle v_i,v_j\rangle<0$ untuk setiap $i\ne j$.
+    Buktikan $m\le n+1$ dan tunjukkan bahwa batas tersebut dapat dicapai.
+\end{latihan}
+
+\ifpembahasan
+\section{Pembahasan Latihan}
+
+\subsection*{Latihan \ref{hkd:lat-tarik-balik}: kepositifan ditentukan oleh kernel}
+Linearitas pada argumen kedua dan simetri konjugat selalu berlaku.
+Selanjutnya $[x,x]=\|Ax\|^2=0$ tepat ketika $Ax=0$.
+Jadi sifat positif definit ekuivalen dengan $\ker A=\{0\}$.
+Untuk matriks $m\times n$, ini berarti $\rank A=n$;
+khususnya, diperlukan $m\ge n$.
+
+\subsection*{Latihan \ref{hkd:lat-evaluasi}: banyak titik dibandingkan derajat}
+Karena semua bobot positif, $[p,p]=0$ tepat ketika
+$p(a_1)=\cdots=p(a_m)=0$.
+Jika $m\ge n+1$, polinom berderajat paling besar $n$ dengan
+akar sebanyak itu harus nol, sehingga bentuknya hasil kali dalam.
+Jika $m\le n$, polinom tak nol $\prod_{j=1}^m(t-a_j)$
+berada di ruang yang diberikan dan bernilai nol pada semua titik.
+Jadi syaratnya tepat $m\ge n+1$.
+
+\subsection*{Latihan \ref{hkd:lat-turunan}: memulihkan konstanta yang hilang}
+Jika $[p,p]=0$, kedua suku nonnegatifnya nol.
+Integral $|p'|^2$ yang nol memaksa $p'=0$, sehingga $p$ konstan.
+Syarat $p(0)=0$ kemudian memaksa konstanta itu nol.
+Aksioma lainnya mengikuti sifat konjugasi dan integral.
+Tanpa suku pertama, setiap polinom konstan tak nol mempunyai
+nilai kuadrat nol, sehingga bentuknya bukan hasil kali dalam.
+
+\subsection*{Latihan \ref{hkd:lat-kesamaan}: bergantung linear dan searah}
+Karena $x\ne0$, kesamaan Cauchy--Schwarz berarti $y=cx$,
+yakni $a=c$ dan $b=ic$ untuk suatu $c\in\C$.
+Kesamaan segitiga mengharuskan $c$ real nonnegatif, termasuk
+$c=0$ yang menghasilkan $y=0$.
+Kelipatan kompleks dengan fase berbeda umumnya tidak memenuhi
+kesamaan segitiga.
+
+\subsection*{Latihan \ref{hkd:lat-trace}: pandang matriks sebagai vektor}
+Gunakan $\langle I,A\rangle_F=\tr A$ dan $\|I\|_F^2=n$.
+Cauchy--Schwarz memberi ketaksamaan pertama, dengan kesamaan
+tepat ketika $A=cI$ untuk suatu $c\in\C$.
+Untuk yang kedua, gunakan
+$\langle A^*,B\rangle_F=\tr(AB)$ serta $\|A^*\|_F=\|A\|_F$.
+
+\subsection*{Latihan \ref{hkd:lat-invers-positif}: gunakan metrik yang sesuai}
+Gunakan Cauchy--Schwarz pada $x,G^{-1}x$ untuk hasil kali dalam
+$\langle u,v\rangle_G=u^*Gv$. Ketiga besaran yang muncul adalah
+\[
+    \langle x,G^{-1}x\rangle_G=x^*x,\quad
+    \|x\|_G^2=x^*Gx,\quad
+    \|G^{-1}x\|_G^2=x^*G^{-1}x.
+\]
+Kesamaan berarti $G^{-1}x=cx$, dengan $c>0$ karena $G^{-1}$
+positif definit. Ini ekuivalen dengan $x$ vektor eigen $G$.
+
+\subsection*{Latihan \ref{hkd:lat-korelasi}: spektrum matriks Gram}
+Matriks Gram yang diminta adalah
+$G=(1-a)I_m+a\boldsymbol{1}\boldsymbol{1}^T$.
+Pada arah $\boldsymbol{1}$, nilai eigennya $1+(m-1)a$;
+pada komplemen ortogonalnya, nilai eigennya $1-a$.
+Jadi $G$ semidefinit positif tepat ketika
+\[
+    -\frac1{m-1}\le a\le1.
+\]
+Kondisi ini cukup karena setiap matriks real simetris semidefinit
+positif dapat diwujudkan sebagai Gram vektor real.
+Dimensi terkecil sama dengan rank Gram: bernilai $m$ di bagian
+dalam interval, $m-1$ pada ujung kiri, dan $1$ pada ujung kanan.
+Kecukupan dimensi rank diperoleh dengan mengambil hanya baris
+tak nol pada faktorisasi spektral $G=B^TB$.
+
+\subsection*{Latihan \ref{hkd:lat-negatif}: pisahkan koefisien positif dan negatif}
+Andaikan $m>n+1$. Vektor $(v_j,1)$ pada $V\times\R$
+bergantung linear, sehingga ada real $c_j$ tidak semuanya nol dengan
+\[
+    \sum_jc_jv_j=0,\qquad \sum_jc_j=0.
+\]
+Ada koefisien positif dan negatif. Letakkan
+$u=\sum_{c_j>0}c_jv_j=\sum_{c_k<0}(-c_k)v_k$.
+Menggunakan dua ekspresi tersebut pada kedua argumen memberi
+\[
+    \|u\|^2=\sum_{c_j>0,\ c_k<0}c_j(-c_k)\langle v_j,v_k\rangle<0,
+\]
+kontradiksi. Jadi $m\le n+1$.
+Untuk mencapai batas, di hiperbidang $\sum x_j=0$ pada $\R^{n+1}$
+yang berdimensi $n$, ambil
+$v_j=e_j-\boldsymbol{1}/(n+1)$.
+Untuk $j\ne k$, hasil kali dalamnya $-1/(n+1)<0$.
+\fi
